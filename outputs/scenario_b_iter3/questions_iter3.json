@@ -1,5 +1,5 @@
 {
-  "session_id": "68225469-8219-44a7-8d67-a9ad6d0f3746",
+  "session_id": "83e3595c-34c8-4a98-a26e-f34a1093c596",
   "mode": "adaptive",
   "selected_sections": [
     8
@@ -42,7 +42,7 @@
   },
   "questions": [
     {
-      "question_id": "7789f92c-0ef5-410f-a6a7-ad1cc6ad30a9",
+      "question_id": "633e3ebb-1525-4bf4-8689-8a3158177277",
       "section_id": "24707465-4591-4e01-b532-4251aceaf99c",
       "section_number": 8,
       "topic": "Section 8 concept 1",
@@ -65,7 +65,7 @@
       "clarification": "Option A is correct because it is directly derived from the retrieved chunk for the selected section."
     },
     {
-      "question_id": "108e0d51-322f-43ae-84b5-7ddd5aa8a048",
+      "question_id": "651dbf68-b4a9-49f1-8b1a-59cf8754c980",
       "section_id": "24707465-4591-4e01-b532-4251aceaf99c",
       "section_number": 8,
       "topic": "Section 8 concept 3",

@@ -1,11 +1,11 @@
 {
-  "snapshot_created_at": "2026-05-19T16:30:26.279568",
-  "current_session_id": "d5677a80-6e94-411c-8032-44740ae172a3",
+  "snapshot_created_at": "2026-05-19T16:59:27.175473",
+  "current_session_id": "3dd6d8e0-cad6-4bc8-a7e0-27fdb8d92403",
   "recent_session_count": 1,
   "recent_sessions": [
     {
-      "session_id": "d5677a80-6e94-411c-8032-44740ae172a3",
-      "timestamp": "2026-05-19T16:30:26.228498",
+      "session_id": "3dd6d8e0-cad6-4bc8-a7e0-27fdb8d92403",
+      "timestamp": "2026-05-19T16:59:27.123343",
       "mode": "cold_start",
       "selected_sections": [
         5,
@@ -27,7 +27,7 @@
       },
       "questions_asked": [
         {
-          "question_id": "e3ff42f3-4fe7-4153-974c-2ace05aee7c0",
+          "question_id": "c8999af2-5498-4df0-8764-6995f8fc15d9",
           "section_number": 5,
           "topic": "Section 5 concept 1",
           "difficulty": "medium",
@@ -48,7 +48,7 @@
           ]
         },
         {
-          "question_id": "94069883-5d53-4bd9-9ee2-7e7b315f6207",
+          "question_id": "7240b2ac-f85a-455c-b587-5cd98f731e62",
           "section_number": 5,
           "topic": "Section 5 concept 7",
           "difficulty": "medium",
@@ -69,7 +69,7 @@
           ]
         },
         {
-          "question_id": "5a094235-44a0-42e3-9104-699c767b53b6",
+          "question_id": "13163599-dbd2-494d-91f6-b1e11e822956",
           "section_number": 8,
           "topic": "Section 8 concept 1",
           "difficulty": "medium",
@@ -90,7 +90,7 @@
           ]
         },
         {
-          "question_id": "5774bdb9-9e38-41b3-8937-779ba036eec6",
+          "question_id": "2a13d122-0045-4159-9922-eaebe739dd94",
           "section_number": 8,
           "topic": "Section 8 concept 3",
           "difficulty": "medium",

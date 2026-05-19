@@ -49,68 +49,25 @@ def simulate_answers(
 
     return answer_map
 
-
 def run_mock_prep_session(
     db: Session,
     selected_section_numbers: list[int],
     questions_per_section: int = 2,
     simulation_strategy: str = "section8_weak",
 ) -> dict:
-    document = get_latest_document(db)
+    from app.workflow.prep_graph import prep_graph
 
-    if document is None:
-        raise ValueError("No document found. Run ingestion first.")
-
-    adaptation_payload = build_adaptation_payload(
-        db=db,
-        document_id=document.id,
-        selected_section_numbers=selected_section_numbers,
+    final_state = prep_graph.invoke(
+        {
+            "db": db,
+            "selected_section_numbers": selected_section_numbers,
+            "questions_per_section": questions_per_section,
+            "simulation_strategy": simulation_strategy,
+        }
     )
 
-    retrieved_chunks = retrieve_chunks_for_sections(
-        db=db,
-        document=document,
-        selected_section_numbers=selected_section_numbers,
-        query="Generate MCQs from the selected sections.",
-        limit=max(12, len(selected_section_numbers) * questions_per_section * 3),
-    )
+    return final_state["result"]
 
-    mcq_set = generate_mock_mcqs(
-        retrieved_chunks=retrieved_chunks,
-        selected_section_numbers=selected_section_numbers,
-        questions_per_section=questions_per_section,
-        adaptation_payload=adaptation_payload,
-    )
-
-    question_ids_and_answers = [
-        (
-            question.question_id,
-            question.correct_answer,
-            question.section_number,
-        )
-        for question in mcq_set.questions
-    ]
-
-    answer_map = simulate_answers(
-        question_ids_and_answers=question_ids_and_answers,
-        strategy=simulation_strategy,
-    )
-
-    scoring_payload = score_mcq_answers(
-        mcq_set=mcq_set,
-        answer_map=answer_map,
-    )
-
-    session = create_prep_session_with_results(
-        db=db,
-        document_id=document.id,
-        selected_section_numbers=selected_section_numbers,
-        mode=adaptation_payload["mode"],
-        mcq_set=mcq_set,
-        scoring_payload=scoring_payload,
-        adaptation_payload=adaptation_payload,
-        adaptation_summary=adaptation_payload["summary"],
-    )
 
     return {
         "session_id": session.id,

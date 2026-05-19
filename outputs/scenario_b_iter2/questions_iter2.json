@@ -1,5 +1,5 @@
 {
-  "session_id": "05b7419e-9b22-4ff2-9cb5-208d4595c2ca",
+  "session_id": "4679c813-0b97-482d-856c-7cc608c45e0a",
   "mode": "adaptive",
   "selected_sections": [
     6,
@@ -42,7 +42,7 @@
   },
   "questions": [
     {
-      "question_id": "c7c3a2d7-a9b0-42b7-abcb-850421c23b7b",
+      "question_id": "79f889a6-262a-4f69-ae80-a95407555f12",
       "section_id": "c199947c-c06d-4701-bb81-0d45720926da",
       "section_number": 6,
       "topic": "Section 6 concept 9",
@@ -65,7 +65,7 @@
       "clarification": null
     },
     {
-      "question_id": "b8e67389-7554-4a3f-a305-16ca90579e9e",
+      "question_id": "88a162b9-2a28-4df0-9280-6e2e0a601171",
       "section_id": "c199947c-c06d-4701-bb81-0d45720926da",
       "section_number": 6,
       "topic": "Section 6 concept 6",
@@ -88,7 +88,7 @@
       "clarification": null
     },
     {
-      "question_id": "05eb6ff3-41fe-4515-9e19-e95ef06df661",
+      "question_id": "c4917fdf-f46d-4ef5-a692-142b84daf83d",
       "section_id": "24707465-4591-4e01-b532-4251aceaf99c",
       "section_number": 8,
       "topic": "Section 8 concept 1",
@@ -111,7 +111,7 @@
       "clarification": "Option A is correct because it is directly derived from the retrieved chunk for the selected section."
     },
     {
-      "question_id": "27fb3762-a82c-481b-8a0f-0192f638ebfd",
+      "question_id": "4d00b7de-2c77-4389-bb0e-b7991da1de6f",
       "section_id": "24707465-4591-4e01-b532-4251aceaf99c",
       "section_number": 8,
       "topic": "Section 8 concept 3",
@@ -134,7 +134,7 @@
       "clarification": "Option A is correct because it is directly derived from the retrieved chunk for the selected section."
     },
     {
-      "question_id": "cd755db4-89b5-4b48-a1f6-d77a1f1f10a2",
+      "question_id": "1a70f335-2351-48a4-b396-63fdc0a40712",
       "section_id": "da396094-6d3e-4427-9d90-933b7170204c",
       "section_number": 9,
       "topic": "Section 9 concept 1",
@@ -157,7 +157,7 @@
       "clarification": null
     },
     {
-      "question_id": "c8c53fa2-8c0e-4827-a391-f2f62adfa63a",
+      "question_id": "23735449-80ba-4a5f-902d-435795cd68c7",
       "section_id": "da396094-6d3e-4427-9d90-933b7170204c",
       "section_number": 9,
       "topic": "Section 9 concept 4",
