@@ -9,8 +9,8 @@ from app.services.prep_service import run_prep_session
 router = APIRouter(prefix="/prep", tags=["prep"])
 
 
-@router.post("/run-simulated", response_model=PrepRunResponse)
-def run_simulated_prep(
+@router.post("/start", response_model=PrepRunResponse)
+def start_prep(
     request: PrepRunRequest,
     db: Session = Depends(get_db),
 ) -> PrepRunResponse:
