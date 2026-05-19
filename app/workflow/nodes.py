@@ -1,6 +1,6 @@
 from app.db.repositories.document_repo import get_latest_document
 from app.db.repositories.session_repo import create_prep_session_with_results
-from app.llm.mcq_generator import generate_mock_mcqs
+from app.llm.mcq_generator import generate_mcqs
 from app.retrieval.retriever import retrieve_chunks_for_sections
 from app.services.adaptation_service import build_adaptation_payload
 from app.services.scoring_service import score_mcq_answers
@@ -34,10 +34,8 @@ def retrieve_selected_section_chunks(state: PrepWorkflowState) -> PrepWorkflowSt
         selected_section_numbers=state["selected_section_numbers"],
         query="Generate MCQs from the selected sections.",
         limit=max(
-            12,
-            len(state["selected_section_numbers"])
-            * state["questions_per_section"]
-            * 3,
+            len(state["selected_section_numbers"]),
+            len(state["selected_section_numbers"]) * state["questions_per_section"],
         ),
     )
 
@@ -48,7 +46,7 @@ def retrieve_selected_section_chunks(state: PrepWorkflowState) -> PrepWorkflowSt
 
 
 def generate_questions(state: PrepWorkflowState) -> PrepWorkflowState:
-    mcq_set = generate_mock_mcqs(
+    mcq_set = generate_mcqs(
         retrieved_chunks=state["retrieved_chunks"],
         selected_section_numbers=state["selected_section_numbers"],
         questions_per_section=state["questions_per_section"],

@@ -1,11 +1,11 @@
 {
-  "snapshot_created_at": "2026-05-19T16:59:29.512472",
-  "current_session_id": "4679c813-0b97-482d-856c-7cc608c45e0a",
+  "snapshot_created_at": "2026-05-19T19:40:49.569155",
+  "current_session_id": "eeed918f-e35c-4b8d-91bb-9d8c512fed2c",
   "recent_session_count": 2,
   "recent_sessions": [
     {
-      "session_id": "4679c813-0b97-482d-856c-7cc608c45e0a",
-      "timestamp": "2026-05-19T16:59:29.453863",
+      "session_id": "eeed918f-e35c-4b8d-91bb-9d8c512fed2c",
+      "timestamp": "2026-05-19T19:40:49.501527",
       "mode": "adaptive",
       "selected_sections": [
         6,
@@ -24,7 +24,7 @@
         "weak_topics": [
           {
             "section_number": 8,
-            "topic": "Section 8 concept 3",
+            "topic": "Safehouses",
             "attempts": 1,
             "wrong_count": 1,
             "correct_count": 0,
@@ -32,7 +32,7 @@
           },
           {
             "section_number": 8,
-            "topic": "Section 8 concept 1",
+            "topic": "Operational Territory",
             "attempts": 1,
             "wrong_count": 1,
             "correct_count": 0,
@@ -41,134 +41,134 @@
         ],
         "mastered_question_texts": [],
         "previous_wrong_question_texts": [
-          "Which option best reflects the selected source material for Section 8 concept 3?",
-          "Which option best reflects the selected source material for Section 8 concept 1?"
+          "How often is safehouse provisioning audited?",
+          "What is the primary operational base of the asset?"
         ],
         "summary": "Adaptive run: prior history found. Focus more on weak topics and avoid excessive repetition of mastered questions."
       },
       "questions_asked": [
         {
-          "question_id": "79f889a6-262a-4f69-ae80-a95407555f12",
+          "question_id": "e7d1f7d2-8c4d-4d6a-9d4c-8e5f6d7c8e9f",
           "section_number": 6,
-          "topic": "Section 6 concept 9",
+          "topic": "Nordic Metahuman Operations Cell",
           "difficulty": "medium",
-          "question": "Which option best reflects the selected source material for Section 6 concept 9?",
+          "question": "How often are joint training rotations held for Nordic Metahuman Operations Cell?",
           "options": {
-            "A": ": Nordic Metahuman Operations Cell (NMOC) \u2014 joint training rotations every 18 months European Metahuman Reserve (EUMR) \u2014 case-data exchange, four reciprocal briefings per year East Asian Metahuman Compact (EAMC) \u2014...",
-            "B": "A statement from an unrelated section.",
-            "C": "A contradictory interpretation of the selected material.",
-            "D": "A generic answer not grounded in the selected section."
+            "A": "Every 12 months",
+            "B": "Every 18 months",
+            "C": "Every 24 months",
+            "D": "Every 6 months"
           },
-          "user_answer": "A",
-          "correct_answer": "A",
+          "user_answer": "B",
+          "correct_answer": "B",
           "is_correct": true,
           "clarification": null,
-          "adaptation_reason": "Cold-start coverage question for selected section 6.",
+          "adaptation_reason": "Prioritized weak topic: Safehouses",
           "source_chunk_ids": [
             "8605ceb7-739a-4ab7-a547-df12a785f39c"
           ]
         },
         {
-          "question_id": "88a162b9-2a28-4df0-9280-6e2e0a601171",
+          "question_id": "f1a2b3c4-d5e6-7f8g-9h0i-jk1l2m3n4",
           "section_number": 6,
-          "topic": "Section 6 concept 6",
+          "topic": "European Metahuman Reserve",
           "difficulty": "medium",
-          "question": "Which option best reflects the selected source material for Section 6 concept 6?",
+          "question": "How often are reciprocal briefings held for European Metahuman Reserve?",
           "options": {
-            "A": "-But-Hostile Relationships PAMC Inspector General Magnus Sletten (the \"Underwriter\" \u2014 see \u00a77.6) \u2014 adversarial bureaucratic figure within the same parent organization. Formal correspondence channel maintained; no...",
-            "B": "A statement from an unrelated section.",
-            "C": "A contradictory interpretation of the selected material.",
-            "D": "A generic answer not grounded in the selected section."
+            "A": "Every 6 months",
+            "B": "Every 12 months",
+            "C": "Four times a year",
+            "D": "Every 24 months"
           },
-          "user_answer": "A",
-          "correct_answer": "A",
+          "user_answer": "C",
+          "correct_answer": "C",
           "is_correct": true,
           "clarification": null,
-          "adaptation_reason": "Cold-start coverage question for selected section 6.",
+          "adaptation_reason": "Avoided close repeat of mastered question",
           "source_chunk_ids": [
-            "fc1aa8e0-1d05-453e-b52e-1c4a128424a5"
+            "8605ceb7-739a-4ab7-a547-df12a785f39c"
           ]
         },
         {
-          "question_id": "c4917fdf-f46d-4ef5-a692-142b84daf83d",
+          "question_id": "f7c5a6b5-8d9e-4f6d-ba7e-1c2d3e4f5678",
           "section_number": 8,
-          "topic": "Section 8 concept 1",
+          "topic": "Safehouses",
           "difficulty": "medium",
-          "question": "Which option best reflects the selected source material for Section 8 concept 1?",
+          "question": "How often is safehouse provisioning audited?",
           "options": {
-            "A": "Section 8. Known Bases, Safehouses, and Operational Territory 8.1 Primary Base: Cuartel Valpara\u00edso The asset's primary operational base is Cuartel Valpara\u00edso, designated PAMC South Cone Headquarters. The facility...",
-            "B": "A statement from an unrelated section.",
-            "C": "A contradictory interpretation of the selected material.",
-            "D": "A generic answer not grounded in the selected section."
+            "A": "Daily",
+            "B": "Weekly",
+            "C": "Semi-annually",
+            "D": "Monthly"
           },
-          "user_answer": "B",
-          "correct_answer": "A",
+          "user_answer": "A",
+          "correct_answer": "C",
           "is_correct": false,
-          "clarification": "Option A is correct because it is directly derived from the retrieved chunk for the selected section.",
-          "adaptation_reason": "Adaptive question because previous history shows weakness in section 8.",
-          "source_chunk_ids": [
-            "11e8b047-54f6-42b9-a9b8-a0e6bbf19e09"
-          ]
-        },
-        {
-          "question_id": "4d00b7de-2c77-4389-bb0e-b7991da1de6f",
-          "section_number": 8,
-          "topic": "Section 8 concept 3",
-          "difficulty": "medium",
-          "question": "Which option best reflects the selected source material for Section 8 concept 3?",
-          "options": {
-            "A": "xin-7 spare blister packs 1 backup PAMC-issued identity package (Norwegian, Argentine, Bolivian alternates) 2,000 USD-equivalent local currency in mixed denominations Safehouse provisioning is audited semi-annually by...",
-            "B": "A statement from an unrelated section.",
-            "C": "A contradictory interpretation of the selected material.",
-            "D": "A generic answer not grounded in the selected section."
-          },
-          "user_answer": "B",
-          "correct_answer": "A",
-          "is_correct": false,
-          "clarification": "Option A is correct because it is directly derived from the retrieved chunk for the selected section.",
-          "adaptation_reason": "Adaptive question because previous history shows weakness in section 8.",
+          "clarification": "Safehouse provisioning is audited semi-annually.",
+          "adaptation_reason": "Prioritized weak topic: Safehouses",
           "source_chunk_ids": [
             "421ff765-5d8f-4b26-b568-e8e439c15860"
           ]
         },
         {
-          "question_id": "1a70f335-2351-48a4-b396-63fdc0a40712",
-          "section_number": 9,
-          "topic": "Section 9 concept 1",
+          "question_id": "c4b3a2b1-9e8d-4f6c-ba7d-1c2d3e4f5679",
+          "section_number": 8,
+          "topic": "Operational Territory",
           "difficulty": "medium",
-          "question": "Which option best reflects the selected source material for Section 9 concept 1?",
+          "question": "What is the primary operational base of the asset?",
           "options": {
-            "A": "Section 9. Case Files: Documented Engagements and Incidents 9.1 Case File Format All cases are recorded under a uniform PAMC format: Case number (year-sequence) SLATEFALL_DOSSIER.md 2026-05-18 39 / 50 Date (start\u2013end)...",
-            "B": "A statement from an unrelated section.",
-            "C": "A contradictory interpretation of the selected material.",
-            "D": "A generic answer not grounded in the selected section."
+            "A": "Cuartel Valpara\u00edso",
+            "B": "PAMC South Cone Headquarters",
+            "C": "Avenida Altamirano 1842",
+            "D": "Valpara\u00edso"
+          },
+          "user_answer": "B",
+          "correct_answer": "A",
+          "is_correct": false,
+          "clarification": "The asset's primary operational base is Cuartel Valpara\u00edso.",
+          "adaptation_reason": "Prioritized weak topic: Operational Territory",
+          "source_chunk_ids": [
+            "11e8b047-54f6-42b9-a9b8-a0e6bbf19e09"
+          ]
+        },
+        {
+          "question_id": "9a1b2c3d-4e5f-6a7b-8c9d-e0f1g2h3i4",
+          "section_number": 9,
+          "topic": "Case File Format",
+          "difficulty": "medium",
+          "question": "What is the PAMC format for recording cases?",
+          "options": {
+            "A": "Case number (year-sequence)",
+            "B": "Date (start\u2013end)",
+            "C": "Location (city, province, country)",
+            "D": "Outcome (Successful / Partial / Inconclusive /..."
           },
           "user_answer": "A",
           "correct_answer": "A",
           "is_correct": true,
           "clarification": null,
-          "adaptation_reason": "Cold-start coverage question for selected section 9.",
+          "adaptation_reason": "Prioritized weak topic: Safehouses",
           "source_chunk_ids": [
             "2a89ad36-6d8e-4949-a65a-a0e94d21724a"
           ]
         },
         {
-          "question_id": "23735449-80ba-4a5f-902d-435795cd68c7",
+          "question_id": "9a1b2c3d-4e5f-6a7b-8c9d-e0f1g2h5",
           "section_number": 9,
-          "topic": "Section 9 concept 4",
-          "difficulty": "medium",
-          "question": "Which option best reflects the selected source material for Section 9 concept 4?",
+          "topic": "Operational Success",
+          "difficulty": "hard",
+          "question": "What was the outcome of Case 2024-0202: Quebrantadero Showdown?",
           "options": {
-            "A": "escaped Notes: Major operational success demonstrating Cell Halc\u00f3n's full capability. The asset deployed Suspended Field for the first time in combat. Detained personnel led to seizure of USD $4.2 million in Concession...",
-            "B": "A statement from an unrelated section.",
-            "C": "A contradictory interpretation of the selected material.",
-            "D": "A generic answer not grounded in the selected section."
+            "A": "Successful",
+            "B": "Partial",
+            "C": "Inconclusive",
+            "D": "Detained personnel led to seizure of USD $4.2 million in Concession assets"
           },
           "user_answer": "A",
           "correct_answer": "A",
           "is_correct": true,
           "clarification": null,
-          "adaptation_reason": "Cold-start coverage question for selected section 9.",
+          "adaptation_reason": "Avoided close repeat of mastered question: Safehouse provisioning audit",
           "source_chunk_ids": [
             "77da46b4-29d5-4d6f-a117-d827cfd4b3f5"
           ]
@@ -177,7 +177,7 @@
       "weak_topics": [
         {
           "section_number": 8,
-          "topic": "Section 8 concept 3",
+          "topic": "Operational Territory",
           "attempts": 2,
           "wrong_count": 2,
           "correct_count": 0,
@@ -185,7 +185,7 @@
         },
         {
           "section_number": 8,
-          "topic": "Section 8 concept 1",
+          "topic": "Safehouses",
           "attempts": 2,
           "wrong_count": 2,
           "correct_count": 0,
@@ -193,7 +193,7 @@
         },
         {
           "section_number": 9,
-          "topic": "Section 9 concept 4",
+          "topic": "Operational Success",
           "attempts": 1,
           "wrong_count": 0,
           "correct_count": 1,
@@ -201,7 +201,7 @@
         },
         {
           "section_number": 9,
-          "topic": "Section 9 concept 1",
+          "topic": "Case File Format",
           "attempts": 1,
           "wrong_count": 0,
           "correct_count": 1,
@@ -209,7 +209,7 @@
         },
         {
           "section_number": 6,
-          "topic": "Section 6 concept 6",
+          "topic": "European Metahuman Reserve",
           "attempts": 1,
           "wrong_count": 0,
           "correct_count": 1,
@@ -217,7 +217,7 @@
         },
         {
           "section_number": 6,
-          "topic": "Section 6 concept 9",
+          "topic": "Nordic Metahuman Operations Cell",
           "attempts": 1,
           "wrong_count": 0,
           "correct_count": 1,
@@ -226,8 +226,8 @@
       ]
     },
     {
-      "session_id": "3dd6d8e0-cad6-4bc8-a7e0-27fdb8d92403",
-      "timestamp": "2026-05-19T16:59:27.123343",
+      "session_id": "2b942ff0-6b50-4fed-8d77-4dec7a5c2188",
+      "timestamp": "2026-05-19T19:40:15.419661",
       "mode": "cold_start",
       "selected_sections": [
         5,
@@ -249,85 +249,85 @@
       },
       "questions_asked": [
         {
-          "question_id": "c8999af2-5498-4df0-8764-6995f8fc15d9",
+          "question_id": "1e5b2a3f-3c6b-4d7e-8e5b-4c3b2a1a3a1a",
           "section_number": 5,
-          "topic": "Section 5 concept 1",
+          "topic": "Operational Tactics",
           "difficulty": "medium",
-          "question": "Which option best reflects the selected source material for Section 5 concept 1?",
+          "question": "What is the Doctrine of Sequential Suspension (DSS)?",
           "options": {
-            "A": "Section 5. Operational Tactics and Combat Doctrine 5.1 The Doctrine of Sequential Suspension The asset's formal combat doctrine, the Doctrine of Sequential Suspension (DSS), was articulated by the asset on 19 June 2022...",
-            "B": "A statement from an unrelated section.",
-            "C": "A contradictory interpretation of the selected material.",
-            "D": "A generic answer not grounded in the selected section."
+            "A": "A combat doctrine for Class A-1 operatives",
+            "B": "An asset's formal combat doctrine",
+            "C": "A PAMC-recognized doctrine for Class A-2 operatives",
+            "D": "A tactical opportunity for civilian risk"
           },
-          "user_answer": "A",
-          "correct_answer": "A",
+          "user_answer": "C",
+          "correct_answer": "C",
           "is_correct": true,
           "clarification": null,
-          "adaptation_reason": "Cold-start coverage question for selected section 5.",
+          "adaptation_reason": "Prioritizing weak topics and avoiding close repeats of mastered questions.",
           "source_chunk_ids": [
             "68144153-edc2-4d07-b82f-9491716eed7b"
           ]
         },
         {
-          "question_id": "7240b2ac-f85a-455c-b587-5cd98f731e62",
+          "question_id": "2e5b2a3f-3c6b-4d7e-8e5b-4c3b2a1a3a1a",
           "section_number": 5,
-          "topic": "Section 5 concept 7",
-          "difficulty": "medium",
-          "question": "Which option best reflects the selected source material for Section 5 concept 7?",
+          "topic": "Operational Tactics",
+          "difficulty": "hard",
+          "question": "What is the primary directive for acquiring targets?",
           "options": {
-            "A": "irectives (PAMC Internal Bulletin 22-19): 1. Acquire targets only when extraction is mapped. 2. Never activate without verifying the contact-exclusion radius. 3. Hold one activation in reserve until extraction. 4....",
-            "B": "A statement from an unrelated section.",
-            "C": "A contradictory interpretation of the selected material.",
-            "D": "A generic answer not grounded in the selected section."
+            "A": "Acquire targets only when extraction is mapped",
+            "B": "Activate without verifying the contact-exclusion radius",
+            "C": "Hold one activation in reserve until extraction",
+            "D": "Engage Tier 4 only with two activations"
           },
           "user_answer": "A",
           "correct_answer": "A",
           "is_correct": true,
           "clarification": null,
-          "adaptation_reason": "Cold-start coverage question for selected section 5.",
+          "adaptation_reason": "Prioritizing weak topics and avoiding close repeats of mastered questions.",
           "source_chunk_ids": [
             "c3f3119b-078d-4ece-9ce7-e165c5f4fc65"
           ]
         },
         {
-          "question_id": "13163599-dbd2-494d-91f6-b1e11e822956",
+          "question_id": "f8b4d8c3-5a7e-4f5c-8a4b-1a8c7b6c5d67",
           "section_number": 8,
-          "topic": "Section 8 concept 1",
+          "topic": "Operational Territory",
           "difficulty": "medium",
-          "question": "Which option best reflects the selected source material for Section 8 concept 1?",
+          "question": "What is the primary operational base of the asset?",
           "options": {
-            "A": "Section 8. Known Bases, Safehouses, and Operational Territory 8.1 Primary Base: Cuartel Valpara\u00edso The asset's primary operational base is Cuartel Valpara\u00edso, designated PAMC South Cone Headquarters. The facility...",
-            "B": "A statement from an unrelated section.",
-            "C": "A contradictory interpretation of the selected material.",
-            "D": "A generic answer not grounded in the selected section."
+            "A": "Cuartel Valpara\u00edso",
+            "B": "PAMC South Cone Headquarters",
+            "C": "Avenida Altamirano 1842",
+            "D": "Valpara\u00edso"
           },
           "user_answer": "B",
           "correct_answer": "A",
           "is_correct": false,
-          "clarification": "Option A is correct because it is directly derived from the retrieved chunk for the selected section.",
-          "adaptation_reason": "Cold-start coverage question for selected section 8.",
+          "clarification": "The primary operational base is Cuartel Valpara\u00edso.",
+          "adaptation_reason": "Prioritizing weak topics and avoiding close repeats of mastered questions.",
           "source_chunk_ids": [
             "11e8b047-54f6-42b9-a9b8-a0e6bbf19e09"
           ]
         },
         {
-          "question_id": "2a13d122-0045-4159-9922-eaebe739dd94",
+          "question_id": "a9c2f1e4-6b7d-4d3c-ba4e-1c2f3d4e5f67",
           "section_number": 8,
-          "topic": "Section 8 concept 3",
-          "difficulty": "medium",
-          "question": "Which option best reflects the selected source material for Section 8 concept 3?",
+          "topic": "Safehouses",
+          "difficulty": "hard",
+          "question": "How often is safehouse provisioning audited?",
           "options": {
-            "A": "xin-7 spare blister packs 1 backup PAMC-issued identity package (Norwegian, Argentine, Bolivian alternates) 2,000 USD-equivalent local currency in mixed denominations Safehouse provisioning is audited semi-annually by...",
-            "B": "A statement from an unrelated section.",
-            "C": "A contradictory interpretation of the selected material.",
-            "D": "A generic answer not grounded in the selected section."
+            "A": "Annually",
+            "B": "Semi-annually",
+            "C": "Quarterly",
+            "D": "Monthly"
           },
-          "user_answer": "B",
-          "correct_answer": "A",
+          "user_answer": "A",
+          "correct_answer": "B",
           "is_correct": false,
-          "clarification": "Option A is correct because it is directly derived from the retrieved chunk for the selected section.",
-          "adaptation_reason": "Cold-start coverage question for selected section 8.",
+          "clarification": "Safehouse provisioning is audited semi-annually.",
+          "adaptation_reason": "Prioritizing weak topics and avoiding close repeats of mastered questions.",
           "source_chunk_ids": [
             "421ff765-5d8f-4b26-b568-e8e439c15860"
           ]
@@ -336,7 +336,7 @@
       "weak_topics": [
         {
           "section_number": 8,
-          "topic": "Section 8 concept 3",
+          "topic": "Operational Territory",
           "attempts": 2,
           "wrong_count": 2,
           "correct_count": 0,
@@ -344,7 +344,7 @@
         },
         {
           "section_number": 8,
-          "topic": "Section 8 concept 1",
+          "topic": "Safehouses",
           "attempts": 2,
           "wrong_count": 2,
           "correct_count": 0,
@@ -352,18 +352,10 @@
         },
         {
           "section_number": 5,
-          "topic": "Section 5 concept 7",
-          "attempts": 1,
+          "topic": "Operational Tactics",
+          "attempts": 2,
           "wrong_count": 0,
-          "correct_count": 1,
-          "weakness_score": 0.0
-        },
-        {
-          "section_number": 5,
-          "topic": "Section 5 concept 1",
-          "attempts": 1,
-          "wrong_count": 0,
-          "correct_count": 1,
+          "correct_count": 2,
           "weakness_score": 0.0
         }
       ]
