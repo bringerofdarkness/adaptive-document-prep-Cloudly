@@ -1,5 +1,5 @@
 {
-  "session_id": "e35cbaf7-1394-41ed-af18-86c6a546f033",
+  "session_id": "b7870a7c-a7e9-4be5-bc67-dd49692d08a7",
   "mode": "cold_start",
   "selected_sections": [
     3,
@@ -21,53 +21,53 @@
   },
   "questions": [
     {
-      "question_id": "b7a06882-c3cb-480b-8aea-129234d548cb",
+      "question_id": "fa39a8a7-cbf3-46f9-9eef-b68b770a7277",
       "section_id": "8ec27f2c-0867-4d0b-9417-77cff5da8703",
       "section_number": 3,
-      "topic": "Biography",
+      "topic": "Military Career",
       "difficulty": "medium",
       "question": "When did she enter the Escuela Militar Bernardo O'Higgins?",
       "options": {
-        "A": "4 March 2005",
-        "B": "12 December 2009",
-        "C": "19 November 2020",
-        "D": "12 March 2019"
+        "A": "4 March 2004",
+        "B": "4 March 2005",
+        "C": "4 March 2006",
+        "D": "4 March 2007"
       },
-      "correct_answer": "A",
+      "correct_answer": "B",
       "explanation": "She entered the Escuela Militar Bernardo O'Higgins on 4 March 2005.",
-      "adaptation_reason": "Prioritizing weak topics and avoiding close repeats of mastered questions.",
+      "adaptation_reason": "Prioritizing weak topics",
       "source_chunk_ids": [
         "af323091-abb2-40d1-85e2-dbe46083e48f"
       ],
-      "simulated_user_answer": "A",
+      "simulated_user_answer": "B",
       "is_correct": true,
       "clarification": null
     },
     {
-      "question_id": "22b86c2f-b5d8-4d31-8c17-2a5c63123a48",
+      "question_id": "512dd5fd-8497-4018-96e9-4138810bbe2b",
       "section_id": "8ec27f2c-0867-4d0b-9417-77cff5da8703",
       "section_number": 3,
       "topic": "Military Career",
       "difficulty": "hard",
-      "question": "What was the codename assigned to her on 7 May 2019?",
+      "question": "What is the name of the event where Drift Read awakens?",
       "options": {
-        "A": "SLATEFALL",
-        "B": "Drift Read",
-        "C": "Tropopausa",
-        "D": "First Echo Lock"
+        "A": "First Echo Lock event",
+        "B": "Drift Read awakens, Antofagasta",
+        "C": "Calvache\u2013Marr\u00f3n Equations published",
+        "D": "Tropopausa first event"
       },
-      "correct_answer": "A",
-      "explanation": "The codename SLATEFALL was assigned to her on 7 May 2019.",
-      "adaptation_reason": "Prioritizing weak topics and avoiding close repeats of mastered questions.",
+      "correct_answer": "B",
+      "explanation": "Drift Read awakens, Antofagasta is the event where Drift Read awakens.",
+      "adaptation_reason": "Avoiding close repeats of mastered questions",
       "source_chunk_ids": [
         "d444863f-9f11-400c-a69e-68010a78d901"
       ],
-      "simulated_user_answer": "B",
+      "simulated_user_answer": "A",
       "is_correct": false,
-      "clarification": "The codename SLATEFALL was assigned to her on 7 May 2019."
+      "clarification": "Drift Read awakens, Antofagasta is the event where Drift Read awakens."
     },
     {
-      "question_id": "c7f91bee-e8de-4713-b145-7b2091099e57",
+      "question_id": "d79459fd-a156-4408-a7a1-7cf0a3b479b9",
       "section_id": "ac56b161-10e2-41eb-a721-ac875f6fdc6e",
       "section_number": 7,
       "topic": "Threat Tier Classification",
@@ -81,7 +81,7 @@
       },
       "correct_answer": "A",
       "explanation": "The PAMC Threat Tier Classification System is used to classify metahuman and organized-paramilitary threats.",
-      "adaptation_reason": "Prioritizing weak topics and avoiding close repeats of mastered questions.",
+      "adaptation_reason": "Prioritizing weak topic: Threat Tier Classification",
       "source_chunk_ids": [
         "fa2883c0-3aa0-40f1-aa1b-4d00ea815fbc"
       ],
@@ -90,25 +90,25 @@
       "clarification": null
     },
     {
-      "question_id": "caa5b7c2-49a0-433f-96b3-bb7e8b914396",
+      "question_id": "bd1c9e8d-59cc-47f5-8c9a-e0ad812801d0",
       "section_id": "ac56b161-10e2-41eb-a721-ac875f6fdc6e",
       "section_number": 7,
       "topic": "Emergent Threats",
-      "difficulty": "medium",
+      "difficulty": "hard",
       "question": "What is the probability of Mar Inverso confirmation and engagement within 2026?",
       "options": {
-        "A": "High",
+        "A": "Low",
         "B": "Moderate",
-        "C": "Low",
+        "C": "High",
         "D": "Unknown"
       },
-      "correct_answer": "A",
+      "correct_answer": "C",
       "explanation": "The Andean Operations Bureau projects a high probability of Mar Inverso confirmation and engagement within 2026.",
-      "adaptation_reason": "Prioritizing weak topics and avoiding close repeats of mastered questions.",
+      "adaptation_reason": "Avoiding close repeats of mastered questions and prioritizing weak topic: Emergent Threats",
       "source_chunk_ids": [
         "9009e52b-f5d9-4d2a-a011-2a29487fb731"
       ],
-      "simulated_user_answer": "B",
+      "simulated_user_answer": "A",
       "is_correct": false,
       "clarification": "The Andean Operations Bureau projects a high probability of Mar Inverso confirmation and engagement within 2026."
     }

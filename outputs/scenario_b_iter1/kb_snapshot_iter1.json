@@ -1,11 +1,11 @@
 {
-  "snapshot_created_at": "2026-05-19T20:37:58.466407",
-  "current_session_id": "1de73700-52f6-47ff-8758-db0e90976c38",
+  "snapshot_created_at": "2026-05-19T20:51:19.898876",
+  "current_session_id": "491857cd-a552-4873-be5e-380b33df9595",
   "recent_session_count": 1,
   "recent_sessions": [
     {
-      "session_id": "1de73700-52f6-47ff-8758-db0e90976c38",
-      "timestamp": "2026-05-19T20:37:58.415002",
+      "session_id": "491857cd-a552-4873-be5e-380b33df9595",
+      "timestamp": "2026-05-19T20:51:19.856601",
       "mode": "cold_start",
       "selected_sections": [
         5,
@@ -27,49 +27,49 @@
       },
       "questions_asked": [
         {
-          "question_id": "6ae2ba05-38b7-4868-a838-ced6f074c643",
+          "question_id": "26b83a9e-8a75-4c67-bba5-05f1f5e824de",
           "section_number": 5,
           "topic": "Operational Tactics and Combat Doctrine",
           "difficulty": "medium",
           "question": "What is the Doctrine of Sequential Suspension (DSS)?",
           "options": {
-            "A": "A combat tactic used to engage targets.",
-            "B": "A formal combat doctrine articulated by the asset on 19 June 2022.",
-            "C": "A PAMC-recognized doctrine for Class A-1 operatives.",
-            "D": "A method of target acquisition."
+            "A": "A doctrine for Class A-1 operatives",
+            "B": "The asset's formal combat doctrine, articulated on 19 June 2022",
+            "C": "A set of directives for PAMC Internal Bulletin 22-19",
+            "D": "A method for target acquisition"
           },
           "user_answer": "B",
           "correct_answer": "B",
           "is_correct": true,
           "clarification": null,
-          "adaptation_reason": "Prioritizing weak topics and avoiding close repeats of mastered questions.",
+          "adaptation_reason": "Prioritizing weak topics and testing a specific fact from the provided chunks.",
           "source_chunk_ids": [
             "68144153-edc2-4d07-b82f-9491716eed7b"
           ]
         },
         {
-          "question_id": "84e4460f-f30b-4b6c-8ced-5f6e103f2f54",
+          "question_id": "7c9d02d0-c237-4a9b-9b96-aa94ac561b12",
           "section_number": 5,
           "topic": "Operational Tactics and Combat Doctrine",
           "difficulty": "hard",
           "question": "What overrides cooldown discipline?",
           "options": {
-            "A": "Tactical opportunity.",
-            "B": "Civilian risk.",
-            "C": "Engagement of Tier 4 targets.",
-            "D": "Activation of the asset."
+            "A": "Tactical opportunity",
+            "B": "Civilian risk",
+            "C": "Engagement of Tier 4",
+            "D": "Extraction"
           },
           "user_answer": "B",
           "correct_answer": "B",
           "is_correct": true,
           "clarification": null,
-          "adaptation_reason": "Prioritizing weak topics and avoiding close repeats of mastered questions.",
+          "adaptation_reason": "Testing a specific relationship from the provided chunks and prioritizing weak topics.",
           "source_chunk_ids": [
             "c3f3119b-078d-4ece-9ce7-e165c5f4fc65"
           ]
         },
         {
-          "question_id": "ab860ec6-b759-4c3e-a680-c37d1fce1390",
+          "question_id": "ca1eba90-a925-4e1b-9962-f6350833d8ab",
           "section_number": 8,
           "topic": "Operational Territory",
           "difficulty": "medium",
@@ -90,16 +90,16 @@
           ]
         },
         {
-          "question_id": "942dac85-2444-45ef-9c95-7270a9d67e21",
+          "question_id": "128703b5-807a-4054-b819-648d0d7eaa02",
           "section_number": 8,
           "topic": "Safehouses",
-          "difficulty": "medium",
+          "difficulty": "hard",
           "question": "Who audits the safehouse provisioning semi-annually?",
           "options": {
             "A": "Cpl. Vendrame",
-            "B": "PAMC South Cone Headquarters",
-            "C": "Asset's primary operational base",
-            "D": "Cell's leader"
+            "B": "PAMC-issued identity package",
+            "C": "Norwegian, Argentine, Bolivian alternates",
+            "D": "2,000 USD-equivalent local currency"
           },
           "user_answer": "B",
           "correct_answer": "A",
