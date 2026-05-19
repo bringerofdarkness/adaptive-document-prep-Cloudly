@@ -1,0 +1,26 @@
+services:
+  postgres:
+    image: postgres:16
+    container_name: adaptive_doc_postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: adaptive_doc_prep
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    ports:
+      - "127.0.0.1:5433:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+  qdrant:
+    image: qdrant/qdrant:latest
+    container_name: adaptive_doc_qdrant
+    restart: unless-stopped
+    ports:
+      - "127.0.0.1:16433:6333"
+    volumes:
+      - qdrant_data:/qdrant/storage
+
+volumes:
+  postgres_data:
+  qdrant_data:

@@ -1,0 +1,91 @@
+{
+  "session_id": "68225469-8219-44a7-8d67-a9ad6d0f3746",
+  "mode": "adaptive",
+  "selected_sections": [
+    8
+  ],
+  "score": 0.0,
+  "total_questions": 2,
+  "correct_count": 0,
+  "wrong_count": 2,
+  "adaptation_summary": "Adaptive run: prior history found. Focus more on weak topics and avoid excessive repetition of mastered questions.",
+  "adaptation_payload": {
+    "is_returning_run": true,
+    "mode": "adaptive",
+    "relevant_prior_session_count": 2,
+    "weak_topics": [
+      {
+        "section_number": 8,
+        "topic": "Section 8 concept 3",
+        "attempts": 2,
+        "wrong_count": 2,
+        "correct_count": 0,
+        "weakness_score": 1.0
+      },
+      {
+        "section_number": 8,
+        "topic": "Section 8 concept 1",
+        "attempts": 2,
+        "wrong_count": 2,
+        "correct_count": 0,
+        "weakness_score": 1.0
+      }
+    ],
+    "mastered_question_texts": [],
+    "previous_wrong_question_texts": [
+      "Which option best reflects the selected source material for Section 8 concept 3?",
+      "Which option best reflects the selected source material for Section 8 concept 1?",
+      "Which option best reflects the selected source material for Section 8 concept 3?",
+      "Which option best reflects the selected source material for Section 8 concept 1?"
+    ],
+    "summary": "Adaptive run: prior history found. Focus more on weak topics and avoid excessive repetition of mastered questions."
+  },
+  "questions": [
+    {
+      "question_id": "7789f92c-0ef5-410f-a6a7-ad1cc6ad30a9",
+      "section_id": "24707465-4591-4e01-b532-4251aceaf99c",
+      "section_number": 8,
+      "topic": "Section 8 concept 1",
+      "difficulty": "medium",
+      "question": "Which option best reflects the selected source material for Section 8 concept 1?",
+      "options": {
+        "A": "Section 8. Known Bases, Safehouses, and Operational Territory 8.1 Primary Base: Cuartel Valpara\u00edso The asset's primary operational base is Cuartel Valpara\u00edso, designated PAMC South Cone Headquarters. The facility...",
+        "B": "A statement from an unrelated section.",
+        "C": "A contradictory interpretation of the selected material.",
+        "D": "A generic answer not grounded in the selected section."
+      },
+      "correct_answer": "A",
+      "explanation": "Option A is correct because it is directly derived from the retrieved chunk for the selected section.",
+      "adaptation_reason": "Adaptive question because previous history shows weakness in section 8.",
+      "source_chunk_ids": [
+        "11e8b047-54f6-42b9-a9b8-a0e6bbf19e09"
+      ],
+      "simulated_user_answer": "B",
+      "is_correct": false,
+      "clarification": "Option A is correct because it is directly derived from the retrieved chunk for the selected section."
+    },
+    {
+      "question_id": "108e0d51-322f-43ae-84b5-7ddd5aa8a048",
+      "section_id": "24707465-4591-4e01-b532-4251aceaf99c",
+      "section_number": 8,
+      "topic": "Section 8 concept 3",
+      "difficulty": "medium",
+      "question": "Which option best reflects the selected source material for Section 8 concept 3?",
+      "options": {
+        "A": "xin-7 spare blister packs 1 backup PAMC-issued identity package (Norwegian, Argentine, Bolivian alternates) 2,000 USD-equivalent local currency in mixed denominations Safehouse provisioning is audited semi-annually by...",
+        "B": "A statement from an unrelated section.",
+        "C": "A contradictory interpretation of the selected material.",
+        "D": "A generic answer not grounded in the selected section."
+      },
+      "correct_answer": "A",
+      "explanation": "Option A is correct because it is directly derived from the retrieved chunk for the selected section.",
+      "adaptation_reason": "Adaptive question because previous history shows weakness in section 8.",
+      "source_chunk_ids": [
+        "421ff765-5d8f-4b26-b568-e8e439c15860"
+      ],
+      "simulated_user_answer": "B",
+      "is_correct": false,
+      "clarification": "Option A is correct because it is directly derived from the retrieved chunk for the selected section."
+    }
+  ]
+}
