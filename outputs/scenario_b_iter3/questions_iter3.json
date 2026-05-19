@@ -1,5 +1,5 @@
 {
-  "session_id": "5eac58b3-3336-40a4-8a66-2c2226746160",
+  "session_id": "76d724b0-7112-435f-92cc-3d16c1e15dfd",
   "mode": "adaptive",
   "selected_sections": [
     8
@@ -34,15 +34,15 @@
     "mastered_question_texts": [],
     "previous_wrong_question_texts": [
       "What is the primary operational base of the asset?",
-      "How often is safehouse provisioning audited?",
-      "How often is safehouse provisioning audited?",
+      "Who audits the safehouse provisioning semi-annually?",
+      "Who audits the safehouse provisioning semi-annually?",
       "What is the primary operational base of the asset?"
     ],
     "summary": "Adaptive run: prior history found. Focus more on weak topics and avoid excessive repetition of mastered questions."
   },
   "questions": [
     {
-      "question_id": "f5c3b8a4-8d4f-4f7d-9a8b-1c2d3e4f5678",
+      "question_id": "39004ba0-98f2-47ca-a667-5cdd65feecc0",
       "section_id": "24707465-4591-4e01-b532-4251aceaf99c",
       "section_number": 8,
       "topic": "Operational Territory",
@@ -50,42 +50,42 @@
       "question": "What is the primary operational base of the asset?",
       "options": {
         "A": "Cuartel Valpara\u00edso",
-        "B": "Avenida Altamirano 1842",
-        "C": "PAMC South Cone Headquarters",
+        "B": "PAMC South Cone Headquarters",
+        "C": "Avenida Altamirano 1842",
         "D": "Valpara\u00edso"
       },
       "correct_answer": "A",
-      "explanation": "The primary operational base of the asset is Cuartel Valpara\u00edso.",
+      "explanation": "The primary operational base is Cuartel Valpara\u00edso.",
       "adaptation_reason": "Prioritized weak topic: Operational Territory",
       "source_chunk_ids": [
         "11e8b047-54f6-42b9-a9b8-a0e6bbf19e09"
       ],
       "simulated_user_answer": "B",
       "is_correct": false,
-      "clarification": "The primary operational base of the asset is Cuartel Valpara\u00edso."
+      "clarification": "The primary operational base is Cuartel Valpara\u00edso."
     },
     {
-      "question_id": "a1b2c3d4-e5f6-7g8h-9i0j-k1l2m3n4o5",
+      "question_id": "9835e44c-7305-46fd-9278-13183d91c110",
       "section_id": "24707465-4591-4e01-b532-4251aceaf99c",
       "section_number": 8,
       "topic": "Safehouses",
       "difficulty": "medium",
-      "question": "How often is safehouse provisioning audited?",
+      "question": "Who audits the safehouse provisioning semi-annually?",
       "options": {
-        "A": "Annually",
-        "B": "Bi-annually",
-        "C": "Semi-annually",
-        "D": "Quarterly"
+        "A": "Cpl. Vendrame",
+        "B": "PAMC South Cone Headquarters",
+        "C": "Asset's primary operational base",
+        "D": "Cell leader"
       },
-      "correct_answer": "C",
-      "explanation": "Safehouse provisioning is audited semi-annually.",
+      "correct_answer": "A",
+      "explanation": "Cpl. Vendrame audits safehouse provisioning semi-annually.",
       "adaptation_reason": "Prioritized weak topic: Safehouses",
       "source_chunk_ids": [
         "421ff765-5d8f-4b26-b568-e8e439c15860"
       ],
-      "simulated_user_answer": "A",
+      "simulated_user_answer": "B",
       "is_correct": false,
-      "clarification": "Safehouse provisioning is audited semi-annually."
+      "clarification": "Cpl. Vendrame audits safehouse provisioning semi-annually."
     }
   ]
 }

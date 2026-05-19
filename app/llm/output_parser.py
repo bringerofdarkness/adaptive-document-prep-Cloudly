@@ -1,6 +1,6 @@
 import json
 from typing import Any
-
+from uuid import uuid4
 from app.schemas.question import MCQSet
 
 
@@ -73,7 +73,7 @@ def normalize_mcq_payload(payload: dict) -> dict:
 
         normalized_questions.append(
             {
-                "question_id": str(question.get("question_id") or f"q-{index}"),
+                "question_id": str(uuid4()),
                 "section_id": str(question.get("section_id") or ""),
                 "section_number": int(question.get("section_number")),
                 "topic": str(question.get("topic") or "General section concept").strip(),

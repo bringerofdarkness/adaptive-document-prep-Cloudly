@@ -49,7 +49,7 @@ def simulate_answers(
 
     return answer_map
 
-def run_mock_prep_session(
+def run_prep_session(
     db: Session,
     selected_section_numbers: list[int],
     questions_per_section: int = 2,

@@ -1,11 +1,11 @@
 {
-  "snapshot_created_at": "2026-05-19T19:40:15.475497",
-  "current_session_id": "2b942ff0-6b50-4fed-8d77-4dec7a5c2188",
+  "snapshot_created_at": "2026-05-19T20:37:58.466407",
+  "current_session_id": "1de73700-52f6-47ff-8758-db0e90976c38",
   "recent_session_count": 1,
   "recent_sessions": [
     {
-      "session_id": "2b942ff0-6b50-4fed-8d77-4dec7a5c2188",
-      "timestamp": "2026-05-19T19:40:15.419661",
+      "session_id": "1de73700-52f6-47ff-8758-db0e90976c38",
+      "timestamp": "2026-05-19T20:37:58.415002",
       "mode": "cold_start",
       "selected_sections": [
         5,
@@ -27,19 +27,19 @@
       },
       "questions_asked": [
         {
-          "question_id": "1e5b2a3f-3c6b-4d7e-8e5b-4c3b2a1a3a1a",
+          "question_id": "6ae2ba05-38b7-4868-a838-ced6f074c643",
           "section_number": 5,
-          "topic": "Operational Tactics",
+          "topic": "Operational Tactics and Combat Doctrine",
           "difficulty": "medium",
           "question": "What is the Doctrine of Sequential Suspension (DSS)?",
           "options": {
-            "A": "A combat doctrine for Class A-1 operatives",
-            "B": "An asset's formal combat doctrine",
-            "C": "A PAMC-recognized doctrine for Class A-2 operatives",
-            "D": "A tactical opportunity for civilian risk"
+            "A": "A combat tactic used to engage targets.",
+            "B": "A formal combat doctrine articulated by the asset on 19 June 2022.",
+            "C": "A PAMC-recognized doctrine for Class A-1 operatives.",
+            "D": "A method of target acquisition."
           },
-          "user_answer": "C",
-          "correct_answer": "C",
+          "user_answer": "B",
+          "correct_answer": "B",
           "is_correct": true,
           "clarification": null,
           "adaptation_reason": "Prioritizing weak topics and avoiding close repeats of mastered questions.",
@@ -48,19 +48,19 @@
           ]
         },
         {
-          "question_id": "2e5b2a3f-3c6b-4d7e-8e5b-4c3b2a1a3a1a",
+          "question_id": "84e4460f-f30b-4b6c-8ced-5f6e103f2f54",
           "section_number": 5,
-          "topic": "Operational Tactics",
+          "topic": "Operational Tactics and Combat Doctrine",
           "difficulty": "hard",
-          "question": "What is the primary directive for acquiring targets?",
+          "question": "What overrides cooldown discipline?",
           "options": {
-            "A": "Acquire targets only when extraction is mapped",
-            "B": "Activate without verifying the contact-exclusion radius",
-            "C": "Hold one activation in reserve until extraction",
-            "D": "Engage Tier 4 only with two activations"
+            "A": "Tactical opportunity.",
+            "B": "Civilian risk.",
+            "C": "Engagement of Tier 4 targets.",
+            "D": "Activation of the asset."
           },
-          "user_answer": "A",
-          "correct_answer": "A",
+          "user_answer": "B",
+          "correct_answer": "B",
           "is_correct": true,
           "clarification": null,
           "adaptation_reason": "Prioritizing weak topics and avoiding close repeats of mastered questions.",
@@ -69,7 +69,7 @@
           ]
         },
         {
-          "question_id": "f8b4d8c3-5a7e-4f5c-8a4b-1a8c7b6c5d67",
+          "question_id": "ab860ec6-b759-4c3e-a680-c37d1fce1390",
           "section_number": 8,
           "topic": "Operational Territory",
           "difficulty": "medium",
@@ -83,28 +83,28 @@
           "user_answer": "B",
           "correct_answer": "A",
           "is_correct": false,
-          "clarification": "The primary operational base is Cuartel Valpara\u00edso.",
+          "clarification": "The primary operational base of the asset is Cuartel Valpara\u00edso.",
           "adaptation_reason": "Prioritizing weak topics and avoiding close repeats of mastered questions.",
           "source_chunk_ids": [
             "11e8b047-54f6-42b9-a9b8-a0e6bbf19e09"
           ]
         },
         {
-          "question_id": "a9c2f1e4-6b7d-4d3c-ba4e-1c2f3d4e5f67",
+          "question_id": "942dac85-2444-45ef-9c95-7270a9d67e21",
           "section_number": 8,
           "topic": "Safehouses",
-          "difficulty": "hard",
-          "question": "How often is safehouse provisioning audited?",
+          "difficulty": "medium",
+          "question": "Who audits the safehouse provisioning semi-annually?",
           "options": {
-            "A": "Annually",
-            "B": "Semi-annually",
-            "C": "Quarterly",
-            "D": "Monthly"
+            "A": "Cpl. Vendrame",
+            "B": "PAMC South Cone Headquarters",
+            "C": "Asset's primary operational base",
+            "D": "Cell's leader"
           },
-          "user_answer": "A",
-          "correct_answer": "B",
+          "user_answer": "B",
+          "correct_answer": "A",
           "is_correct": false,
-          "clarification": "Safehouse provisioning is audited semi-annually.",
+          "clarification": "Cpl. Vendrame audits the safehouse provisioning semi-annually on behalf of the cell.",
           "adaptation_reason": "Prioritizing weak topics and avoiding close repeats of mastered questions.",
           "source_chunk_ids": [
             "421ff765-5d8f-4b26-b568-e8e439c15860"
@@ -130,7 +130,7 @@
         },
         {
           "section_number": 5,
-          "topic": "Operational Tactics",
+          "topic": "Operational Tactics and Combat Doctrine",
           "attempts": 2,
           "wrong_count": 0,
           "correct_count": 2,

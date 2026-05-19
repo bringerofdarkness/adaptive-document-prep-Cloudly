@@ -1,0 +1,150 @@
+{
+  "snapshot_created_at": "2026-05-19T20:34:55.142371",
+  "current_session_id": "e35cbaf7-1394-41ed-af18-86c6a546f033",
+  "recent_session_count": 1,
+  "recent_sessions": [
+    {
+      "session_id": "e35cbaf7-1394-41ed-af18-86c6a546f033",
+      "timestamp": "2026-05-19T20:34:55.055401",
+      "mode": "cold_start",
+      "selected_sections": [
+        3,
+        7
+      ],
+      "score": 50.0,
+      "total_questions": 4,
+      "correct_count": 2,
+      "wrong_count": 2,
+      "adaptation_summary": "Cold-start run: no prior relevant history found.",
+      "adaptation_payload": {
+        "is_returning_run": false,
+        "mode": "cold_start",
+        "relevant_prior_session_count": 0,
+        "weak_topics": [],
+        "mastered_question_texts": [],
+        "previous_wrong_question_texts": [],
+        "summary": "Cold-start run: no prior relevant history found."
+      },
+      "questions_asked": [
+        {
+          "question_id": "b7a06882-c3cb-480b-8aea-129234d548cb",
+          "section_number": 3,
+          "topic": "Biography",
+          "difficulty": "medium",
+          "question": "When did she enter the Escuela Militar Bernardo O'Higgins?",
+          "options": {
+            "A": "4 March 2005",
+            "B": "12 December 2009",
+            "C": "19 November 2020",
+            "D": "12 March 2019"
+          },
+          "user_answer": "A",
+          "correct_answer": "A",
+          "is_correct": true,
+          "clarification": null,
+          "adaptation_reason": "Prioritizing weak topics and avoiding close repeats of mastered questions.",
+          "source_chunk_ids": [
+            "af323091-abb2-40d1-85e2-dbe46083e48f"
+          ]
+        },
+        {
+          "question_id": "22b86c2f-b5d8-4d31-8c17-2a5c63123a48",
+          "section_number": 3,
+          "topic": "Military Career",
+          "difficulty": "hard",
+          "question": "What was the codename assigned to her on 7 May 2019?",
+          "options": {
+            "A": "SLATEFALL",
+            "B": "Drift Read",
+            "C": "Tropopausa",
+            "D": "First Echo Lock"
+          },
+          "user_answer": "B",
+          "correct_answer": "A",
+          "is_correct": false,
+          "clarification": "The codename SLATEFALL was assigned to her on 7 May 2019.",
+          "adaptation_reason": "Prioritizing weak topics and avoiding close repeats of mastered questions.",
+          "source_chunk_ids": [
+            "d444863f-9f11-400c-a69e-68010a78d901"
+          ]
+        },
+        {
+          "question_id": "c7f91bee-e8de-4713-b145-7b2091099e57",
+          "section_number": 7,
+          "topic": "Threat Tier Classification",
+          "difficulty": "medium",
+          "question": "What is the name of the system used to classify metahuman and organized-paramilitary threats?",
+          "options": {
+            "A": "PAMC Threat Tier Classification System",
+            "B": "NMOC-derived Threat Tier Schedule",
+            "C": "Threat Tier Schedule",
+            "D": "Tier Assignment Criteria"
+          },
+          "user_answer": "A",
+          "correct_answer": "A",
+          "is_correct": true,
+          "clarification": null,
+          "adaptation_reason": "Prioritizing weak topics and avoiding close repeats of mastered questions.",
+          "source_chunk_ids": [
+            "fa2883c0-3aa0-40f1-aa1b-4d00ea815fbc"
+          ]
+        },
+        {
+          "question_id": "caa5b7c2-49a0-433f-96b3-bb7e8b914396",
+          "section_number": 7,
+          "topic": "Emergent Threats",
+          "difficulty": "medium",
+          "question": "What is the probability of Mar Inverso confirmation and engagement within 2026?",
+          "options": {
+            "A": "High",
+            "B": "Moderate",
+            "C": "Low",
+            "D": "Unknown"
+          },
+          "user_answer": "B",
+          "correct_answer": "A",
+          "is_correct": false,
+          "clarification": "The Andean Operations Bureau projects a high probability of Mar Inverso confirmation and engagement within 2026.",
+          "adaptation_reason": "Prioritizing weak topics and avoiding close repeats of mastered questions.",
+          "source_chunk_ids": [
+            "9009e52b-f5d9-4d2a-a011-2a29487fb731"
+          ]
+        }
+      ],
+      "weak_topics": [
+        {
+          "section_number": 7,
+          "topic": "Emergent Threats",
+          "attempts": 1,
+          "wrong_count": 1,
+          "correct_count": 0,
+          "weakness_score": 1.0
+        },
+        {
+          "section_number": 3,
+          "topic": "Military Career",
+          "attempts": 1,
+          "wrong_count": 1,
+          "correct_count": 0,
+          "weakness_score": 1.0
+        },
+        {
+          "section_number": 7,
+          "topic": "Threat Tier Classification",
+          "attempts": 1,
+          "wrong_count": 0,
+          "correct_count": 1,
+          "weakness_score": 0.0
+        },
+        {
+          "section_number": 3,
+          "topic": "Biography",
+          "attempts": 1,
+          "wrong_count": 0,
+          "correct_count": 1,
+          "weakness_score": 0.0
+        }
+      ]
+    }
+  ]
+}

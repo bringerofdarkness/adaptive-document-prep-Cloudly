@@ -1,5 +1,5 @@
 {
-  "session_id": "eeed918f-e35c-4b8d-91bb-9d8c512fed2c",
+  "session_id": "b59ffea2-7570-4ca3-aed6-24e9f14b13eb",
   "mode": "adaptive",
   "selected_sections": [
     6,
@@ -35,27 +35,27 @@
     ],
     "mastered_question_texts": [],
     "previous_wrong_question_texts": [
-      "How often is safehouse provisioning audited?",
+      "Who audits the safehouse provisioning semi-annually?",
       "What is the primary operational base of the asset?"
     ],
     "summary": "Adaptive run: prior history found. Focus more on weak topics and avoid excessive repetition of mastered questions."
   },
   "questions": [
     {
-      "question_id": "e7d1f7d2-8c4d-4d6a-9d4c-8e5f6d7c8e9f",
+      "question_id": "cc81802b-0b38-4409-bf2f-5b02222c33d8",
       "section_id": "c199947c-c06d-4701-bb81-0d45720926da",
       "section_number": 6,
       "topic": "Nordic Metahuman Operations Cell",
       "difficulty": "medium",
-      "question": "How often are joint training rotations held for Nordic Metahuman Operations Cell?",
+      "question": "What is the frequency of joint training rotations for the Nordic Metahuman Operations Cell?",
       "options": {
-        "A": "Every 12 months",
+        "A": "Every 6 months",
         "B": "Every 18 months",
-        "C": "Every 24 months",
-        "D": "Every 6 months"
+        "C": "Every 2 years",
+        "D": "Every 5 years"
       },
       "correct_answer": "B",
-      "explanation": "Joint training rotations for Nordic Metahuman Operations Cell are held every 18 months.",
+      "explanation": "The Nordic Metahuman Operations Cell conducts joint training rotations every 18 months.",
       "adaptation_reason": "Prioritized weak topic: Safehouses",
       "source_chunk_ids": [
         "8605ceb7-739a-4ab7-a547-df12a785f39c"
@@ -65,53 +65,53 @@
       "clarification": null
     },
     {
-      "question_id": "f1a2b3c4-d5e6-7f8g-9h0i-jk1l2m3n4",
+      "question_id": "f4e3e8f8-8fdc-43d9-a356-370da518d6b9",
       "section_id": "c199947c-c06d-4701-bb81-0d45720926da",
       "section_number": 6,
-      "topic": "European Metahuman Reserve",
-      "difficulty": "medium",
-      "question": "How often are reciprocal briefings held for European Metahuman Reserve?",
+      "topic": "Pan-Cooperative Summit",
+      "difficulty": "easy",
+      "question": "Where did the asset attend the 2024 Pan-Cooperative Summit?",
       "options": {
-        "A": "Every 6 months",
-        "B": "Every 12 months",
-        "C": "Four times a year",
-        "D": "Every 24 months"
+        "A": "Paris",
+        "B": "Lisbon",
+        "C": "Berlin",
+        "D": "Madrid"
       },
-      "correct_answer": "C",
-      "explanation": "Reciprocal briefings for European Metahuman Reserve are held four times a year.",
-      "adaptation_reason": "Avoided close repeat of mastered question",
+      "correct_answer": "B",
+      "explanation": "The asset attended the 2024 Pan-Cooperative Summit in Lisbon.",
+      "adaptation_reason": "Avoided close repeat of mastered question: Safehouse provisioning",
       "source_chunk_ids": [
         "8605ceb7-739a-4ab7-a547-df12a785f39c"
       ],
-      "simulated_user_answer": "C",
+      "simulated_user_answer": "B",
       "is_correct": true,
       "clarification": null
     },
     {
-      "question_id": "f7c5a6b5-8d9e-4f6d-ba7e-1c2d3e4f5678",
+      "question_id": "dd4c5aaa-fccf-42fb-901a-341cae59018a",
       "section_id": "24707465-4591-4e01-b532-4251aceaf99c",
       "section_number": 8,
       "topic": "Safehouses",
       "difficulty": "medium",
-      "question": "How often is safehouse provisioning audited?",
+      "question": "Who audits the safehouse provisioning semi-annually?",
       "options": {
-        "A": "Daily",
-        "B": "Weekly",
-        "C": "Semi-annually",
-        "D": "Monthly"
+        "A": "Cpl. Vendrame",
+        "B": "Asset's primary operational base personnel",
+        "C": "Cell leader",
+        "D": "Unknown"
       },
-      "correct_answer": "C",
-      "explanation": "Safehouse provisioning is audited semi-annually.",
+      "correct_answer": "A",
+      "explanation": "Cpl. Vendrame audits the safehouse provisioning semi-annually on behalf of the cell.",
       "adaptation_reason": "Prioritized weak topic: Safehouses",
       "source_chunk_ids": [
         "421ff765-5d8f-4b26-b568-e8e439c15860"
       ],
-      "simulated_user_answer": "A",
+      "simulated_user_answer": "B",
       "is_correct": false,
-      "clarification": "Safehouse provisioning is audited semi-annually."
+      "clarification": "Cpl. Vendrame audits the safehouse provisioning semi-annually on behalf of the cell."
     },
     {
-      "question_id": "c4b3a2b1-9e8d-4f6c-ba7d-1c2d3e4f5679",
+      "question_id": "2bf9bf26-7de2-4a6f-9f54-196e0dbc66e4",
       "section_id": "24707465-4591-4e01-b532-4251aceaf99c",
       "section_number": 8,
       "topic": "Operational Territory",
@@ -119,35 +119,35 @@
       "question": "What is the primary operational base of the asset?",
       "options": {
         "A": "Cuartel Valpara\u00edso",
-        "B": "PAMC South Cone Headquarters",
-        "C": "Avenida Altamirano 1842",
-        "D": "Valpara\u00edso"
+        "B": "Asset's safehouse",
+        "C": "Cell headquarters",
+        "D": "Unknown"
       },
       "correct_answer": "A",
-      "explanation": "The asset's primary operational base is Cuartel Valpara\u00edso.",
+      "explanation": "Cuartel Valpara\u00edso is the primary operational base of the asset.",
       "adaptation_reason": "Prioritized weak topic: Operational Territory",
       "source_chunk_ids": [
         "11e8b047-54f6-42b9-a9b8-a0e6bbf19e09"
       ],
       "simulated_user_answer": "B",
       "is_correct": false,
-      "clarification": "The asset's primary operational base is Cuartel Valpara\u00edso."
+      "clarification": "Cuartel Valpara\u00edso is the primary operational base of the asset."
     },
     {
-      "question_id": "9a1b2c3d-4e5f-6a7b-8c9d-e0f1g2h3i4",
+      "question_id": "ed13f78b-f524-4853-943c-c9bb828aab1f",
       "section_id": "da396094-6d3e-4427-9d90-933b7170204c",
       "section_number": 9,
       "topic": "Case File Format",
       "difficulty": "medium",
-      "question": "What is the PAMC format for recording cases?",
+      "question": "What is the format of all cases recorded under PAMC?",
       "options": {
         "A": "Case number (year-sequence)",
-        "B": "Date (start\u2013end)",
-        "C": "Location (city, province, country)",
+        "B": "Location (city, province, country)",
+        "C": "Classification (open / classified / declassified)",
         "D": "Outcome (Successful / Partial / Inconclusive /..."
       },
       "correct_answer": "A",
-      "explanation": "The PAMC format for recording cases is Case number (year-sequence).",
+      "explanation": "The PAMC format for case files is uniform and includes a case number in the format of year-sequence.",
       "adaptation_reason": "Prioritized weak topic: Safehouses",
       "source_chunk_ids": [
         "2a89ad36-6d8e-4949-a65a-a0e94d21724a"
@@ -157,11 +157,11 @@
       "clarification": null
     },
     {
-      "question_id": "9a1b2c3d-4e5f-6a7b-8c9d-e0f1g2h5",
+      "question_id": "1870b867-5426-4196-8c42-e3cb1a865df5",
       "section_id": "da396094-6d3e-4427-9d90-933b7170204c",
       "section_number": 9,
-      "topic": "Operational Success",
-      "difficulty": "hard",
+      "topic": "Case File Details",
+      "difficulty": "medium",
       "question": "What was the outcome of Case 2024-0202: Quebrantadero Showdown?",
       "options": {
         "A": "Successful",
@@ -170,8 +170,8 @@
         "D": "Detained personnel led to seizure of USD $4.2 million in Concession assets"
       },
       "correct_answer": "A",
-      "explanation": "The outcome of Case 2024-0202: Quebrantadero Showdown was a successful operation.",
-      "adaptation_reason": "Avoided close repeat of mastered question: Safehouse provisioning audit",
+      "explanation": "The outcome of Case 2024-0202: Quebrantadero Showdown was a major operational success.",
+      "adaptation_reason": "Avoided close repeat of mastered question: Who audits the safehouse provisioning semi-annually?",
       "source_chunk_ids": [
         "77da46b4-29d5-4d6f-a117-d827cfd4b3f5"
       ],

@@ -5,7 +5,7 @@ import typer
 from app.db.repositories.document_repo import get_latest_document
 from app.db.repositories.session_repo import clear_prep_history_for_document
 from app.db.session import SessionLocal
-from app.services.prep_service import run_mock_prep_session
+from app.services.prep_service import run_prep_session
 from app.services.question_export_service import export_session_questions
 from app.services.snapshot_service import save_and_export_kb_snapshot
 
@@ -38,7 +38,8 @@ def main(
             iteration = run_config["iteration"]
             output_dir = Path(output_root) / f"scenario_b_iter{iteration}"
 
-            result = run_mock_prep_session(
+            result = run_prep_session(
+                
                 db=db,
                 selected_section_numbers=run_config["sections"],
                 questions_per_section=questions_per_section,

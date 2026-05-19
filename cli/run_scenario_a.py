@@ -2,29 +2,15 @@ from pathlib import Path
 
 import typer
 
+from app.db.repositories.document_repo import get_latest_document
+from app.db.repositories.session_repo import clear_prep_history_for_document
 from app.db.session import SessionLocal
-from app.services.prep_service import run_mock_prep_session
+from app.services.prep_service import run_prep_session
 from app.services.question_export_service import export_session_questions
 from app.services.snapshot_service import save_and_export_kb_snapshot
 
 
-SCENARIO_B_RUNS = [
-    {
-        "iteration": 1,
-        "sections": [5, 8],
-        "simulation_strategy": "section8_weak",
-    },
-    {
-        "iteration": 2,
-        "sections": [6, 8, 9],
-        "simulation_strategy": "section8_weak",
-    },
-    {
-        "iteration": 3,
-        "sections": [8],
-        "simulation_strategy": "section8_weak",
-    },
-]
+DEFAULT_SCENARIO_A_SECTIONS = [3, 7]
 
 
 def main(
@@ -34,34 +20,41 @@ def main(
     db = SessionLocal()
 
     try:
-        for run_config in SCENARIO_B_RUNS:
-            iteration = run_config["iteration"]
-            output_dir = Path(output_root) / f"scenario_b_iter{iteration}"
+        document = get_latest_document(db)
 
-            result = run_mock_prep_session(
-                db=db,
-                selected_section_numbers=run_config["sections"],
-                questions_per_section=questions_per_section,
-                simulation_strategy=run_config["simulation_strategy"],
-            )
+        if document is None:
+            raise typer.BadParameter("No document found. Run ingestion first.")
 
-            export_session_questions(
-                db=db,
-                session_id=result["session_id"],
-                output_path=output_dir / f"questions_iter{iteration}.json",
-            )
+        clear_prep_history_for_document(
+            db=db,
+            document_id=document.id,
+        )
 
-            save_and_export_kb_snapshot(
-                db=db,
-                current_session_id=result["session_id"],
-                output_path=output_dir / f"kb_snapshot_iter{iteration}.json",
-            )
+        result = run_prep_session(
+            db=db,
+            selected_section_numbers=DEFAULT_SCENARIO_A_SECTIONS,
+            questions_per_section=questions_per_section,
+            simulation_strategy="alternating",
+        )
 
-            typer.echo(
-                f"Scenario B iteration {iteration} complete: "
-                f"session={result['session_id']} mode={result['mode']} "
-                f"score={result['score']}"
-            )
+        output_dir = Path(output_root) / "scenario_a"
+
+        export_session_questions(
+            db=db,
+            session_id=result["session_id"],
+            output_path=output_dir / "questions_scenario_a.json",
+        )
+
+        save_and_export_kb_snapshot(
+            db=db,
+            current_session_id=result["session_id"],
+            output_path=output_dir / "kb_snapshot_scenario_a.json",
+        )
+
+        typer.echo(
+            f"Scenario A complete | session={result['session_id']} | "
+            f"mode={result['mode']} | score={result['score']}"
+        )
 
     finally:
         db.close()
