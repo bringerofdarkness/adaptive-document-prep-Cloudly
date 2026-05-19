@@ -1,11 +1,11 @@
 {
-  "snapshot_created_at": "2026-05-19T20:52:00.741557",
-  "current_session_id": "2d1fc4a8-93b9-47ef-8c96-d2d7851f6c7d",
+  "snapshot_created_at": "2026-05-19T21:48:15.621260",
+  "current_session_id": "2abca22b-7fba-477c-bd00-ed060796a752",
   "recent_session_count": 2,
   "recent_sessions": [
     {
-      "session_id": "2d1fc4a8-93b9-47ef-8c96-d2d7851f6c7d",
-      "timestamp": "2026-05-19T20:52:00.680037",
+      "session_id": "2abca22b-7fba-477c-bd00-ed060796a752",
+      "timestamp": "2026-05-19T21:48:15.549559",
       "mode": "adaptive",
       "selected_sections": [
         6,
@@ -48,49 +48,49 @@
       },
       "questions_asked": [
         {
-          "question_id": "a6b20097-14c2-456c-bf79-8e809300fb22",
+          "question_id": "a3d478bd-01fd-4a22-b28b-b40f034cb994",
           "section_number": 6,
-          "topic": "Nordic Metahuman Operations Cell",
+          "topic": "Metahuman Operations Cells",
           "difficulty": "medium",
-          "question": "Who audits the Nordic Metahuman Operations Cell semi-annually?",
+          "question": "What is the purpose of the Nordic Metahuman Operations Cell (NMOC)?",
           "options": {
-            "A": "European Metahuman Reserve",
-            "B": "East Asian Metahuman Compact",
-            "C": "Nordic Metahuman Operations Cell itself",
-            "D": "PAMC Inspector General Magnus Sletten"
+            "A": "Joint training rotations every 18 months",
+            "B": "Case-data exchange, four reciprocal briefings per year",
+            "C": "Observer status, biennial conference attendance",
+            "D": "Attending the Pan-Cooperative Summit"
           },
           "user_answer": "A",
           "correct_answer": "A",
           "is_correct": true,
           "clarification": null,
-          "adaptation_reason": "Prioritizing weak topics and avoiding excessive repetition of mastered questions.",
+          "adaptation_reason": "Prioritized weak topic: Metahuman Operations Cells",
           "source_chunk_ids": [
             "8605ceb7-739a-4ab7-a547-df12a785f39c"
           ]
         },
         {
-          "question_id": "3ea870c3-7017-4b8d-998a-1827e2a8e57c",
+          "question_id": "464857ea-6850-4930-8193-7f8f6fea52b4",
           "section_number": 6,
-          "topic": "PAMC Inspector General Magnus Sletten",
+          "topic": "PAMC Inspector General",
           "difficulty": "hard",
-          "question": "What is the relationship between PAMC Inspector General Magnus Sletten and the asset?",
+          "question": "What is the role of PAMC Inspector General Magnus Sletten?",
           "options": {
-            "A": "Close friend",
-            "B": "Adversarial bureaucratic figure",
-            "C": "Mentor",
-            "D": "Peer"
+            "A": "Adversarial bureaucratic figure",
+            "B": "Operative in the Caracas Cell",
+            "C": "Maintains formal correspondence channel",
+            "D": "Attends biennial conferences"
           },
-          "user_answer": "B",
-          "correct_answer": "B",
+          "user_answer": "A",
+          "correct_answer": "A",
           "is_correct": true,
           "clarification": null,
-          "adaptation_reason": "Prioritizing weak topics and avoiding excessive repetition of mastered questions.",
+          "adaptation_reason": "Avoided close repeat of mastered question",
           "source_chunk_ids": [
             "fc1aa8e0-1d05-453e-b52e-1c4a128424a5"
           ]
         },
         {
-          "question_id": "d4c908f7-4007-4240-b4ec-9ffacffaeb24",
+          "question_id": "a337f7e3-93b1-44ac-beb1-d40b1dbb04b1",
           "section_number": 8,
           "topic": "Safehouses",
           "difficulty": "medium",
@@ -98,8 +98,8 @@
           "options": {
             "A": "Cpl. Vendrame",
             "B": "Asset's primary operational base",
-            "C": "Cell's leader",
-            "D": "Unknown"
+            "C": "PAMC South Cone Headquarters",
+            "D": "Cell's representative"
           },
           "user_answer": "B",
           "correct_answer": "A",
@@ -111,16 +111,16 @@
           ]
         },
         {
-          "question_id": "5299c17d-61f1-4a5a-9b44-92fb3f0121ab",
+          "question_id": "00534128-e91d-447b-a884-b11e71c5e175",
           "section_number": 8,
           "topic": "Operational Territory",
           "difficulty": "medium",
           "question": "What is the primary operational base of the asset?",
           "options": {
             "A": "Cuartel Valpara\u00edso",
-            "B": "Asset's safehouse",
-            "C": "Cell's headquarters",
-            "D": "Unknown"
+            "B": "PAMC South Cone Headquarters",
+            "C": "Avenida Altamirano 1842",
+            "D": "Valpara\u00edso"
           },
           "user_answer": "B",
           "correct_answer": "A",
@@ -132,45 +132,45 @@
           ]
         },
         {
-          "question_id": "48bc28ad-4442-4158-b3ab-107025f13256",
+          "question_id": "6c4dd399-95eb-4d5d-af35-d3dd268771b2",
           "section_number": 9,
           "topic": "Case File Format",
-          "difficulty": "easy",
+          "difficulty": "medium",
           "question": "What is the format of all cases recorded under PAMC?",
           "options": {
-            "A": "Case number (year-sequence)",
-            "B": "Date (start\u2013end)",
-            "C": "Location (city, province, country)",
-            "D": "Classification (open / classified / declassified)"
+            "A": "Uniform PAMC format",
+            "B": "SLATEFALL_DOSSIER.md",
+            "C": "Case number (year-sequence)",
+            "D": "Date (start\u2013end)"
           },
           "user_answer": "A",
           "correct_answer": "A",
           "is_correct": true,
           "clarification": null,
-          "adaptation_reason": "Prioritized due to weak topic in section 8.",
+          "adaptation_reason": "Prioritized weak topics and avoided close repeats of mastered questions.",
           "source_chunk_ids": [
             "2a89ad36-6d8e-4949-a65a-a0e94d21724a"
           ]
         },
         {
-          "question_id": "3ff7572a-6da3-4d6a-a857-dd2340f00cda",
+          "question_id": "3c4f5e34-329c-467c-8e99-fd72308a60a1",
           "section_number": 9,
-          "topic": "Operational Success",
+          "topic": "Case File Format",
           "difficulty": "medium",
-          "question": "What was the outcome of Case 2024-0202: Quebrantadero Showdown?",
+          "question": "What is the classification of cases?",
           "options": {
-            "A": "Successful",
-            "B": "Partial",
-            "C": "Inconclusive",
-            "D": "Detained personnel led to seizure of USD $4.2 million in Concession assets"
+            "A": "Open",
+            "B": "Classified",
+            "C": "Declassified",
+            "D": "All of the above"
           },
           "user_answer": "D",
           "correct_answer": "D",
           "is_correct": true,
           "clarification": null,
-          "adaptation_reason": "Avoided close repeat of mastered question.",
+          "adaptation_reason": "Prioritized weak topics and avoided close repeats of mastered questions.",
           "source_chunk_ids": [
-            "77da46b4-29d5-4d6f-a117-d827cfd4b3f5"
+            "2a89ad36-6d8e-4949-a65a-a0e94d21724a"
           ]
         }
       ],
@@ -193,15 +193,15 @@
         },
         {
           "section_number": 9,
-          "topic": "Operational Success",
-          "attempts": 1,
-          "wrong_count": 0,
-          "correct_count": 1,
-          "weakness_score": 0.0
-        },
-        {
-          "section_number": 9,
           "topic": "Case File Format",
+          "attempts": 2,
+          "wrong_count": 0,
+          "correct_count": 2,
+          "weakness_score": 0.0
+        },
+        {
+          "section_number": 6,
+          "topic": "PAMC Inspector General",
           "attempts": 1,
           "wrong_count": 0,
           "correct_count": 1,
@@ -209,15 +209,7 @@
         },
         {
           "section_number": 6,
-          "topic": "PAMC Inspector General Magnus Sletten",
-          "attempts": 1,
-          "wrong_count": 0,
-          "correct_count": 1,
-          "weakness_score": 0.0
-        },
-        {
-          "section_number": 6,
-          "topic": "Nordic Metahuman Operations Cell",
+          "topic": "Metahuman Operations Cells",
           "attempts": 1,
           "wrong_count": 0,
           "correct_count": 1,
@@ -226,8 +218,8 @@
       ]
     },
     {
-      "session_id": "491857cd-a552-4873-be5e-380b33df9595",
-      "timestamp": "2026-05-19T20:51:19.856601",
+      "session_id": "bc7ac529-1535-4ccd-9a5b-eff697fe47b3",
+      "timestamp": "2026-05-19T21:47:25.475649",
       "mode": "cold_start",
       "selected_sections": [
         5,
@@ -249,85 +241,85 @@
       },
       "questions_asked": [
         {
-          "question_id": "26b83a9e-8a75-4c67-bba5-05f1f5e824de",
+          "question_id": "9feb240a-23ce-46a7-80c0-4600f2f46077",
           "section_number": 5,
           "topic": "Operational Tactics and Combat Doctrine",
           "difficulty": "medium",
           "question": "What is the Doctrine of Sequential Suspension (DSS)?",
           "options": {
-            "A": "A doctrine for Class A-1 operatives",
-            "B": "The asset's formal combat doctrine, articulated on 19 June 2022",
-            "C": "A set of directives for PAMC Internal Bulletin 22-19",
-            "D": "A method for target acquisition"
+            "A": "A combat tactic used to engage targets.",
+            "B": "A formal combat doctrine articulated by the asset on 19 June 2022.",
+            "C": "A method of extraction.",
+            "D": "A cooldown discipline."
           },
           "user_answer": "B",
           "correct_answer": "B",
           "is_correct": true,
           "clarification": null,
-          "adaptation_reason": "Prioritizing weak topics and testing a specific fact from the provided chunks.",
+          "adaptation_reason": "Testing understanding of specific doctrine.",
           "source_chunk_ids": [
             "68144153-edc2-4d07-b82f-9491716eed7b"
           ]
         },
         {
-          "question_id": "7c9d02d0-c237-4a9b-9b96-aa94ac561b12",
+          "question_id": "d67a8772-974b-4211-90e4-fc5bbc0d64cc",
           "section_number": 5,
           "topic": "Operational Tactics and Combat Doctrine",
           "difficulty": "hard",
           "question": "What overrides cooldown discipline?",
           "options": {
-            "A": "Tactical opportunity",
-            "B": "Civilian risk",
-            "C": "Engagement of Tier 4",
-            "D": "Extraction"
+            "A": "Tactical opportunity.",
+            "B": "Civilian risk.",
+            "C": "Extraction.",
+            "D": "Engagement."
           },
           "user_answer": "B",
           "correct_answer": "B",
           "is_correct": true,
           "clarification": null,
-          "adaptation_reason": "Testing a specific relationship from the provided chunks and prioritizing weak topics.",
+          "adaptation_reason": "Testing understanding of specific doctrine.",
           "source_chunk_ids": [
             "c3f3119b-078d-4ece-9ce7-e165c5f4fc65"
           ]
         },
         {
-          "question_id": "ca1eba90-a925-4e1b-9962-f6350833d8ab",
+          "question_id": "910ba40e-8d63-4209-96e4-11f2044222ae",
           "section_number": 8,
           "topic": "Operational Territory",
           "difficulty": "medium",
           "question": "What is the primary operational base of the asset?",
           "options": {
             "A": "Cuartel Valpara\u00edso",
-            "B": "PAMC South Cone Headquarters",
-            "C": "Avenida Altamirano 1842",
+            "B": "Avenida Altamirano 1842",
+            "C": "PAMC South Cone Headquarters",
             "D": "Valpara\u00edso"
           },
           "user_answer": "B",
           "correct_answer": "A",
           "is_correct": false,
           "clarification": "The primary operational base of the asset is Cuartel Valpara\u00edso.",
-          "adaptation_reason": "Prioritizing weak topics and avoiding close repeats of mastered questions.",
+          "adaptation_reason": "Prioritizing weak topics and avoiding mastered questions.",
           "source_chunk_ids": [
             "11e8b047-54f6-42b9-a9b8-a0e6bbf19e09"
           ]
         },
         {
-          "question_id": "128703b5-807a-4054-b819-648d0d7eaa02",
+          "question_id": "a734ddac-9754-4b25-b798-ba19adddceec",
           "section_number": 8,
           "topic": "Safehouses",
           "difficulty": "hard",
           "question": "Who audits the safehouse provisioning semi-annually?",
           "options": {
             "A": "Cpl. Vendrame",
-            "B": "PAMC-issued identity package",
-            "C": "Norwegian, Argentine, Bolivian alternates",
-            "D": "2,000 USD-equivalent local currency"
+            "B": "PAMC South Cone Headquarters",
+            "C": "Asset's primary operational base",
+            "D": "Cell's leader"
           },
           "user_answer": "B",
           "correct_answer": "A",
           "is_correct": false,
           "clarification": "Cpl. Vendrame audits the safehouse provisioning semi-annually on behalf of the cell.",
-          "adaptation_reason": "Prioritizing weak topics and avoiding close repeats of mastered questions.",
+          "adaptation_reason": "Prioritizing weak topics and avoiding mastered questions.",
           "source_chunk_ids": [
             "421ff765-5d8f-4b26-b568-e8e439c15860"
           ]

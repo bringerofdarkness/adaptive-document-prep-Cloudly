@@ -1,5 +1,5 @@
 {
-  "session_id": "a657b290-6d91-46e6-963d-4e71331c81e8",
+  "session_id": "aae4d266-eb37-47dd-aeb6-962e18b7cc20",
   "mode": "adaptive",
   "selected_sections": [
     8
@@ -42,7 +42,7 @@
   },
   "questions": [
     {
-      "question_id": "a6fb6f47-09a1-4b63-97ec-22cb0209d14c",
+      "question_id": "0ed6fa99-da15-48ac-a1d0-cc42c55404ba",
       "section_id": "24707465-4591-4e01-b532-4251aceaf99c",
       "section_number": 8,
       "topic": "Operational Territory",
@@ -55,17 +55,17 @@
         "D": "Valpara\u00edso"
       },
       "correct_answer": "A",
-      "explanation": "The primary operational base of the asset is Cuartel Valpara\u00edso.",
+      "explanation": "The primary operational base is Cuartel Valpara\u00edso.",
       "adaptation_reason": "Prioritized weak topic: Operational Territory",
       "source_chunk_ids": [
         "11e8b047-54f6-42b9-a9b8-a0e6bbf19e09"
       ],
       "simulated_user_answer": "B",
       "is_correct": false,
-      "clarification": "The primary operational base of the asset is Cuartel Valpara\u00edso."
+      "clarification": "The primary operational base is Cuartel Valpara\u00edso."
     },
     {
-      "question_id": "83cd97db-83b7-4cb1-96fe-2017d23660e4",
+      "question_id": "11bbb305-86ac-4048-aa1b-b11780792fa5",
       "section_id": "24707465-4591-4e01-b532-4251aceaf99c",
       "section_number": 8,
       "topic": "Safehouses",
@@ -78,14 +78,14 @@
         "D": "Cell leader"
       },
       "correct_answer": "A",
-      "explanation": "Cpl. Vendrame audits the safehouse provisioning semi-annually on behalf of the cell.",
+      "explanation": "Cpl. Vendrame audits safehouse provisioning semi-annually.",
       "adaptation_reason": "Prioritized weak topic: Safehouses",
       "source_chunk_ids": [
         "421ff765-5d8f-4b26-b568-e8e439c15860"
       ],
       "simulated_user_answer": "B",
       "is_correct": false,
-      "clarification": "Cpl. Vendrame audits the safehouse provisioning semi-annually on behalf of the cell."
+      "clarification": "Cpl. Vendrame audits safehouse provisioning semi-annually."
     }
   ]
 }

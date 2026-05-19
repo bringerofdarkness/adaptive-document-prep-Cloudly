@@ -146,6 +146,21 @@ def generate_mcqs(
     )
 
 
+def _adaptation_payload_for_section(
+    adaptation_payload: dict,
+    section_number: int,
+) -> dict:
+    section_payload = dict(adaptation_payload or {})
+
+    section_payload["weak_topics"] = [
+        weak_topic
+        for weak_topic in section_payload.get("weak_topics", [])
+        if weak_topic.get("section_number") == section_number
+    ]
+
+    return section_payload
+
+
 def _generate_section_mcqs_with_llm(
     section_chunks: list[dict],
     section_number: int,
@@ -156,7 +171,10 @@ def _generate_section_mcqs_with_llm(
         retrieved_chunks=section_chunks[: max(2, questions_per_section * 2)],
         selected_section_numbers=[section_number],
         questions_per_section=questions_per_section,
+        adaptation_payload=_adaptation_payload_for_section(
         adaptation_payload=adaptation_payload,
+        section_number=section_number,
+    ),
     )
 
     last_error: Exception | None = None

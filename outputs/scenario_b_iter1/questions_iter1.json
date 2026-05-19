@@ -1,5 +1,5 @@
 {
-  "session_id": "491857cd-a552-4873-be5e-380b33df9595",
+  "session_id": "bc7ac529-1535-4ccd-9a5b-eff697fe47b3",
   "mode": "cold_start",
   "selected_sections": [
     5,
@@ -21,21 +21,21 @@
   },
   "questions": [
     {
-      "question_id": "26b83a9e-8a75-4c67-bba5-05f1f5e824de",
+      "question_id": "9feb240a-23ce-46a7-80c0-4600f2f46077",
       "section_id": "41324742-9fb6-4a1c-a2a8-2bdd90d48f6b",
       "section_number": 5,
       "topic": "Operational Tactics and Combat Doctrine",
       "difficulty": "medium",
       "question": "What is the Doctrine of Sequential Suspension (DSS)?",
       "options": {
-        "A": "A doctrine for Class A-1 operatives",
-        "B": "The asset's formal combat doctrine, articulated on 19 June 2022",
-        "C": "A set of directives for PAMC Internal Bulletin 22-19",
-        "D": "A method for target acquisition"
+        "A": "A combat tactic used to engage targets.",
+        "B": "A formal combat doctrine articulated by the asset on 19 June 2022.",
+        "C": "A method of extraction.",
+        "D": "A cooldown discipline."
       },
       "correct_answer": "B",
-      "explanation": "The Doctrine of Sequential Suspension (DSS) is the asset's formal combat doctrine, articulated on 19 June 2022.",
-      "adaptation_reason": "Prioritizing weak topics and testing a specific fact from the provided chunks.",
+      "explanation": "The Doctrine of Sequential Suspension (DSS) is a formal combat doctrine articulated by the asset on 19 June 2022.",
+      "adaptation_reason": "Testing understanding of specific doctrine.",
       "source_chunk_ids": [
         "68144153-edc2-4d07-b82f-9491716eed7b"
       ],
@@ -44,21 +44,21 @@
       "clarification": null
     },
     {
-      "question_id": "7c9d02d0-c237-4a9b-9b96-aa94ac561b12",
+      "question_id": "d67a8772-974b-4211-90e4-fc5bbc0d64cc",
       "section_id": "41324742-9fb6-4a1c-a2a8-2bdd90d48f6b",
       "section_number": 5,
       "topic": "Operational Tactics and Combat Doctrine",
       "difficulty": "hard",
       "question": "What overrides cooldown discipline?",
       "options": {
-        "A": "Tactical opportunity",
-        "B": "Civilian risk",
-        "C": "Engagement of Tier 4",
-        "D": "Extraction"
+        "A": "Tactical opportunity.",
+        "B": "Civilian risk.",
+        "C": "Extraction.",
+        "D": "Engagement."
       },
       "correct_answer": "B",
       "explanation": "Civilian risk overrides cooldown discipline.",
-      "adaptation_reason": "Testing a specific relationship from the provided chunks and prioritizing weak topics.",
+      "adaptation_reason": "Testing understanding of specific doctrine.",
       "source_chunk_ids": [
         "c3f3119b-078d-4ece-9ce7-e165c5f4fc65"
       ],
@@ -67,7 +67,7 @@
       "clarification": null
     },
     {
-      "question_id": "ca1eba90-a925-4e1b-9962-f6350833d8ab",
+      "question_id": "910ba40e-8d63-4209-96e4-11f2044222ae",
       "section_id": "24707465-4591-4e01-b532-4251aceaf99c",
       "section_number": 8,
       "topic": "Operational Territory",
@@ -75,13 +75,13 @@
       "question": "What is the primary operational base of the asset?",
       "options": {
         "A": "Cuartel Valpara\u00edso",
-        "B": "PAMC South Cone Headquarters",
-        "C": "Avenida Altamirano 1842",
+        "B": "Avenida Altamirano 1842",
+        "C": "PAMC South Cone Headquarters",
         "D": "Valpara\u00edso"
       },
       "correct_answer": "A",
       "explanation": "The primary operational base of the asset is Cuartel Valpara\u00edso.",
-      "adaptation_reason": "Prioritizing weak topics and avoiding close repeats of mastered questions.",
+      "adaptation_reason": "Prioritizing weak topics and avoiding mastered questions.",
       "source_chunk_ids": [
         "11e8b047-54f6-42b9-a9b8-a0e6bbf19e09"
       ],
@@ -90,7 +90,7 @@
       "clarification": "The primary operational base of the asset is Cuartel Valpara\u00edso."
     },
     {
-      "question_id": "128703b5-807a-4054-b819-648d0d7eaa02",
+      "question_id": "a734ddac-9754-4b25-b798-ba19adddceec",
       "section_id": "24707465-4591-4e01-b532-4251aceaf99c",
       "section_number": 8,
       "topic": "Safehouses",
@@ -98,13 +98,13 @@
       "question": "Who audits the safehouse provisioning semi-annually?",
       "options": {
         "A": "Cpl. Vendrame",
-        "B": "PAMC-issued identity package",
-        "C": "Norwegian, Argentine, Bolivian alternates",
-        "D": "2,000 USD-equivalent local currency"
+        "B": "PAMC South Cone Headquarters",
+        "C": "Asset's primary operational base",
+        "D": "Cell's leader"
       },
       "correct_answer": "A",
       "explanation": "Cpl. Vendrame audits the safehouse provisioning semi-annually on behalf of the cell.",
-      "adaptation_reason": "Prioritizing weak topics and avoiding close repeats of mastered questions.",
+      "adaptation_reason": "Prioritizing weak topics and avoiding mastered questions.",
       "source_chunk_ids": [
         "421ff765-5d8f-4b26-b568-e8e439c15860"
       ],
