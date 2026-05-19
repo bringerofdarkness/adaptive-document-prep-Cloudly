@@ -1,5 +1,7 @@
 from fastapi import FastAPI
 
+from app.api.routes_kb import router as kb_router
+
 from app.api.routes_health import router as health_router
 from app.api.routes_documents import router as documents_router
 from app.api.routes_prep import router as prep_router
@@ -19,3 +21,4 @@ app.include_router(health_router)
 app.include_router(documents_router)
 app.include_router(prep_router)
 app.include_router(sessions_router)
+app.include_router(kb_router)
