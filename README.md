@@ -1,40 +1,79 @@
 # Adaptive Document Preparation System
 
-A backend-driven adaptive RAG system for PDF-based preparation and MCQ generation.
+A production-style adaptive RAG backend for PDF-based study preparation and MCQ generation.
 
-This project ingests a structured multi-section PDF, stores document sections and chunks in PostgreSQL, indexes chunks in Qdrant for deterministic section-filtered retrieval, generates MCQs with an LLM, validates structured MCQ output, collects or simulates answers, scores preparation sessions, stores full learning history, identifies weak topics, and adapts future question generation based on previous mistakes.
+This project ingests a structured multi-section PDF, stores document sections and learning history in PostgreSQL, indexes semantic chunk embeddings in Qdrant, retrieves only user-selected sections, generates MCQs through an LLM, validates structured outputs, scores answers, identifies weak topics, and adapts future question generation based on previous mistakes.
 
----
-
-## Current Status
-
-This project is currently in the **core working stage**.
-
-The main assessment backbone is working:
-
-- PDF ingestion works.
-- Section extraction works.
-- PostgreSQL persistence works.
-- Qdrant indexing works.
-- Strict selected-section retrieval works.
-- Groq-based MCQ generation works.
-- Mock fallback generation works.
-- LangGraph orchestration works.
-- Scenario A runs successfully.
-- Scenario B runs successfully.
-- Scenario B demonstrates adaptive behavior.
-- KB snapshot JSON files are exported.
-- Questions JSON files are exported.
-- FastAPI routes are available.
-- `/prep/start` works.
-- `/prep/submit` works.
-- Basic tests pass.
-
-The project is not fully final yet. Remaining work includes cleanup, stronger API tests, encoding normalization, final Dockerfile, documentation files, structured logging, and final README polish.
+The goal is not only to build a basic RAG system. The main goal is to prove adaptive preparation behavior across repeated study sessions.
 
 ---
 
-## Repository
+## 1. Project Highlights
+
+This project implements the complete prep flow required by the assessment:
+
+1. User selects one or more PDF sections to study.
+2. The system checks prior prep history for those sections.
+3. The system retrieves only chunks from the selected sections.
+4. The system generates `N` MCQs per selected section.
+5. The system presents questions without exposing correct answers.
+6. The user or simulation submits answers.
+7. The system scores the session.
+8. Wrong answers receive the correct answer and a concise clarification.
+9. The session is persisted to PostgreSQL.
+10. Weak topics are updated from wrong answers.
+11. Future runs adapt question generation based on stored history.
+12. Scenario A and Scenario B outputs are exported for reviewer inspection.
+
+The most important feature is adaptive intelligence:
+
+```text
+first-time relevant run -> cold_start
+returning relevant run  -> adaptive
+```
+
+---
+
+## 2. Current Verified Status
+
+Core backend functionality is working.
+
+Verified items:
+
+```text
+PDF ingestion                         Passed
+10-section extraction                  Passed
+PostgreSQL persistence                 Passed
+Qdrant indexing                        Passed
+Strict selected-section retrieval      Passed
+Groq MCQ generation                    Passed
+Mock fallback generation               Passed
+N=5 Scenario A/B generation            Passed
+Backend-owned adaptation metadata      Passed
+LLM retry reliability                  Improved
+MCQ validation                         Passed
+Scenario A                             Passed
+Scenario B                             Passed
+KB snapshot export                     Passed
+FastAPI Swagger flow                   Passed
+/prep/start                            Passed
+/prep/submit                           Passed
+/sessions/{session_id}                 Passed
+/kb/snapshot                           Passed
+Automated tests                        6 passed
+```
+
+Latest verified Scenario B behavior with `5` questions per selected section:
+
+```text
+Scenario B iteration 1 | sections [5, 8]    | mode=cold_start | score=50.0
+Scenario B iteration 2 | sections [6, 8, 9] | mode=adaptive   | score=66.67
+Scenario B iteration 3 | sections [8]       | mode=adaptive   | score=0.0
+```
+
+---
+
+## 3. Repository
 
 ```text
 https://github.com/bringerofdarkness/adaptive-document-prep-Cloudly
@@ -42,250 +81,98 @@ https://github.com/bringerofdarkness/adaptive-document-prep-Cloudly
 
 ---
 
-## Local Project Root
+## 4. Prerequisites
+
+Recommended environment:
 
 ```text
-F:\Self Project\adaptive-document-prep
+Python 3.13+
+Docker Desktop
+Windows PowerShell or compatible terminal
+Groq API key for real LLM generation
 ```
 
----
-
-## Project Goal
-
-The goal is to build a production-style AI/ML internship take-home project called **Adaptive Document Preparation System**.
-
-The system should:
-
-1. Ingest a multi-section PDF.
-2. Allow a user to select one or more sections.
-3. Retrieve only chunks from the selected sections.
-4. Generate MCQs from those sections using an LLM.
-5. Validate MCQ output strictly.
-6. Collect real or simulated answers.
-7. Score the preparation session.
-8. Show correct answers and clarifications for wrong answers.
-9. Persist complete session history in PostgreSQL.
-10. Detect weak topics from previous wrong answers.
-11. Adapt future question generation based on historical weak areas.
-12. Export reviewer-ready Scenario A and Scenario B outputs.
-
-The most important feature is **adaptive intelligence**.
-
-The system must distinguish:
+Required services:
 
 ```text
-first-time run  -> cold_start
-returning run   -> adaptive
+PostgreSQL
+Qdrant
 ```
 
----
-
-## Final Project Pitch
-
-This project is a production-style adaptive RAG backend that ingests a structured PDF, stores section chunks in Qdrant for deterministic section-filtered retrieval, stores all sessions and learning history in PostgreSQL, generates MCQs through an LLM, validates structured outputs, scores user answers, identifies weak topics over time, and uses LangGraph to adapt future question generation based on previous mistakes while exporting reviewer-ready Scenario B outputs.
+These services are started through Docker Compose.
 
 ---
 
-## Technology Stack
+## 5. Fresh Setup on a New PC
 
-| Layer | Technology |
-|---|---|
-| Backend API | FastAPI |
-| Workflow orchestration | LangGraph |
-| LLM provider | Groq primary, mock fallback |
-| Optional LLM provider | Gemini scaffold |
-| PDF parsing | PyMuPDF |
-| Embeddings | sentence-transformers/all-MiniLM-L6-v2 |
-| Vector database | Qdrant |
-| Structured Knowledge Base | PostgreSQL |
-| ORM | SQLAlchemy |
-| CLI | Typer |
-| Testing | Pytest |
-| Containerization | Docker Compose |
-| Optional UI later | Streamlit |
-
----
-
-## Architecture Philosophy
-
-The project uses a hybrid storage architecture.
-
-### PostgreSQL
-
-PostgreSQL is the source of truth.
-
-It stores:
-
-- documents
-- sections
-- chunks
-- prep sessions
-- generated questions
-- submitted answers
-- correct/wrong results
-- scores
-- weak-topic statistics
-- adaptation metadata
-- KB snapshots
-
-### Qdrant
-
-Qdrant is used only for semantic retrieval.
-
-It stores vector embeddings of chunks with metadata:
-
-```text
-document_id
-section_id
-section_number
-chunk_id
-chunk_index
-page_number
-text_preview
-```
-
-Qdrant is not used as the main Knowledge Base.
-
-The design rule is:
-
-```text
-PostgreSQL = truth and history
-Qdrant     = semantic retrieval
-```
-
-This prevents the vector database from becoming an unreliable source of session truth.
-
----
-
-## Project Structure
-
-```text
-adaptive-document-prep/
-  app/
-    main.py
-
-    api/
-      routes_documents.py
-      routes_health.py
-      routes_kb.py
-      routes_prep.py
-      routes_sessions.py
-
-    core/
-      config.py
-      exceptions.py
-      logging.py
-
-    db/
-      models.py
-      session.py
-      repositories/
-        document_repo.py
-        question_repo.py
-        session_repo.py
-        snapshot_repo.py
-
-    ingestion/
-      pdf_loader.py
-      section_parser.py
-      chunker.py
-
-    retrieval/
-      embeddings.py
-      qdrant_store.py
-      retriever.py
-
-    llm/
-      providers.py
-      prompts.py
-      mcq_generator.py
-      output_parser.py
-
-    workflow/
-      state.py
-      nodes.py
-      prep_graph.py
-
-    services/
-      adaptation_service.py
-      interactive_prep_service.py
-      prep_service.py
-      question_export_service.py
-      scoring_service.py
-      snapshot_service.py
-
-    schemas/
-      document.py
-      prep.py
-      question.py
-      session.py
-
-  cli/
-    ingest_pdf.py
-    index_qdrant.py
-    reset_db.py
-    run_evaluation.py
-    run_scenario_a.py
-    run_scenario_b.py
-
-  data/
-    SLATEFALL_DOSSIER.pdf
-    intern_assessment_brief.pdf
-
-  outputs/
-    scenario_a/
-    scenario_b_iter1/
-    scenario_b_iter2/
-    scenario_b_iter3/
-
-  tests/
-    test_mcq_validation.py
-    test_prep_flow.py
-
-  docs/
-    architecture.md
-    database_schema.md
-    adaptation_strategy.md
-
-  docker-compose.yml
-  Dockerfile
-  requirements.txt
-  .env.example
-  README.md
-  pyproject.toml
-```
-
----
-
-## Environment Setup
-
-### 1. Create and activate virtual environment
+### 5.1 Clone the repository
 
 ```powershell
-cd "F:\Self Project\adaptive-document-prep"
+git clone https://github.com/bringerofdarkness/adaptive-document-prep-Cloudly.git
+cd adaptive-document-prep-Cloudly
+```
+
+### 5.2 Create and activate a virtual environment
+
+Windows PowerShell:
+
+```powershell
 python -m venv .venv
 .\.venv\Scripts\Activate.ps1
 ```
 
-### 2. Install dependencies
+macOS/Linux:
+
+```bash
+python -m venv .venv
+source .venv/bin/activate
+```
+
+### 5.3 Install dependencies
 
 ```powershell
+python -m pip install --upgrade pip
 python -m pip install -r requirements.txt
 ```
 
-### 3. Create `.env`
+### 5.4 Create `.env`
+
+Windows PowerShell:
 
 ```powershell
 Copy-Item .env.example .env
 ```
 
-Example `.env`:
+macOS/Linux:
+
+```bash
+cp .env.example .env
+```
+
+Then edit `.env` and set your Groq API key:
+
+```env
+LLM_PROVIDER=groq
+GROQ_API_KEY=your_groq_api_key_here
+```
+
+For deterministic local testing without an external LLM, use:
+
+```env
+LLM_PROVIDER=mock
+```
+
+Do not commit `.env`.
+
+---
+
+## 6. Environment Variables
+
+Example `.env` values:
 
 ```env
 APP_NAME=Adaptive Document Preparation System
 APP_ENV=local
-API_HOST=0.0.0.0
-API_PORT=8000
 
 POSTGRES_HOST=localhost
 POSTGRES_PORT=5433
@@ -304,17 +191,15 @@ GROQ_API_KEY=your_groq_api_key_here
 GEMINI_API_KEY=
 ```
 
-For deterministic local testing without Groq:
+Local FastAPI is normally run on port `18000`:
 
-```env
-LLM_PROVIDER=mock
+```text
+http://127.0.0.1:18000/docs
 ```
-
-Do not commit `.env`.
 
 ---
 
-## Docker Services
+## 7. Start Docker Services
 
 Start PostgreSQL and Qdrant:
 
@@ -328,32 +213,26 @@ Check containers:
 docker ps
 ```
 
-Expected project containers:
+Expected containers:
 
 ```text
 adaptive_doc_postgres
 adaptive_doc_qdrant
 ```
 
-Verify PostgreSQL:
+Check PostgreSQL:
 
 ```powershell
 docker exec adaptive_doc_postgres pg_isready -U postgres -d adaptive_doc_prep
 ```
 
-Expected:
-
-```text
-/var/run/postgresql:5432 - accepting connections
-```
-
-Verify Qdrant:
+Check Qdrant:
 
 ```powershell
 Invoke-RestMethod http://127.0.0.1:16433/healthz
 ```
 
-Expected:
+Expected Qdrant result:
 
 ```text
 healthz check passed
@@ -361,7 +240,13 @@ healthz check passed
 
 ---
 
-## Database Setup
+## 8. Prepare the Knowledge Base
+
+The main PDF is expected at:
+
+```text
+data/SLATEFALL_DOSSIER.pdf
+```
 
 Reset database tables:
 
@@ -369,34 +254,15 @@ Reset database tables:
 python -m cli.reset_db reset
 ```
 
-Expected:
-
-```text
-Dropping existing tables...
-Creating tables...
-Database reset complete.
-```
-
----
-
-## PDF Ingestion
-
-The main PDF corpus should be located at:
-
-```text
-data/SLATEFALL_DOSSIER.pdf
-```
-
-Run ingestion:
+Ingest the PDF into PostgreSQL:
 
 ```powershell
 python -m cli.ingest_pdf
 ```
 
-Expected:
+Expected ingestion result:
 
 ```text
-Ingested document_id: ...
 Pages: 50
 Sections: 10
 Chunks: 101
@@ -408,319 +274,71 @@ Index chunks into Qdrant:
 python -m cli.index_qdrant
 ```
 
-Expected:
+Expected indexing result:
 
 ```text
-Latest document_id: ...
 Chunks to index: 101
 Qdrant indexing complete.
 ```
 
 ---
 
-## PDF Section Mapping
+## 9. Run Evaluation Scenarios
 
-The PDF parser currently detects 10 sections:
+The assessment requires exported outputs for Scenario A and Scenario B.
 
-| Section | Title | Pages |
-|---|---|---|
-| 1 | Identity, Background, and Public Status | 1-4 |
-| 2 | Powers, Abilities, and Documented Limits | 4-11 |
-| 3 | Origin and Key Historical Events | 11-15 |
-| 4 | Equipment, Gear, and Specialized Technology | 15-22 |
-| 5 | Operational Tactics and Combat Doctrine | 22-25 |
-| 6 | Allies, Networks, and Known Affiliations | 25-30 |
-| 7 | Adversaries and Documented Threats | 30-36 |
-| 8 | Known Bases, Safehouses, and Operational Territory | 36-39 |
-| 9 | Case Files: Documented Engagements and Incidents | 39-43 |
-| 10 | Glossary, Codenames, and Reference Tables | 43-50 |
-
-Scenario B uses the assessment-required repeated section 8:
+The final verified output scale is:
 
 ```text
-Iteration 1: sections 5 and 8
-Iteration 2: sections 6, 8, and 9
-Iteration 3: section 8
+5 questions per selected section
 ```
 
----
-
-## Retrieval Behavior
-
-Retrieval is deterministic and section-filtered.
-
-If the selected sections are:
-
-```text
-[5, 8]
-```
-
-then the retriever only retrieves chunks from sections 5 and 8.
-
-This prevents out-of-section MCQ generation.
-
-Qdrant filtering uses metadata such as:
-
-```text
-document_id
-section_number
-```
-
-The vector database returns chunk IDs and metadata, while full chunk text is read back from PostgreSQL.
-
----
-
-## MCQ Format
-
-Each MCQ follows this structure:
-
-```json
-{
-  "question_id": "backend-generated UUID",
-  "section_id": "section UUID",
-  "section_number": 8,
-  "topic": "Safehouses",
-  "difficulty": "medium",
-  "question": "What is the primary operational base of the asset?",
-  "options": {
-    "A": "Option A",
-    "B": "Option B",
-    "C": "Option C",
-    "D": "Option D"
-  },
-  "correct_answer": "A",
-  "explanation": "Concise explanation",
-  "adaptation_reason": "Weak topic: Safehouses",
-  "source_chunk_ids": ["chunk UUID"]
-}
-```
-
-Important implementation decision:
-
-```text
-The backend generates question_id values.
-The LLM is not trusted to generate database primary keys.
-```
-
-This fixed duplicate primary key errors caused by repeated LLM-generated IDs.
-
----
-
-## MCQ Validation
-
-The system validates:
-
-- exactly 4 options
-- options must be A, B, C, D
-- correct answer must be A, B, C, or D
-- non-empty topic
-- non-empty explanation
-- non-empty adaptation reason
-- no out-of-selected-section questions
-- expected number of questions per selected section
-- duplicate question text detection
-
-Validation files:
-
-```text
-app/llm/output_parser.py
-app/schemas/question.py
-```
-
----
-
-## LLM Provider
-
-The active real LLM provider is Groq.
-
-Provider implementation:
-
-```text
-app/llm/providers.py
-```
-
-Groq is configured through:
-
-```env
-LLM_PROVIDER=groq
-GROQ_API_KEY=your_key_here
-```
-
-Mock fallback is available through:
-
-```env
-LLM_PROVIDER=mock
-```
-
-The mock provider is useful for deterministic local testing and CI-style tests.
-
----
-
-## Prompt and Token Management
-
-Groq free-tier token limits caused request-size failures earlier.
-
-Fixes implemented:
-
-- compact context chunks
-- reduced chunk character length
-- reduced number of context chunks
-- compact adaptation payload
-- reduced max tokens
-- section-by-section LLM generation
-- validation retry
-
-This keeps requests smaller and more reliable.
-
----
-
-## LangGraph Workflow
-
-The preparation flow is modeled as a LangGraph graph.
-
-Workflow nodes:
-
-1. Load latest document and prior history.
-2. Build adaptation payload.
-3. Retrieve selected-section chunks.
-4. Generate MCQs.
-5. Simulate or collect answers.
-6. Score answers.
-7. Persist session and weak-topic updates.
-
-Files:
-
-```text
-app/workflow/state.py
-app/workflow/nodes.py
-app/workflow/prep_graph.py
-```
-
-Graph state includes:
-
-```text
-selected_section_numbers
-retrieved_chunks
-adaptation_payload
-mcq_set
-answers
-score
-session
-result
-```
-
----
-
-## Adaptive Logic
-
-Adaptive logic is implemented in:
-
-```text
-app/services/adaptation_service.py
-```
-
-The adaptation service checks PostgreSQL history and builds:
-
-```text
-is_returning_run
-mode
-relevant_prior_session_count
-weak_topics
-mastered_question_texts
-previous_wrong_question_texts
-summary
-```
-
-Modes:
-
-```text
-cold_start = no relevant prior history
-adaptive   = prior history found for selected sections
-```
-
-Weak topics are updated from wrong answers.
-
-Example adaptation reasons:
-
-```text
-Weak topic: Safehouses
-Prioritized weak topic: Operational Territory
-Avoided close repeat of mastered question
-```
-
----
-
-## Scenario A
+### 9.1 Run Scenario A only
 
 Scenario A runs a cold-start prep over two sections.
 
-Command:
-
 ```powershell
-python -m cli.run_scenario_a --questions-per-section 2
+python -m cli.run_scenario_a --questions-per-section 5
 ```
 
-Expected:
+Expected result:
 
 ```text
-Scenario A complete | session=... | mode=cold_start | score=50.0
+Scenario A complete | mode=cold_start | score=50.0
 ```
 
-Output files:
+Generated files:
 
 ```text
 outputs/scenario_a/questions_scenario_a.json
 outputs/scenario_a/kb_snapshot_scenario_a.json
 ```
 
----
+### 9.2 Run Scenario B only
 
-## Scenario B
-
-Scenario B is the main adaptive evaluation scenario.
-
-Command:
+Scenario B is the main adaptive proof.
 
 ```powershell
-python -m cli.run_scenario_b --questions-per-section 2
+python -m cli.run_scenario_b --questions-per-section 5
 ```
 
-Expected behavior:
+Scenario B uses the assessment-required section sequence:
 
 ```text
-Scenario B iteration 1 complete | ... | mode=cold_start | score=50.0
-Scenario B iteration 2 complete | ... | mode=adaptive | score=66.67
-Scenario B iteration 3 complete | ... | mode=adaptive | score=0.0
+Iteration 1: sections [5, 8]
+Iteration 2: sections [6, 8, 9]
+Iteration 3: sections [8]
 ```
 
-Why these scores happen:
+Expected result:
 
 ```text
-Iteration 1:
-sections = [5, 8]
-2 questions per section
-total = 4
-section 8 is simulated weak
-2 correct, 2 wrong
-score = 50.0
-
-Iteration 2:
-sections = [6, 8, 9]
-2 questions per section
-total = 6
-section 8 is simulated weak
-4 correct, 2 wrong
-score = 66.67
-
-Iteration 3:
-sections = [8]
-2 questions total
-section 8 is simulated weak
-0 correct, 2 wrong
-score = 0.0
+Scenario B iteration 1 complete | mode=cold_start | score=50.0
+Scenario B iteration 2 complete | mode=adaptive   | score=66.67
+Scenario B iteration 3 complete | mode=adaptive   | score=0.0
 ```
 
-Required output files:
+Generated files:
 
 ```text
 outputs/scenario_b_iter1/questions_iter1.json
@@ -733,39 +351,95 @@ outputs/scenario_b_iter3/questions_iter3.json
 outputs/scenario_b_iter3/kb_snapshot_iter3.json
 ```
 
----
-
-## Unified Evaluation Command
-
-Run Scenario A and Scenario B together:
+### 9.3 Run full evaluation
 
 ```powershell
-python -m cli.run_evaluation --questions-per-section 2
+python -m cli.run_evaluation --questions-per-section 5
 ```
 
-Expected:
+Expected result:
 
 ```text
 Running Scenario A...
-Scenario A complete | ... | mode=cold_start | score=50.0
+Scenario A complete | mode=cold_start | score=50.0
+
 Running Scenario B...
-Scenario B iteration 1 complete | ... | mode=cold_start | score=50.0
-Scenario B iteration 2 complete | ... | mode=adaptive | score=66.67
-Scenario B iteration 3 complete | ... | mode=adaptive | score=0.0
+Scenario B iteration 1 complete | mode=cold_start | score=50.0
+Scenario B iteration 2 complete | mode=adaptive | score=66.67
+Scenario B iteration 3 complete | mode=adaptive | score=0.0
+
 Evaluation complete. Outputs are available under the outputs directory.
 ```
 
 ---
 
-## FastAPI API
+## 10. Verify Output Counts
 
-Run API:
+After running full evaluation with `--questions-per-section 5`, the expected question counts are:
 
-```powershell
-.\.venv\Scripts\python.exe -m uvicorn app.main:app --reload --host 127.0.0.1 --port 18000
+```text
+Scenario A:              10 questions
+Scenario B iteration 1:  10 questions
+Scenario B iteration 2:  15 questions
+Scenario B iteration 3:   5 questions
 ```
 
-Swagger:
+PowerShell checks:
+
+```powershell
+(Get-Content outputs\scenario_a\questions_scenario_a.json | ConvertFrom-Json).questions.Count
+(Get-Content outputs\scenario_b_iter1\questions_iter1.json | ConvertFrom-Json).questions.Count
+(Get-Content outputs\scenario_b_iter2\questions_iter2.json | ConvertFrom-Json).questions.Count
+(Get-Content outputs\scenario_b_iter3\questions_iter3.json | ConvertFrom-Json).questions.Count
+```
+
+Expected:
+
+```text
+10
+10
+15
+5
+```
+
+---
+
+## 11. Run Tests
+
+Run the automated test suite:
+
+```powershell
+python -m pytest tests
+```
+
+Latest verified result:
+
+```text
+6 passed
+```
+
+Current tests cover:
+
+```text
+MCQ validation
+Out-of-selected-section rejection
+Invalid question distribution rejection
+Scoring logic
+/prep/start API contract
+/prep/submit API contract
+```
+
+---
+
+## 12. Run the FastAPI Server
+
+Start the API:
+
+```powershell
+.\.venv\Scripts\python.exe -m uvicorn app.main:app --host 127.0.0.1 --port 18000
+```
+
+Open Swagger:
 
 ```text
 http://127.0.0.1:18000/docs
@@ -786,11 +460,35 @@ GET  /kb/snapshot
 
 ---
 
-## Interactive API Flow
+## 13. API Usage
 
-### Start a prep session
+### 13.1 Health check
 
-Endpoint:
+```text
+GET /health
+```
+
+Expected response:
+
+```json
+{
+  "status": "ok",
+  "service": "Adaptive Document Preparation System",
+  "environment": "local"
+}
+```
+
+### 13.2 List latest document sections
+
+```text
+GET /documents/latest/sections
+```
+
+This returns all extracted PDF sections with page ranges and chunk counts.
+
+The current PDF exposes 10 sections.
+
+### 13.3 Start a prep session
 
 ```text
 POST /prep/start
@@ -805,50 +503,50 @@ Request:
 }
 ```
 
-Expected response:
+Important behavior:
+
+```text
+/prep/start returns questions and options.
+It does not expose correct_answer.
+It does not expose explanation.
+```
+
+Example response shape:
 
 ```json
 {
-  "session_id": "...",
-  "document_id": "...",
+  "session_id": "session-id",
+  "document_id": "document-id",
   "mode": "adaptive",
   "selected_sections": [5, 8],
   "total_questions": 2,
-  "adaptation_summary": "...",
+  "adaptation_summary": "Adaptive run: prior history found...",
   "questions": [
     {
-      "question_id": "...",
-      "section_number": 5,
-      "topic": "...",
+      "question_id": "question-id",
+      "section_number": 8,
+      "topic": "Operational Territory",
       "difficulty": "medium",
-      "question": "...",
+      "question": "What is the name of the asset's primary operational base?",
       "options": {
-        "A": "...",
-        "B": "...",
-        "C": "...",
-        "D": "..."
+        "A": "Cuartel Valparaíso",
+        "B": "PAMC South Cone Headquarters",
+        "C": "Avenida Altamirano 1842",
+        "D": "Valparaíso"
       },
-      "adaptation_reason": "..."
+      "adaptation_reason": "Adaptive question generated for section 8 because prior session history marks this section as weak."
     }
   ]
 }
 ```
 
-Important:
-
-```text
-/prep/start does not expose correct_answer.
-```
-
-### Submit answers
-
-Endpoint:
+### 13.4 Submit answers
 
 ```text
 POST /prep/submit
 ```
 
-Request:
+Request format:
 
 ```json
 {
@@ -860,170 +558,412 @@ Request:
 }
 ```
 
-Expected response:
+Important behavior:
+
+```text
+/prep/submit scores the session.
+/prep/submit returns correct_answer after submission.
+/prep/submit returns clarification for wrong answers.
+```
+
+Example response shape:
 
 ```json
 {
-  "session_id": "...",
-  "score": 50.0,
+  "session_id": "session-id",
+  "score": 50,
   "total_questions": 2,
   "correct_count": 1,
   "wrong_count": 1,
   "results": [
     {
-      "question_id": "...",
+      "question_id": "question-id",
       "section_number": 8,
-      "topic": "Safehouses",
+      "topic": "Operational Territory",
       "selected_answer": "B",
       "correct_answer": "A",
       "is_correct": false,
-      "clarification": "..."
+      "clarification": "The primary operational base is Cuartel Valparaíso."
     }
   ]
 }
 ```
 
-Important:
+### 13.5 Retrieve a session
 
 ```text
-/prep/submit exposes correct_answer and clarification after answer submission.
+GET /sessions/{session_id}
 ```
+
+This returns:
+
+```text
+session metadata
+selected sections
+score
+correct and wrong counts
+adaptation payload
+weak topics
+previous wrong question texts
+mastered question texts
+question-level results
+user answers
+correct answers
+explanations
+adaptation reasons
+```
+
+### 13.6 Retrieve KB snapshot
+
+```text
+GET /kb/snapshot
+```
+
+This returns a human-readable snapshot of the top 5 most recent sessions, including question-level history and weak-topic statistics.
+
+This endpoint supports the assessment requirement that reviewers can verify the stored history behind adaptive prompting.
 
 ---
 
-## Latest API Test Observation
+## 14. PDF Section Mapping
 
-Latest `/prep/start` test worked:
+The current PDF parser detects these sections:
 
-```text
-session_id generated
-document_id returned
-mode returned as adaptive
-questions returned
-options returned
-correct_answer hidden
-adaptation_reason visible
-```
+| Section | Title | Pages |
+|---:|---|---:|
+| 1 | Identity, Background, and Public Status | 1-4 |
+| 2 | Powers, Abilities, and Documented Limits | 4-11 |
+| 3 | Origin and Key Historical Events | 11-15 |
+| 4 | Equipment, Gear, and Specialized Technology | 15-22 |
+| 5 | Operational Tactics and Combat Doctrine | 22-25 |
+| 6 | Allies, Networks, and Known Affiliations | 25-30 |
+| 7 | Adversaries and Documented Threats | 30-36 |
+| 8 | Known Bases, Safehouses, and Operational Territory | 36-39 |
+| 9 | Case Files: Documented Engagements and Incidents | 39-43 |
+| 10 | Glossary, Codenames, and Reference Tables | 43-50 |
 
-Known issue from latest API response:
-
-```text
-"Cuartel ValparaÃ­so" appears instead of "Cuartel Valparaíso"
-```
-
-This is an encoding/mojibake cleanup issue and should be fixed before final submission.
+Users can select one or more sections from this list.
 
 ---
 
-## Tests
+## 15. Architecture Summary
 
-Run tests:
-
-```powershell
-python -m pytest tests
-```
-
-Current result:
+The system uses a hybrid RAG architecture.
 
 ```text
-4 passed
+PDF
+ |
+ |-- PyMuPDF loader
+ |
+ |-- Section parser
+ |
+ |-- Chunker
+ |
+ |-- PostgreSQL
+ |     documents
+ |     sections
+ |     chunks
+ |     prep_sessions
+ |     generated_questions
+ |     user_answers
+ |     weak_topic_stats
+ |     kb_snapshots
+ |
+ |-- Qdrant
+       semantic chunk embeddings
+       section metadata filters
 ```
 
-Current tests cover:
-
-- valid MCQ payload validation
-- out-of-selected-section rejection
-- invalid question distribution rejection
-- scoring logic
-
-Test files:
+At prep time:
 
 ```text
-tests/test_mcq_validation.py
-tests/test_prep_flow.py
+Selected sections
+ |
+ |-- Load relevant prior history from PostgreSQL
+ |
+ |-- Build adaptation payload
+ |
+ |-- Retrieve selected-section chunks from Qdrant
+ |
+ |-- Generate MCQs with LLM
+ |
+ |-- Validate MCQs
+ |
+ |-- Simulate or collect answers
+ |
+ |-- Score session
+ |
+ |-- Persist results and weak-topic updates
+ |
+ |-- Export questions and KB snapshots
 ```
 
----
-
-## Current Recruiter Audit Status
-
-Current pass items:
+Important design rule:
 
 ```text
-Docker services running
-Code compile passes
-Pytest passes
-Scenario A outputs generated
-Scenario B outputs generated
-Scenario B iteration 1 = cold_start
-Scenario B iteration 2 = adaptive
-Scenario B iteration 3 = adaptive
-KB snapshots generated
-questions JSON generated
-adaptation_reason visible
-FastAPI Swagger available
-/prep/start works
-/prep/submit works
+PostgreSQL = source of truth and learning history
+Qdrant     = semantic retrieval only
 ```
 
-Current unfinished items:
+Qdrant does not store session truth. It only stores embeddings and retrieval metadata.
+
+For deeper architecture details, see:
 
 ```text
-Encoding cleanup for mojibake text such as ValparaÃ­so
-More tests for API interactive flow
-Cleanup old naming if run_mock_prep_session still exists anywhere
-Final Dockerfile
-Final README polish
 docs/architecture.md
-docs/database_schema.md
-docs/adaptation_strategy.md
-Structured logging
-Final GitHub cleanup
 ```
 
 ---
 
-## Known Issues
+## 16. Knowledge Base Design
 
-### 1. Encoding issue
+PostgreSQL supports these assessment-required query patterns:
 
-Some LLM output may contain mojibake:
+```text
+Given selected section IDs, retrieve prior prep sessions involving those sections.
+Given a session, retrieve question-level right/wrong results.
+Identify topics/questions answered incorrectly across multiple sessions.
+Retrieve a KB snapshot at the end of a session.
+```
+
+Main persisted entities:
+
+```text
+documents
+sections
+chunks
+prep_sessions
+generated_questions
+user_answers
+weak_topic_stats
+kb_snapshots
+```
+
+For schema details and access patterns, see:
+
+```text
+docs/database_schema.md
+```
+
+---
+
+## 17. Adaptation Strategy
+
+Adaptation is built from stored PostgreSQL history.
+
+The adaptation service creates:
+
+```text
+is_returning_run
+mode
+relevant_prior_session_count
+weak_topics
+mastered_question_texts
+previous_wrong_question_texts
+summary
+```
+
+Mode rules:
+
+```text
+No relevant prior history -> cold_start
+Relevant prior history    -> adaptive
+```
+
+Backend-owned adaptation metadata is used in final MCQ outputs.
+
+This is intentional:
+
+```text
+The LLM generates question content.
+The backend owns adaptation_reason based on real history.
+```
+
+This prevents the model from falsely claiming weak-topic adaptation during cold-start runs.
+
+Example final behavior:
+
+```text
+Scenario B iteration 1:
+mode = cold_start
+adaptation_reason = Cold-start coverage question generated from the selected section because no prior relevant learning history exists.
+
+Scenario B iteration 2:
+section 6 = returning-run question without section-specific weakness
+section 8 = adaptive question because section 8 is weak
+
+Scenario B iteration 3:
+section 8 = adaptive weak-section questions
+```
+
+For full adaptation details, see:
+
+```text
+docs/adaptation_strategy.md
+```
+
+---
+
+## 18. LLM and Model Choice
+
+### Primary LLM: Groq
+
+Groq is used as the primary hosted LLM provider because:
+
+```text
+It is fast for development and evaluation.
+It has a free/developer-friendly access path.
+It works well for structured JSON-style MCQ generation.
+It avoids requiring reviewers to run a local GPU model.
+```
+
+Configured with:
+
+```env
+LLM_PROVIDER=groq
+GROQ_API_KEY=your_groq_api_key_here
+```
+
+### Mock fallback
+
+A mock provider is included because:
+
+```text
+It allows deterministic local testing.
+It allows tests to run without external API calls.
+It helps validate the backend flow independently of LLM availability.
+```
+
+Configured with:
+
+```env
+LLM_PROVIDER=mock
+```
+
+### Why not only Gemini?
+
+Gemini support is scaffolded as optional, but Groq is the primary provider to keep the final evaluation path simple and fast.
+
+### Why not only Ollama/local LLM?
+
+A local LLM would reduce external API dependency, but it would make reviewer setup heavier because model downloads and local hardware performance vary widely.
+
+### Why not only HuggingFace generation?
+
+The project already uses HuggingFace sentence-transformer embeddings locally. For MCQ generation, hosted LLM inference through Groq gives better response speed and quality for this project.
+
+---
+
+## 19. MCQ Validation
+
+The backend does not blindly trust LLM output.
+
+Validation checks include:
+
+```text
+exactly 4 options
+options must be A, B, C, D
+correct answer must be A, B, C, or D
+non-empty topic
+non-empty explanation
+non-empty adaptation_reason
+only selected-section questions
+expected number of questions per section
+duplicate question text handling
+Pydantic schema validation
+```
+
+Validation files:
+
+```text
+app/llm/output_parser.py
+app/schemas/question.py
+```
+
+If the LLM under-generates or returns malformed questions, the system retries section-level generation before failing.
+
+---
+
+## 20. Encoding Cleanup
+
+LLM and PDF text can sometimes contain mojibake, for example:
 
 ```text
 Cuartel ValparaÃ­so
 ```
 
-Expected:
+The expected cleaned form is:
 
 ```text
 Cuartel Valparaíso
 ```
 
-Fix area:
+The project uses `ftfy` for general Unicode/mojibake cleanup.
+
+This is intentionally not a hardcoded word-specific replacement.
+
+---
+
+## 21. Project Speciality
+
+The project is stronger than a basic RAG demo because it includes:
 
 ```text
-app/llm/output_parser.py
+real PDF ingestion
+real section extraction
+PostgreSQL source-of-truth storage
+Qdrant vector retrieval
+strict section-filtered retrieval
+LLM-generated MCQs
+strict output validation
+session scoring
+weak-topic tracking
+adaptive future generation
+Scenario B proof of adaptation
+FastAPI interactive flow
+reviewer-ready JSON outputs
+KB snapshots with recent session history
 ```
 
-The output normalization layer should clean common mojibake patterns before persistence and response.
-
-### 2. Existing database history affects API mode
-
-If previous Scenario B or API sessions exist, `/prep/start` may return:
+The most important proof is Scenario B:
 
 ```text
-mode = adaptive
+Iteration 1 creates weakness in section 8.
+Iteration 2 detects section 8 weakness while also handling sections 6 and 9.
+Iteration 3 focuses only on section 8 and remains adaptive.
+```
+
+---
+
+## 22. Known Limitations
+
+### LLM non-determinism
+
+Groq output can vary between runs. The backend mitigates this through:
+
+```text
+compact prompts
+section-by-section generation
+strict validation
+retry logic
+backend-owned adaptation metadata
+```
+
+Still, very poor LLM responses can fail validation.
+
+### First run can be slow
+
+The first API or evaluation run may take several minutes because:
+
+```text
+the embedding model may load into memory
+the LLM generates many questions
+Scenario A/B with N=5 generates 40 total MCQs
 ```
 
 This is expected.
 
-For a fresh cold-start API test, prep history must be cleared first.
-
-### 3. LLM non-determinism
-
-Groq output may vary. The backend validation layer protects against many malformed outputs, but very poor LLM output may still fail.
-
-### 4. HF token warning
+### HuggingFace token warning
 
 The console may show:
 
@@ -1031,109 +971,118 @@ The console may show:
 Warning: You are sending unauthenticated requests to the HF Hub.
 ```
 
-This is not a failure. The embedding model still loads.
+This is not a failure. The embedding model still loads. Setting `HF_TOKEN` may improve rate limits.
+
+### API mode depends on existing history
+
+If the database already contains Scenario B or API sessions, `/prep/start` may return:
+
+```text
+mode = adaptive
+```
+
+This is expected.
+
+For a clean cold-start API test, reset the database first.
+
+### No frontend
+
+A frontend is not included because the assessment asks for:
+
+```text
+CLI-runnable system
+REST APIs
+exported evaluation outputs
+```
+
+Swagger is used for API interaction.
+
+### Docker scope
+
+Docker Compose is used for PostgreSQL and Qdrant services. The FastAPI app can be run locally through Uvicorn. If the Dockerfile is used for the API, verify environment variables and service hostnames before deployment.
 
 ---
 
-## Commands That Currently Work
+## 23. Output Commit Strategy
+
+The `outputs/` directory is intentionally useful for reviewers.
+
+It contains generated Scenario A and Scenario B artifacts so reviewers can inspect structural correctness immediately after cloning.
+
+Important output files:
+
+```text
+outputs/scenario_a/questions_scenario_a.json
+outputs/scenario_a/kb_snapshot_scenario_a.json
+
+outputs/scenario_b_iter1/questions_iter1.json
+outputs/scenario_b_iter1/kb_snapshot_iter1.json
+
+outputs/scenario_b_iter2/questions_iter2.json
+outputs/scenario_b_iter2/kb_snapshot_iter2.json
+
+outputs/scenario_b_iter3/questions_iter3.json
+outputs/scenario_b_iter3/kb_snapshot_iter3.json
+```
+
+Reviewers can regenerate these files using:
+
+```powershell
+python -m cli.run_evaluation --questions-per-section 5
+```
+
+---
+
+## 24. Suggested Recruiter Verification Flow
+
+A reviewer can verify the project as follows.
+
+### 24.1 Start services
 
 ```powershell
 docker compose up -d
 ```
 
+### 24.2 Reset and rebuild the KB
+
 ```powershell
 python -m cli.reset_db reset
-```
-
-```powershell
 python -m cli.ingest_pdf
-```
-
-```powershell
 python -m cli.index_qdrant
 ```
 
-```powershell
-python -m cli.run_scenario_a --questions-per-section 2
-```
+### 24.3 Run full evaluation
 
 ```powershell
-python -m cli.run_scenario_b --questions-per-section 2
+python -m cli.run_evaluation --questions-per-section 5
 ```
 
-```powershell
-python -m cli.run_evaluation --questions-per-section 2
+### 24.4 Verify final Scenario B result
+
+Expected:
+
+```text
+Scenario B iteration 1 complete | mode=cold_start | score=50.0
+Scenario B iteration 2 complete | mode=adaptive | score=66.67
+Scenario B iteration 3 complete | mode=adaptive | score=0.0
 ```
+
+### 24.5 Run tests
 
 ```powershell
 python -m pytest tests
 ```
 
-```powershell
-.\.venv\Scripts\python.exe -m uvicorn app.main:app --reload --host 127.0.0.1 --port 18000
+Expected:
+
+```text
+6 passed
 ```
 
----
-
-## Recruiter Verification Flow
-
-A recruiter should be able to check the project like this.
-
-### 1. Start services
+### 24.6 Run API
 
 ```powershell
-docker compose up -d
-```
-
-### 2. Reset database
-
-```powershell
-python -m cli.reset_db reset
-```
-
-### 3. Ingest PDF
-
-```powershell
-python -m cli.ingest_pdf
-```
-
-### 4. Index Qdrant
-
-```powershell
-python -m cli.index_qdrant
-```
-
-### 5. Run full evaluation
-
-```powershell
-python -m cli.run_evaluation --questions-per-section 2
-```
-
-### 6. Confirm Scenario B outputs
-
-```powershell
-Get-ChildItem outputs\scenario_b_iter1
-Get-ChildItem outputs\scenario_b_iter2
-Get-ChildItem outputs\scenario_b_iter3
-```
-
-### 7. Check adaptive evidence
-
-```powershell
-Get-Content outputs\scenario_b_iter2\questions_iter2.json | Select-String "adaptation_reason"
-Get-Content outputs\scenario_b_iter3\questions_iter3.json | Select-String "adaptation_reason"
-```
-
-### 8. Run tests
-
-```powershell
-python -m pytest tests
-```
-
-### 9. Run API
-
-```powershell
-.\.venv\Scripts\python.exe -m uvicorn app.main:app --reload --host 127.0.0.1 --port 18000
+.\.venv\Scripts\python.exe -m uvicorn app.main:app --host 127.0.0.1 --port 18000
 ```
 
 Open:
@@ -1142,132 +1091,132 @@ Open:
 http://127.0.0.1:18000/docs
 ```
 
----
-
-## Immediate Next Implementation Plan
-
-### Step 1: Fix encoding cleanup
-
-Fix mojibake issue:
+Test:
 
 ```text
-ValparaÃ­so -> Valparaíso
-```
-
-Likely location:
-
-```text
-app/llm/output_parser.py
-```
-
-Ensure cleanup applies to:
-
-- question text
-- option text
-- explanation
-- topic
-- adaptation_reason
-
-### Step 2: Add interactive API tests
-
-Add tests for:
-
-```text
+GET /health
+GET /documents/latest/sections
 POST /prep/start
 POST /prep/submit
+GET /sessions/{session_id}
+GET /kb/snapshot
 ```
-
-Test expectations:
-
-- `/prep/start` does not return correct_answer
-- `/prep/start` returns options
-- `/prep/submit` returns score
-- `/prep/submit` returns correct_answer
-- `/prep/submit` returns clarification for wrong answers
-- duplicate submit should fail
-
-### Step 3: Clean old names
-
-Search for:
-
-```text
-run_mock_prep_session
-```
-
-Rename to:
-
-```text
-run_prep_session
-```
-
-if still present.
-
-### Step 4: Improve documentation files
-
-Add:
-
-```text
-docs/architecture.md
-docs/database_schema.md
-docs/adaptation_strategy.md
-```
-
-### Step 5: Finalize Dockerfile
-
-Make sure reviewer can run the API cleanly.
-
-### Step 6: Add structured logging
-
-Add logs for:
-
-```text
-session_id
-selected_sections
-mode
-retrieved_chunk_count
-llm_provider
-score
-weak_topic_count
-```
-
-### Step 7: Final README polish
-
-After implementation is stable, rewrite the final README for submission.
 
 ---
 
-## Git Workflow
+## 25. Project Structure
 
-Use frequent push workflow:
+Short structure summary:
+
+```text
+app/
+  api/          FastAPI route modules
+  core/         settings, logging, exceptions
+  db/           SQLAlchemy models, session, repositories
+  ingestion/    PDF loading, section parsing, chunking
+  retrieval/    embeddings, Qdrant indexing, retrieval
+  llm/          providers, prompts, generation, validation
+  workflow/     LangGraph state, nodes, graph
+  services/     business logic services
+  schemas/      Pydantic request/response schemas
+
+cli/
+  reset_db.py
+  ingest_pdf.py
+  index_qdrant.py
+  run_scenario_a.py
+  run_scenario_b.py
+  run_evaluation.py
+
+docs/
+  architecture.md
+  database_schema.md
+  adaptation_strategy.md
+
+outputs/
+  scenario_a/
+  scenario_b_iter1/
+  scenario_b_iter2/
+  scenario_b_iter3/
+
+tests/
+  test_mcq_validation.py
+  test_prep_api.py
+  test_prep_flow.py
+```
+
+A more detailed project structure can be added in:
+
+```text
+docs/project_structure.md
+```
+
+---
+
+## 26. Useful Commands
+
+Start services:
 
 ```powershell
-git status
-git add .
-git commit -m "Meaningful checkpoint message"
-git push
+docker compose up -d
 ```
 
-Important:
+Reset database:
+
+```powershell
+python -m cli.reset_db reset
+```
+
+Ingest PDF:
+
+```powershell
+python -m cli.ingest_pdf
+```
+
+Index Qdrant:
+
+```powershell
+python -m cli.index_qdrant
+```
+
+Run Scenario A:
+
+```powershell
+python -m cli.run_scenario_a --questions-per-section 5
+```
+
+Run Scenario B:
+
+```powershell
+python -m cli.run_scenario_b --questions-per-section 5
+```
+
+Run full evaluation:
+
+```powershell
+python -m cli.run_evaluation --questions-per-section 5
+```
+
+Run tests:
+
+```powershell
+python -m pytest tests
+```
+
+Run API:
+
+```powershell
+.\.venv\Scripts\python.exe -m uvicorn app.main:app --host 127.0.0.1 --port 18000
+```
+
+Open Swagger:
 
 ```text
-Do not commit .env.
-Do not commit API keys.
-Do not commit unnecessary temporary files.
+http://127.0.0.1:18000/docs
 ```
 
 ---
 
-## Current Recommended Next Action
+## 27. Final Project Pitch
 
-Do not add new large features immediately.
-
-First finish the current interactive API cleanup:
-
-1. Fix encoding issue.
-2. Run Scenario B again.
-3. Test `/prep/start`.
-4. Test `/prep/submit`.
-5. Add API tests.
-6. Push stable checkpoint.
-
-After that, continue with documentation and final polish.
+This project is a production-style adaptive RAG backend that ingests a structured PDF, stores section chunks in Qdrant for deterministic section-filtered retrieval, stores all learning history in PostgreSQL, generates MCQs through an LLM, validates structured outputs, scores answers, identifies weak topics over time, and adapts future question generation based on previous mistakes while exporting reviewer-ready Scenario A and Scenario B outputs.
