@@ -1,5 +1,5 @@
 {
-  "session_id": "d03a96d7-c97a-4b50-9530-79eb46dbbfa2",
+  "session_id": "0c75a3c3-f042-447d-acf6-c0d0d9dd2a27",
   "mode": "adaptive",
   "selected_sections": [
     6,
@@ -18,7 +18,7 @@
     "weak_topics": [
       {
         "section_number": 8,
-        "topic": "Bilateral Cooperation",
+        "topic": "Micro-Cache Network",
         "attempts": 1,
         "wrong_count": 1,
         "correct_count": 0,
@@ -26,7 +26,7 @@
       },
       {
         "section_number": 8,
-        "topic": "Micro-Cache Network",
+        "topic": "Bilateral Cooperation",
         "attempts": 1,
         "wrong_count": 1,
         "correct_count": 0,
@@ -59,9 +59,9 @@
     ],
     "mastered_question_texts": [],
     "previous_wrong_question_texts": [
-      "What is the name of the bilateral cooperation framework between the asset and Bolivian Servicio de Operaciones Especiales (SOE)?",
       "How many micro-caches does the asset maintain?",
-      "What is the approximate size of the asset's authorized operational territory?",
+      "What is the name of the bilateral cooperation framework between the asset and Bolivian Servicio de Operaciones Especiales (SOE)?",
+      "What is the approximate area of the asset's authorized operational territory?",
       "Who audits the safehouse provisioning semi-annually?",
       "What is the name of the asset's primary operational base?"
     ],
@@ -69,7 +69,7 @@
   },
   "questions": [
     {
-      "question_id": "125690c0-d8e7-447e-a674-e3bda97d319b",
+      "question_id": "e956fc47-8eb8-4d7f-a47c-8fe5a272e49d",
       "section_id": "c199947c-c06d-4701-bb81-0d45720926da",
       "section_number": 6,
       "topic": "PAMC Founding",
@@ -83,7 +83,7 @@
       },
       "correct_answer": "A",
       "explanation": "The Pan-American Metahuman Cooperative (PAMC) was founded on 22 May 2014.",
-      "adaptation_reason": "Prioritized weak topic: PAMC founding date.",
+      "adaptation_reason": "Returning-run question generated using previous session history without a section-specific weak topic.",
       "source_chunk_ids": [
         "ee5c9e86-bbdf-4666-a702-46fee96157af"
       ],
@@ -92,21 +92,21 @@
       "clarification": null
     },
     {
-      "question_id": "bc48127d-5807-41aa-9927-208d9c6ee10c",
+      "question_id": "bcb614fb-9700-44f9-b18d-e4122cf6cea5",
       "section_id": "c199947c-c06d-4701-bb81-0d45720926da",
       "section_number": 6,
       "topic": "PAMC Headquarters",
-      "difficulty": "medium",
+      "difficulty": "easy",
       "question": "Where is the Pan-American Metahuman Cooperative (PAMC) headquartered?",
       "options": {
         "A": "Edificio Marasol, Avenida Salaverry 1840, Lima",
-        "B": "Edificio Marasol, Avenida Salaverry 1840, Bogota",
-        "C": "Edificio Marasol, Avenida Salaverry 1840, Quito",
-        "D": "Edificio Marasol, Avenida Salaverry 1840, Santiago"
+        "B": "Edificio Marasol, Avenida Salaverry 1841, Lima",
+        "C": "Edificio Marasol, Avenida Salaverry 1842, Lima",
+        "D": "Edificio Marasol, Avenida Salaverry 1843, Lima"
       },
       "correct_answer": "A",
       "explanation": "The Pan-American Metahuman Cooperative (PAMC) is headquartered at Edificio Marasol, Avenida Salaverry 1840, Lima.",
-      "adaptation_reason": "Prioritized weak topic: PAMC headquarters location.",
+      "adaptation_reason": "Returning-run question generated using previous session history without a section-specific weak topic.",
       "source_chunk_ids": [
         "ee5c9e86-bbdf-4666-a702-46fee96157af"
       ],
@@ -115,21 +115,21 @@
       "clarification": null
     },
     {
-      "question_id": "f175ce03-cb54-4394-a6d0-71217888fa06",
+      "question_id": "2a570f32-3908-499c-9bcd-606bd55b7a40",
       "section_id": "c199947c-c06d-4701-bb81-0d45720926da",
       "section_number": 6,
       "topic": "PAMC Inspector General",
-      "difficulty": "hard",
+      "difficulty": "medium",
       "question": "What is the title of the PAMC Inspector General?",
       "options": {
         "A": "Magnus Sletten",
-        "B": "Joaqu\u00edn Hidalgo-Y\u00e1\u00f1ez",
+        "B": "Joaqu\\u00edn Hidalgo-Y\\u00e1\\u00f1ez",
         "C": "Underwriter",
         "D": "Inspector General"
       },
       "correct_answer": "C",
       "explanation": "The PAMC Inspector General is referred to as the \"Underwriter\".",
-      "adaptation_reason": "Avoided close repeat of mastered question: PAMC Inspector General title.",
+      "adaptation_reason": "Returning-run question generated using previous session history without a section-specific weak topic.",
       "source_chunk_ids": [
         "fc1aa8e0-1d05-453e-b52e-1c4a128424a5"
       ],
@@ -138,113 +138,88 @@
       "clarification": null
     },
     {
-      "question_id": "bf81ea68-ae9b-4d3c-be45-a2683de7e078",
+      "question_id": "8ca6b464-16c5-48c0-b983-32c6a29f70d7",
       "section_id": "c199947c-c06d-4701-bb81-0d45720926da",
       "section_number": 6,
       "topic": "PAMC Operative",
       "difficulty": "medium",
       "question": "What is the name of the PAMC Class A-1 operative?",
       "options": {
-        "A": "MARTILLO",
-        "B": "Joaqu\u00edn Hidalgo-Y\u00e1\u00f1ez",
-        "C": "Magnus Sletten",
+        "A": "Magnus Sletten",
+        "B": "Joaqu\\u00edn Hidalgo-Y\\u00e1\\u00f1ez",
+        "C": "T\u00f3rtola",
         "D": "Underwriter"
       },
-      "correct_answer": "A",
-      "explanation": "MARTILLO is a PAMC Class A-1 operative.",
-      "adaptation_reason": "Prioritized weak topic: PAMC operative name.",
+      "correct_answer": "B",
+      "explanation": "Joaqu\u00edn Hidalgo-Y\u00e1\u00f1ez is a PAMC Class A-1 operative.",
+      "adaptation_reason": "Returning-run question generated using previous session history without a section-specific weak topic.",
       "source_chunk_ids": [
         "fc1aa8e0-1d05-453e-b52e-1c4a128424a5"
       ],
+      "simulated_user_answer": "B",
+      "is_correct": true,
+      "clarification": null
+    },
+    {
+      "question_id": "ef518866-4f1d-4de0-af09-cd5e58e24694",
+      "section_id": "c199947c-c06d-4701-bb81-0d45720926da",
+      "section_number": 6,
+      "topic": "PAMC Summit Attendance",
+      "difficulty": "hard",
+      "question": "In what year did the asset attend the 2024 Pan-Cooperative Summit in Lisbon?",
+      "options": {
+        "A": "2023",
+        "B": "2024",
+        "C": "2025",
+        "D": "2026"
+      },
+      "correct_answer": "A",
+      "explanation": "The answer is grounded in the retrieved source context.",
+      "adaptation_reason": "Returning-run question generated using previous session history without a section-specific weak topic.",
+      "source_chunk_ids": [],
       "simulated_user_answer": "A",
       "is_correct": true,
       "clarification": null
     },
     {
-      "question_id": "a4afcc53-b449-4607-bda3-a2076c54b4e8",
-      "section_id": "c199947c-c06d-4701-bb81-0d45720926da",
-      "section_number": 6,
-      "topic": "PAMC Summit",
-      "difficulty": "easy",
-      "question": "In what city did the asset attend the 2024 Pan-Cooperative Summit?",
-      "options": {
-        "A": "Lima",
-        "B": "Bogota",
-        "C": "Quito",
-        "D": "Lisbon"
-      },
-      "correct_answer": "D",
-      "explanation": "The asset attended the 2024 Pan-Cooperative Summit in Lisbon.",
-      "adaptation_reason": "Avoided close repeat of mastered question: PAMC summit location.",
-      "source_chunk_ids": [
-        "8605ceb7-739a-4ab7-a547-df12a785f39c"
-      ],
-      "simulated_user_answer": "D",
-      "is_correct": true,
-      "clarification": null
-    },
-    {
-      "question_id": "a5e0a146-750e-44db-a931-cc59dd070443",
+      "question_id": "f866d13e-3326-457d-9eaf-ca1310644091",
       "section_id": "24707465-4591-4e01-b532-4251aceaf99c",
       "section_number": 8,
       "topic": "Operational Territory",
       "difficulty": "medium",
-      "question": "What is the approximate area of the asset's authorized operational territory?",
+      "question": "What is the approximate size of the asset's operational territory?",
       "options": {
-        "A": "6.8 million km\u00b2",
-        "B": "1.8 million km\u00b2",
-        "C": "8.8 million km\u00b2",
-        "D": "4.8 million km\u00b2"
+        "A": "1 million km\u00b2",
+        "B": "6.8 million km\u00b2",
+        "C": "10 million km\u00b2",
+        "D": "20 million km\u00b2"
       },
-      "correct_answer": "A",
-      "explanation": "The asset's authorized operational territory spans approximately 6.8 million km\u00b2.",
-      "adaptation_reason": "Prioritized weak topic: Operational Territory",
+      "correct_answer": "B",
+      "explanation": "The asset's operational territory spans approximately 6.8 million km\u00b2.",
+      "adaptation_reason": "Adaptive question generated for section 8 because prior session history marks this section as weak.",
       "source_chunk_ids": [
         "bf0015aa-d18c-4de4-921a-1871f08b8f33"
       ],
-      "simulated_user_answer": "B",
-      "is_correct": false,
-      "clarification": "The asset's authorized operational territory spans approximately 6.8 million km\u00b2."
-    },
-    {
-      "question_id": "ab10cfe8-20e3-4e50-9c99-5febf85163b5",
-      "section_id": "24707465-4591-4e01-b532-4251aceaf99c",
-      "section_number": 8,
-      "topic": "Bilateral Cooperation",
-      "difficulty": "medium",
-      "question": "Which organization is part of the asset's bilateral cooperation framework?",
-      "options": {
-        "A": "Peruvian Direcci\u00f3n de Asuntos Metahumanos (DAM)",
-        "B": "Bolivian Servicio de Operaciones Especiales (SOE)",
-        "C": "Chilean Navy",
-        "D": "Norwegian Intelligence Agency"
-      },
-      "correct_answer": "B",
-      "explanation": "The asset has a bilateral cooperation framework with the Bolivian Servicio de Operaciones Especiales (SOE).",
-      "adaptation_reason": "Prioritized weak topic: Bilateral Cooperation",
-      "source_chunk_ids": [
-        "a819f646-02b3-4382-a957-d7ffbbb247c0"
-      ],
       "simulated_user_answer": "A",
       "is_correct": false,
-      "clarification": "The asset has a bilateral cooperation framework with the Bolivian Servicio de Operaciones Especiales (SOE)."
+      "clarification": "The asset's operational territory spans approximately 6.8 million km\u00b2."
     },
     {
-      "question_id": "34a926b2-c3a7-44db-bbc4-dd19d0788ec5",
+      "question_id": "625d31d4-7b49-43ef-8a03-9bcbcc2a228d",
       "section_id": "24707465-4591-4e01-b532-4251aceaf99c",
       "section_number": 8,
       "topic": "Micro-Cache Network",
-      "difficulty": "easy",
+      "difficulty": "medium",
       "question": "How many micro-caches does the asset maintain?",
       "options": {
-        "A": "10",
-        "B": "19",
-        "C": "5",
-        "D": "7"
+        "A": "10 micro-caches",
+        "B": "15 micro-caches",
+        "C": "19 micro-caches",
+        "D": "25 micro-caches"
       },
-      "correct_answer": "B",
+      "correct_answer": "C",
       "explanation": "The asset maintains a network of 19 micro-caches.",
-      "adaptation_reason": "Prioritized weak topic: Micro-Cache Network",
+      "adaptation_reason": "Adaptive question generated for section 8 because prior session history marks this section as weak.",
       "source_chunk_ids": [
         "421ff765-5d8f-4b26-b568-e8e439c15860"
       ],
@@ -253,21 +228,44 @@
       "clarification": "The asset maintains a network of 19 micro-caches."
     },
     {
-      "question_id": "d22cbad1-3708-425e-9d75-10dbf1def716",
+      "question_id": "532d31e4-57b2-479e-9651-023cd7f1276c",
+      "section_id": "24707465-4591-4e01-b532-4251aceaf99c",
+      "section_number": 8,
+      "topic": "Bilateral Cooperation",
+      "difficulty": "medium",
+      "question": "What is the name of the bilateral cooperation framework between the asset and Bolivian Servicio de Operaciones Especiales (SOE)?",
+      "options": {
+        "A": "La Paz Annex 2022",
+        "B": "La Paz Annex 2023",
+        "C": "Bolivia Framework 2020",
+        "D": "SOE Partnership 2019"
+      },
+      "correct_answer": "B",
+      "explanation": "The asset has a bilateral cooperation framework with Bolivian SOE, known as La Paz Annex 2023.",
+      "adaptation_reason": "Adaptive question generated for section 8 because prior session history marks this section as weak.",
+      "source_chunk_ids": [
+        "a819f646-02b3-4382-a957-d7ffbbb247c0"
+      ],
+      "simulated_user_answer": "A",
+      "is_correct": false,
+      "clarification": "The asset has a bilateral cooperation framework with Bolivian SOE, known as La Paz Annex 2023."
+    },
+    {
+      "question_id": "f3496556-2b28-47b5-a5c2-cdf3fc8c1bbe",
       "section_id": "24707465-4591-4e01-b532-4251aceaf99c",
       "section_number": 8,
       "topic": "Primary Base",
-      "difficulty": "medium",
+      "difficulty": "easy",
       "question": "What is the name of the asset's primary operational base?",
       "options": {
         "A": "Cuartel Valpara\u00edso",
         "B": "PAMC South Cone Headquarters",
-        "C": "La Paz Annex",
-        "D": "Easter Island"
+        "C": "SOE Base",
+        "D": "Asset HQ"
       },
       "correct_answer": "A",
       "explanation": "The asset's primary operational base is Cuartel Valpara\u00edso.",
-      "adaptation_reason": "Avoid close repeats of mastered questions",
+      "adaptation_reason": "Adaptive question generated for section 8 because prior session history marks this section as weak.",
       "source_chunk_ids": [
         "11e8b047-54f6-42b9-a9b8-a0e6bbf19e09"
       ],
@@ -276,12 +274,12 @@
       "clarification": "The asset's primary operational base is Cuartel Valpara\u00edso."
     },
     {
-      "question_id": "04743f8f-ef03-49e6-8dc7-b27e5d960e50",
+      "question_id": "89cdd0ec-c038-4f26-9aa0-3a0ee7cde06c",
       "section_id": "24707465-4591-4e01-b532-4251aceaf99c",
       "section_number": 8,
       "topic": "Operational Territory",
       "difficulty": "hard",
-      "question": "Which country has restricted access to Easter Island?",
+      "question": "Which country has restricted access to the asset's operational territory?",
       "options": {
         "A": "Chile",
         "B": "Bolivia",
@@ -289,22 +287,22 @@
         "D": "Argentina"
       },
       "correct_answer": "A",
-      "explanation": "The asset's authorized operational territory in Chile includes offshore islands except Easter Island (restricted).",
-      "adaptation_reason": "Prioritized weak topic: Operational Territory",
+      "explanation": "Easter Island is restricted in the asset's operational territory.",
+      "adaptation_reason": "Adaptive question generated for section 8 because prior session history marks this section as weak.",
       "source_chunk_ids": [
         "bf0015aa-d18c-4de4-921a-1871f08b8f33"
       ],
       "simulated_user_answer": "B",
       "is_correct": false,
-      "clarification": "The asset's authorized operational territory in Chile includes offshore islands except Easter Island (restricted)."
+      "clarification": "Easter Island is restricted in the asset's operational territory."
     },
     {
-      "question_id": "67a41ff9-dbde-4b0b-8091-622713738b95",
+      "question_id": "61f3b571-b6a0-4c62-b0e3-3e2220766b59",
       "section_id": "da396094-6d3e-4427-9d90-933b7170204c",
       "section_number": 9,
       "topic": "Case Files",
       "difficulty": "medium",
-      "question": "What is the format of all cases recorded under the PAMC format?",
+      "question": "What is the format of all cases recorded under PAMC?",
       "options": {
         "A": "Case number (year-sequence)",
         "B": "Date (start\u2013end)",
@@ -312,8 +310,8 @@
         "D": "Classification (open / classified / declassified)"
       },
       "correct_answer": "A",
-      "explanation": "The PAMC format for case files includes a case number in the format of year-sequence.",
-      "adaptation_reason": "Prioritized due to weak topic.",
+      "explanation": "PAMC format is uniform for all cases.",
+      "adaptation_reason": "Returning-run question generated using previous session history without a section-specific weak topic.",
       "source_chunk_ids": [
         "2a89ad36-6d8e-4949-a65a-a0e94d21724a"
       ],
@@ -322,7 +320,7 @@
       "clarification": null
     },
     {
-      "question_id": "813a1c03-d480-4872-a415-b6fa159c1048",
+      "question_id": "8fa5f5e1-4e07-4f6d-9feb-f4028df53776",
       "section_id": "da396094-6d3e-4427-9d90-933b7170204c",
       "section_number": 9,
       "topic": "Case Files",
@@ -335,8 +333,8 @@
         "D": "Failed"
       },
       "correct_answer": "A",
-      "explanation": "The outcome of Case 2024-0202: Quebrantadero Showdown was successful.",
-      "adaptation_reason": "Avoided close repeat of mastered question.",
+      "explanation": "Case 2024-0202 was a major operational success.",
+      "adaptation_reason": "Returning-run question generated using previous session history without a section-specific weak topic.",
       "source_chunk_ids": [
         "77da46b4-29d5-4d6f-a117-d827cfd4b3f5"
       ],
@@ -345,21 +343,21 @@
       "clarification": null
     },
     {
-      "question_id": "0ac8f85c-afae-4c9c-a5bc-871e301a3d48",
+      "question_id": "be7630c3-e878-4f47-be24-5669ebc027b0",
       "section_id": "da396094-6d3e-4427-9d90-933b7170204c",
       "section_number": 9,
       "topic": "Case Files",
       "difficulty": "medium",
-      "question": "What was the location of Case 2023-0067: El Sereno Pursuit?",
+      "question": "What was the classification of Case 2023-0067: El Sereno Pursuit?",
       "options": {
-        "A": "Iquique, Tarapac\u00e1 Region, Chile",
-        "B": "Salta city, Salta Province, Argentina",
-        "C": "Port District, Antofagasta, Chile",
-        "D": "Unknown"
+        "A": "Open",
+        "B": "Classified",
+        "C": "Declassified",
+        "D": "Unclassified"
       },
       "correct_answer": "A",
-      "explanation": "The location of Case 2023-0067: El Sereno Pursuit was Iquique, Tarapac\u00e1 Region, Chile.",
-      "adaptation_reason": "Prioritized due to weak topic.",
+      "explanation": "Case 2023-0067 was classified as Open.",
+      "adaptation_reason": "Returning-run question generated using previous session history without a section-specific weak topic.",
       "source_chunk_ids": [
         "b5e2da7a-b10b-40a7-8bff-b056ee39afc7"
       ],
@@ -368,7 +366,7 @@
       "clarification": null
     },
     {
-      "question_id": "e4f55f0e-46b8-4038-91d5-901ccdea4129",
+      "question_id": "921644a5-87b4-46e1-830f-2b6a2bc55999",
       "section_id": "da396094-6d3e-4427-9d90-933b7170204c",
       "section_number": 9,
       "topic": "Case Files",
@@ -377,12 +375,12 @@
       "options": {
         "A": "Inconclusive",
         "B": "Successful",
-        "C": "Partial",
-        "D": "Failed"
+        "C": "Failed",
+        "D": "Partial"
       },
       "correct_answer": "B",
-      "explanation": "The outcome of Case 2020-0048: Containment was successful.",
-      "adaptation_reason": "Avoided close repeat of mastered question.",
+      "explanation": "Case 2020-0048 was a successful operation.",
+      "adaptation_reason": "Returning-run question generated using previous session history without a section-specific weak topic.",
       "source_chunk_ids": [
         "8c5df1cf-36be-4ba0-b0f5-89225c0f5c4a"
       ],
@@ -391,23 +389,23 @@
       "clarification": null
     },
     {
-      "question_id": "7968a5c1-f576-4d6a-9cf9-9ee108f4ca4c",
+      "question_id": "5e97db4e-d012-4e6f-9988-73aac211fe38",
       "section_id": "da396094-6d3e-4427-9d90-933b7170204c",
       "section_number": 9,
       "topic": "Case Files",
       "difficulty": "medium",
-      "question": "How many PAMC casualties were there in Case 2020-0048: Containment?",
+      "question": "What was the location of Case 2023-0067: El Sereno Pursuit?",
       "options": {
-        "A": "1",
-        "B": "2",
-        "C": "3",
-        "D": "4"
+        "A": "Iquique, Tarapac\u00e1 Region, Chile",
+        "B": "Salta city, Argentina",
+        "C": "Antofagasta, Chile",
+        "D": "Port District, Antofagasta, Chile"
       },
       "correct_answer": "A",
-      "explanation": "There was 1 PAMC casualty in Case 2020-0048: Containment.",
-      "adaptation_reason": "Prioritized due to weak topic.",
+      "explanation": "Case 2023-0067 took place in Iquique, Tarapac\u00e1 Region, Chile.",
+      "adaptation_reason": "Returning-run question generated using previous session history without a section-specific weak topic.",
       "source_chunk_ids": [
-        "8c5df1cf-36be-4ba0-b0f5-89225c0f5c4a"
+        "b5e2da7a-b10b-40a7-8bff-b056ee39afc7"
       ],
       "simulated_user_answer": "A",
       "is_correct": true,

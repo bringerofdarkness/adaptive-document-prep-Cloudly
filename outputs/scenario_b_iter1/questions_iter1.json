@@ -1,5 +1,5 @@
 {
-  "session_id": "a6809745-d1c0-4379-9247-59e5bfb61bcc",
+  "session_id": "6d58cb8a-93d7-4cae-928f-df9d6364ebeb",
   "mode": "cold_start",
   "selected_sections": [
     5,
@@ -21,34 +21,57 @@
   },
   "questions": [
     {
-      "question_id": "5c7e48ab-aa8f-492a-824c-f792bb0bd548",
+      "question_id": "ee078dc5-e1aa-4e03-bcc0-ceb57f0d9c5c",
       "section_id": "41324742-9fb6-4a1c-a2a8-2bdd90d48f6b",
       "section_number": 5,
-      "topic": "Sequential Suspension",
+      "topic": "Operational Tactics and Combat Doctrine",
       "difficulty": "medium",
-      "question": "When was the Doctrine of Sequential Suspension articulated by the asset?",
+      "question": "What is the Doctrine of Sequential Suspension?",
       "options": {
-        "A": "19 June 2022",
-        "B": "20 June 2022",
-        "C": "18 June 2022",
-        "D": "21 June 2022"
+        "A": "A technique for releasing objects before they strike anything",
+        "B": "An asset's formal combat doctrine",
+        "C": "A protocol for pre-engagement reconnaissance",
+        "D": "A method for verifying contact-exclusion radius"
       },
-      "correct_answer": "A",
-      "explanation": "The Doctrine of Sequential Suspension was articulated by the asset on 19 June 2022.",
-      "adaptation_reason": "Prioritizing weak topics and avoiding close repeats of mastered questions.",
+      "correct_answer": "B",
+      "explanation": "The Doctrine of Sequential Suspension is an asset's formal combat doctrine.",
+      "adaptation_reason": "Cold-start coverage question generated from the selected section because no prior relevant learning history exists.",
       "source_chunk_ids": [
         "68144153-edc2-4d07-b82f-9491716eed7b"
       ],
-      "simulated_user_answer": "A",
+      "simulated_user_answer": "B",
       "is_correct": true,
       "clarification": null
     },
     {
-      "question_id": "5e6b2231-53b4-496b-b6bc-a983c476566e",
+      "question_id": "f4b88fea-b87c-4007-9d4c-c631cedb8bf9",
       "section_id": "41324742-9fb6-4a1c-a2a8-2bdd90d48f6b",
       "section_number": 5,
-      "topic": "Sequential Suspension",
+      "topic": "Operational Tactics and Combat Doctrine",
       "difficulty": "hard",
+      "question": "What is the contact-exclusion rule?",
+      "options": {
+        "A": "A technique for releasing objects before they strike anything",
+        "B": "A rule for verifying contact-exclusion radius",
+        "C": "A pattern around the contact-exclusion rule",
+        "D": "A method for suspending released objects"
+      },
+      "correct_answer": "C",
+      "explanation": "The contact-exclusion rule is a pattern around the contact-exclusion rule.",
+      "adaptation_reason": "Cold-start coverage question generated from the selected section because no prior relevant learning history exists.",
+      "source_chunk_ids": [
+        "e8a95d90-b765-405a-b3e6-32dd90daba3f"
+      ],
+      "simulated_user_answer": "C",
+      "is_correct": true,
+      "clarification": null
+    },
+    {
+      "question_id": "42a90dec-c6d8-4e3d-b201-84937b875c08",
+      "section_id": "41324742-9fb6-4a1c-a2a8-2bdd90d48f6b",
+      "section_number": 5,
+      "topic": "Operational Tactics and Combat Doctrine",
+      "difficulty": "easy",
       "question": "What is the purpose of the Doctrine of Sequential Suspension?",
       "options": {
         "A": "To acquire targets only when extraction is mapped",
@@ -58,7 +81,7 @@
       },
       "correct_answer": "C",
       "explanation": "The Doctrine of Sequential Suspension permits a meaningful one-second window between release and engagement target acquisition.",
-      "adaptation_reason": "Prioritizing weak topics and avoiding close repeats of mastered questions.",
+      "adaptation_reason": "Cold-start coverage question generated from the selected section because no prior relevant learning history exists.",
       "source_chunk_ids": [
         "68144153-edc2-4d07-b82f-9491716eed7b"
       ],
@@ -67,74 +90,51 @@
       "clarification": null
     },
     {
-      "question_id": "c60626e8-d3e4-4821-af35-b64bff5dbb93",
+      "question_id": "9bb98b66-50f1-4552-ad01-3689be67bd46",
       "section_id": "41324742-9fb6-4a1c-a2a8-2bdd90d48f6b",
       "section_number": 5,
-      "topic": "Operational Tactics",
-      "difficulty": "easy",
-      "question": "What is the first directive in PAMC Internal Bulletin 22-19?",
+      "topic": "Operational Tactics and Combat Doctrine",
+      "difficulty": "hard",
+      "question": "What is the 72-hour saturation protocol?",
       "options": {
-        "A": "Acquire targets only when extraction is mapped",
-        "B": "Never activate without verifying the contact-exclusion radius",
-        "C": "Hold one activation in reserve until extraction",
-        "D": "Cooldown discipline overrides tactical opportunity"
+        "A": "A protocol for pre-engagement reconnaissance",
+        "B": "A method for verifying contact-exclusion radius",
+        "C": "A technique for releasing objects before they strike anything",
+        "D": "A pattern around the contact-exclusion rule"
       },
       "correct_answer": "A",
-      "explanation": "The first directive in PAMC Internal Bulletin 22-19 is to acquire targets only when extraction is mapped.",
-      "adaptation_reason": "Prioritizing weak topics and avoiding close repeats of mastered questions.",
+      "explanation": "The 72-hour saturation protocol is a protocol for pre-engagement reconnaissance.",
+      "adaptation_reason": "Cold-start coverage question generated from the selected section because no prior relevant learning history exists.",
       "source_chunk_ids": [
-        "c3f3119b-078d-4ece-9ce7-e165c5f4fc65"
+        "9c37bd6d-9f59-42a7-acc3-32da296cab05"
       ],
       "simulated_user_answer": "A",
       "is_correct": true,
       "clarification": null
     },
     {
-      "question_id": "9db7a648-39c1-4228-bb2d-32f9bf2c56a7",
+      "question_id": "507fc254-f1ff-4b4b-8120-b30063d53d2e",
       "section_id": "41324742-9fb6-4a1c-a2a8-2bdd90d48f6b",
       "section_number": 5,
-      "topic": "Contact-Exclusion Rule",
+      "topic": "Operational Tactics and Combat Doctrine",
       "difficulty": "medium",
-      "question": "How long does it take for the contact-exclusion field to clear after the asset releases an object?",
+      "question": "What is the PAMC-recognized doctrine for Class A-2 (Targeted) operatives?",
       "options": {
-        "A": "0.2 seconds",
-        "B": "0.3 seconds",
-        "C": "0.5 seconds",
-        "D": "1 second"
-      },
-      "correct_answer": "B",
-      "explanation": "The contact-exclusion field clears after 0.3 seconds.",
-      "adaptation_reason": "Prioritizing weak topics and avoiding close repeats of mastered questions.",
-      "source_chunk_ids": [
-        "e8a95d90-b765-405a-b3e6-32dd90daba3f"
-      ],
-      "simulated_user_answer": "B",
-      "is_correct": true,
-      "clarification": null
-    },
-    {
-      "question_id": "1c07f558-0a0f-4014-88b3-c9e2f258c85b",
-      "section_id": "41324742-9fb6-4a1c-a2a8-2bdd90d48f6b",
-      "section_number": 5,
-      "topic": "Reconnaissance Sequencing",
-      "difficulty": "hard",
-      "question": "What is the purpose of the 72-hour saturation protocol in pre-engagement reconnaissance?",
-      "options": {
-        "A": "To acquire targets only when extraction is mapped",
-        "B": "To never activate without verifying the contact-exclusion radius",
-        "C": "To permit a meaningful one-second window between release and engagement target acquisition",
-        "D": "To conduct a thorough site survey before engagement"
+        "A": "The Doctrine of Sequential Suspension",
+        "B": "The 72-hour saturation protocol",
+        "C": "The contact-exclusion rule",
+        "D": "The technique for releasing objects before they strike anything"
       },
       "correct_answer": "A",
       "explanation": "The answer is grounded in the retrieved source context.",
-      "adaptation_reason": "Generated from the selected section and current preparation history.",
+      "adaptation_reason": "Cold-start coverage question generated from the selected section because no prior relevant learning history exists.",
       "source_chunk_ids": [],
       "simulated_user_answer": "A",
       "is_correct": true,
       "clarification": null
     },
     {
-      "question_id": "142ec846-aa0d-4a45-9d2f-be2e1a1ffdfb",
+      "question_id": "4cf54d68-9385-4c56-bcbe-67dc77f73661",
       "section_id": "24707465-4591-4e01-b532-4251aceaf99c",
       "section_number": 8,
       "topic": "Primary Base",
@@ -148,7 +148,7 @@
       },
       "correct_answer": "A",
       "explanation": "Cuartel Valpara\u00edso is the asset's primary operational base.",
-      "adaptation_reason": "Prioritizing weak topics",
+      "adaptation_reason": "Cold-start coverage question generated from the selected section because no prior relevant learning history exists.",
       "source_chunk_ids": [
         "11e8b047-54f6-42b9-a9b8-a0e6bbf19e09"
       ],
@@ -157,7 +157,7 @@
       "clarification": "Cuartel Valpara\u00edso is the asset's primary operational base."
     },
     {
-      "question_id": "28ca8183-586d-44b0-a3af-1d92e9ef42ab",
+      "question_id": "8fc026d5-69b5-43fc-a53e-f471174821d5",
       "section_id": "24707465-4591-4e01-b532-4251aceaf99c",
       "section_number": 8,
       "topic": "Safehouse Provisioning",
@@ -166,12 +166,12 @@
       "options": {
         "A": "Cpl. Vendrame",
         "B": "The asset's former trainer",
-        "C": "Peruvian Direcci\u00f3n de Asuntos Metahumanos (DAM)",
+        "C": "PAMC-issued identity package",
         "D": "Bolivian Servicio de Operaciones Especiales (SOE)"
       },
       "correct_answer": "A",
       "explanation": "Cpl. Vendrame audits the safehouse provisioning semi-annually.",
-      "adaptation_reason": "Avoiding close repeats of mastered questions",
+      "adaptation_reason": "Cold-start coverage question generated from the selected section because no prior relevant learning history exists.",
       "source_chunk_ids": [
         "421ff765-5d8f-4b26-b568-e8e439c15860"
       ],
@@ -180,67 +180,67 @@
       "clarification": "Cpl. Vendrame audits the safehouse provisioning semi-annually."
     },
     {
-      "question_id": "9caf4f13-2afa-47f0-a73b-4b10edc12136",
+      "question_id": "de58a29b-9868-4791-b1a1-b911d924b426",
       "section_id": "24707465-4591-4e01-b532-4251aceaf99c",
       "section_number": 8,
       "topic": "Operational Territory",
       "difficulty": "hard",
-      "question": "What is the approximate size of the asset's authorized operational territory?",
+      "question": "What is the approximate area of the asset's authorized operational territory?",
       "options": {
-        "A": "5.4 million km\u00b2",
-        "B": "6.8 million km\u00b2",
-        "C": "8.2 million km\u00b2",
-        "D": "9.6 million km\u00b2"
+        "A": "6.8 million km\u00b2",
+        "B": "10 million km\u00b2",
+        "C": "5 million km\u00b2",
+        "D": "3 million km\u00b2"
       },
-      "correct_answer": "B",
+      "correct_answer": "A",
       "explanation": "The asset's authorized operational territory spans approximately 6.8 million km\u00b2.",
-      "adaptation_reason": "Prioritizing weak topics",
+      "adaptation_reason": "Cold-start coverage question generated from the selected section because no prior relevant learning history exists.",
       "source_chunk_ids": [
         "bf0015aa-d18c-4de4-921a-1871f08b8f33"
       ],
-      "simulated_user_answer": "A",
+      "simulated_user_answer": "B",
       "is_correct": false,
       "clarification": "The asset's authorized operational territory spans approximately 6.8 million km\u00b2."
     },
     {
-      "question_id": "432ade1c-2d06-4769-9836-a684ea00de6f",
-      "section_id": "24707465-4591-4e01-b532-4251aceaf99c",
-      "section_number": 8,
-      "topic": "Micro-Cache Network",
-      "difficulty": "medium",
-      "question": "How many micro-caches does the asset maintain?",
-      "options": {
-        "A": "10 micro-caches",
-        "B": "15 micro-caches",
-        "C": "19 micro-caches",
-        "D": "20 micro-caches"
-      },
-      "correct_answer": "C",
-      "explanation": "The asset maintains a network of 19 micro-caches.",
-      "adaptation_reason": "Avoiding close repeats of mastered questions",
-      "source_chunk_ids": [
-        "421ff765-5d8f-4b26-b568-e8e439c15860"
-      ],
-      "simulated_user_answer": "A",
-      "is_correct": false,
-      "clarification": "The asset maintains a network of 19 micro-caches."
-    },
-    {
-      "question_id": "787f2ce8-4d18-4062-9926-a566aaf7c2e8",
+      "question_id": "36a37318-f23b-4b3e-b21e-6a69e5dfece2",
       "section_id": "24707465-4591-4e01-b532-4251aceaf99c",
       "section_number": 8,
       "topic": "Bilateral Cooperation",
-      "difficulty": "hard",
+      "difficulty": "medium",
       "question": "What is the name of the bilateral cooperation framework between the asset and Bolivian Servicio de Operaciones Especiales (SOE)?",
       "options": {
-        "A": "La Paz Annex 2022",
-        "B": "La Paz Annex 2023",
-        "C": "Cuzco Protocol 2020",
-        "D": "Valpara\u00edso Agreement 2019"
+        "A": "La Paz Annex 2023",
+        "B": "Cuzco Operations",
+        "C": "PAMC-issued identity package",
+        "D": "Bolivian Servicio de Operaciones Especiales (SOE)"
+      },
+      "correct_answer": "A",
+      "explanation": "The bilateral cooperation framework between the asset and Bolivian Servicio de Operaciones Especiales (SOE) is La Paz Annex 2023.",
+      "adaptation_reason": "Cold-start coverage question generated from the selected section because no prior relevant learning history exists.",
+      "source_chunk_ids": [
+        "a819f646-02b3-4382-a957-d7ffbbb247c0"
+      ],
+      "simulated_user_answer": "B",
+      "is_correct": false,
+      "clarification": "The bilateral cooperation framework between the asset and Bolivian Servicio de Operaciones Especiales (SOE) is La Paz Annex 2023."
+    },
+    {
+      "question_id": "881521b9-5b9f-4c50-95b1-5a2b43e9e39a",
+      "section_id": "24707465-4591-4e01-b532-4251aceaf99c",
+      "section_number": 8,
+      "topic": "Micro-Cache Network",
+      "difficulty": "easy",
+      "question": "How many micro-caches does the asset maintain?",
+      "options": {
+        "A": "10",
+        "B": "19",
+        "C": "20",
+        "D": "25"
       },
       "correct_answer": "A",
       "explanation": "The answer is grounded in the retrieved source context.",
-      "adaptation_reason": "Generated from the selected section and current preparation history.",
+      "adaptation_reason": "Cold-start coverage question generated from the selected section because no prior relevant learning history exists.",
       "source_chunk_ids": [],
       "simulated_user_answer": "B",
       "is_correct": false,

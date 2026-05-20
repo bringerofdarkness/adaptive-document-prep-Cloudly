@@ -1,5 +1,5 @@
 {
-  "session_id": "0ea8e01b-20cd-455c-ad59-fbae55ce78c8",
+  "session_id": "99ba6ee9-57d8-4343-8232-1be635a34d54",
   "mode": "adaptive",
   "selected_sections": [
     8
@@ -32,7 +32,7 @@
       },
       {
         "section_number": 8,
-        "topic": "Micro-Cache Network",
+        "topic": "Bilateral Cooperation",
         "attempts": 2,
         "wrong_count": 2,
         "correct_count": 0,
@@ -40,7 +40,7 @@
       },
       {
         "section_number": 8,
-        "topic": "Bilateral Cooperation",
+        "topic": "Micro-Cache Network",
         "attempts": 2,
         "wrong_count": 2,
         "correct_count": 0,
@@ -57,14 +57,14 @@
     ],
     "mastered_question_texts": [],
     "previous_wrong_question_texts": [
-      "Which country has restricted access to Easter Island?",
+      "Which country has restricted access to the asset's operational territory?",
       "What is the name of the asset's primary operational base?",
-      "How many micro-caches does the asset maintain?",
-      "Which organization is part of the asset's bilateral cooperation framework?",
-      "What is the approximate area of the asset's authorized operational territory?",
       "What is the name of the bilateral cooperation framework between the asset and Bolivian Servicio de Operaciones Especiales (SOE)?",
       "How many micro-caches does the asset maintain?",
-      "What is the approximate size of the asset's authorized operational territory?",
+      "What is the approximate size of the asset's operational territory?",
+      "How many micro-caches does the asset maintain?",
+      "What is the name of the bilateral cooperation framework between the asset and Bolivian Servicio de Operaciones Especiales (SOE)?",
+      "What is the approximate area of the asset's authorized operational territory?",
       "Who audits the safehouse provisioning semi-annually?",
       "What is the name of the asset's primary operational base?"
     ],
@@ -72,90 +72,21 @@
   },
   "questions": [
     {
-      "question_id": "8dcba22e-dac8-449f-a056-e20adb440b36",
-      "section_id": "24707465-4591-4e01-b532-4251aceaf99c",
-      "section_number": 8,
-      "topic": "Primary Base",
-      "difficulty": "medium",
-      "question": "What is the name of the asset's primary operational base?",
-      "options": {
-        "A": "Cuartel Valpara\u00edso",
-        "B": "PAMC South Cone Headquarters",
-        "C": "Avenida Altamirano 1842",
-        "D": "Valpara\u00edso"
-      },
-      "correct_answer": "A",
-      "explanation": "Cuartel Valpara\u00edso is the asset's primary operational base.",
-      "adaptation_reason": "Prioritized weak topic: Primary Base",
-      "source_chunk_ids": [
-        "11e8b047-54f6-42b9-a9b8-a0e6bbf19e09"
-      ],
-      "simulated_user_answer": "B",
-      "is_correct": false,
-      "clarification": "Cuartel Valpara\u00edso is the asset's primary operational base."
-    },
-    {
-      "question_id": "2759c3d3-bdb6-41af-b92b-6990b960b259",
-      "section_id": "24707465-4591-4e01-b532-4251aceaf99c",
-      "section_number": 8,
-      "topic": "Micro-Cache Network",
-      "difficulty": "hard",
-      "question": "How many micro-caches does the asset maintain?",
-      "options": {
-        "A": "10",
-        "B": "15",
-        "C": "19",
-        "D": "25"
-      },
-      "correct_answer": "C",
-      "explanation": "The asset maintains a network of 19 micro-caches.",
-      "adaptation_reason": "Prioritized weak topic: Micro-Cache Network",
-      "source_chunk_ids": [
-        "421ff765-5d8f-4b26-b568-e8e439c15860"
-      ],
-      "simulated_user_answer": "A",
-      "is_correct": false,
-      "clarification": "The asset maintains a network of 19 micro-caches."
-    },
-    {
-      "question_id": "7ca06443-cffb-4b27-9f04-078cb49dbe43",
+      "question_id": "7206834c-6544-4d0f-a846-47a0be179a82",
       "section_id": "24707465-4591-4e01-b532-4251aceaf99c",
       "section_number": 8,
       "topic": "Operational Territory",
       "difficulty": "medium",
-      "question": "Which country has restricted access to Easter Island?",
+      "question": "What is the approximate size of the asset's authorized operational territory?",
       "options": {
-        "A": "Chile",
-        "B": "Bolivia",
-        "C": "Peru",
-        "D": "Argentina"
-      },
-      "correct_answer": "A",
-      "explanation": "Chile has restricted access to Easter Island.",
-      "adaptation_reason": "Prioritized weak topic: Operational Territory",
-      "source_chunk_ids": [
-        "bf0015aa-d18c-4de4-921a-1871f08b8f33"
-      ],
-      "simulated_user_answer": "B",
-      "is_correct": false,
-      "clarification": "Chile has restricted access to Easter Island."
-    },
-    {
-      "question_id": "e1a4fc1f-1918-4be7-9ea7-48b5bed8cf59",
-      "section_id": "24707465-4591-4e01-b532-4251aceaf99c",
-      "section_number": 8,
-      "topic": "Operational Territory",
-      "difficulty": "hard",
-      "question": "What is the approximate area of the asset's authorized operational territory?",
-      "options": {
-        "A": "5 million km\u00b2",
+        "A": "1 million km\u00b2",
         "B": "6.8 million km\u00b2",
         "C": "10 million km\u00b2",
-        "D": "12 million km\u00b2"
+        "D": "20 million km\u00b2"
       },
       "correct_answer": "B",
       "explanation": "The asset's authorized operational territory spans approximately 6.8 million km\u00b2.",
-      "adaptation_reason": "Prioritized weak topic: Operational Territory",
+      "adaptation_reason": "Adaptive question generated for section 8 because prior session history marks this section as weak.",
       "source_chunk_ids": [
         "bf0015aa-d18c-4de4-921a-1871f08b8f33"
       ],
@@ -164,27 +95,96 @@
       "clarification": "The asset's authorized operational territory spans approximately 6.8 million km\u00b2."
     },
     {
-      "question_id": "fe81e1c7-8248-4cd3-a70a-ad4e744f30fe",
+      "question_id": "2206279f-5bc5-45c9-8128-8ace2d1dde1b",
       "section_id": "24707465-4591-4e01-b532-4251aceaf99c",
       "section_number": 8,
-      "topic": "Micro-Cache Network",
+      "topic": "Primary Base",
       "difficulty": "easy",
-      "question": "Where are the micro-caches distributed across?",
+      "question": "What is the name of the asset's primary operational base?",
       "options": {
-        "A": "Western Andean states",
-        "B": "Southern Andean states",
-        "C": "Eastern Andean states",
-        "D": "Northern Andean states"
+        "A": "Cuartel Valpara\u00edso",
+        "B": "PAMC South Cone Headquarters",
+        "C": "La Paz Annex",
+        "D": "Cuzco Operations Center"
       },
       "correct_answer": "A",
-      "explanation": "The micro-caches are distributed across the western Andean states.",
-      "adaptation_reason": "Prioritized weak topic: Micro-Cache Network",
+      "explanation": "The asset's primary operational base is Cuartel Valpara\u00edso.",
+      "adaptation_reason": "Adaptive question generated for section 8 because prior session history marks this section as weak.",
       "source_chunk_ids": [
-        "421ff765-5d8f-4b26-b568-e8e439c15860"
+        "11e8b047-54f6-42b9-a9b8-a0e6bbf19e09"
       ],
       "simulated_user_answer": "B",
       "is_correct": false,
-      "clarification": "The micro-caches are distributed across the western Andean states."
+      "clarification": "The asset's primary operational base is Cuartel Valpara\u00edso."
+    },
+    {
+      "question_id": "7b57ee02-ff25-4582-9dca-4c2aa3c6bd0d",
+      "section_id": "24707465-4591-4e01-b532-4251aceaf99c",
+      "section_number": 8,
+      "topic": "Bilateral Cooperation",
+      "difficulty": "hard",
+      "question": "Which organization is part of the asset's bilateral cooperation framework in Bolivia?",
+      "options": {
+        "A": "Bolivian Servicio de Operaciones Especiales (SOE)",
+        "B": "Peruvian Direcci\u00f3n de Asuntos Metahumanos (DAM)",
+        "C": "Chilean Navy",
+        "D": "Argentine Army"
+      },
+      "correct_answer": "A",
+      "explanation": "The asset has a bilateral cooperation framework with the Bolivian Servicio de Operaciones Especiales (SOE).",
+      "adaptation_reason": "Adaptive question generated for section 8 because prior session history marks this section as weak.",
+      "source_chunk_ids": [
+        "a819f646-02b3-4382-a957-d7ffbbb247c0"
+      ],
+      "simulated_user_answer": "B",
+      "is_correct": false,
+      "clarification": "The asset has a bilateral cooperation framework with the Bolivian Servicio de Operaciones Especiales (SOE)."
+    },
+    {
+      "question_id": "6ec2ea10-8d02-407d-82ad-899563a4e960",
+      "section_id": "24707465-4591-4e01-b532-4251aceaf99c",
+      "section_number": 8,
+      "topic": "Operational Territory",
+      "difficulty": "medium",
+      "question": "Which country has restricted access to the asset's operational territory?",
+      "options": {
+        "A": "Chile",
+        "B": "Bolivia",
+        "C": "Argentina",
+        "D": "Peru"
+      },
+      "correct_answer": "A",
+      "explanation": "Easter Island is restricted in Chile.",
+      "adaptation_reason": "Adaptive question generated for section 8 because prior session history marks this section as weak.",
+      "source_chunk_ids": [
+        "bf0015aa-d18c-4de4-921a-1871f08b8f33"
+      ],
+      "simulated_user_answer": "B",
+      "is_correct": false,
+      "clarification": "Easter Island is restricted in Chile."
+    },
+    {
+      "question_id": "c56e43c7-0df3-4bf7-9ec4-3096afe43ceb",
+      "section_id": "24707465-4591-4e01-b532-4251aceaf99c",
+      "section_number": 8,
+      "topic": "Primary Base",
+      "difficulty": "easy",
+      "question": "In what year was the asset's primary operational base repurposed for PAMC use?",
+      "options": {
+        "A": "2015",
+        "B": "2017",
+        "C": "2020",
+        "D": "2023"
+      },
+      "correct_answer": "B",
+      "explanation": "The facility was repurposed for PAMC use in 2017.",
+      "adaptation_reason": "Adaptive question generated for section 8 because prior session history marks this section as weak.",
+      "source_chunk_ids": [
+        "11e8b047-54f6-42b9-a9b8-a0e6bbf19e09"
+      ],
+      "simulated_user_answer": "A",
+      "is_correct": false,
+      "clarification": "The facility was repurposed for PAMC use in 2017."
     }
   ]
 }

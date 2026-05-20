@@ -10,6 +10,9 @@ from app.llm.providers import call_llm
 from app.schemas.question import MCQSet
 
 
+MAX_LLM_GENERATION_ATTEMPTS = 3
+
+
 def _clean_text(text: str, max_length: int = 220) -> str:
     cleaned = " ".join(text.split())
 
@@ -23,6 +26,57 @@ def _topic_from_chunk(section_number: int, chunk_index: int) -> str:
     return f"Section {section_number} concept {chunk_index}"
 
 
+def _adaptation_reason_from_payload(
+    adaptation_payload: dict,
+    section_number: int,
+) -> str:
+    mode = str(adaptation_payload.get("mode") or "cold_start").lower().strip()
+    weak_topics = adaptation_payload.get("weak_topics") or []
+
+    has_section_weak_topic = any(
+        isinstance(weak_topic, dict)
+        and weak_topic.get("section_number") == section_number
+        for weak_topic in weak_topics
+    )
+
+    if mode == "adaptive" and has_section_weak_topic:
+        return (
+            f"Adaptive question generated for section {section_number} because "
+            "prior session history marks this section as weak."
+        )
+
+    if mode == "adaptive":
+        return (
+            "Returning-run question generated using previous session history "
+            "without a section-specific weak topic."
+        )
+
+    return (
+        "Cold-start coverage question generated from the selected section because "
+        "no prior relevant learning history exists."
+    )
+
+
+def _apply_backend_adaptation_reasons(
+    mcq_set: MCQSet,
+    adaptation_payload: dict,
+    section_number: int,
+) -> MCQSet:
+    adaptation_reason = _adaptation_reason_from_payload(
+        adaptation_payload=adaptation_payload,
+        section_number=section_number,
+    )
+
+    questions = []
+
+    for question in mcq_set.questions:
+        question_payload = question.model_dump()
+        question_payload["adaptation_reason"] = adaptation_reason
+        questions.append(question_payload)
+
+    return MCQSet.model_validate({"questions": questions})
+
+
 def generate_mock_mcqs(
     retrieved_chunks: list[dict],
     selected_section_numbers: list[int],
@@ -33,8 +87,6 @@ def generate_mock_mcqs(
         raise ValueError("Cannot generate MCQs without retrieved chunks.")
 
     adaptation_payload = adaptation_payload or {}
-    weak_topics = adaptation_payload.get("weak_topics", [])
-
     grouped_chunks: dict[int, list[dict]] = {}
 
     for chunk in retrieved_chunks:
@@ -54,15 +106,9 @@ def generate_mock_mcqs(
             topic = _topic_from_chunk(section_number, chunk["chunk_index"])
             source_preview = _clean_text(chunk["text"])
 
-            is_adaptive = any(
-                weak_topic.get("section_number") == section_number
-                for weak_topic in weak_topics
-            )
-
-            adaptation_reason = (
-                f"Adaptive question because previous history shows weakness in section {section_number}."
-                if is_adaptive
-                else f"Cold-start coverage question for selected section {section_number}."
+            adaptation_reason = _adaptation_reason_from_payload(
+                adaptation_payload=adaptation_payload,
+                section_number=section_number,
             )
 
             questions.append(
@@ -167,37 +213,49 @@ def _generate_section_mcqs_with_llm(
     questions_per_section: int,
     adaptation_payload: dict,
 ) -> MCQSet:
+    section_adaptation_payload = _adaptation_payload_for_section(
+        adaptation_payload=adaptation_payload,
+        section_number=section_number,
+    )
+
     prompt = build_mcq_generation_prompt(
         retrieved_chunks=section_chunks[: max(2, questions_per_section * 2)],
         selected_section_numbers=[section_number],
         questions_per_section=questions_per_section,
-        adaptation_payload=_adaptation_payload_for_section(
-        adaptation_payload=adaptation_payload,
-        section_number=section_number,
-    ),
+        adaptation_payload=section_adaptation_payload,
     )
 
     last_error: Exception | None = None
 
-    for attempt in range(2):
+    for attempt in range(MAX_LLM_GENERATION_ATTEMPTS):
         candidate_prompt = prompt
 
-        if attempt == 1 and last_error is not None:
+        if attempt > 0 and last_error is not None:
             candidate_prompt = (
                 f"{prompt}\n\n"
                 f"Previous output failed validation: {last_error}\n"
-                "Regenerate the full JSON. Return exactly the requested number of questions. "
-                "Every question text must be unique. Include correct_answer, explanation, "
-                "adaptation_reason, section_id, section_number, and source_chunk_ids."
+                f"Regenerate the full JSON for section {section_number}. "
+                f"Return exactly {questions_per_section} valid questions for section {section_number}. "
+                "Do not return fewer questions. Do not include any other section. "
+                "Every question text must be unique. "
+                "Each question must include section_id, section_number, topic, difficulty, "
+                "question, options, correct_answer, explanation, adaptation_reason, "
+                "and source_chunk_ids. Return JSON only."
             )
 
         raw_output = call_llm(candidate_prompt)
 
         try:
-            return parse_and_validate_mcqs(
+            section_mcq_set = parse_and_validate_mcqs(
                 raw_output=raw_output,
                 selected_section_numbers=[section_number],
                 questions_per_section=questions_per_section,
+            )
+
+            return _apply_backend_adaptation_reasons(
+                mcq_set=section_mcq_set,
+                adaptation_payload=adaptation_payload,
+                section_number=section_number,
             )
         except (JSONDecodeError, ValidationError, ValueError) as error:
             last_error = error

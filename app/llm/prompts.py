@@ -35,6 +35,28 @@ def _compact_adaptation_payload(adaptation_payload: dict) -> dict:
         )[:MAX_HISTORY_ITEMS],
     }
 
+def _adaptation_reason_guidance(compact_adaptation_payload: dict) -> str:
+    mode = compact_adaptation_payload.get("mode", "cold_start")
+    weak_topics = compact_adaptation_payload.get("weak_topics", [])
+
+    if mode == "adaptive" and weak_topics:
+        return (
+            "For adaptation_reason, explain that the question targets prior weak "
+            "topics or mistakes from previous sessions."
+        )
+
+    if mode == "adaptive":
+        return (
+            "For adaptation_reason, explain that the question is part of a returning "
+            "run using previous session history, without claiming a weak topic unless "
+            "one is provided."
+        )
+
+    return (
+        "For adaptation_reason, explain that this is cold-start section coverage "
+        "because no prior relevant learning history exists."
+    )
+
 
 def build_mcq_generation_prompt(
     retrieved_chunks: list[dict],
@@ -56,6 +78,7 @@ def build_mcq_generation_prompt(
         )
 
     compact_adaptation_payload = _compact_adaptation_payload(adaptation_payload)
+    adaptation_reason_guidance = _adaptation_reason_guidance(compact_adaptation_payload)
 
     return f"""
 You are generating assessment-quality MCQs from a selected PDF corpus.

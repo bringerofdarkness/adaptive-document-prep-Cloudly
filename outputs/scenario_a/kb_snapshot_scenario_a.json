@@ -1,11 +1,11 @@
 {
-  "snapshot_created_at": "2026-05-20T01:00:36.729815",
-  "current_session_id": "90844010-1472-493b-84b1-3a03a4347723",
+  "snapshot_created_at": "2026-05-20T21:37:02.658856",
+  "current_session_id": "af9c2a73-86d1-49e6-9c33-df1c30b275d3",
   "recent_session_count": 1,
   "recent_sessions": [
     {
-      "session_id": "90844010-1472-493b-84b1-3a03a4347723",
-      "timestamp": "2026-05-20T01:00:36.607480",
+      "session_id": "af9c2a73-86d1-49e6-9c33-df1c30b275d3",
+      "timestamp": "2026-05-20T21:37:02.345313",
       "mode": "cold_start",
       "selected_sections": [
         3,
@@ -27,133 +27,133 @@
       },
       "questions_asked": [
         {
-          "question_id": "2b01071e-77ff-43b9-8f8e-4a28caeb0392",
+          "question_id": "0bfbaf62-f4a5-4a03-84a9-14478facdbf5",
           "section_number": 3,
-          "topic": "Biography",
+          "topic": "Military Career",
           "difficulty": "medium",
           "question": "When did she enter the Escuela Militar Bernardo O'Higgins?",
           "options": {
-            "A": "4 March 2004",
-            "B": "4 March 2005",
-            "C": "4 March 2006",
-            "D": "4 March 2007"
+            "A": "4 March 2005",
+            "B": "12 December 2009",
+            "C": "9 February 2024",
+            "D": "19 November 2020"
           },
-          "user_answer": "B",
-          "correct_answer": "B",
+          "user_answer": "A",
+          "correct_answer": "A",
           "is_correct": true,
           "clarification": null,
-          "adaptation_reason": "Prioritizing weak topics",
+          "adaptation_reason": "Cold-start coverage question generated from the selected section because no prior relevant learning history exists.",
           "source_chunk_ids": [
             "af323091-abb2-40d1-85e2-dbe46083e48f"
           ]
         },
         {
-          "question_id": "a76724b4-88b0-4a27-952a-b0fa8806b770",
+          "question_id": "36a71de0-d92c-4478-b73a-352d5b7e65ad",
           "section_number": 3,
-          "topic": "Career",
+          "topic": "Drift Read",
           "difficulty": "hard",
-          "question": "What was the result of the Tarapac\u00e1 Concession compound raid?",
+          "question": "When was the first manifestation of Drift Read documented?",
           "options": {
-            "A": "Failed operation",
-            "B": "Successful classification",
-            "C": "Failed classification",
-            "D": "Unknown result"
+            "A": "9 February 2024",
+            "B": "17 May 2021",
+            "C": "11 May 2022",
+            "D": "3\u20135 Jun 2022"
           },
           "user_answer": "A",
           "correct_answer": "B",
           "is_correct": false,
-          "clarification": "The Tarapac\u00e1 Concession compound raid resulted in a Successful classification.",
-          "adaptation_reason": "Avoiding close repeats of mastered questions",
+          "clarification": "The first manifestation of Drift Read was documented on 17 May 2021.",
+          "adaptation_reason": "Cold-start coverage question generated from the selected section because no prior relevant learning history exists.",
+          "source_chunk_ids": [
+            "d444863f-9f11-400c-a69e-68010a78d901"
+          ]
+        },
+        {
+          "question_id": "f5ded9a8-a5bd-4353-aba2-4ba5ffb92f8d",
+          "section_number": 3,
+          "topic": "Operations",
+          "difficulty": "medium",
+          "question": "What was the name of the operation that resulted in a Successful classification but a 14-day medical leave?",
+          "options": {
+            "A": "Tarapac\u00e1 Concession compound raid",
+            "B": "Tallinn-Asunci\u00f3n intelligence rotation",
+            "C": "Lima Audiencia counter-audit",
+            "D": "Antofagasta operation"
+          },
+          "user_answer": "D",
+          "correct_answer": "D",
+          "is_correct": true,
+          "clarification": null,
+          "adaptation_reason": "Cold-start coverage question generated from the selected section because no prior relevant learning history exists.",
           "source_chunk_ids": [
             "340a12a7-b520-4aec-ab8f-141e58a0c894"
           ]
         },
         {
-          "question_id": "ed9d1c51-fe7b-432f-9fe7-8b259017b3f2",
+          "question_id": "b7089377-4080-4cf7-a241-619f9f6fc3ff",
           "section_number": 3,
           "topic": "Drift Read",
-          "difficulty": "medium",
-          "question": "When did the Antofagasta operation produce a Successful classification?",
+          "difficulty": "hard",
+          "question": "What is the ability known as Drift Read?",
           "options": {
-            "A": "9 February 2024",
-            "B": "11 May 2022",
-            "C": "17 May 2021",
-            "D": "12 December 2009"
+            "A": "The ability to read minds",
+            "B": "The ability to communicate with animals",
+            "C": "The ability to sense changes in the environment",
+            "D": "The ability to manipulate objects with one's mind"
           },
-          "user_answer": "B",
-          "correct_answer": "B",
-          "is_correct": true,
-          "clarification": null,
-          "adaptation_reason": "Prioritizing weak topics",
+          "user_answer": "A",
+          "correct_answer": "C",
+          "is_correct": false,
+          "clarification": "Drift Read is the ability to sense changes in the environment.",
+          "adaptation_reason": "Cold-start coverage question generated from the selected section because no prior relevant learning history exists.",
           "source_chunk_ids": [
             "8b799e0c-7ca5-48ce-b23e-de6053a2d9fc"
           ]
         },
         {
-          "question_id": "45ebe37f-6aa4-480f-91dc-1359c1ccda4a",
+          "question_id": "40cd94c9-5141-41ae-bd81-daf3540bffad",
           "section_number": 3,
-          "topic": "Education",
-          "difficulty": "easy",
-          "question": "When did she graduate from the Escuela Militar Bernardo O'Higgins?",
+          "topic": "Military Career",
+          "difficulty": "medium",
+          "question": "What was her rank when she graduated from the Escuela Militar Bernardo O'Higgins?",
           "options": {
-            "A": "12 December 2008",
-            "B": "12 December 2009",
-            "C": "12 December 2010",
-            "D": "12 December 2011"
+            "A": "Cadet",
+            "B": "Junior Officer",
+            "C": "Lead Officer (Field, Grade 3)",
+            "D": "Senior Officer"
           },
           "user_answer": "A",
-          "correct_answer": "B",
-          "is_correct": false,
-          "clarification": "She graduated from the Escuela Militar Bernardo O'Higgins on 12 December 2009.",
-          "adaptation_reason": "Avoiding close repeats of mastered questions",
+          "correct_answer": "A",
+          "is_correct": true,
+          "clarification": null,
+          "adaptation_reason": "Cold-start coverage question generated from the selected section because no prior relevant learning history exists.",
           "source_chunk_ids": [
             "af323091-abb2-40d1-85e2-dbe46083e48f"
           ]
         },
         {
-          "question_id": "d1cca550-c659-4db4-942e-841137a16171",
-          "section_number": 3,
-          "topic": "Drift Read",
-          "difficulty": "hard",
-          "question": "What was the first manifestation of Drift Read?",
-          "options": {
-            "A": "The Antofagasta operation",
-            "B": "The Tarapac\u00e1 Concession compound raid",
-            "C": "The Tallinn-Asunci\u00f3n intelligence rotation",
-            "D": "The first manifestation occurred in 2005"
-          },
-          "user_answer": "A",
-          "correct_answer": "A",
-          "is_correct": true,
-          "clarification": null,
-          "adaptation_reason": "Prioritizing weak topics",
-          "source_chunk_ids": [
-            "8b799e0c-7ca5-48ce-b23e-de6053a2d9fc"
-          ]
-        },
-        {
-          "question_id": "5984bb32-cf4f-4b87-ae00-9c164b44ce71",
+          "question_id": "494aac3d-9895-4366-b90a-c96be67904be",
           "section_number": 7,
-          "topic": "Adversary Classification",
+          "topic": "Threat Tier Classification",
           "difficulty": "medium",
-          "question": "What is the name of the Threat Tier Schedule ratified on 11 March 2017?",
+          "question": "What is the name of the system used to classify metahuman and organized-paramilitary threats?",
           "options": {
             "A": "PAMC Threat Tier Classification System",
             "B": "NMOC-derived Threat Tier Schedule",
-            "C": "Tier Assignment Criteria",
-            "D": "Threat Tier Schedule Amendment"
+            "C": "Threat Tier Schedule",
+            "D": "Tier Assignment Criteria"
           },
           "user_answer": "B",
           "correct_answer": "A",
           "is_correct": false,
-          "clarification": "The PAMC Threat Tier Classification System is the name of the Threat Tier Schedule ratified on 11 March 2017.",
-          "adaptation_reason": "Prioritizing weak topics and avoiding close repeats of mastered questions.",
+          "clarification": "The PAMC Threat Tier Classification System is used to classify metahuman and organized-paramilitary threats.",
+          "adaptation_reason": "Cold-start coverage question generated from the selected section because no prior relevant learning history exists.",
           "source_chunk_ids": [
             "fa2883c0-3aa0-40f1-aa1b-4d00ea815fbc"
           ]
         },
         {
-          "question_id": "03139440-4984-4ec6-9f79-95148df1eb33",
+          "question_id": "1e076bc2-eda1-40ad-965c-6e56f9ba545e",
           "section_number": 7,
           "topic": "Emergent Threats",
           "difficulty": "hard",
@@ -168,17 +168,17 @@
           "correct_answer": "A",
           "is_correct": true,
           "clarification": null,
-          "adaptation_reason": "Prioritizing weak topics and avoiding close repeats of mastered questions.",
+          "adaptation_reason": "Cold-start coverage question generated from the selected section because no prior relevant learning history exists.",
           "source_chunk_ids": [
             "9009e52b-f5d9-4d2a-a011-2a29487fb731"
           ]
         },
         {
-          "question_id": "312d3b92-85b8-42bc-a016-80f001c51f74",
+          "question_id": "6406bfd9-45cf-4dfd-a8d7-cc6e40b3a70d",
           "section_number": 7,
-          "topic": "Adversary Engagement",
+          "topic": "Adversary Information",
           "difficulty": "medium",
-          "question": "How many confirmed engagements has Drift Read been involved in?",
+          "question": "How many confirmed engagements has Drift Read had?",
           "options": {
             "A": "1",
             "B": "2",
@@ -188,14 +188,14 @@
           "user_answer": "A",
           "correct_answer": "C",
           "is_correct": false,
-          "clarification": "Drift Read has been involved in 3 confirmed engagements.",
-          "adaptation_reason": "Prioritizing weak topics and avoiding close repeats of mastered questions.",
+          "clarification": "Drift Read has had 3 confirmed engagements.",
+          "adaptation_reason": "Cold-start coverage question generated from the selected section because no prior relevant learning history exists.",
           "source_chunk_ids": [
             "2d9439f9-91e0-4f6b-bf93-5872ab0fa811"
           ]
         },
         {
-          "question_id": "9a4cd1e1-130a-402f-979c-3f0a729f5d30",
+          "question_id": "0b717bd0-a116-4e90-beb4-ac781b51991d",
           "section_number": 7,
           "topic": "Adversary Roster",
           "difficulty": "hard",
@@ -210,69 +210,53 @@
           "correct_answer": "B",
           "is_correct": true,
           "clarification": null,
-          "adaptation_reason": "Prioritizing weak topics and avoiding close repeats of mastered questions.",
+          "adaptation_reason": "Cold-start coverage question generated from the selected section because no prior relevant learning history exists.",
           "source_chunk_ids": [
             "ef331e17-51c5-4f92-bce8-27161f1f9d3f"
           ]
         },
         {
-          "question_id": "427d9f04-a41b-45bc-b365-442a979f5ea4",
+          "question_id": "442a2648-4cbc-4360-ac3c-1a74ef388c1b",
           "section_number": 7,
-          "topic": "Defunct Adversaries",
+          "topic": "Threat Tier Classification",
           "difficulty": "medium",
-          "question": "What is the status of the former adversary 'Bambolla'?",
+          "question": "When was the NMOC-derived Threat Tier Schedule ratified?",
           "options": {
-            "A": "Active",
-            "B": "Deceased",
-            "C": "Neutralized",
-            "D": "Historical Reference"
+            "A": "11 March 2016",
+            "B": "11 March 2017",
+            "C": "11 March 2018",
+            "D": "11 March 2019"
           },
           "user_answer": "A",
-          "correct_answer": "D",
+          "correct_answer": "B",
           "is_correct": false,
-          "clarification": "'Bambolla' is retained for historical reference only.",
-          "adaptation_reason": "Prioritizing weak topics and avoiding close repeats of mastered questions.",
+          "clarification": "The NMOC-derived Threat Tier Schedule was ratified on 11 March 2017.",
+          "adaptation_reason": "Cold-start coverage question generated from the selected section because no prior relevant learning history exists.",
           "source_chunk_ids": [
-            "ef331e17-51c5-4f92-bce8-27161f1f9d3f"
+            "fa2883c0-3aa0-40f1-aa1b-4d00ea815fbc"
           ]
         }
       ],
       "weak_topics": [
         {
           "section_number": 7,
-          "topic": "Defunct Adversaries",
-          "attempts": 1,
-          "wrong_count": 1,
-          "correct_count": 0,
-          "weakness_score": 1.0
-        },
-        {
-          "section_number": 7,
-          "topic": "Adversary Engagement",
-          "attempts": 1,
-          "wrong_count": 1,
-          "correct_count": 0,
-          "weakness_score": 1.0
-        },
-        {
-          "section_number": 7,
-          "topic": "Adversary Classification",
-          "attempts": 1,
-          "wrong_count": 1,
+          "topic": "Threat Tier Classification",
+          "attempts": 2,
+          "wrong_count": 2,
           "correct_count": 0,
           "weakness_score": 1.0
         },
         {
           "section_number": 3,
-          "topic": "Education",
-          "attempts": 1,
-          "wrong_count": 1,
+          "topic": "Drift Read",
+          "attempts": 2,
+          "wrong_count": 2,
           "correct_count": 0,
           "weakness_score": 1.0
         },
         {
-          "section_number": 3,
-          "topic": "Career",
+          "section_number": 7,
+          "topic": "Adversary Information",
           "attempts": 1,
           "wrong_count": 1,
           "correct_count": 0,
@@ -296,7 +280,7 @@
         },
         {
           "section_number": 3,
-          "topic": "Drift Read",
+          "topic": "Military Career",
           "attempts": 2,
           "wrong_count": 0,
           "correct_count": 2,
@@ -304,7 +288,7 @@
         },
         {
           "section_number": 3,
-          "topic": "Biography",
+          "topic": "Operations",
           "attempts": 1,
           "wrong_count": 0,
           "correct_count": 1,
