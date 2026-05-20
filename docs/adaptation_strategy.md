@@ -1,5 +1,47 @@
 # Adaptation Strategy
+## Index
 
+- [Adaptation Strategy](#adaptation-strategy)
+  - [Index](#index)
+  - [1. Overview](#1-overview)
+  - [2. Adaptation Goal](#2-adaptation-goal)
+  - [3. Main Design Rule](#3-main-design-rule)
+  - [4. Adaptation Inputs](#4-adaptation-inputs)
+  - [5. Adaptation Payload](#5-adaptation-payload)
+  - [6. Mode Detection](#6-mode-detection)
+    - [Cold Start](#cold-start)
+    - [Adaptive](#adaptive)
+  - [7. Relevant Prior Session Logic](#7-relevant-prior-session-logic)
+  - [8. Weak Topic Detection](#8-weak-topic-detection)
+  - [9. Mastered Question Tracking](#9-mastered-question-tracking)
+  - [10. Previous Wrong Question Tracking](#10-previous-wrong-question-tracking)
+  - [11. Prompt-Level Adaptation](#11-prompt-level-adaptation)
+  - [12. Backend-Owned Adaptation Reason](#12-backend-owned-adaptation-reason)
+    - [Cold-start reason](#cold-start-reason)
+    - [Returning run without section-specific weakness](#returning-run-without-section-specific-weakness)
+    - [Adaptive weak-section reason](#adaptive-weak-section-reason)
+  - [13. Scenario B Adaptation Proof](#13-scenario-b-adaptation-proof)
+    - [Iteration 1](#iteration-1)
+    - [Iteration 2](#iteration-2)
+    - [Iteration 3](#iteration-3)
+  - [14. Simulation Strategy](#14-simulation-strategy)
+  - [15. LangGraph Role in Adaptation](#15-langgraph-role-in-adaptation)
+  - [16. Interactive API Adaptation](#16-interactive-api-adaptation)
+    - [Start session](#start-session)
+    - [Submit answers](#submit-answers)
+  - [17. KB Snapshot Role](#17-kb-snapshot-role)
+  - [18. Why Adaptation Is Not Fully Delegated to the LLM](#18-why-adaptation-is-not-fully-delegated-to-the-llm)
+  - [19. Handling LLM Non-Determinism](#19-handling-llm-non-determinism)
+  - [20. Reviewer Evidence](#20-reviewer-evidence)
+  - [21. Current Verified Scenario B Result](#21-current-verified-scenario-b-result)
+  - [22. Known Limitations](#22-known-limitations)
+    - [LLM variation](#llm-variation)
+    - [Simulated answers](#simulated-answers)
+    - [Existing database history affects mode](#existing-database-history-affects-mode)
+    - [Topic labels depend partly on LLM output](#topic-labels-depend-partly-on-llm-output)
+  - [23. Summary](#23-summary)
+
+---
 ## 1. Overview
 
 The Adaptive Document Preparation System is designed to prove history-aware preparation behavior.
