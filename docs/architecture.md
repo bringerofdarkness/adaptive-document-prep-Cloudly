@@ -518,6 +518,90 @@ app/workflow/prep_graph.py
 
 ---
 
+## LangGraph Workflow Orchestration
+
+The CLI preparation flow is orchestrated with LangGraph.
+
+LangGraph is used because the prep flow is not a single function call. It is a multi-step stateful workflow where each step depends on the previous step:
+
+```text
+load document and history
+retrieve selected-section chunks
+generate MCQs
+simulate answers
+score answers
+persist session
+export outputs
+```
+
+The graph makes the preparation flow easier to inspect, test, and extend.
+
+### Workflow Nodes
+
+The graph currently uses these nodes:
+
+```text
+load_document_and_history
+retrieve_selected_section_chunks
+generate_questions
+simulate_and_score_answers
+persist_session
+```
+
+### Workflow State
+
+The LangGraph state carries the main runtime objects:
+
+```text
+db
+document
+selected_section_numbers
+questions_per_section
+simulation_strategy
+adaptation_payload
+retrieved_chunks
+mcq_set
+answer_map
+scoring_payload
+session
+result
+```
+
+### Why LangGraph Is Used
+
+LangGraph is useful here because the system needs to preserve and pass state across multiple backend steps:
+
+```text
+selected sections -> retrieved chunks -> MCQs -> answers -> score -> persisted session -> adaptive history
+```
+
+It also makes the adaptive workflow clearer:
+
+```text
+previous PostgreSQL history
+  ↓
+adaptation payload
+  ↓
+retrieval and generation
+  ↓
+scoring
+  ↓
+new history for future adaptive runs
+```
+
+This is especially important for Scenario B, where iteration 2 and iteration 3 depend on the history created by earlier iterations.
+
+### Main Files
+
+```text
+app/workflow/state.py
+app/workflow/nodes.py
+app/workflow/prep_graph.py
+app/services/prep_service.py
+```
+---
+
+
 ## 14. Adaptive Intelligence Layer
 
 The adaptive layer checks previous sessions before generating new questions.
