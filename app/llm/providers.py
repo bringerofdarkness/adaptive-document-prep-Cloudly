@@ -26,7 +26,10 @@ def _call_groq(prompt: str) -> str:
     settings = get_settings()
 
     if not settings.groq_api_key:
-        raise ValueError("GROQ_API_KEY is required when LLM_PROVIDER=groq.")
+        raise ValueError(
+        "GROQ_API_KEY is required when LLM_PROVIDER=groq. "
+        "To run without an external LLM key, set LLM_PROVIDER=mock."
+    )
 
     client = Groq(api_key=settings.groq_api_key)
 
@@ -64,7 +67,10 @@ def _call_gemini(prompt: str) -> str:
     settings = get_settings()
 
     if not settings.gemini_api_key:
-        raise ValueError("GEMINI_API_KEY is required when LLM_PROVIDER=gemini.")
+        raise ValueError(
+        "GEMINI_API_KEY is required when LLM_PROVIDER=gemini. "
+        "To run without an external LLM key, set LLM_PROVIDER=mock."
+    )
 
     client = genai.Client(api_key=settings.gemini_api_key)
 
