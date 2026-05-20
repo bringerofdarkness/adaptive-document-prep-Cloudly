@@ -1,14 +1,14 @@
 {
-  "session_id": "b7870a7c-a7e9-4be5-bc67-dd49692d08a7",
+  "session_id": "90844010-1472-493b-84b1-3a03a4347723",
   "mode": "cold_start",
   "selected_sections": [
     3,
     7
   ],
   "score": 50.0,
-  "total_questions": 4,
-  "correct_count": 2,
-  "wrong_count": 2,
+  "total_questions": 10,
+  "correct_count": 5,
+  "wrong_count": 5,
   "adaptation_summary": "Cold-start run: no prior relevant history found.",
   "adaptation_payload": {
     "is_returning_run": false,
@@ -21,10 +21,10 @@
   },
   "questions": [
     {
-      "question_id": "fa39a8a7-cbf3-46f9-9eef-b68b770a7277",
+      "question_id": "2b01071e-77ff-43b9-8f8e-4a28caeb0392",
       "section_id": "8ec27f2c-0867-4d0b-9417-77cff5da8703",
       "section_number": 3,
-      "topic": "Military Career",
+      "topic": "Biography",
       "difficulty": "medium",
       "question": "When did she enter the Escuela Militar Bernardo O'Higgins?",
       "options": {
@@ -44,73 +44,211 @@
       "clarification": null
     },
     {
-      "question_id": "512dd5fd-8497-4018-96e9-4138810bbe2b",
+      "question_id": "a76724b4-88b0-4a27-952a-b0fa8806b770",
       "section_id": "8ec27f2c-0867-4d0b-9417-77cff5da8703",
       "section_number": 3,
-      "topic": "Military Career",
+      "topic": "Career",
       "difficulty": "hard",
-      "question": "What is the name of the event where Drift Read awakens?",
+      "question": "What was the result of the Tarapac\u00e1 Concession compound raid?",
       "options": {
-        "A": "First Echo Lock event",
-        "B": "Drift Read awakens, Antofagasta",
-        "C": "Calvache\u2013Marr\u00f3n Equations published",
-        "D": "Tropopausa first event"
+        "A": "Failed operation",
+        "B": "Successful classification",
+        "C": "Failed classification",
+        "D": "Unknown result"
       },
       "correct_answer": "B",
-      "explanation": "Drift Read awakens, Antofagasta is the event where Drift Read awakens.",
+      "explanation": "The Tarapac\u00e1 Concession compound raid resulted in a Successful classification.",
       "adaptation_reason": "Avoiding close repeats of mastered questions",
       "source_chunk_ids": [
-        "d444863f-9f11-400c-a69e-68010a78d901"
+        "340a12a7-b520-4aec-ab8f-141e58a0c894"
       ],
       "simulated_user_answer": "A",
       "is_correct": false,
-      "clarification": "Drift Read awakens, Antofagasta is the event where Drift Read awakens."
+      "clarification": "The Tarapac\u00e1 Concession compound raid resulted in a Successful classification."
     },
     {
-      "question_id": "d79459fd-a156-4408-a7a1-7cf0a3b479b9",
-      "section_id": "ac56b161-10e2-41eb-a721-ac875f6fdc6e",
-      "section_number": 7,
-      "topic": "Threat Tier Classification",
+      "question_id": "ed9d1c51-fe7b-432f-9fe7-8b259017b3f2",
+      "section_id": "8ec27f2c-0867-4d0b-9417-77cff5da8703",
+      "section_number": 3,
+      "topic": "Drift Read",
       "difficulty": "medium",
-      "question": "What is the name of the system used to classify metahuman and organized-paramilitary threats?",
+      "question": "When did the Antofagasta operation produce a Successful classification?",
       "options": {
-        "A": "PAMC Threat Tier Classification System",
-        "B": "NMOC-derived Threat Tier Schedule",
-        "C": "Threat Tier Schedule",
-        "D": "Tier Assignment Criteria"
+        "A": "9 February 2024",
+        "B": "11 May 2022",
+        "C": "17 May 2021",
+        "D": "12 December 2009"
+      },
+      "correct_answer": "B",
+      "explanation": "The Antofagasta operation produced a Successful classification on 11 May 2022.",
+      "adaptation_reason": "Prioritizing weak topics",
+      "source_chunk_ids": [
+        "8b799e0c-7ca5-48ce-b23e-de6053a2d9fc"
+      ],
+      "simulated_user_answer": "B",
+      "is_correct": true,
+      "clarification": null
+    },
+    {
+      "question_id": "45ebe37f-6aa4-480f-91dc-1359c1ccda4a",
+      "section_id": "8ec27f2c-0867-4d0b-9417-77cff5da8703",
+      "section_number": 3,
+      "topic": "Education",
+      "difficulty": "easy",
+      "question": "When did she graduate from the Escuela Militar Bernardo O'Higgins?",
+      "options": {
+        "A": "12 December 2008",
+        "B": "12 December 2009",
+        "C": "12 December 2010",
+        "D": "12 December 2011"
+      },
+      "correct_answer": "B",
+      "explanation": "She graduated from the Escuela Militar Bernardo O'Higgins on 12 December 2009.",
+      "adaptation_reason": "Avoiding close repeats of mastered questions",
+      "source_chunk_ids": [
+        "af323091-abb2-40d1-85e2-dbe46083e48f"
+      ],
+      "simulated_user_answer": "A",
+      "is_correct": false,
+      "clarification": "She graduated from the Escuela Militar Bernardo O'Higgins on 12 December 2009."
+    },
+    {
+      "question_id": "d1cca550-c659-4db4-942e-841137a16171",
+      "section_id": "8ec27f2c-0867-4d0b-9417-77cff5da8703",
+      "section_number": 3,
+      "topic": "Drift Read",
+      "difficulty": "hard",
+      "question": "What was the first manifestation of Drift Read?",
+      "options": {
+        "A": "The Antofagasta operation",
+        "B": "The Tarapac\u00e1 Concession compound raid",
+        "C": "The Tallinn-Asunci\u00f3n intelligence rotation",
+        "D": "The first manifestation occurred in 2005"
       },
       "correct_answer": "A",
-      "explanation": "The PAMC Threat Tier Classification System is used to classify metahuman and organized-paramilitary threats.",
-      "adaptation_reason": "Prioritizing weak topic: Threat Tier Classification",
+      "explanation": "The first manifestation of Drift Read was the Antofagasta operation.",
+      "adaptation_reason": "Prioritizing weak topics",
       "source_chunk_ids": [
-        "fa2883c0-3aa0-40f1-aa1b-4d00ea815fbc"
+        "8b799e0c-7ca5-48ce-b23e-de6053a2d9fc"
       ],
       "simulated_user_answer": "A",
       "is_correct": true,
       "clarification": null
     },
     {
-      "question_id": "bd1c9e8d-59cc-47f5-8c9a-e0ad812801d0",
+      "question_id": "5984bb32-cf4f-4b87-ae00-9c164b44ce71",
+      "section_id": "ac56b161-10e2-41eb-a721-ac875f6fdc6e",
+      "section_number": 7,
+      "topic": "Adversary Classification",
+      "difficulty": "medium",
+      "question": "What is the name of the Threat Tier Schedule ratified on 11 March 2017?",
+      "options": {
+        "A": "PAMC Threat Tier Classification System",
+        "B": "NMOC-derived Threat Tier Schedule",
+        "C": "Tier Assignment Criteria",
+        "D": "Threat Tier Schedule Amendment"
+      },
+      "correct_answer": "A",
+      "explanation": "The PAMC Threat Tier Classification System is the name of the Threat Tier Schedule ratified on 11 March 2017.",
+      "adaptation_reason": "Prioritizing weak topics and avoiding close repeats of mastered questions.",
+      "source_chunk_ids": [
+        "fa2883c0-3aa0-40f1-aa1b-4d00ea815fbc"
+      ],
+      "simulated_user_answer": "B",
+      "is_correct": false,
+      "clarification": "The PAMC Threat Tier Classification System is the name of the Threat Tier Schedule ratified on 11 March 2017."
+    },
+    {
+      "question_id": "03139440-4984-4ec6-9f79-95148df1eb33",
       "section_id": "ac56b161-10e2-41eb-a721-ac875f6fdc6e",
       "section_number": 7,
       "topic": "Emergent Threats",
       "difficulty": "hard",
       "question": "What is the probability of Mar Inverso confirmation and engagement within 2026?",
       "options": {
-        "A": "Low",
+        "A": "High",
         "B": "Moderate",
-        "C": "High",
+        "C": "Low",
         "D": "Unknown"
       },
-      "correct_answer": "C",
+      "correct_answer": "A",
       "explanation": "The Andean Operations Bureau projects a high probability of Mar Inverso confirmation and engagement within 2026.",
-      "adaptation_reason": "Avoiding close repeats of mastered questions and prioritizing weak topic: Emergent Threats",
+      "adaptation_reason": "Prioritizing weak topics and avoiding close repeats of mastered questions.",
       "source_chunk_ids": [
         "9009e52b-f5d9-4d2a-a011-2a29487fb731"
       ],
       "simulated_user_answer": "A",
+      "is_correct": true,
+      "clarification": null
+    },
+    {
+      "question_id": "312d3b92-85b8-42bc-a016-80f001c51f74",
+      "section_id": "ac56b161-10e2-41eb-a721-ac875f6fdc6e",
+      "section_number": 7,
+      "topic": "Adversary Engagement",
+      "difficulty": "medium",
+      "question": "How many confirmed engagements has Drift Read been involved in?",
+      "options": {
+        "A": "1",
+        "B": "2",
+        "C": "3",
+        "D": "4"
+      },
+      "correct_answer": "C",
+      "explanation": "Drift Read has been involved in 3 confirmed engagements.",
+      "adaptation_reason": "Prioritizing weak topics and avoiding close repeats of mastered questions.",
+      "source_chunk_ids": [
+        "2d9439f9-91e0-4f6b-bf93-5872ab0fa811"
+      ],
+      "simulated_user_answer": "A",
       "is_correct": false,
-      "clarification": "The Andean Operations Bureau projects a high probability of Mar Inverso confirmation and engagement within 2026."
+      "clarification": "Drift Read has been involved in 3 confirmed engagements."
+    },
+    {
+      "question_id": "9a4cd1e1-130a-402f-979c-3f0a729f5d30",
+      "section_id": "ac56b161-10e2-41eb-a721-ac875f6fdc6e",
+      "section_number": 7,
+      "topic": "Adversary Roster",
+      "difficulty": "hard",
+      "question": "What is the primary criterion for adding an adversary to the roster?",
+      "options": {
+        "A": "Three documented engagements",
+        "B": "A single incident producing more than 5 civilian casualties",
+        "C": "Both A and B",
+        "D": "Neither A nor B"
+      },
+      "correct_answer": "B",
+      "explanation": "The primary criterion for adding an adversary to the roster is a single incident producing more than 5 civilian casualties.",
+      "adaptation_reason": "Prioritizing weak topics and avoiding close repeats of mastered questions.",
+      "source_chunk_ids": [
+        "ef331e17-51c5-4f92-bce8-27161f1f9d3f"
+      ],
+      "simulated_user_answer": "B",
+      "is_correct": true,
+      "clarification": null
+    },
+    {
+      "question_id": "427d9f04-a41b-45bc-b365-442a979f5ea4",
+      "section_id": "ac56b161-10e2-41eb-a721-ac875f6fdc6e",
+      "section_number": 7,
+      "topic": "Defunct Adversaries",
+      "difficulty": "medium",
+      "question": "What is the status of the former adversary 'Bambolla'?",
+      "options": {
+        "A": "Active",
+        "B": "Deceased",
+        "C": "Neutralized",
+        "D": "Historical Reference"
+      },
+      "correct_answer": "D",
+      "explanation": "'Bambolla' is retained for historical reference only.",
+      "adaptation_reason": "Prioritizing weak topics and avoiding close repeats of mastered questions.",
+      "source_chunk_ids": [
+        "ef331e17-51c5-4f92-bce8-27161f1f9d3f"
+      ],
+      "simulated_user_answer": "A",
+      "is_correct": false,
+      "clarification": "'Bambolla' is retained for historical reference only."
     }
   ]
 }

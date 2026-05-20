@@ -1,20 +1,20 @@
 {
-  "snapshot_created_at": "2026-05-20T00:21:17.666402",
-  "current_session_id": "7c19f14f-bd1a-4dd9-8584-dc94059cdff7",
+  "snapshot_created_at": "2026-05-20T01:01:24.469303",
+  "current_session_id": "a6809745-d1c0-4379-9247-59e5bfb61bcc",
   "recent_session_count": 1,
   "recent_sessions": [
     {
-      "session_id": "7c19f14f-bd1a-4dd9-8584-dc94059cdff7",
-      "timestamp": "2026-05-20T00:21:17.610075",
+      "session_id": "a6809745-d1c0-4379-9247-59e5bfb61bcc",
+      "timestamp": "2026-05-20T01:01:24.350089",
       "mode": "cold_start",
       "selected_sections": [
         5,
         8
       ],
       "score": 50.0,
-      "total_questions": 4,
-      "correct_count": 2,
-      "wrong_count": 2,
+      "total_questions": 10,
+      "correct_count": 5,
+      "wrong_count": 5,
       "adaptation_summary": "Cold-start run: no prior relevant history found.",
       "adaptation_payload": {
         "is_returning_run": false,
@@ -27,16 +27,37 @@
       },
       "questions_asked": [
         {
-          "question_id": "abd64d28-4faa-4ec3-ab34-5478c744855f",
+          "question_id": "5c7e48ab-aa8f-492a-824c-f792bb0bd548",
           "section_number": 5,
-          "topic": "Operational Tactics and Combat Doctrine",
+          "topic": "Sequential Suspension",
           "difficulty": "medium",
-          "question": "What is the Doctrine of Sequential Suspension (DSS)?",
+          "question": "When was the Doctrine of Sequential Suspension articulated by the asset?",
           "options": {
-            "A": "A combat doctrine that prioritizes sequential suspension.",
-            "B": "A doctrine that emphasizes the importance of extraction.",
-            "C": "A formal combat doctrine articulated by the asset on 19 June 2022.",
-            "D": "A doctrine that focuses on civilian risk."
+            "A": "19 June 2022",
+            "B": "20 June 2022",
+            "C": "18 June 2022",
+            "D": "21 June 2022"
+          },
+          "user_answer": "A",
+          "correct_answer": "A",
+          "is_correct": true,
+          "clarification": null,
+          "adaptation_reason": "Prioritizing weak topics and avoiding close repeats of mastered questions.",
+          "source_chunk_ids": [
+            "68144153-edc2-4d07-b82f-9491716eed7b"
+          ]
+        },
+        {
+          "question_id": "5e6b2231-53b4-496b-b6bc-a983c476566e",
+          "section_number": 5,
+          "topic": "Sequential Suspension",
+          "difficulty": "hard",
+          "question": "What is the purpose of the Doctrine of Sequential Suspension?",
+          "options": {
+            "A": "To acquire targets only when extraction is mapped",
+            "B": "To never activate without verifying the contact-exclusion radius",
+            "C": "To permit a meaningful one-second window between release and engagement target acquisition",
+            "D": "To engage Tier 4 only with two activations"
           },
           "user_answer": "C",
           "correct_answer": "C",
@@ -48,19 +69,19 @@
           ]
         },
         {
-          "question_id": "2eca9395-a0ed-47c9-a7be-5e833d7c95bf",
+          "question_id": "c60626e8-d3e4-4821-af35-b64bff5dbb93",
           "section_number": 5,
-          "topic": "Operational Tactics and Combat Doctrine",
-          "difficulty": "hard",
-          "question": "What overrides cooldown discipline in the Doctrine of Sequential Suspension?",
+          "topic": "Operational Tactics",
+          "difficulty": "easy",
+          "question": "What is the first directive in PAMC Internal Bulletin 22-19?",
           "options": {
-            "A": "Tactical opportunity.",
-            "B": "Civilian risk.",
-            "C": "Extraction.",
-            "D": "Activation."
+            "A": "Acquire targets only when extraction is mapped",
+            "B": "Never activate without verifying the contact-exclusion radius",
+            "C": "Hold one activation in reserve until extraction",
+            "D": "Cooldown discipline overrides tactical opportunity"
           },
-          "user_answer": "B",
-          "correct_answer": "B",
+          "user_answer": "A",
+          "correct_answer": "A",
           "is_correct": true,
           "clarification": null,
           "adaptation_reason": "Prioritizing weak topics and avoiding close repeats of mastered questions.",
@@ -69,60 +90,217 @@
           ]
         },
         {
-          "question_id": "34b081e2-6f87-48be-bfce-524ca22cdd8e",
-          "section_number": 8,
-          "topic": "Operational Territory",
+          "question_id": "9db7a648-39c1-4228-bb2d-32f9bf2c56a7",
+          "section_number": 5,
+          "topic": "Contact-Exclusion Rule",
           "difficulty": "medium",
-          "question": "What is the primary operational base of the asset?",
+          "question": "How long does it take for the contact-exclusion field to clear after the asset releases an object?",
+          "options": {
+            "A": "0.2 seconds",
+            "B": "0.3 seconds",
+            "C": "0.5 seconds",
+            "D": "1 second"
+          },
+          "user_answer": "B",
+          "correct_answer": "B",
+          "is_correct": true,
+          "clarification": null,
+          "adaptation_reason": "Prioritizing weak topics and avoiding close repeats of mastered questions.",
+          "source_chunk_ids": [
+            "e8a95d90-b765-405a-b3e6-32dd90daba3f"
+          ]
+        },
+        {
+          "question_id": "1c07f558-0a0f-4014-88b3-c9e2f258c85b",
+          "section_number": 5,
+          "topic": "Reconnaissance Sequencing",
+          "difficulty": "hard",
+          "question": "What is the purpose of the 72-hour saturation protocol in pre-engagement reconnaissance?",
+          "options": {
+            "A": "To acquire targets only when extraction is mapped",
+            "B": "To never activate without verifying the contact-exclusion radius",
+            "C": "To permit a meaningful one-second window between release and engagement target acquisition",
+            "D": "To conduct a thorough site survey before engagement"
+          },
+          "user_answer": "A",
+          "correct_answer": "A",
+          "is_correct": true,
+          "clarification": null,
+          "adaptation_reason": "Generated from the selected section and current preparation history.",
+          "source_chunk_ids": []
+        },
+        {
+          "question_id": "142ec846-aa0d-4a45-9d2f-be2e1a1ffdfb",
+          "section_number": 8,
+          "topic": "Primary Base",
+          "difficulty": "easy",
+          "question": "What is the name of the asset's primary operational base?",
           "options": {
             "A": "Cuartel Valpara\u00edso",
-            "B": "Avenida Altamirano 1842",
-            "C": "PAMC South Cone Headquarters",
+            "B": "PAMC South Cone Headquarters",
+            "C": "Avenida Altamirano 1842",
             "D": "Valpara\u00edso"
           },
           "user_answer": "B",
           "correct_answer": "A",
           "is_correct": false,
-          "clarification": "The asset's primary operational base is Cuartel Valpara\u00edso.",
-          "adaptation_reason": "Prioritizing weak topics and avoiding mastered questions.",
+          "clarification": "Cuartel Valpara\u00edso is the asset's primary operational base.",
+          "adaptation_reason": "Prioritizing weak topics",
           "source_chunk_ids": [
             "11e8b047-54f6-42b9-a9b8-a0e6bbf19e09"
           ]
         },
         {
-          "question_id": "35453624-d192-4ef6-a5ce-2e91601e7051",
+          "question_id": "28ca8183-586d-44b0-a3af-1d92e9ef42ab",
+          "section_number": 8,
+          "topic": "Safehouse Provisioning",
+          "difficulty": "medium",
+          "question": "Who audits the safehouse provisioning semi-annually?",
+          "options": {
+            "A": "Cpl. Vendrame",
+            "B": "The asset's former trainer",
+            "C": "Peruvian Direcci\u00f3n de Asuntos Metahumanos (DAM)",
+            "D": "Bolivian Servicio de Operaciones Especiales (SOE)"
+          },
+          "user_answer": "B",
+          "correct_answer": "A",
+          "is_correct": false,
+          "clarification": "Cpl. Vendrame audits the safehouse provisioning semi-annually.",
+          "adaptation_reason": "Avoiding close repeats of mastered questions",
+          "source_chunk_ids": [
+            "421ff765-5d8f-4b26-b568-e8e439c15860"
+          ]
+        },
+        {
+          "question_id": "9caf4f13-2afa-47f0-a73b-4b10edc12136",
           "section_number": 8,
           "topic": "Operational Territory",
+          "difficulty": "hard",
+          "question": "What is the approximate size of the asset's authorized operational territory?",
+          "options": {
+            "A": "5.4 million km\u00b2",
+            "B": "6.8 million km\u00b2",
+            "C": "8.2 million km\u00b2",
+            "D": "9.6 million km\u00b2"
+          },
+          "user_answer": "A",
+          "correct_answer": "B",
+          "is_correct": false,
+          "clarification": "The asset's authorized operational territory spans approximately 6.8 million km\u00b2.",
+          "adaptation_reason": "Prioritizing weak topics",
+          "source_chunk_ids": [
+            "bf0015aa-d18c-4de4-921a-1871f08b8f33"
+          ]
+        },
+        {
+          "question_id": "432ade1c-2d06-4769-9836-a684ea00de6f",
+          "section_number": 8,
+          "topic": "Micro-Cache Network",
           "difficulty": "medium",
           "question": "How many micro-caches does the asset maintain?",
           "options": {
-            "A": "10",
-            "B": "15",
-            "C": "19",
-            "D": "20"
+            "A": "10 micro-caches",
+            "B": "15 micro-caches",
+            "C": "19 micro-caches",
+            "D": "20 micro-caches"
           },
           "user_answer": "A",
           "correct_answer": "C",
           "is_correct": false,
           "clarification": "The asset maintains a network of 19 micro-caches.",
-          "adaptation_reason": "Prioritizing weak topics and avoiding mastered questions.",
+          "adaptation_reason": "Avoiding close repeats of mastered questions",
           "source_chunk_ids": [
             "421ff765-5d8f-4b26-b568-e8e439c15860"
           ]
+        },
+        {
+          "question_id": "787f2ce8-4d18-4062-9926-a566aaf7c2e8",
+          "section_number": 8,
+          "topic": "Bilateral Cooperation",
+          "difficulty": "hard",
+          "question": "What is the name of the bilateral cooperation framework between the asset and Bolivian Servicio de Operaciones Especiales (SOE)?",
+          "options": {
+            "A": "La Paz Annex 2022",
+            "B": "La Paz Annex 2023",
+            "C": "Cuzco Protocol 2020",
+            "D": "Valpara\u00edso Agreement 2019"
+          },
+          "user_answer": "B",
+          "correct_answer": "A",
+          "is_correct": false,
+          "clarification": "The answer is grounded in the retrieved source context.",
+          "adaptation_reason": "Generated from the selected section and current preparation history.",
+          "source_chunk_ids": []
         }
       ],
       "weak_topics": [
         {
           "section_number": 8,
+          "topic": "Bilateral Cooperation",
+          "attempts": 1,
+          "wrong_count": 1,
+          "correct_count": 0,
+          "weakness_score": 1.0
+        },
+        {
+          "section_number": 8,
+          "topic": "Micro-Cache Network",
+          "attempts": 1,
+          "wrong_count": 1,
+          "correct_count": 0,
+          "weakness_score": 1.0
+        },
+        {
+          "section_number": 8,
           "topic": "Operational Territory",
-          "attempts": 2,
-          "wrong_count": 2,
+          "attempts": 1,
+          "wrong_count": 1,
+          "correct_count": 0,
+          "weakness_score": 1.0
+        },
+        {
+          "section_number": 8,
+          "topic": "Safehouse Provisioning",
+          "attempts": 1,
+          "wrong_count": 1,
+          "correct_count": 0,
+          "weakness_score": 1.0
+        },
+        {
+          "section_number": 8,
+          "topic": "Primary Base",
+          "attempts": 1,
+          "wrong_count": 1,
           "correct_count": 0,
           "weakness_score": 1.0
         },
         {
           "section_number": 5,
-          "topic": "Operational Tactics and Combat Doctrine",
+          "topic": "Reconnaissance Sequencing",
+          "attempts": 1,
+          "wrong_count": 0,
+          "correct_count": 1,
+          "weakness_score": 0.0
+        },
+        {
+          "section_number": 5,
+          "topic": "Contact-Exclusion Rule",
+          "attempts": 1,
+          "wrong_count": 0,
+          "correct_count": 1,
+          "weakness_score": 0.0
+        },
+        {
+          "section_number": 5,
+          "topic": "Operational Tactics",
+          "attempts": 1,
+          "wrong_count": 0,
+          "correct_count": 1,
+          "weakness_score": 0.0
+        },
+        {
+          "section_number": 5,
+          "topic": "Sequential Suspension",
           "attempts": 2,
           "wrong_count": 0,
           "correct_count": 2,
