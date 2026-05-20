@@ -5,11 +5,42 @@ A production-style adaptive RAG backend for PDF-based study preparation and MCQ 
 This project ingests a structured multi-section PDF, stores document sections and learning history in PostgreSQL, indexes semantic chunk embeddings in Qdrant, retrieves only user-selected sections, generates MCQs through an LLM, validates structured outputs, scores answers, identifies weak topics, and adapts future question generation based on previous mistakes.
 
 The goal is not only to build a basic RAG system. The main goal is to prove adaptive preparation behavior across repeated study sessions.
+---
+## Tech Stack
 
+<p align="left">
+  <img src="https://img.shields.io/badge/Python-3.13-blue?logo=python&logoColor=white" />
+  <img src="https://img.shields.io/badge/FastAPI-Backend-009688?logo=fastapi&logoColor=white" />
+  <img src="https://img.shields.io/badge/PostgreSQL-Knowledge%20Base-4169E1?logo=postgresql&logoColor=white" />
+  <img src="https://img.shields.io/badge/Qdrant-Vector%20Store-DC244C" />
+  <img src="https://img.shields.io/badge/LangGraph-Workflow-1C3C3C" />
+  <img src="https://img.shields.io/badge/Groq-LLM-orange" />
+  <img src="https://img.shields.io/badge/SentenceTransformers-Embeddings-yellow" />
+  <img src="https://img.shields.io/badge/Docker-Services-2496ED?logo=docker&logoColor=white" />
+  <img src="https://img.shields.io/badge/Pytest-Tests-0A9EDC?logo=pytest&logoColor=white" />
+</p>
+
+| Layer | Technology | Purpose |
+|---|---|---|
+| Backend API | FastAPI | REST API, Swagger testing, interactive prep flow |
+| Workflow orchestration | LangGraph | Stateful CLI prep pipeline for retrieval, generation, scoring, persistence, and adaptation |
+| Relational Knowledge Base | PostgreSQL | Documents, sections, chunks, sessions, answers, weak topics, and KB snapshots |
+| Vector retrieval | Qdrant | Semantic retrieval over PDF chunks with strict section filtering |
+| Embeddings | sentence-transformers/all-MiniLM-L6-v2 | Local chunk embedding generation |
+| LLM provider | Groq | Real MCQ generation with free/developer-friendly API access |
+| Optional fallback | Mock provider | Deterministic local testing without external LLM key |
+| PDF parsing | PyMuPDF | PDF page loading and text extraction |
+| ORM | SQLAlchemy | Database models and persistence layer |
+| CLI | Typer | Scenario A, Scenario B, ingestion, indexing, and evaluation commands |
+| Testing | Pytest | Validation, scoring, and API contract tests |
+| Container services | Docker Compose | PostgreSQL and Qdrant runtime services |
 ---
 ## Index
 
 - [Adaptive Document Preparation System](#adaptive-document-preparation-system)
+  - [The goal is not only to build a basic RAG system. The main goal is to prove adaptive preparation behavior across repeated study sessions.](#the-goal-is-not-only-to-build-a-basic-rag-system-the-main-goal-is-to-prove-adaptive-preparation-behavior-across-repeated-study-sessions)
+  - [Tech Stack](#tech-stack)
+  - [| Container services | Docker Compose | PostgreSQL and Qdrant runtime services |](#-container-services--docker-compose--postgresql-and-qdrant-runtime-services-)
   - [Index](#index)
   - [1. Project Highlights](#1-project-highlights)
   - [2. Current Verified Status](#2-current-verified-status)
