@@ -714,6 +714,31 @@ docs/architecture.md
 ```
 
 ---
+## LangGraph Workflow
+
+The CLI preparation flow uses LangGraph to orchestrate the end-to-end adaptive prep pipeline.
+
+Workflow nodes:
+
+```text
+load_document_and_history
+retrieve_selected_section_chunks
+generate_questions
+simulate_and_score_answers
+persist_session
+```
+
+LangGraph carries state across retrieval, generation, scoring, persistence, and adaptation. This is important for Scenario B because later iterations depend on history created by earlier sessions.
+
+Main files:
+
+```text
+app/workflow/state.py
+app/workflow/nodes.py
+app/workflow/prep_graph.py
+app/services/prep_service.py
+```
+---
 
 ## 16. Knowledge Base Design
 
