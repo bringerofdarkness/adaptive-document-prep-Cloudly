@@ -39,36 +39,44 @@ The goal is not only to build a basic RAG system. The main goal is to prove adap
     - [13.6 Retrieve KB snapshot](#136-retrieve-kb-snapshot)
   - [14. PDF Section Mapping](#14-pdf-section-mapping)
   - [15. Architecture Summary](#15-architecture-summary)
-  - [LangGraph Workflow](#langgraph-workflow)
-  - [16. Knowledge Base Design](#16-knowledge-base-design)
-  - [17. Adaptation Strategy](#17-adaptation-strategy)
-  - [18. LLM and Model Choice](#18-llm-and-model-choice)
+    - [Ingestion Architecture](#ingestion-architecture)
+    - [Prep-Time Architecture](#prep-time-architecture)
+  - [16. LangGraph Workflow](#16-langgraph-workflow)
+    - [Workflow Nodes](#workflow-nodes)
+    - [Workflow State](#workflow-state)
+    - [Why LangGraph Matters](#why-langgraph-matters)
+  - [17. Documentation](#17-documentation)
+  - [18. Knowledge Base Design](#18-knowledge-base-design)
+    - [Why PostgreSQL Is Used](#why-postgresql-is-used)
+    - [Why Qdrant Is Separate](#why-qdrant-is-separate)
+  - [19. Adaptation Strategy](#19-adaptation-strategy)
+  - [20. LLM and Model Choice](#20-llm-and-model-choice)
     - [Primary LLM: Groq](#primary-llm-groq)
     - [Mock fallback](#mock-fallback)
     - [Why not only Gemini?](#why-not-only-gemini)
     - [Why not only Ollama/local LLM?](#why-not-only-ollamalocal-llm)
     - [Why not only HuggingFace generation?](#why-not-only-huggingface-generation)
-  - [19. MCQ Validation](#19-mcq-validation)
-  - [20. Encoding Cleanup](#20-encoding-cleanup)
-  - [21. Project Speciality](#21-project-speciality)
-  - [22. Known Limitations](#22-known-limitations)
+  - [21. MCQ Validation](#21-mcq-validation)
+  - [22. Encoding Cleanup](#22-encoding-cleanup)
+  - [23. Project Speciality](#23-project-speciality)
+  - [24. Known Limitations](#24-known-limitations)
     - [LLM non-determinism](#llm-non-determinism)
     - [First run can be slow](#first-run-can-be-slow)
     - [HuggingFace token warning](#huggingface-token-warning)
     - [API mode depends on existing history](#api-mode-depends-on-existing-history)
     - [No frontend](#no-frontend)
     - [Docker scope](#docker-scope)
-  - [23. Output Commit Strategy](#23-output-commit-strategy)
-  - [24. Suggested Recruiter Verification Flow](#24-suggested-recruiter-verification-flow)
-    - [24.1 Start services](#241-start-services)
+  - [25. Output Commit Strategy](#25-output-commit-strategy)
+  - [26. Suggested Recruiter Verification Flow](#26-suggested-recruiter-verification-flow)
+    - [26.1 Start services](#261-start-services)
     - [24.2 Reset and rebuild the KB](#242-reset-and-rebuild-the-kb)
-    - [24.3 Run full evaluation](#243-run-full-evaluation)
-    - [24.4 Verify final Scenario B result](#244-verify-final-scenario-b-result)
-    - [24.5 Run tests](#245-run-tests)
-    - [24.6 Run API](#246-run-api)
-  - [25. Project Structure](#25-project-structure)
-  - [26. Useful Commands](#26-useful-commands)
-  - [27. Final Project Pitch](#27-final-project-pitch)
+    - [26.3 Run full evaluation](#263-run-full-evaluation)
+    - [26.4 Verify final Scenario B result](#264-verify-final-scenario-b-result)
+    - [26.5 Run tests](#265-run-tests)
+    - [26.6 Run API](#266-run-api)
+  - [27. Project Structure](#27-project-structure)
+  - [28. Useful Commands](#28-useful-commands)
+  - [29. Final Project Pitch](#29-final-project-pitch)
 
 ---
 
@@ -713,64 +721,83 @@ Users can select one or more sections from this list.
 
 ## 15. Architecture Summary
 
-The system uses a hybrid RAG architecture.
+The system uses a **hybrid adaptive RAG architecture**.
+
+The design separates three responsibilities clearly:
 
 ```text
-PDF
+PostgreSQL = source of truth, learning history, scoring, adaptation, KB snapshots
+Qdrant     = semantic retrieval over PDF chunks
+LangGraph  = orchestration layer for the multi-step prep workflow
+```
+
+This separation is important because the project is not only retrieving PDF text. It is also storing learning history and using that history to adapt future question generation.
+
+### Ingestion Architecture
+
+```text
+SLATEFALL_DOSSIER.pdf
  |
  |-- PyMuPDF loader
+ |     reads PDF pages
  |
  |-- Section parser
+ |     detects structured sections 1-10
  |
  |-- Chunker
+ |     splits section text into retrievable chunks
  |
  |-- PostgreSQL
- |     documents
- |     sections
- |     chunks
- |     prep_sessions
- |     generated_questions
- |     user_answers
- |     weak_topic_stats
- |     kb_snapshots
+ |     stores document, section, and chunk records
+ |
+ |-- Embedding model
+ |     creates semantic vectors for chunks
  |
  |-- Qdrant
-       semantic chunk embeddings
-       section metadata filters
+       stores chunk embeddings with section metadata filters
 ```
 
-At prep time:
+PostgreSQL keeps the original structured document data. Qdrant only stores semantic vectors and retrieval metadata.
+
+### Prep-Time Architecture
 
 ```text
-Selected sections
+User-selected sections
  |
- |-- Load relevant prior history from PostgreSQL
+ |-- PostgreSQL history lookup
+ |     checks previous sessions involving selected sections
  |
- |-- Build adaptation payload
+ |-- Adaptation service
+ |     builds cold_start or adaptive payload
  |
- |-- Retrieve selected-section chunks from Qdrant
+ |-- Qdrant retrieval
+ |     retrieves only chunks from selected sections
  |
- |-- Generate MCQs with LLM
+ |-- LLM MCQ generation
+ |     generates questions from retrieved section context
  |
- |-- Validate MCQs
+ |-- Validation layer
+ |     enforces 4 options, correct answer, explanation, section validity, and N questions per section
  |
- |-- Simulate or collect answers
+ |-- Scoring service
+ |     marks correct and wrong answers
  |
- |-- Score session
+ |-- PostgreSQL persistence
+ |     stores session, questions, answers, score, and weak-topic updates
  |
- |-- Persist results and weak-topic updates
- |
- |-- Export questions and KB snapshots
+ |-- Snapshot/export layer
+       writes questions JSON and KB snapshot JSON for reviewer verification
 ```
 
-Important design rule:
+The most important architectural rule is:
 
 ```text
-PostgreSQL = source of truth and learning history
-Qdrant     = semantic retrieval only
+The vector store retrieves knowledge.
+The relational database proves learning history.
+The workflow layer connects the full adaptive process.
 ```
 
-Qdrant does not store session truth. It only stores embeddings and retrieval metadata.
+Qdrant does not store session truth, scores, answers, or weak topics. It only supports retrieval. PostgreSQL stores the auditable learning history required for adaptation.
 
 For deeper architecture details, see:
 
@@ -779,11 +806,14 @@ docs/architecture.md
 ```
 
 ---
-## LangGraph Workflow
 
-The CLI preparation flow uses LangGraph to orchestrate the end-to-end adaptive prep pipeline.
+## 16. LangGraph Workflow
 
-Workflow nodes:
+The CLI preparation flow uses **LangGraph** to orchestrate the end-to-end adaptive prep pipeline.
+
+LangGraph is used because the prep flow is stateful and multi-step. Each step depends on the previous step, and the final result must preserve a clear chain from selected sections to retrieval, generation, scoring, persistence, and future adaptation.
+
+### Workflow Nodes
 
 ```text
 load_document_and_history
@@ -793,7 +823,46 @@ simulate_and_score_answers
 persist_session
 ```
 
-LangGraph carries state across retrieval, generation, scoring, persistence, and adaptation. This is important for Scenario B because later iterations depend on history created by earlier sessions.
+### Workflow State
+
+The graph carries important runtime state across the full pipeline:
+
+```text
+db
+document
+selected_section_numbers
+questions_per_section
+simulation_strategy
+adaptation_payload
+retrieved_chunks
+mcq_set
+answer_map
+scoring_payload
+session
+result
+```
+
+### Why LangGraph Matters
+
+LangGraph makes the adaptive workflow explicit:
+
+```text
+previous PostgreSQL history
+ |
+ |-- adaptation payload
+ |
+ |-- selected-section retrieval
+ |
+ |-- MCQ generation
+ |
+ |-- scoring
+ |
+ |-- persisted new history
+ |
+ |-- future adaptive runs
+```
+
+This is especially important for Scenario B. Iteration 2 and iteration 3 depend on the history created by earlier iterations. LangGraph keeps this process structured instead of hiding it inside one large function.
 
 Main files:
 
@@ -803,11 +872,32 @@ app/workflow/nodes.py
 app/workflow/prep_graph.py
 app/services/prep_service.py
 ```
+
+---
+## 17. Documentation
+
+For deeper technical review, the main documentation files are listed below.
+
+| File | Purpose |
+|---|---|
+| [Architecture](docs/architecture.md) | System architecture, hybrid RAG design, LangGraph workflow, retrieval flow, API flow, and major component responsibilities |
+| [Database Schema](docs/database_schema.md) | PostgreSQL schema, table relationships, Knowledge Base query patterns, weak-topic storage, and KB snapshot design |
+| [Adaptation Strategy](docs/adaptation_strategy.md) | Cold-start vs adaptive logic, weak-topic tracking, Scenario B behavior, backend-owned adaptation reasons, and history-aware generation |
+
+Recommended reading order:
+
+```text
+1. docs/architecture.md
+2. docs/database_schema.md
+3. docs/adaptation_strategy.md
+```
 ---
 
-## 16. Knowledge Base Design
+## 18. Knowledge Base Design
 
-PostgreSQL supports these assessment-required query patterns:
+PostgreSQL is the system’s Knowledge Base for learning history.
+
+It supports the assessment-required query patterns:
 
 ```text
 Given selected section IDs, retrieve prior prep sessions involving those sections.
@@ -829,6 +919,29 @@ weak_topic_stats
 kb_snapshots
 ```
 
+### Why PostgreSQL Is Used
+
+PostgreSQL is used because adaptation requires structured, queryable history.
+
+The system needs to know:
+
+```text
+which sections were selected
+which questions were asked
+which answers were correct or wrong
+which topics became weak
+which sessions are relevant to the next run
+what the KB looked like after each iteration
+```
+
+This is why PostgreSQL is treated as the source of truth.
+
+### Why Qdrant Is Separate
+
+Qdrant is optimized for semantic retrieval, not relational learning history.
+
+The system uses Qdrant to find relevant chunks from selected sections, but it uses PostgreSQL to prove and explain adaptive behavior.
+
 For schema details and access patterns, see:
 
 ```text
@@ -837,7 +950,7 @@ docs/database_schema.md
 
 ---
 
-## 17. Adaptation Strategy
+## 19. Adaptation Strategy
 
 Adaptation is built from stored PostgreSQL history.
 
@@ -894,7 +1007,7 @@ docs/adaptation_strategy.md
 
 ---
 
-## 18. LLM and Model Choice
+## 20. LLM and Model Choice
 
 ### Primary LLM: Groq
 
@@ -944,7 +1057,7 @@ The project already uses HuggingFace sentence-transformer embeddings locally. Fo
 
 ---
 
-## 19. MCQ Validation
+## 21. MCQ Validation
 
 The backend does not blindly trust LLM output.
 
@@ -974,7 +1087,7 @@ If the LLM under-generates or returns malformed questions, the system retries se
 
 ---
 
-## 20. Encoding Cleanup
+## 22. Encoding Cleanup
 
 LLM and PDF text can sometimes contain mojibake, for example:
 
@@ -994,7 +1107,7 @@ This is intentionally not a hardcoded word-specific replacement.
 
 ---
 
-## 21. Project Speciality
+## 23. Project Speciality
 
 The project is stronger than a basic RAG demo because it includes:
 
@@ -1025,7 +1138,7 @@ Iteration 3 focuses only on section 8 and remains adaptive.
 
 ---
 
-## 22. Known Limitations
+## 24. Known Limitations
 
 ### LLM non-determinism
 
@@ -1093,7 +1206,7 @@ Docker Compose is used for PostgreSQL and Qdrant services. The FastAPI app can b
 
 ---
 
-## 23. Output Commit Strategy
+## 25. Output Commit Strategy
 
 The `outputs/` directory is intentionally useful for reviewers.
 
@@ -1123,11 +1236,11 @@ python -m cli.run_evaluation --questions-per-section 5
 
 ---
 
-## 24. Suggested Recruiter Verification Flow
+## 26. Suggested Recruiter Verification Flow
 
 A reviewer can verify the project as follows.
 
-### 24.1 Start services
+### 26.1 Start services
 
 ```powershell
 docker compose up -d
@@ -1141,13 +1254,13 @@ python -m cli.ingest_pdf
 python -m cli.index_qdrant
 ```
 
-### 24.3 Run full evaluation
+### 26.3 Run full evaluation
 
 ```powershell
 python -m cli.run_evaluation --questions-per-section 5
 ```
 
-### 24.4 Verify final Scenario B result
+### 26.4 Verify final Scenario B result
 
 Expected:
 
@@ -1157,7 +1270,7 @@ Scenario B iteration 2 complete | mode=adaptive | score=66.67
 Scenario B iteration 3 complete | mode=adaptive | score=0.0
 ```
 
-### 24.5 Run tests
+### 26.5 Run tests
 
 ```powershell
 python -m pytest tests
@@ -1169,7 +1282,7 @@ Expected:
 6 passed
 ```
 
-### 24.6 Run API
+### 26.6 Run API
 
 ```powershell
 .\.venv\Scripts\python.exe -m uvicorn app.main:app --host 127.0.0.1 --port 18000
@@ -1194,7 +1307,7 @@ GET /kb/snapshot
 
 ---
 
-## 25. Project Structure
+## 27. Project Structure
 
 Short structure summary:
 
@@ -1243,7 +1356,7 @@ docs/project_structure.md
 
 ---
 
-## 26. Useful Commands
+## 28. Useful Commands
 
 Start services:
 
@@ -1307,6 +1420,6 @@ http://127.0.0.1:18000/docs
 
 ---
 
-## 27. Final Project Pitch
+## 29. Final Project Pitch
 
 This project is a production-style adaptive RAG backend that ingests a structured PDF, stores section chunks in Qdrant for deterministic section-filtered retrieval, stores all learning history in PostgreSQL, generates MCQs through an LLM, validates structured outputs, scores answers, identifies weak topics over time, and adapts future question generation based on previous mistakes while exporting reviewer-ready Scenario A and Scenario B outputs.
