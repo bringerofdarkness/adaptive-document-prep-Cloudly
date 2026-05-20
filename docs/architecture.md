@@ -1,41 +1,47 @@
-````markdown
 # Architecture
 
-## Overview
+## 1. Overview
 
-The Adaptive Document Preparation System is a backend-driven adaptive RAG application.
+The **Adaptive Document Preparation System** is a backend-first adaptive RAG application for PDF-based study preparation and MCQ generation.
 
-It ingests a structured multi-section PDF, stores structured document data and learning history in PostgreSQL, stores semantic chunk embeddings in Qdrant, retrieves only chunks from selected sections, generates MCQs with an LLM, validates generated MCQs, collects or simulates answers, scores sessions, updates weak-topic history, and adapts future question generation based on previous mistakes.
+The system ingests a structured multi-section PDF, stores document data and learning history in PostgreSQL, stores semantic chunk embeddings in Qdrant, retrieves only the user-selected sections, generates MCQs with an LLM, validates generated output, scores answers, updates weak-topic history, and adapts future question generation based on previous mistakes.
 
-The system is designed for an AI/ML internship take-home assessment where the most important requirement is adaptive intelligence.
+The most important architectural goal is not simple retrieval. The main goal is to prove **history-aware adaptive preparation**.
+
+The system distinguishes:
+
+```text
+first relevant run     -> cold_start
+returning relevant run -> adaptive
+```
 
 ---
 
-## Core Architecture Principle
+## 2. Core Architecture Principle
 
-The project uses a hybrid storage architecture.
+The project uses a hybrid storage architecture:
 
 ```text
-PostgreSQL = source of truth
+PostgreSQL = source of truth and learning history
 Qdrant     = semantic retrieval only
 ```
 
-PostgreSQL stores all structured data, user history, questions, answers, scores, weak-topic statistics, and KB snapshots.
+PostgreSQL stores all structured data, session history, questions, answers, scores, weak-topic statistics, and KB snapshots.
 
-Qdrant stores vector embeddings for PDF chunks and supports semantic retrieval with strict metadata filtering.
+Qdrant stores only vector embeddings and retrieval metadata for PDF chunks.
 
-Qdrant is not used as the main Knowledge Base.
+Qdrant is not used as the main Knowledge Base. This keeps the system auditable and allows reviewers to verify how adaptive decisions are grounded in real stored session history.
 
 ---
 
-## High-Level Flow
+## 3. High-Level System Flow
 
 ```text
-PDF
+Structured PDF
   ↓
-PDF loader
+PDF Loader
   ↓
-Section parser
+Section Parser
   ↓
 Chunker
   ↓
@@ -43,40 +49,40 @@ PostgreSQL stores documents, sections, and chunks
   ↓
 Embedding model creates chunk vectors
   ↓
-Qdrant stores vectors with strict metadata
+Qdrant stores vectors with section metadata
   ↓
 User selects one or more sections
   ↓
-Retriever fetches only selected-section chunks
-  ↓
-PostgreSQL history is checked
+System checks PostgreSQL for prior prep history
   ↓
 Adaptation payload is built
   ↓
-LLM generates MCQs
+Retriever fetches only selected-section chunks from Qdrant
   ↓
-Pydantic validates MCQ output
+LLM generates MCQs section by section
   ↓
-Questions are presented through API or CLI
+MCQ output is normalized and validated
   ↓
-Answers are collected or simulated
+Questions are presented through CLI or API
   ↓
-Scoring is performed
+Answers are simulated or submitted by user
   ↓
-Session, questions, answers, score, and weak-topic updates are saved
+Scoring service marks correct and wrong answers
   ↓
-KB snapshot and reviewer JSON outputs are exported
+Session, questions, answers, scores, and weak-topic updates are persisted
+  ↓
+Questions JSON and KB snapshot JSON are exported for reviewer verification
 ```
 
 ---
 
-## Main Components
+## 4. Main Runtime Components
 
-## 1. FastAPI Backend
+### 4.1 FastAPI Backend
 
-FastAPI exposes the REST API for document sections, preparation sessions, answer submission, session history, KB snapshot access, and health checking.
+FastAPI exposes the REST API for health checks, document section listing, prep session creation, answer submission, session retrieval, and KB snapshots.
 
-Current important endpoints:
+Important endpoints:
 
 ```text
 GET  /health
@@ -102,9 +108,9 @@ app/api/routes_kb.py
 
 ---
 
-## 2. PostgreSQL Knowledge Base
+### 4.2 PostgreSQL Knowledge Base
 
-PostgreSQL is the relational source of truth.
+PostgreSQL is the durable source of truth.
 
 It stores:
 
@@ -121,16 +127,18 @@ kb_snapshots
 
 PostgreSQL is responsible for:
 
-- document metadata
-- PDF section metadata
-- chunk text and previews
-- generated questions
-- user answers
-- correct/wrong results
-- session scores
-- weak-topic tracking
-- adaptation metadata
-- human-readable KB snapshots
+```text
+document metadata
+section metadata
+chunk text
+generated questions
+submitted or simulated answers
+correct/wrong results
+session scores
+weak-topic statistics
+adaptation metadata
+reviewer-readable KB snapshots
+```
 
 Main files:
 
@@ -145,11 +153,11 @@ app/db/repositories/snapshot_repo.py
 
 ---
 
-## 3. Qdrant Vector Store
+### 4.3 Qdrant Vector Store
 
 Qdrant stores semantic embeddings for PDF chunks.
 
-Each vector point includes strict metadata:
+Each vector point includes retrieval metadata:
 
 ```text
 document_id
@@ -161,9 +169,7 @@ page_number
 text_preview
 ```
 
-Qdrant is used only to retrieve relevant chunks.
-
-It does not store learning history, scores, answers, or user sessions.
+Qdrant is used only to retrieve relevant chunks. It does not store user answers, scores, sessions, weak topics, or adaptation history.
 
 Main files:
 
@@ -175,18 +181,18 @@ app/retrieval/retriever.py
 
 ---
 
-## 4. PDF Ingestion Pipeline
+### 4.4 PDF Ingestion Pipeline
 
-The PDF ingestion pipeline converts the main multi-section PDF corpus into structured sections and chunks.
+The ingestion pipeline converts the main PDF corpus into structured sections and chunks.
 
 Flow:
 
 ```text
-SLATEFALL_DOSSIER.pdf
+data/SLATEFALL_DOSSIER.pdf
   ↓
 load pages with PyMuPDF
   ↓
-detect sections
+detect section boundaries
   ↓
 split sections into chunks
   ↓
@@ -207,12 +213,12 @@ cli/index_qdrant.py
 
 ---
 
-## 5. Section Mapping
+## 5. PDF Section Mapping
 
-The PDF parser currently detects 10 sections.
+The current PDF parser detects 10 sections:
 
 | Section | Title | Pages |
-|---|---|---|
+|---:|---|---:|
 | 1 | Identity, Background, and Public Status | 1-4 |
 | 2 | Powers, Abilities, and Documented Limits | 4-11 |
 | 3 | Origin and Key Historical Events | 11-15 |
@@ -224,19 +230,21 @@ The PDF parser currently detects 10 sections.
 | 9 | Case Files: Documented Engagements and Incidents | 39-43 |
 | 10 | Glossary, Codenames, and Reference Tables | 43-50 |
 
+Users can select one or more sections from this list.
+
 Scenario B uses the assessment-required repeated section 8:
 
 ```text
-Iteration 1: sections 5 and 8
-Iteration 2: sections 6, 8, and 9
-Iteration 3: section 8
+Iteration 1: sections [5, 8]
+Iteration 2: sections [6, 8, 9]
+Iteration 3: sections [8]
 ```
 
 ---
 
 ## 6. Deterministic Section-Filtered Retrieval
 
-The retriever must only retrieve chunks from selected sections.
+Retrieval is strictly section-filtered.
 
 Example:
 
@@ -244,14 +252,16 @@ Example:
 Selected sections: [5, 8]
 ```
 
-The retriever applies strict metadata filters so only section 5 and section 8 chunks can be returned.
+The retriever applies Qdrant metadata filters so only chunks from sections 5 and 8 can be returned.
 
 This prevents:
 
-- out-of-section question generation
-- unnecessary hallucination
-- random retrieval from the full PDF corpus
-- reviewer confusion about where questions came from
+```text
+out-of-section question generation
+random full-corpus retrieval
+unrelated context leakage
+reviewer confusion about source grounding
+```
 
 Main file:
 
@@ -271,15 +281,9 @@ Current embedding model:
 sentence-transformers/all-MiniLM-L6-v2
 ```
 
-This is lightweight and suitable for local development.
+This model is lightweight and suitable for local development.
 
-The project can later switch to:
-
-```text
-BAAI/bge-small-en-v1.5
-```
-
-if stronger retrieval quality is needed.
+The console may show a HuggingFace warning about unauthenticated requests. This is not a failure. Setting `HF_TOKEN` can improve rate limits, but it is not required for normal local execution.
 
 Main file:
 
@@ -293,21 +297,23 @@ app/retrieval/embeddings.py
 
 The LLM layer supports real and mock providers.
 
-Current providers:
+Current provider options:
 
 ```text
 groq
+gemini
 mock
 ```
 
-Groq is used for real MCQ generation.
+Groq is the primary real LLM provider for MCQ generation.
 
-Mock is used for deterministic local development and testing.
+Mock generation is available for deterministic local testing and for environments where no external LLM key is available.
 
-The provider is controlled through:
+Provider selection is controlled through `.env`:
 
 ```env
 LLM_PROVIDER=groq
+GROQ_API_KEY=your_groq_api_key_here
 ```
 
 or:
@@ -315,6 +321,8 @@ or:
 ```env
 LLM_PROVIDER=mock
 ```
+
+If a Groq or Gemini key is missing, the provider layer raises a clear error and tells the user to set `LLM_PROVIDER=mock` to run without an external LLM key.
 
 Main files:
 
@@ -328,21 +336,21 @@ app/llm/mcq_generator.py
 
 ## 9. Prompting Strategy
 
-Before question generation, the system builds a compact prompt containing:
+Before MCQ generation, the system builds a compact prompt containing:
 
-- selected section numbers
-- retrieved chunks
-- questions per section
-- adaptive context
-- weak topics
-- previous wrong questions
-- mastered questions to avoid
+```text
+selected section number
+retrieved chunks
+questions per section
+adaptation mode
+weak topics
+previous wrong questions
+mastered questions to avoid
+```
 
-The system does not send a huge raw history dump to the LLM.
+The system does not send the full raw session history to the LLM. Instead, it sends a compact adaptation payload.
 
-Instead, it sends a compact adaptation payload.
-
-This keeps prompts smaller, more controlled, and more reviewer-friendly.
+This keeps prompts smaller, safer, and more reliable.
 
 Main file:
 
@@ -363,9 +371,9 @@ questions_per_section
 adaptation_payload
 ```
 
-It generates structured MCQs.
+It generates structured MCQs section by section.
 
-Each MCQ includes:
+Each MCQ contains:
 
 ```text
 question_id
@@ -381,14 +389,18 @@ adaptation_reason
 source_chunk_ids
 ```
 
-Important design decision:
+Important design decisions:
 
 ```text
 The backend generates question_id values.
 The LLM is not trusted to generate database primary keys.
+The backend owns adaptation_reason based on real history.
+The LLM generates question content, not adaptation metadata.
 ```
 
-This prevents duplicate primary key errors caused by repeated LLM-generated IDs.
+This prevents duplicate IDs and prevents the LLM from falsely claiming adaptive behavior during cold-start runs.
+
+The generator also uses section-level retry logic. If the LLM under-generates or returns invalid structure, the system retries before failing.
 
 Main file:
 
@@ -402,23 +414,24 @@ app/llm/mcq_generator.py
 
 Generated MCQs are normalized and validated before they are saved or returned.
 
-Validation checks:
+Validation checks include:
 
 ```text
 exactly 4 options
 options must be A, B, C, D
 correct answer must be A, B, C, or D
-question must belong to selected sections only
+question must belong only to selected sections
 topic must be non-empty
 explanation must be non-empty
 adaptation_reason must be non-empty
 question count per selected section must match the request
 duplicate question text is handled
 extra LLM questions are truncated safely
-missing questions cause a controlled validation error
+missing questions cause controlled validation failure
+Pydantic schema validation
 ```
 
-Main files:
+Validation files:
 
 ```text
 app/llm/output_parser.py
@@ -429,7 +442,7 @@ app/schemas/question.py
 
 ## 12. Text Normalization
 
-LLM output can occasionally contain broken Unicode or mojibake.
+LLM and PDF text can sometimes contain broken Unicode or mojibake.
 
 Example:
 
@@ -438,11 +451,11 @@ Broken:  Cuartel ValparaÃ­so
 Correct: Cuartel Valparaíso
 ```
 
-The project uses the `ftfy` library to normalize user-facing text.
+The project uses `ftfy` to normalize user-facing text.
 
-This avoids hardcoded character replacement maps.
+This is intentionally not a hardcoded word-specific replacement.
 
-Text normalization is applied to:
+Text normalization applies to:
 
 ```text
 question text
@@ -528,9 +541,7 @@ No relevant previous session -> cold_start
 Relevant history found       -> adaptive
 ```
 
-The adaptive layer uses historical wrong answers to identify weak topics.
-
-Future questions focus more on weak topics and avoid excessive repetition of mastered questions.
+The adaptive layer uses historical wrong answers to identify weak topics. Future questions can then focus more on weak sections and avoid excessive repetition of mastered questions.
 
 Main file:
 
@@ -540,7 +551,40 @@ app/services/adaptation_service.py
 
 ---
 
-## 15. Weak Topic Tracking
+## 15. Backend-Owned Adaptation Reason
+
+The final `adaptation_reason` is controlled by the backend, not the LLM.
+
+Examples:
+
+```text
+Cold-start coverage question generated from the selected section because no prior relevant learning history exists.
+
+Returning-run question generated using previous session history without a section-specific weak topic.
+
+Adaptive question generated for section 8 because prior session history marks this section as weak.
+```
+
+This makes the output safer and more explainable.
+
+For Scenario B:
+
+```text
+Iteration 1:
+mode = cold_start
+adaptation_reason = cold-start coverage
+
+Iteration 2:
+section 6 = returning-run, no section-specific weakness
+section 8 = adaptive weak-section reason
+
+Iteration 3:
+section 8 = adaptive weak-section reason
+```
+
+---
+
+## 16. Weak Topic Tracking
 
 Weak topics are updated from wrong answers.
 
@@ -556,9 +600,9 @@ correct_count
 weakness_score
 ```
 
-The weakness score is computed from previous performance.
+Weakness score is computed from previous performance.
 
-This allows the system to know which topics need more practice in returning runs.
+This allows the system to detect which topics need more practice in returning runs.
 
 Main file:
 
@@ -568,9 +612,9 @@ app/db/repositories/session_repo.py
 
 ---
 
-## 16. Interactive API Flow
+## 17. Interactive API Flow
 
-The interactive API flow supports real user answers.
+The interactive API supports real user answers.
 
 ### Start preparation
 
@@ -589,7 +633,7 @@ Input:
 }
 ```
 
-Output:
+Output includes:
 
 ```text
 session_id
@@ -599,12 +643,15 @@ selected_sections
 total_questions
 adaptation_summary
 questions
+options
+adaptation_reason
 ```
 
 Important:
 
 ```text
 /prep/start does not expose correct_answer.
+/prep/start does not expose explanation.
 ```
 
 ### Submit answers
@@ -627,7 +674,7 @@ Input:
 }
 ```
 
-Output:
+Output includes:
 
 ```text
 score
@@ -635,7 +682,9 @@ total_questions
 correct_count
 wrong_count
 results
+selected_answer
 correct_answer
+is_correct
 clarification for wrong answers
 ```
 
@@ -650,16 +699,16 @@ app/schemas/prep.py
 
 ---
 
-## 17. CLI Evaluation Flow
+## 18. CLI Evaluation Flow
 
 The CLI flow supports reviewer evaluation scenarios.
 
-Available commands:
+Current final-scale commands use `5` questions per selected section:
 
 ```powershell
-python -m cli.run_scenario_a --questions-per-section 2
-python -m cli.run_scenario_b --questions-per-section 2
-python -m cli.run_evaluation --questions-per-section 2
+python -m cli.run_scenario_a --questions-per-section 5
+python -m cli.run_scenario_b --questions-per-section 5
+python -m cli.run_evaluation --questions-per-section 5
 ```
 
 Scenario A demonstrates cold-start behavior.
@@ -676,14 +725,14 @@ cli/run_evaluation.py
 
 ---
 
-## 18. Scenario A
+## 19. Scenario A
 
 Scenario A runs a cold-start prep over two sections.
 
 Expected output:
 
 ```text
-Scenario A complete | session=... | mode=cold_start | score=50.0
+Scenario A complete | mode=cold_start | score=50.0
 ```
 
 Output files:
@@ -693,53 +742,36 @@ outputs/scenario_a/questions_scenario_a.json
 outputs/scenario_a/kb_snapshot_scenario_a.json
 ```
 
+With `--questions-per-section 5`, Scenario A generates 10 questions.
+
 ---
 
-## 19. Scenario B
+## 20. Scenario B
 
 Scenario B is the main adaptive evaluation scenario.
 
 It runs:
 
 ```text
-Iteration 1: sections 5 and 8
-Iteration 2: sections 6, 8, and 9
-Iteration 3: section 8
+Iteration 1: sections [5, 8]
+Iteration 2: sections [6, 8, 9]
+Iteration 3: sections [8]
 ```
 
 Expected output:
 
 ```text
-Scenario B iteration 1 complete | ... | mode=cold_start | score=50.0
-Scenario B iteration 2 complete | ... | mode=adaptive | score=66.67
-Scenario B iteration 3 complete | ... | mode=adaptive | score=0.0
+Scenario B iteration 1 complete | mode=cold_start | score=50.0
+Scenario B iteration 2 complete | mode=adaptive   | score=66.67
+Scenario B iteration 3 complete | mode=adaptive   | score=0.0
 ```
 
-Why the scores happen:
+With `--questions-per-section 5`, the expected counts are:
 
 ```text
-Iteration 1:
-sections = [5, 8]
-2 questions per section
-total = 4
-section 8 is simulated weak
-2 correct, 2 wrong
-score = 50.0
-
-Iteration 2:
-sections = [6, 8, 9]
-2 questions per section
-total = 6
-section 8 is simulated weak
-4 correct, 2 wrong
-score = 66.67
-
-Iteration 3:
-sections = [8]
-2 questions total
-section 8 is simulated weak
-0 correct, 2 wrong
-score = 0.0
+Iteration 1: 2 sections × 5 = 10 questions
+Iteration 2: 3 sections × 5 = 15 questions
+Iteration 3: 1 section  × 5 = 5 questions
 ```
 
 Required output files:
@@ -757,9 +789,9 @@ outputs/scenario_b_iter3/kb_snapshot_iter3.json
 
 ---
 
-## 20. KB Snapshots
+## 21. KB Snapshots
 
-KB snapshots are exported after each evaluation run.
+KB snapshots are exported after evaluation runs.
 
 They include enough information for reviewers to verify:
 
@@ -773,9 +805,12 @@ wrong answers
 score
 weak topics
 adaptation summary
+adaptation payload
 timestamp
 recent session history
 ```
+
+The snapshot endpoint and exported JSON files are designed to support the assessment requirement that the reviewer can verify history-backed adaptation.
 
 Main file:
 
@@ -785,11 +820,11 @@ app/services/snapshot_service.py
 
 ---
 
-## 21. Exported Reviewer Outputs
+## 22. Exported Reviewer Outputs
 
 Questions and KB snapshots are exported into the `outputs/` directory.
 
-Scenario B expected structure:
+Scenario B structure:
 
 ```text
 outputs/
@@ -806,7 +841,7 @@ outputs/
     kb_snapshot_iter3.json
 ```
 
-These files are important because they provide reviewer-visible evidence of:
+These files provide reviewer-visible evidence of:
 
 ```text
 generated questions
@@ -815,11 +850,12 @@ answers
 scores
 weak-topic tracking
 session history
+cold_start vs adaptive behavior
 ```
 
 ---
 
-## 22. Testing
+## 23. Testing
 
 Current tests cover:
 
@@ -854,7 +890,7 @@ tests/test_prep_api.py
 
 ---
 
-## 23. API Contract Tests
+## 24. API Contract Tests
 
 The API contract tests verify:
 
@@ -867,13 +903,13 @@ The API contract tests verify:
 /prep/submit returns clarification for wrong answers
 ```
 
-This allows recruiters to verify API behavior without relying only on Swagger manual testing.
+This helps verify API behavior without relying only on manual Swagger testing.
 
 ---
 
-## 24. Recruiter Verification Flow
+## 25. Recruiter Verification Flow
 
-A recruiter should be able to verify the project with this flow:
+A reviewer can verify the project with this flow:
 
 ### 1. Start services
 
@@ -902,7 +938,7 @@ python -m cli.index_qdrant
 ### 5. Run evaluation
 
 ```powershell
-python -m cli.run_evaluation --questions-per-section 2
+python -m cli.run_evaluation --questions-per-section 5
 ```
 
 ### 6. Check Scenario B outputs
@@ -940,7 +976,7 @@ http://127.0.0.1:18000/docs
 
 ---
 
-## 25. API Swagger Verification
+## 26. API Swagger Verification
 
 In Swagger, test:
 
@@ -963,6 +999,7 @@ Expected:
 questions are returned
 options are returned
 correct_answer is hidden
+explanation is hidden
 adaptation_reason is visible
 ```
 
@@ -980,15 +1017,22 @@ correct_answer is returned after submission
 clarification is returned for wrong answers
 ```
 
+Also test:
+
+```text
+GET /sessions/{session_id}
+GET /kb/snapshot
+```
+
+These prove that session history and KB snapshot retrieval work through the API.
+
 ---
 
-## 26. Known Architecture Decisions
+## 27. Architecture Decisions
 
 ### No Authentication
 
-Authentication and authorization are intentionally excluded.
-
-The assessment focuses on:
+Authentication and authorization are intentionally excluded because the assessment focuses on:
 
 ```text
 PDF ingestion
@@ -1006,8 +1050,8 @@ reviewer outputs
 The project prioritizes:
 
 ```text
-FastAPI
 CLI
+FastAPI
 PostgreSQL
 Qdrant
 LangGraph
@@ -1015,7 +1059,7 @@ JSON outputs
 tests
 ```
 
-A UI is optional and should only be added after the backend is complete.
+A frontend is not required by the assessment.
 
 ### Qdrant Is Not the Knowledge Base
 
@@ -1029,9 +1073,11 @@ The system validates and normalizes LLM output before persistence.
 
 Backend-generated UUIDs are used for question IDs.
 
+Backend-owned adaptation reasons are used for final output consistency.
+
 ---
 
-## 27. Current Working Commands
+## 28. Current Working Commands
 
 ```powershell
 docker compose up -d
@@ -1050,15 +1096,15 @@ python -m cli.index_qdrant
 ```
 
 ```powershell
-python -m cli.run_scenario_a --questions-per-section 2
+python -m cli.run_scenario_a --questions-per-section 5
 ```
 
 ```powershell
-python -m cli.run_scenario_b --questions-per-section 2
+python -m cli.run_scenario_b --questions-per-section 5
 ```
 
 ```powershell
-python -m cli.run_evaluation --questions-per-section 2
+python -m cli.run_evaluation --questions-per-section 5
 ```
 
 ```powershell
@@ -1071,80 +1117,39 @@ python -m pytest tests
 
 ---
 
-## 28. Current Verified Status
+## 29. Known Limitations
 
-The following are currently verified:
+### LLM non-determinism
 
-```text
-Docker services run
-PostgreSQL works
-Qdrant works
-PDF ingestion works
-Qdrant indexing works
-Strict selected-section retrieval works
-Groq generation works
-Mock fallback works
-MCQ validation works
-LangGraph workflow works
-Scenario A works
-Scenario B works
-Scenario B adaptive behavior works
-/prep/start works
-/prep/submit works
-Swagger verification works
-Pytest suite passes
-Clean-code audit removed obsolete CLI helpers
-Groq API key is not hardcoded
-Local absolute paths are not hardcoded in app/cli/tests
+Groq output can vary between runs. The backend mitigates this through validation, compact prompts, section-by-section generation, retry logic, and backend-owned adaptation metadata.
+
+### First run can be slow
+
+The first evaluation or API request can take several minutes because the embedding model may load and the LLM must generate multiple MCQs.
+
+### No frontend
+
+A frontend is not included because the assessment asks for a CLI-runnable system, REST APIs, and exported evaluation outputs.
+
+### API mode depends on history
+
+If previous sessions exist, `/prep/start` may return `adaptive`. Reset the database for a clean cold-start run.
+
+### External LLM key
+
+Groq is used with a free/developer key. To run without an external LLM key, set:
+
+```env
+LLM_PROVIDER=mock
 ```
 
 ---
 
-## 29. Remaining Work
-
-Remaining implementation and polish tasks:
-
-```text
-Add docs/database_schema.md
-Add docs/adaptation_strategy.md
-Finalize Dockerfile
-Finalize README.md
-Add structured logging
-Review output JSON commit strategy
-Add more integration tests if time allows
-Run final clean-code audit
-Run final recruiter verification from a fresh reset
-Push final GitHub checkpoint
-```
-
----
-
-## 30. Future Optional Work
-
-Optional features after the assessment core is complete:
-
-```text
-Streamlit UI
-manual answer UI
-session dashboard
-weak-topic visualization
-question review screen
-section selector UI
-export report as PDF
-support more PDFs
-support multiple users
-support local Ollama fallback
-```
-
-These should not be prioritized before the backend assessment requirements are fully polished.
-
----
-
-## Summary
+## 30. Summary
 
 The architecture is backend-first and assessment-focused.
 
-The system already demonstrates the key requirement:
+The system demonstrates:
 
 ```text
 cold_start first run
@@ -1155,7 +1160,7 @@ section-filtered retrieval
 PostgreSQL-backed Knowledge Base
 Qdrant-backed semantic retrieval
 reviewer-ready Scenario B outputs
+FastAPI interactive prep flow
 ```
 
-The project is progressing toward a clean production-style AI backend rather than a UI-first demo.
-````
+The project is designed as a production-style adaptive RAG backend rather than a UI-first demo.
