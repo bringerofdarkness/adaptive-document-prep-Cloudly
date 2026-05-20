@@ -19,6 +19,7 @@ filelock==3.29.0
 filetype==1.2.0
 frozenlist==1.8.0
 fsspec==2026.4.0
+ftfy==6.3.1
 google-auth==2.53.0
 google-genai==1.75.0
 greenlet==3.5.0
@@ -116,6 +117,7 @@ urllib3==2.7.0
 uuid_utils==0.16.0
 uvicorn==0.47.0
 watchfiles==1.2.0
+wcwidth==0.7.0
 websockets==16.0
 xxhash==3.7.0
 yarl==1.23.0

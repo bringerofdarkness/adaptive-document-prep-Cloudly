@@ -1,11 +1,11 @@
 {
-  "snapshot_created_at": "2026-05-19T21:47:25.540351",
-  "current_session_id": "bc7ac529-1535-4ccd-9a5b-eff697fe47b3",
+  "snapshot_created_at": "2026-05-20T00:21:17.666402",
+  "current_session_id": "7c19f14f-bd1a-4dd9-8584-dc94059cdff7",
   "recent_session_count": 1,
   "recent_sessions": [
     {
-      "session_id": "bc7ac529-1535-4ccd-9a5b-eff697fe47b3",
-      "timestamp": "2026-05-19T21:47:25.475649",
+      "session_id": "7c19f14f-bd1a-4dd9-8584-dc94059cdff7",
+      "timestamp": "2026-05-20T00:21:17.610075",
       "mode": "cold_start",
       "selected_sections": [
         5,
@@ -27,49 +27,49 @@
       },
       "questions_asked": [
         {
-          "question_id": "9feb240a-23ce-46a7-80c0-4600f2f46077",
+          "question_id": "abd64d28-4faa-4ec3-ab34-5478c744855f",
           "section_number": 5,
           "topic": "Operational Tactics and Combat Doctrine",
           "difficulty": "medium",
           "question": "What is the Doctrine of Sequential Suspension (DSS)?",
           "options": {
-            "A": "A combat tactic used to engage targets.",
-            "B": "A formal combat doctrine articulated by the asset on 19 June 2022.",
-            "C": "A method of extraction.",
-            "D": "A cooldown discipline."
+            "A": "A combat doctrine that prioritizes sequential suspension.",
+            "B": "A doctrine that emphasizes the importance of extraction.",
+            "C": "A formal combat doctrine articulated by the asset on 19 June 2022.",
+            "D": "A doctrine that focuses on civilian risk."
           },
-          "user_answer": "B",
-          "correct_answer": "B",
+          "user_answer": "C",
+          "correct_answer": "C",
           "is_correct": true,
           "clarification": null,
-          "adaptation_reason": "Testing understanding of specific doctrine.",
+          "adaptation_reason": "Prioritizing weak topics and avoiding close repeats of mastered questions.",
           "source_chunk_ids": [
             "68144153-edc2-4d07-b82f-9491716eed7b"
           ]
         },
         {
-          "question_id": "d67a8772-974b-4211-90e4-fc5bbc0d64cc",
+          "question_id": "2eca9395-a0ed-47c9-a7be-5e833d7c95bf",
           "section_number": 5,
           "topic": "Operational Tactics and Combat Doctrine",
           "difficulty": "hard",
-          "question": "What overrides cooldown discipline?",
+          "question": "What overrides cooldown discipline in the Doctrine of Sequential Suspension?",
           "options": {
             "A": "Tactical opportunity.",
             "B": "Civilian risk.",
             "C": "Extraction.",
-            "D": "Engagement."
+            "D": "Activation."
           },
           "user_answer": "B",
           "correct_answer": "B",
           "is_correct": true,
           "clarification": null,
-          "adaptation_reason": "Testing understanding of specific doctrine.",
+          "adaptation_reason": "Prioritizing weak topics and avoiding close repeats of mastered questions.",
           "source_chunk_ids": [
             "c3f3119b-078d-4ece-9ce7-e165c5f4fc65"
           ]
         },
         {
-          "question_id": "910ba40e-8d63-4209-96e4-11f2044222ae",
+          "question_id": "34b081e2-6f87-48be-bfce-524ca22cdd8e",
           "section_number": 8,
           "topic": "Operational Territory",
           "difficulty": "medium",
@@ -83,28 +83,28 @@
           "user_answer": "B",
           "correct_answer": "A",
           "is_correct": false,
-          "clarification": "The primary operational base of the asset is Cuartel Valpara\u00edso.",
+          "clarification": "The asset's primary operational base is Cuartel Valpara\u00edso.",
           "adaptation_reason": "Prioritizing weak topics and avoiding mastered questions.",
           "source_chunk_ids": [
             "11e8b047-54f6-42b9-a9b8-a0e6bbf19e09"
           ]
         },
         {
-          "question_id": "a734ddac-9754-4b25-b798-ba19adddceec",
+          "question_id": "35453624-d192-4ef6-a5ce-2e91601e7051",
           "section_number": 8,
-          "topic": "Safehouses",
-          "difficulty": "hard",
-          "question": "Who audits the safehouse provisioning semi-annually?",
+          "topic": "Operational Territory",
+          "difficulty": "medium",
+          "question": "How many micro-caches does the asset maintain?",
           "options": {
-            "A": "Cpl. Vendrame",
-            "B": "PAMC South Cone Headquarters",
-            "C": "Asset's primary operational base",
-            "D": "Cell's leader"
+            "A": "10",
+            "B": "15",
+            "C": "19",
+            "D": "20"
           },
-          "user_answer": "B",
-          "correct_answer": "A",
+          "user_answer": "A",
+          "correct_answer": "C",
           "is_correct": false,
-          "clarification": "Cpl. Vendrame audits the safehouse provisioning semi-annually on behalf of the cell.",
+          "clarification": "The asset maintains a network of 19 micro-caches.",
           "adaptation_reason": "Prioritizing weak topics and avoiding mastered questions.",
           "source_chunk_ids": [
             "421ff765-5d8f-4b26-b568-e8e439c15860"
@@ -114,17 +114,9 @@
       "weak_topics": [
         {
           "section_number": 8,
-          "topic": "Safehouses",
-          "attempts": 1,
-          "wrong_count": 1,
-          "correct_count": 0,
-          "weakness_score": 1.0
-        },
-        {
-          "section_number": 8,
           "topic": "Operational Territory",
-          "attempts": 1,
-          "wrong_count": 1,
+          "attempts": 2,
+          "wrong_count": 2,
           "correct_count": 0,
           "weakness_score": 1.0
         },

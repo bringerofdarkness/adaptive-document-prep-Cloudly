@@ -1,5 +1,5 @@
 {
-  "session_id": "2abca22b-7fba-477c-bd00-ed060796a752",
+  "session_id": "6d2b1be8-ba2e-4470-9732-510374116959",
   "mode": "adaptive",
   "selected_sections": [
     6,
@@ -18,45 +18,60 @@
     "weak_topics": [
       {
         "section_number": 8,
-        "topic": "Safehouses",
-        "attempts": 1,
-        "wrong_count": 1,
-        "correct_count": 0,
-        "weakness_score": 1.0
-      },
-      {
-        "section_number": 8,
         "topic": "Operational Territory",
-        "attempts": 1,
-        "wrong_count": 1,
+        "attempts": 2,
+        "wrong_count": 2,
         "correct_count": 0,
         "weakness_score": 1.0
       }
     ],
     "mastered_question_texts": [],
     "previous_wrong_question_texts": [
-      "Who audits the safehouse provisioning semi-annually?",
+      "How many micro-caches does the asset maintain?",
       "What is the primary operational base of the asset?"
     ],
     "summary": "Adaptive run: prior history found. Focus more on weak topics and avoid excessive repetition of mastered questions."
   },
   "questions": [
     {
-      "question_id": "a3d478bd-01fd-4a22-b28b-b40f034cb994",
+      "question_id": "69715658-c481-470d-b9d6-c610358abaf1",
       "section_id": "c199947c-c06d-4701-bb81-0d45720926da",
       "section_number": 6,
-      "topic": "Metahuman Operations Cells",
+      "topic": "Nordic Metahuman Operations Cell",
       "difficulty": "medium",
-      "question": "What is the purpose of the Nordic Metahuman Operations Cell (NMOC)?",
+      "question": "What is the frequency of joint training rotations for the Nordic Metahuman Operations Cell (NMOC)?",
       "options": {
-        "A": "Joint training rotations every 18 months",
-        "B": "Case-data exchange, four reciprocal briefings per year",
-        "C": "Observer status, biennial conference attendance",
-        "D": "Attending the Pan-Cooperative Summit"
+        "A": "Every 12 months",
+        "B": "Every 18 months",
+        "C": "Every 6 months",
+        "D": "Every 24 months"
+      },
+      "correct_answer": "B",
+      "explanation": "The Nordic Metahuman Operations Cell (NMOC) conducts joint training rotations every 18 months.",
+      "adaptation_reason": "Prioritized weak topic: Nordic Metahuman Operations Cell",
+      "source_chunk_ids": [
+        "8605ceb7-739a-4ab7-a547-df12a785f39c"
+      ],
+      "simulated_user_answer": "B",
+      "is_correct": true,
+      "clarification": null
+    },
+    {
+      "question_id": "42cd0727-d408-459a-80db-738d587670fb",
+      "section_id": "c199947c-c06d-4701-bb81-0d45720926da",
+      "section_number": 6,
+      "topic": "European Metahuman Reserve",
+      "difficulty": "medium",
+      "question": "How often does the European Metahuman Reserve (EUMR) conduct case-data exchange with other organizations?",
+      "options": {
+        "A": "Four reciprocal briefings per year",
+        "B": "Six reciprocal briefings per year",
+        "C": "Two reciprocal briefings per year",
+        "D": "Eight reciprocal briefings per year"
       },
       "correct_answer": "A",
-      "explanation": "NMOC focuses on joint training rotations.",
-      "adaptation_reason": "Prioritized weak topic: Metahuman Operations Cells",
+      "explanation": "The European Metahuman Reserve (EUMR) conducts case-data exchange with other organizations four times a year.",
+      "adaptation_reason": "Prioritized weak topic: European Metahuman Reserve",
       "source_chunk_ids": [
         "8605ceb7-739a-4ab7-a547-df12a785f39c"
       ],
@@ -65,53 +80,7 @@
       "clarification": null
     },
     {
-      "question_id": "464857ea-6850-4930-8193-7f8f6fea52b4",
-      "section_id": "c199947c-c06d-4701-bb81-0d45720926da",
-      "section_number": 6,
-      "topic": "PAMC Inspector General",
-      "difficulty": "hard",
-      "question": "What is the role of PAMC Inspector General Magnus Sletten?",
-      "options": {
-        "A": "Adversarial bureaucratic figure",
-        "B": "Operative in the Caracas Cell",
-        "C": "Maintains formal correspondence channel",
-        "D": "Attends biennial conferences"
-      },
-      "correct_answer": "A",
-      "explanation": "Magnus Sletten is an adversarial bureaucratic figure.",
-      "adaptation_reason": "Avoided close repeat of mastered question",
-      "source_chunk_ids": [
-        "fc1aa8e0-1d05-453e-b52e-1c4a128424a5"
-      ],
-      "simulated_user_answer": "A",
-      "is_correct": true,
-      "clarification": null
-    },
-    {
-      "question_id": "a337f7e3-93b1-44ac-beb1-d40b1dbb04b1",
-      "section_id": "24707465-4591-4e01-b532-4251aceaf99c",
-      "section_number": 8,
-      "topic": "Safehouses",
-      "difficulty": "medium",
-      "question": "Who audits the safehouse provisioning semi-annually?",
-      "options": {
-        "A": "Cpl. Vendrame",
-        "B": "Asset's primary operational base",
-        "C": "PAMC South Cone Headquarters",
-        "D": "Cell's representative"
-      },
-      "correct_answer": "A",
-      "explanation": "Cpl. Vendrame audits the safehouse provisioning semi-annually on behalf of the cell.",
-      "adaptation_reason": "Prioritized weak topic: Safehouses",
-      "source_chunk_ids": [
-        "421ff765-5d8f-4b26-b568-e8e439c15860"
-      ],
-      "simulated_user_answer": "B",
-      "is_correct": false,
-      "clarification": "Cpl. Vendrame audits the safehouse provisioning semi-annually on behalf of the cell."
-    },
-    {
-      "question_id": "00534128-e91d-447b-a884-b11e71c5e175",
+      "question_id": "b37ca445-2e11-42df-ad9d-459314eae894",
       "section_id": "24707465-4591-4e01-b532-4251aceaf99c",
       "section_number": 8,
       "topic": "Operational Territory",
@@ -119,36 +88,59 @@
       "question": "What is the primary operational base of the asset?",
       "options": {
         "A": "Cuartel Valpara\u00edso",
-        "B": "PAMC South Cone Headquarters",
-        "C": "Avenida Altamirano 1842",
+        "B": "Avenida Altamirano 1842",
+        "C": "PAMC South Cone Headquarters",
         "D": "Valpara\u00edso"
       },
       "correct_answer": "A",
-      "explanation": "Cuartel Valpara\u00edso is the primary operational base of the asset.",
-      "adaptation_reason": "Prioritized weak topic: Operational Territory",
+      "explanation": "The primary operational base is Cuartel Valpara\u00edso.",
+      "adaptation_reason": "Prioritized weak topic: Operational Territory.",
       "source_chunk_ids": [
         "11e8b047-54f6-42b9-a9b8-a0e6bbf19e09"
       ],
       "simulated_user_answer": "B",
       "is_correct": false,
-      "clarification": "Cuartel Valpara\u00edso is the primary operational base of the asset."
+      "clarification": "The primary operational base is Cuartel Valpara\u00edso."
     },
     {
-      "question_id": "6c4dd399-95eb-4d5d-af35-d3dd268771b2",
+      "question_id": "b29ad1ce-e4fa-4420-a8a8-d19c73189608",
+      "section_id": "24707465-4591-4e01-b532-4251aceaf99c",
+      "section_number": 8,
+      "topic": "Operational Territory",
+      "difficulty": "medium",
+      "question": "How many micro-caches does the asset maintain?",
+      "options": {
+        "A": "10",
+        "B": "15",
+        "C": "19",
+        "D": "20"
+      },
+      "correct_answer": "C",
+      "explanation": "The asset maintains a network of 19 micro-caches.",
+      "adaptation_reason": "Prioritized weak topic: Operational Territory.",
+      "source_chunk_ids": [
+        "421ff765-5d8f-4b26-b568-e8e439c15860"
+      ],
+      "simulated_user_answer": "A",
+      "is_correct": false,
+      "clarification": "The asset maintains a network of 19 micro-caches."
+    },
+    {
+      "question_id": "61d81be9-ebd8-4f04-b431-c7cc6c39b0a7",
       "section_id": "da396094-6d3e-4427-9d90-933b7170204c",
       "section_number": 9,
-      "topic": "Case File Format",
+      "topic": "Case Files",
       "difficulty": "medium",
-      "question": "What is the format of all cases recorded under PAMC?",
+      "question": "What is the uniform PAMC format for recording cases?",
       "options": {
-        "A": "Uniform PAMC format",
-        "B": "SLATEFALL_DOSSIER.md",
-        "C": "Case number (year-sequence)",
-        "D": "Date (start\u2013end)"
+        "A": "Case number (year-sequence)",
+        "B": "Date (start\u2013end)",
+        "C": "Location (city, province, country)",
+        "D": "Outcome (Successful / Partial / Inconclusive /..."
       },
       "correct_answer": "A",
-      "explanation": "All cases are recorded under a uniform PAMC format.",
-      "adaptation_reason": "Prioritized weak topics and avoided close repeats of mastered questions.",
+      "explanation": "The uniform PAMC format is used for recording cases under a specific format.",
+      "adaptation_reason": "Prioritized weak topics and avoided mastered questions.",
       "source_chunk_ids": [
         "2a89ad36-6d8e-4949-a65a-a0e94d21724a"
       ],
@@ -157,23 +149,23 @@
       "clarification": null
     },
     {
-      "question_id": "3c4f5e34-329c-467c-8e99-fd72308a60a1",
+      "question_id": "8edbfe2f-fdd2-4bd4-a6e0-94d851df165e",
       "section_id": "da396094-6d3e-4427-9d90-933b7170204c",
       "section_number": 9,
-      "topic": "Case File Format",
-      "difficulty": "medium",
-      "question": "What is the classification of cases?",
+      "topic": "Case Files",
+      "difficulty": "hard",
+      "question": "What was the outcome of Case 2024-0202: Quebrantadero Showdown?",
       "options": {
-        "A": "Open",
-        "B": "Classified",
-        "C": "Declassified",
-        "D": "All of the above"
+        "A": "Successful",
+        "B": "Partial",
+        "C": "Inconclusive",
+        "D": "Detained personnel led to seizure of USD $4.2 million in Concession assets"
       },
       "correct_answer": "D",
-      "explanation": "Cases can be classified as open, classified, or declassified.",
-      "adaptation_reason": "Prioritized weak topics and avoided close repeats of mastered questions.",
+      "explanation": "The outcome of Case 2024-0202: Quebrantadero Showdown was the seizure of USD $4.2 million in Concession assets.",
+      "adaptation_reason": "Prioritized weak topics and avoided mastered questions.",
       "source_chunk_ids": [
-        "2a89ad36-6d8e-4949-a65a-a0e94d21724a"
+        "77da46b4-29d5-4d6f-a117-d827cfd4b3f5"
       ],
       "simulated_user_answer": "D",
       "is_correct": true,

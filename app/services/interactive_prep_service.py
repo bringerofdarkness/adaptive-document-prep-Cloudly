@@ -1,5 +1,6 @@
 from sqlalchemy.orm import Session
 
+from app.llm.output_parser import clean_text_value
 from app.db.repositories.document_repo import get_latest_document
 from app.db.repositories.session_repo import (
     create_prep_session_with_questions,
@@ -9,6 +10,11 @@ from app.llm.mcq_generator import generate_mcqs
 from app.retrieval.retriever import retrieve_chunks_for_sections
 from app.services.adaptation_service import build_adaptation_payload
 
+def _clean_options(options: dict) -> dict[str, str]:
+    return {
+        str(key): clean_text_value(value)
+        for key, value in options.items()
+    }
 
 def start_interactive_prep_session(
     db: Session,
@@ -62,17 +68,17 @@ def start_interactive_prep_session(
         "total_questions": session.total_questions,
         "adaptation_summary": session.adaptation_summary,
         "questions": [
-            {
-                "question_id": question.question_id,
-                "section_number": question.section_number,
-                "topic": question.topic,
-                "difficulty": question.difficulty,
-                "question": question.question,
-                "options": dict(question.options),
-                "adaptation_reason": question.adaptation_reason,
-            }
-            for question in mcq_set.questions
-        ],
+    {
+        "question_id": question.question_id,
+        "section_number": question.section_number,
+        "topic": clean_text_value(question.topic),
+        "difficulty": question.difficulty,
+        "question": clean_text_value(question.question),
+        "options": _clean_options(dict(question.options)),
+        "adaptation_reason": clean_text_value(question.adaptation_reason),
+    }
+    for question in mcq_set.questions
+],
     }
 
 
