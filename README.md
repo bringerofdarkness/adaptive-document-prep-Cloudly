@@ -134,9 +134,8 @@ Recommended reading order:
     - [25.6 Run API](#256-run-api)
   - [26. Project Structure](#26-project-structure)
   - [27. Useful Commands](#27-useful-commands)
-  - [Development Note](#development-note)
-  - [**AI Tools:** ChatGPT, Google Gemini](#ai-tools-chatgpt-google-gemini)
-  - [28. Final Project Pitch](#28-final-project-pitch)
+  - [28. Development Note](#28-development-note)
+  - [29. Final Project Pitch](#29-final-project-pitch)
 
 ---
 
@@ -1462,15 +1461,16 @@ http://127.0.0.1:18000/docs
 
 ---
 
-## Development Note
+## 28. Development Note
 
 This project was independently implemented and validated by the project author. AI tools were used as supplementary assistants for brainstorming, debugging support, documentation refinement, and reviewing implementation decisions.
 
 All final architecture choices, code changes, testing, validation, and repository maintenance were reviewed and owned by the project author.
 
 **AI Tools:** ChatGPT, Google Gemini
+
 ---
 
-## 28. Final Project Pitch
+## 29. Final Project Pitch
 
 This project is a production-style adaptive RAG backend that ingests a structured PDF, stores section chunks in Qdrant for deterministic section-filtered retrieval, stores all learning history in PostgreSQL, generates MCQs through an LLM, validates structured outputs, scores answers, identifies weak topics over time, and adapts future question generation based on previous mistakes while exporting reviewer-ready Scenario A and Scenario B outputs.
