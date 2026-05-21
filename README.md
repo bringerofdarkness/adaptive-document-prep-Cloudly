@@ -134,6 +134,8 @@ Recommended reading order:
     - [25.6 Run API](#256-run-api)
   - [26. Project Structure](#26-project-structure)
   - [27. Useful Commands](#27-useful-commands)
+  - [Development Note](#development-note)
+  - [**AI Tools:** ChatGPT, Google Gemini](#ai-tools-chatgpt-google-gemini)
   - [28. Final Project Pitch](#28-final-project-pitch)
 
 ---
@@ -1458,6 +1460,15 @@ Open Swagger:
 http://127.0.0.1:18000/docs
 ```
 
+---
+
+## Development Note
+
+This project was independently implemented and validated by the project author. AI tools were used as supplementary assistants for brainstorming, debugging support, documentation refinement, and reviewing implementation decisions.
+
+All final architecture choices, code changes, testing, validation, and repository maintenance were reviewed and owned by the project author.
+
+**AI Tools:** ChatGPT, Google Gemini
 ---
 
 ## 28. Final Project Pitch
