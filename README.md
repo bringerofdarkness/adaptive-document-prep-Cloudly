@@ -30,11 +30,10 @@ The goal is not only to build a basic RAG system. The main goal is to prove adap
 | Layer | Technology | Purpose |
 |---|---|---|
 | Backend API | FastAPI | REST API, Swagger testing, interactive prep flow |
-| Workflow orchestration | LangGraph | Stateful CLI prep pipeline for retrieval, generation, scoring, persistence, and adaptation |
-| LangChain ecosystem | LangGraph | Graph-based orchestration from the LangChain ecosystem |
+| Workflow orchestration | LangGraph | Stateful CLI workflow for loading history, retrieving chunks, generating MCQs, scoring answers, persisting sessions, and supporting adaptive Scenario B |
 | Relational Knowledge Base | PostgreSQL | Documents, sections, chunks, sessions, answers, weak topics, and KB snapshots |
 | Vector retrieval | Qdrant | Semantic retrieval over PDF chunks with strict section filtering |
-| Embeddings | Hugging Face `sentence-transformers/all-MiniLM-L6-v2` | Local chunk embedding generation for Qdrant indexing and retrieval |
+| Embeddings | SentenceTransformers model: `all-MiniLM-L6-v2` | Converts PDF chunks into vectors before storing/searching them in Qdrant |
 | LLM provider | Groq | Real MCQ generation with free/developer-friendly API access |
 | Optional LLM provider | Gemini scaffold | Alternative provider path if configured |
 | Local fallback | Mock provider | Deterministic local testing without external LLM key |
@@ -46,11 +45,30 @@ The goal is not only to build a basic RAG system. The main goal is to prove adap
 | Text cleanup | ftfy | Unicode/mojibake cleanup for LLM and PDF text |
 
 ---
+## Documentation
+
+For deeper technical review, see the documentation files below.
+
+| File | Purpose |
+|---|---|
+| [Architecture](docs/architecture.md) | Hybrid RAG architecture, LangGraph workflow, retrieval flow, API flow, and component responsibilities |
+| [Database Schema](docs/database_schema.md) | PostgreSQL schema, table relationships, Knowledge Base query patterns, weak-topic storage, and KB snapshot design |
+| [Adaptation Strategy](docs/adaptation_strategy.md) | Cold-start vs adaptive logic, weak-topic tracking, Scenario B behavior, backend-owned adaptation reasons, and history-aware generation |
+
+Recommended reading order:
+
+```text
+1. docs/architecture.md
+2. docs/database_schema.md
+3. docs/adaptation_strategy.md
+```
+---
 
 ## Index
-
+ 
 - [Adaptive Document Preparation System](#adaptive-document-preparation-system)
   - [Tech Stack](#tech-stack)
+  - [Documentation](#documentation)
   - [Index](#index)
   - [1. Project Highlights](#1-project-highlights)
   - [2. Current Verified Status](#2-current-verified-status)
@@ -86,38 +104,37 @@ The goal is not only to build a basic RAG system. The main goal is to prove adap
     - [Workflow Nodes](#workflow-nodes)
     - [Workflow State](#workflow-state)
     - [Why LangGraph Matters](#why-langgraph-matters)
-  - [17. Documentation](#17-documentation)
-  - [18. Knowledge Base Design](#18-knowledge-base-design)
+  - [17. Knowledge Base Design](#17-knowledge-base-design)
     - [Why PostgreSQL Is Used](#why-postgresql-is-used)
     - [Why Qdrant Is Separate](#why-qdrant-is-separate)
-  - [19. Adaptation Strategy](#19-adaptation-strategy)
-  - [20. LLM and Model Choice](#20-llm-and-model-choice)
+  - [18. Adaptation Strategy](#18-adaptation-strategy)
+  - [19. LLM and Model Choice](#19-llm-and-model-choice)
     - [Primary LLM: Groq](#primary-llm-groq)
     - [Mock fallback](#mock-fallback)
     - [Why not only Gemini?](#why-not-only-gemini)
     - [Why not only Ollama/local LLM?](#why-not-only-ollamalocal-llm)
     - [Why not only HuggingFace generation?](#why-not-only-huggingface-generation)
-  - [21. MCQ Validation](#21-mcq-validation)
-  - [22. Encoding Cleanup](#22-encoding-cleanup)
-  - [23. Project Speciality](#23-project-speciality)
-  - [24. Known Limitations](#24-known-limitations)
+  - [20. MCQ Validation](#20-mcq-validation)
+  - [21. Encoding Cleanup](#21-encoding-cleanup)
+  - [22. Project Speciality](#22-project-speciality)
+  - [23. Known Limitations](#23-known-limitations)
     - [LLM non-determinism](#llm-non-determinism)
     - [First run can be slow](#first-run-can-be-slow)
     - [HuggingFace token warning](#huggingface-token-warning)
     - [API mode depends on existing history](#api-mode-depends-on-existing-history)
     - [No frontend](#no-frontend)
     - [Docker scope](#docker-scope)
-  - [25. Output Commit Strategy](#25-output-commit-strategy)
-  - [26. Suggested Recruiter Verification Flow](#26-suggested-recruiter-verification-flow)
-    - [26.1 Start services](#261-start-services)
-    - [24.2 Reset and rebuild the KB](#242-reset-and-rebuild-the-kb)
-    - [26.3 Run full evaluation](#263-run-full-evaluation)
-    - [26.4 Verify final Scenario B result](#264-verify-final-scenario-b-result)
-    - [26.5 Run tests](#265-run-tests)
-    - [26.6 Run API](#266-run-api)
-  - [27. Project Structure](#27-project-structure)
-  - [28. Useful Commands](#28-useful-commands)
-  - [29. Final Project Pitch](#29-final-project-pitch)
+  - [24. Output Commit Strategy](#24-output-commit-strategy)
+  - [25. Suggested Recruiter Verification Flow](#25-suggested-recruiter-verification-flow)
+    - [25.1 Start services](#251-start-services)
+    - [25.2 Reset and rebuild the KB](#252-reset-and-rebuild-the-kb)
+    - [25.3 Run full evaluation](#253-run-full-evaluation)
+    - [25.4 Verify final Scenario B result](#254-verify-final-scenario-b-result)
+    - [25.5 Run tests](#255-run-tests)
+    - [25.6 Run API](#256-run-api)
+  - [26. Project Structure](#26-project-structure)
+  - [27. Useful Commands](#27-useful-commands)
+  - [28. Final Project Pitch](#28-final-project-pitch)
 
 ---
 
@@ -914,26 +931,9 @@ app/services/prep_service.py
 ```
 
 ---
-## 17. Documentation
 
-For deeper technical review, the main documentation files are listed below.
 
-| File | Purpose |
-|---|---|
-| [Architecture](docs/architecture.md) | System architecture, hybrid RAG design, LangGraph workflow, retrieval flow, API flow, and major component responsibilities |
-| [Database Schema](docs/database_schema.md) | PostgreSQL schema, table relationships, Knowledge Base query patterns, weak-topic storage, and KB snapshot design |
-| [Adaptation Strategy](docs/adaptation_strategy.md) | Cold-start vs adaptive logic, weak-topic tracking, Scenario B behavior, backend-owned adaptation reasons, and history-aware generation |
-
-Recommended reading order:
-
-```text
-1. docs/architecture.md
-2. docs/database_schema.md
-3. docs/adaptation_strategy.md
-```
----
-
-## 18. Knowledge Base Design
+## 17. Knowledge Base Design
 
 PostgreSQL is the system’s Knowledge Base for learning history.
 
@@ -990,7 +990,7 @@ docs/database_schema.md
 
 ---
 
-## 19. Adaptation Strategy
+## 18. Adaptation Strategy
 
 Adaptation is built from stored PostgreSQL history.
 
@@ -1047,7 +1047,7 @@ docs/adaptation_strategy.md
 
 ---
 
-## 20. LLM and Model Choice
+## 19. LLM and Model Choice
 
 ### Primary LLM: Groq
 
@@ -1097,7 +1097,7 @@ The project already uses HuggingFace sentence-transformer embeddings locally. Fo
 
 ---
 
-## 21. MCQ Validation
+## 20. MCQ Validation
 
 The backend does not blindly trust LLM output.
 
@@ -1127,7 +1127,7 @@ If the LLM under-generates or returns malformed questions, the system retries se
 
 ---
 
-## 22. Encoding Cleanup
+## 21. Encoding Cleanup
 
 LLM and PDF text can sometimes contain mojibake, for example:
 
@@ -1147,7 +1147,7 @@ This is intentionally not a hardcoded word-specific replacement.
 
 ---
 
-## 23. Project Speciality
+## 22. Project Speciality
 
 The project is stronger than a basic RAG demo because it includes:
 
@@ -1178,7 +1178,7 @@ Iteration 3 focuses only on section 8 and remains adaptive.
 
 ---
 
-## 24. Known Limitations
+## 23. Known Limitations
 
 ### LLM non-determinism
 
@@ -1246,7 +1246,7 @@ Docker Compose is used for PostgreSQL and Qdrant services. The FastAPI app can b
 
 ---
 
-## 25. Output Commit Strategy
+## 24. Output Commit Strategy
 
 The `outputs/` directory is intentionally useful for reviewers.
 
@@ -1276,17 +1276,17 @@ python -m cli.run_evaluation --questions-per-section 5
 
 ---
 
-## 26. Suggested Recruiter Verification Flow
+## 25. Suggested Recruiter Verification Flow
 
 A reviewer can verify the project as follows.
 
-### 26.1 Start services
+### 25.1 Start services
 
 ```powershell
 docker compose up -d
 ```
 
-### 24.2 Reset and rebuild the KB
+### 25.2 Reset and rebuild the KB
 
 ```powershell
 python -m cli.reset_db reset
@@ -1294,13 +1294,13 @@ python -m cli.ingest_pdf
 python -m cli.index_qdrant
 ```
 
-### 26.3 Run full evaluation
+### 25.3 Run full evaluation
 
 ```powershell
 python -m cli.run_evaluation --questions-per-section 5
 ```
 
-### 26.4 Verify final Scenario B result
+### 25.4 Verify final Scenario B result
 
 Expected:
 
@@ -1310,7 +1310,7 @@ Scenario B iteration 2 complete | mode=adaptive | score=66.67
 Scenario B iteration 3 complete | mode=adaptive | score=0.0
 ```
 
-### 26.5 Run tests
+### 25.5 Run tests
 
 ```powershell
 python -m pytest tests
@@ -1322,7 +1322,7 @@ Expected:
 6 passed
 ```
 
-### 26.6 Run API
+### 25.6 Run API
 
 ```powershell
 .\.venv\Scripts\python.exe -m uvicorn app.main:app --host 127.0.0.1 --port 18000
@@ -1347,7 +1347,7 @@ GET /kb/snapshot
 
 ---
 
-## 27. Project Structure
+## 26. Project Structure
 
 Short structure summary:
 
@@ -1396,7 +1396,7 @@ docs/project_structure.md
 
 ---
 
-## 28. Useful Commands
+## 27. Useful Commands
 
 Start services:
 
@@ -1460,6 +1460,6 @@ http://127.0.0.1:18000/docs
 
 ---
 
-## 29. Final Project Pitch
+## 28. Final Project Pitch
 
 This project is a production-style adaptive RAG backend that ingests a structured PDF, stores section chunks in Qdrant for deterministic section-filtered retrieval, stores all learning history in PostgreSQL, generates MCQs through an LLM, validates structured outputs, scores answers, identifies weak topics over time, and adapts future question generation based on previous mistakes while exporting reviewer-ready Scenario A and Scenario B outputs.
