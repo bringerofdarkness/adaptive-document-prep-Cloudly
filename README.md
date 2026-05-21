@@ -778,7 +778,7 @@ Users can select one or more sections from this list.
 
 ## 15. Architecture Summary
 
-The system uses a **hybrid adaptive RAG architecture**.
+The system uses a **hybrid-storage adaptive RAG architecture**: PostgreSQL stores the auditable source of truth and learning history, Qdrant stores semantic PDF chunk embeddings for selected-section retrieval, and LangGraph orchestrates the multi-step CLI preparation workflow that turns prior history into adaptive MCQ generation.
 
 The design separates three responsibilities clearly:
 
