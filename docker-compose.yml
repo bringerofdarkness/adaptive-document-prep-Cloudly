@@ -21,6 +21,16 @@ services:
     volumes:
       - qdrant_data:/qdrant/storage
 
+  redis:
+    image: redis:7-alpine
+    container_name: adaptive_doc_redis_6380
+    restart: unless-stopped
+    ports:
+      - "127.0.0.1:6380:6379"
+    volumes:
+      - redis_data:/data
+
 volumes:
   postgres_data:
   qdrant_data:
+  redis_data:
