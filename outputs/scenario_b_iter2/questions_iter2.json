@@ -1,5 +1,5 @@
 {
-  "session_id": "0c75a3c3-f042-447d-acf6-c0d0d9dd2a27",
+  "session_id": "76b7468f-e9a9-47f9-8007-49b7c3553601",
   "mode": "adaptive",
   "selected_sections": [
     6,
@@ -18,7 +18,7 @@
     "weak_topics": [
       {
         "section_number": 8,
-        "topic": "Micro-Cache Network",
+        "topic": "Bilateral Cooperation",
         "attempts": 1,
         "wrong_count": 1,
         "correct_count": 0,
@@ -26,7 +26,7 @@
       },
       {
         "section_number": 8,
-        "topic": "Bilateral Cooperation",
+        "topic": "Former Trainer",
         "attempts": 1,
         "wrong_count": 1,
         "correct_count": 0,
@@ -59,209 +59,217 @@
     ],
     "mastered_question_texts": [],
     "previous_wrong_question_texts": [
-      "How many micro-caches does the asset maintain?",
       "What is the name of the bilateral cooperation framework between the asset and Bolivian Servicio de Operaciones Especiales (SOE)?",
-      "What is the approximate area of the asset's authorized operational territory?",
+      "Who is the asset's former trainer?",
+      "What is the approximate size of the asset's authorized operational territory?",
       "Who audits the safehouse provisioning semi-annually?",
-      "What is the name of the asset's primary operational base?"
+      "What is the primary operational base of the asset?"
     ],
-    "summary": "Adaptive run: prior history found. Focus more on weak topics and avoid excessive repetition of mastered questions."
+    "summary": "Adaptive run: prior history found. Focus more on weak topics and avoid excessive repetition of mastered questions.",
+    "telemetry": {
+      "prompt_tokens": 5100,
+      "completion_tokens": 2700,
+      "total_tokens": 7800,
+      "cached_applied": false
+    }
   },
   "questions": [
     {
-      "question_id": "e956fc47-8eb8-4d7f-a47c-8fe5a272e49d",
+      "question_id": "d9b550ea-3098-45f7-8ce3-eabdbb01c5ba",
       "section_id": "c199947c-c06d-4701-bb81-0d45720926da",
       "section_number": 6,
-      "topic": "PAMC Founding",
-      "difficulty": "easy",
-      "question": "When was the Pan-American Metahuman Cooperative (PAMC) founded?",
+      "topic": "PAMC Structure",
+      "difficulty": "medium",
+      "question": "Where is the PAMC headquartered?",
       "options": {
-        "A": "22 May 2014",
-        "B": "22 May 2013",
+        "A": "Edificio Marasol, Avenida Salaverry 1840, Lima",
+        "B": "European Metahuman Reserve (EUMR) HQ",
+        "C": "Nordic Metahuman Operations Cell (NMOC) HQ",
+        "D": "East Asian Metahuman Compact (EAMC) HQ"
+      },
+      "correct_answer": "A",
+      "explanation": "PAMC is headquartered at Edificio Marasol, Avenida Salaverry 1840, Lima.",
+      "adaptation_reason": "Returning-run question generated using previous session history without a section-specific weak topic.",
+      "source_chunk_ids": [
+        "ee5c9e86-bbdf-4666-a702-46fee96157af"
+      ],
+      "simulated_user_answer": "A",
+      "is_correct": true,
+      "clarification": null
+    },
+    {
+      "question_id": "2be9583c-86dd-4ca8-84d7-c5daeb29bfa5",
+      "section_id": "c199947c-c06d-4701-bb81-0d45720926da",
+      "section_number": 6,
+      "topic": "PAMC History",
+      "difficulty": "easy",
+      "question": "When was the PAMC founded?",
+      "options": {
+        "A": "22 May 2013",
+        "B": "22 May 2014",
         "C": "22 May 2015",
         "D": "22 May 2016"
       },
-      "correct_answer": "A",
-      "explanation": "The Pan-American Metahuman Cooperative (PAMC) was founded on 22 May 2014.",
-      "adaptation_reason": "Returning-run question generated using previous session history without a section-specific weak topic.",
-      "source_chunk_ids": [
-        "ee5c9e86-bbdf-4666-a702-46fee96157af"
-      ],
-      "simulated_user_answer": "A",
-      "is_correct": true,
-      "clarification": null
-    },
-    {
-      "question_id": "bcb614fb-9700-44f9-b18d-e4122cf6cea5",
-      "section_id": "c199947c-c06d-4701-bb81-0d45720926da",
-      "section_number": 6,
-      "topic": "PAMC Headquarters",
-      "difficulty": "easy",
-      "question": "Where is the Pan-American Metahuman Cooperative (PAMC) headquartered?",
-      "options": {
-        "A": "Edificio Marasol, Avenida Salaverry 1840, Lima",
-        "B": "Edificio Marasol, Avenida Salaverry 1841, Lima",
-        "C": "Edificio Marasol, Avenida Salaverry 1842, Lima",
-        "D": "Edificio Marasol, Avenida Salaverry 1843, Lima"
-      },
-      "correct_answer": "A",
-      "explanation": "The Pan-American Metahuman Cooperative (PAMC) is headquartered at Edificio Marasol, Avenida Salaverry 1840, Lima.",
-      "adaptation_reason": "Returning-run question generated using previous session history without a section-specific weak topic.",
-      "source_chunk_ids": [
-        "ee5c9e86-bbdf-4666-a702-46fee96157af"
-      ],
-      "simulated_user_answer": "A",
-      "is_correct": true,
-      "clarification": null
-    },
-    {
-      "question_id": "2a570f32-3908-499c-9bcd-606bd55b7a40",
-      "section_id": "c199947c-c06d-4701-bb81-0d45720926da",
-      "section_number": 6,
-      "topic": "PAMC Inspector General",
-      "difficulty": "medium",
-      "question": "What is the title of the PAMC Inspector General?",
-      "options": {
-        "A": "Magnus Sletten",
-        "B": "Joaqu\\u00edn Hidalgo-Y\\u00e1\\u00f1ez",
-        "C": "Underwriter",
-        "D": "Inspector General"
-      },
-      "correct_answer": "C",
-      "explanation": "The PAMC Inspector General is referred to as the \"Underwriter\".",
-      "adaptation_reason": "Returning-run question generated using previous session history without a section-specific weak topic.",
-      "source_chunk_ids": [
-        "fc1aa8e0-1d05-453e-b52e-1c4a128424a5"
-      ],
-      "simulated_user_answer": "C",
-      "is_correct": true,
-      "clarification": null
-    },
-    {
-      "question_id": "8ca6b464-16c5-48c0-b983-32c6a29f70d7",
-      "section_id": "c199947c-c06d-4701-bb81-0d45720926da",
-      "section_number": 6,
-      "topic": "PAMC Operative",
-      "difficulty": "medium",
-      "question": "What is the name of the PAMC Class A-1 operative?",
-      "options": {
-        "A": "Magnus Sletten",
-        "B": "Joaqu\\u00edn Hidalgo-Y\\u00e1\\u00f1ez",
-        "C": "T\u00f3rtola",
-        "D": "Underwriter"
-      },
       "correct_answer": "B",
-      "explanation": "Joaqu\u00edn Hidalgo-Y\u00e1\u00f1ez is a PAMC Class A-1 operative.",
+      "explanation": "The PAMC was founded on 22 May 2014.",
       "adaptation_reason": "Returning-run question generated using previous session history without a section-specific weak topic.",
       "source_chunk_ids": [
-        "fc1aa8e0-1d05-453e-b52e-1c4a128424a5"
+        "ee5c9e86-bbdf-4666-a702-46fee96157af"
       ],
       "simulated_user_answer": "B",
       "is_correct": true,
       "clarification": null
     },
     {
-      "question_id": "ef518866-4f1d-4de0-af09-cd5e58e24694",
+      "question_id": "7c99668c-f912-4ea2-b6f9-e7501dd4b898",
       "section_id": "c199947c-c06d-4701-bb81-0d45720926da",
       "section_number": 6,
-      "topic": "PAMC Summit Attendance",
+      "topic": "PAMC Relationships",
       "difficulty": "hard",
-      "question": "In what year did the asset attend the 2024 Pan-Cooperative Summit in Lisbon?",
+      "question": "What is the nature of the relationship between PAMC and the European Metahuman Reserve (EUMR)?",
       "options": {
-        "A": "2023",
-        "B": "2024",
-        "C": "2025",
-        "D": "2026"
+        "A": "Adversarial",
+        "B": "Neutral",
+        "C": "Observer status",
+        "D": "Joint training rotations"
+      },
+      "correct_answer": "D",
+      "explanation": "PAMC and EUMR have joint training rotations every 18 months.",
+      "adaptation_reason": "Returning-run question generated using previous session history without a section-specific weak topic.",
+      "source_chunk_ids": [
+        "8605ceb7-739a-4ab7-a547-df12a785f39c"
+      ],
+      "simulated_user_answer": "D",
+      "is_correct": true,
+      "clarification": null
+    },
+    {
+      "question_id": "7fa26564-5ba4-4acf-8ddf-946aa268476b",
+      "section_id": "c199947c-c06d-4701-bb81-0d45720926da",
+      "section_number": 6,
+      "topic": "PAMC Affiliations",
+      "difficulty": "medium",
+      "question": "What is the name of the bilateral cooperation framework between the PAMC and the Bolivian Servicio de Operaciones Especiales (SOE)?",
+      "options": {
+        "A": "Nordic Metahuman Operations Cell (NMOC)",
+        "B": "European Metahuman Reserve (EUMR)",
+        "C": "East Asian Metahuman Compact (EAMC)",
+        "D": "Not specified"
+      },
+      "correct_answer": "D",
+      "explanation": "The name of the bilateral cooperation framework is not specified.",
+      "adaptation_reason": "Returning-run question generated using previous session history without a section-specific weak topic.",
+      "source_chunk_ids": [
+        "fc1aa8e0-1d05-453e-b52e-1c4a128424a5"
+      ],
+      "simulated_user_answer": "D",
+      "is_correct": true,
+      "clarification": null
+    },
+    {
+      "question_id": "632a3e23-9749-4ac7-ab5a-0b11e4cda9b3",
+      "section_id": "c199947c-c06d-4701-bb81-0d45720926da",
+      "section_number": 6,
+      "topic": "PAMC Personnel",
+      "difficulty": "hard",
+      "question": "Who is the PAMC Inspector General?",
+      "options": {
+        "A": "Magnus Sletten",
+        "B": "Joaqu\u00edn Hidalgo-Y\u00e1\u00f1ez",
+        "C": "Erlind Calder\u00f3n-Brun",
+        "D": "Marta Spiess- Quiroga"
       },
       "correct_answer": "A",
-      "explanation": "The answer is grounded in the retrieved source context.",
+      "explanation": "Magnus Sletten is the PAMC Inspector General.",
       "adaptation_reason": "Returning-run question generated using previous session history without a section-specific weak topic.",
-      "source_chunk_ids": [],
+      "source_chunk_ids": [
+        "fc1aa8e0-1d05-453e-b52e-1c4a128424a5"
+      ],
       "simulated_user_answer": "A",
       "is_correct": true,
       "clarification": null
     },
     {
-      "question_id": "f866d13e-3326-457d-9eaf-ca1310644091",
+      "question_id": "9bf94fac-6311-4cdc-9dea-9798c5b428ec",
       "section_id": "24707465-4591-4e01-b532-4251aceaf99c",
       "section_number": 8,
       "topic": "Operational Territory",
       "difficulty": "medium",
-      "question": "What is the approximate size of the asset's operational territory?",
+      "question": "What is the approximate area of the asset's authorized operational territory?",
       "options": {
-        "A": "1 million km\u00b2",
-        "B": "6.8 million km\u00b2",
-        "C": "10 million km\u00b2",
-        "D": "20 million km\u00b2"
+        "A": "6.8 million km\u00b2",
+        "B": "1.8 million km\u00b2",
+        "C": "8.8 million km\u00b2",
+        "D": "4.8 million km\u00b2"
       },
-      "correct_answer": "B",
+      "correct_answer": "A",
       "explanation": "The asset's operational territory spans approximately 6.8 million km\u00b2.",
       "adaptation_reason": "Adaptive question generated for section 8 because prior session history marks this section as weak.",
       "source_chunk_ids": [
         "bf0015aa-d18c-4de4-921a-1871f08b8f33"
       ],
-      "simulated_user_answer": "A",
+      "simulated_user_answer": "B",
       "is_correct": false,
       "clarification": "The asset's operational territory spans approximately 6.8 million km\u00b2."
     },
     {
-      "question_id": "625d31d4-7b49-43ef-8a03-9bcbcc2a228d",
-      "section_id": "24707465-4591-4e01-b532-4251aceaf99c",
-      "section_number": 8,
-      "topic": "Micro-Cache Network",
-      "difficulty": "medium",
-      "question": "How many micro-caches does the asset maintain?",
-      "options": {
-        "A": "10 micro-caches",
-        "B": "15 micro-caches",
-        "C": "19 micro-caches",
-        "D": "25 micro-caches"
-      },
-      "correct_answer": "C",
-      "explanation": "The asset maintains a network of 19 micro-caches.",
-      "adaptation_reason": "Adaptive question generated for section 8 because prior session history marks this section as weak.",
-      "source_chunk_ids": [
-        "421ff765-5d8f-4b26-b568-e8e439c15860"
-      ],
-      "simulated_user_answer": "A",
-      "is_correct": false,
-      "clarification": "The asset maintains a network of 19 micro-caches."
-    },
-    {
-      "question_id": "532d31e4-57b2-479e-9651-023cd7f1276c",
+      "question_id": "0e3d4c43-05e0-4702-86c4-6fdd02fccba0",
       "section_id": "24707465-4591-4e01-b532-4251aceaf99c",
       "section_number": 8,
       "topic": "Bilateral Cooperation",
-      "difficulty": "medium",
-      "question": "What is the name of the bilateral cooperation framework between the asset and Bolivian Servicio de Operaciones Especiales (SOE)?",
+      "difficulty": "hard",
+      "question": "Which country's Servicio de Operaciones Especiales (SOE) is involved in a bilateral cooperation framework with the asset?",
       "options": {
-        "A": "La Paz Annex 2022",
-        "B": "La Paz Annex 2023",
-        "C": "Bolivia Framework 2020",
-        "D": "SOE Partnership 2019"
+        "A": "Chile",
+        "B": "Bolivia",
+        "C": "Peru",
+        "D": "Argentina"
       },
       "correct_answer": "B",
-      "explanation": "The asset has a bilateral cooperation framework with Bolivian SOE, known as La Paz Annex 2023.",
+      "explanation": "The asset has a bilateral cooperation framework with the Bolivian Servicio de Operaciones Especiales (SOE).",
       "adaptation_reason": "Adaptive question generated for section 8 because prior session history marks this section as weak.",
       "source_chunk_ids": [
         "a819f646-02b3-4382-a957-d7ffbbb247c0"
       ],
       "simulated_user_answer": "A",
       "is_correct": false,
-      "clarification": "The asset has a bilateral cooperation framework with Bolivian SOE, known as La Paz Annex 2023."
+      "clarification": "The asset has a bilateral cooperation framework with the Bolivian Servicio de Operaciones Especiales (SOE)."
     },
     {
-      "question_id": "f3496556-2b28-47b5-a5c2-cdf3fc8c1bbe",
+      "question_id": "4d6ff57e-3230-4411-9c8e-9d5d57ce211c",
+      "section_id": "24707465-4591-4e01-b532-4251aceaf99c",
+      "section_number": 8,
+      "topic": "Safehouses",
+      "difficulty": "easy",
+      "question": "Who audits the asset's safehouse provisioning semi-annually?",
+      "options": {
+        "A": "Cpl. Vendrame",
+        "B": "Asset's former trainer",
+        "C": "PAMC-issued identity package",
+        "D": "Bolivian Servicio de Operaciones Especiales (SOE)"
+      },
+      "correct_answer": "A",
+      "explanation": "Cpl. Vendrame audits the asset's safehouse provisioning semi-annually.",
+      "adaptation_reason": "Adaptive question generated for section 8 because prior session history marks this section as weak.",
+      "source_chunk_ids": [
+        "421ff765-5d8f-4b26-b568-e8e439c15860"
+      ],
+      "simulated_user_answer": "B",
+      "is_correct": false,
+      "clarification": "Cpl. Vendrame audits the asset's safehouse provisioning semi-annually."
+    },
+    {
+      "question_id": "f3839d43-e91d-443d-87f8-7b242d3d2345",
       "section_id": "24707465-4591-4e01-b532-4251aceaf99c",
       "section_number": 8,
       "topic": "Primary Base",
-      "difficulty": "easy",
+      "difficulty": "medium",
       "question": "What is the name of the asset's primary operational base?",
       "options": {
         "A": "Cuartel Valpara\u00edso",
         "B": "PAMC South Cone Headquarters",
-        "C": "SOE Base",
-        "D": "Asset HQ"
+        "C": "Bolivian Servicio de Operaciones Especiales (SOE)",
+        "D": "Peruvian Direcci\u00f3n de Asuntos Metahumanos (DAM)"
       },
       "correct_answer": "A",
       "explanation": "The asset's primary operational base is Cuartel Valpara\u00edso.",
@@ -274,33 +282,31 @@
       "clarification": "The asset's primary operational base is Cuartel Valpara\u00edso."
     },
     {
-      "question_id": "89cdd0ec-c038-4f26-9aa0-3a0ee7cde06c",
+      "question_id": "5f9e96e9-4a05-4824-b680-a6fb7a67fb44",
       "section_id": "24707465-4591-4e01-b532-4251aceaf99c",
       "section_number": 8,
-      "topic": "Operational Territory",
+      "topic": "Former Trainer",
       "difficulty": "hard",
-      "question": "Which country has restricted access to the asset's operational territory?",
+      "question": "What is the name of the asset's former trainer?",
       "options": {
-        "A": "Chile",
-        "B": "Bolivia",
-        "C": "Peru",
-        "D": "Argentina"
+        "A": "Bolivian Servicio de Operaciones Especiales (SOE)",
+        "B": "Peruvian Direcci\u00f3n de Asuntos Metahumanos (DAM)",
+        "C": "Asset's primary operational base",
+        "D": "Cpl. Vendrame"
       },
       "correct_answer": "A",
-      "explanation": "Easter Island is restricted in the asset's operational territory.",
+      "explanation": "The answer is grounded in the retrieved source context.",
       "adaptation_reason": "Adaptive question generated for section 8 because prior session history marks this section as weak.",
-      "source_chunk_ids": [
-        "bf0015aa-d18c-4de4-921a-1871f08b8f33"
-      ],
+      "source_chunk_ids": [],
       "simulated_user_answer": "B",
       "is_correct": false,
-      "clarification": "Easter Island is restricted in the asset's operational territory."
+      "clarification": "The answer is grounded in the retrieved source context."
     },
     {
-      "question_id": "61f3b571-b6a0-4c62-b0e3-3e2220766b59",
+      "question_id": "7af654b3-acbc-426a-9aa5-8ff7228e9be4",
       "section_id": "da396094-6d3e-4427-9d90-933b7170204c",
       "section_number": 9,
-      "topic": "Case Files",
+      "topic": "Case File Format",
       "difficulty": "medium",
       "question": "What is the format of all cases recorded under PAMC?",
       "options": {
@@ -310,7 +316,7 @@
         "D": "Classification (open / classified / declassified)"
       },
       "correct_answer": "A",
-      "explanation": "PAMC format is uniform for all cases.",
+      "explanation": "The PAMC format for case files includes a case number in the format of year-sequence.",
       "adaptation_reason": "Returning-run question generated using previous session history without a section-specific weak topic.",
       "source_chunk_ids": [
         "2a89ad36-6d8e-4949-a65a-a0e94d21724a"
@@ -320,94 +326,94 @@
       "clarification": null
     },
     {
-      "question_id": "8fa5f5e1-4e07-4f6d-9feb-f4028df53776",
+      "question_id": "86fd5778-3542-4e2b-8791-3d2833bd0675",
       "section_id": "da396094-6d3e-4427-9d90-933b7170204c",
       "section_number": 9,
-      "topic": "Case Files",
-      "difficulty": "hard",
-      "question": "What was the outcome of Case 2024-0202: Quebrantadero Showdown?",
-      "options": {
-        "A": "Successful",
-        "B": "Inconclusive",
-        "C": "Partial",
-        "D": "Failed"
-      },
-      "correct_answer": "A",
-      "explanation": "Case 2024-0202 was a major operational success.",
-      "adaptation_reason": "Returning-run question generated using previous session history without a section-specific weak topic.",
-      "source_chunk_ids": [
-        "77da46b4-29d5-4d6f-a117-d827cfd4b3f5"
-      ],
-      "simulated_user_answer": "A",
-      "is_correct": true,
-      "clarification": null
-    },
-    {
-      "question_id": "be7630c3-e878-4f47-be24-5669ebc027b0",
-      "section_id": "da396094-6d3e-4427-9d90-933b7170204c",
-      "section_number": 9,
-      "topic": "Case Files",
+      "topic": "Case File Format",
       "difficulty": "medium",
-      "question": "What was the classification of Case 2023-0067: El Sereno Pursuit?",
+      "question": "What is the purpose of the PAMC format?",
       "options": {
-        "A": "Open",
-        "B": "Classified",
-        "C": "Declassified",
-        "D": "Unclassified"
+        "A": "To classify cases",
+        "B": "To record case numbers",
+        "C": "To standardize case documentation",
+        "D": "To conceal case information"
       },
-      "correct_answer": "A",
-      "explanation": "Case 2023-0067 was classified as Open.",
+      "correct_answer": "C",
+      "explanation": "The PAMC format is used to standardize case documentation.",
       "adaptation_reason": "Returning-run question generated using previous session history without a section-specific weak topic.",
       "source_chunk_ids": [
-        "b5e2da7a-b10b-40a7-8bff-b056ee39afc7"
+        "2a89ad36-6d8e-4949-a65a-a0e94d21724a"
+      ],
+      "simulated_user_answer": "C",
+      "is_correct": true,
+      "clarification": null
+    },
+    {
+      "question_id": "56572beb-04b4-48e7-820c-5b11517e0486",
+      "section_id": "da396094-6d3e-4427-9d90-933b7170204c",
+      "section_number": 9,
+      "topic": "Case File Format",
+      "difficulty": "medium",
+      "question": "What information is included in the case number?",
+      "options": {
+        "A": "Year and sequence",
+        "B": "Date and location",
+        "C": "Classification and outcome",
+        "D": "Location and classification"
+      },
+      "correct_answer": "A",
+      "explanation": "The case number includes the year and sequence.",
+      "adaptation_reason": "Returning-run question generated using previous session history without a section-specific weak topic.",
+      "source_chunk_ids": [
+        "2a89ad36-6d8e-4949-a65a-a0e94d21724a"
       ],
       "simulated_user_answer": "A",
       "is_correct": true,
       "clarification": null
     },
     {
-      "question_id": "921644a5-87b4-46e1-830f-2b6a2bc55999",
+      "question_id": "02debaa9-f638-4c3f-bc4d-1783666c2781",
       "section_id": "da396094-6d3e-4427-9d90-933b7170204c",
       "section_number": 9,
-      "topic": "Case Files",
-      "difficulty": "hard",
-      "question": "What was the outcome of Case 2020-0048: Containment?",
+      "topic": "Case File Format",
+      "difficulty": "medium",
+      "question": "What is the purpose of the classification in the PAMC format?",
       "options": {
-        "A": "Inconclusive",
-        "B": "Successful",
-        "C": "Failed",
-        "D": "Partial"
+        "A": "To conceal case information",
+        "B": "To classify cases",
+        "C": "To standardize case documentation",
+        "D": "To record case numbers"
       },
       "correct_answer": "B",
-      "explanation": "Case 2020-0048 was a successful operation.",
+      "explanation": "The classification is used to classify cases.",
       "adaptation_reason": "Returning-run question generated using previous session history without a section-specific weak topic.",
       "source_chunk_ids": [
-        "8c5df1cf-36be-4ba0-b0f5-89225c0f5c4a"
+        "2a89ad36-6d8e-4949-a65a-a0e94d21724a"
       ],
       "simulated_user_answer": "B",
       "is_correct": true,
       "clarification": null
     },
     {
-      "question_id": "5e97db4e-d012-4e6f-9988-73aac211fe38",
+      "question_id": "414a120d-bf64-41c4-a691-ea292f53af8b",
       "section_id": "da396094-6d3e-4427-9d90-933b7170204c",
       "section_number": 9,
-      "topic": "Case Files",
+      "topic": "Case File Format",
       "difficulty": "medium",
-      "question": "What was the location of Case 2023-0067: El Sereno Pursuit?",
+      "question": "What is the purpose of the outcome in the PAMC format?",
       "options": {
-        "A": "Iquique, Tarapac\u00e1 Region, Chile",
-        "B": "Salta city, Argentina",
-        "C": "Antofagasta, Chile",
-        "D": "Port District, Antofagasta, Chile"
+        "A": "To classify cases",
+        "B": "To standardize case documentation",
+        "C": "To record case numbers",
+        "D": "To describe the result of the case"
       },
-      "correct_answer": "A",
-      "explanation": "Case 2023-0067 took place in Iquique, Tarapac\u00e1 Region, Chile.",
+      "correct_answer": "D",
+      "explanation": "The outcome is used to describe the result of the case.",
       "adaptation_reason": "Returning-run question generated using previous session history without a section-specific weak topic.",
       "source_chunk_ids": [
-        "b5e2da7a-b10b-40a7-8bff-b056ee39afc7"
+        "2a89ad36-6d8e-4949-a65a-a0e94d21724a"
       ],
-      "simulated_user_answer": "A",
+      "simulated_user_answer": "D",
       "is_correct": true,
       "clarification": null
     }

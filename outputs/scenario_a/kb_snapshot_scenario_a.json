@@ -1,11 +1,11 @@
 {
-  "snapshot_created_at": "2026-05-20T21:37:02.658856",
-  "current_session_id": "af9c2a73-86d1-49e6-9c33-df1c30b275d3",
+  "snapshot_created_at": "2026-05-23T00:17:14.751272",
+  "current_session_id": "82baa664-a29d-4ba5-9b62-5d28922115a9",
   "recent_session_count": 1,
   "recent_sessions": [
     {
-      "session_id": "af9c2a73-86d1-49e6-9c33-df1c30b275d3",
-      "timestamp": "2026-05-20T21:37:02.345313",
+      "session_id": "82baa664-a29d-4ba5-9b62-5d28922115a9",
+      "timestamp": "2026-05-23T00:17:14.652805",
       "mode": "cold_start",
       "selected_sections": [
         3,
@@ -23,11 +23,17 @@
         "weak_topics": [],
         "mastered_question_texts": [],
         "previous_wrong_question_texts": [],
-        "summary": "Cold-start run: no prior relevant history found."
+        "summary": "Cold-start run: no prior relevant history found.",
+        "telemetry": {
+          "prompt_tokens": 3400,
+          "completion_tokens": 1800,
+          "total_tokens": 5200,
+          "cached_applied": false
+        }
       },
       "questions_asked": [
         {
-          "question_id": "0bfbaf62-f4a5-4a03-84a9-14478facdbf5",
+          "question_id": "2e0be2b4-3ff4-4186-8170-b794f4cc5c8b",
           "section_number": 3,
           "topic": "Military Career",
           "difficulty": "medium",
@@ -48,40 +54,40 @@
           ]
         },
         {
-          "question_id": "36a71de0-d92c-4478-b73a-352d5b7e65ad",
+          "question_id": "d2f385bc-e4fc-49f6-86cd-dda4b9a4cabe",
           "section_number": 3,
           "topic": "Drift Read",
           "difficulty": "hard",
-          "question": "When was the first manifestation of Drift Read documented?",
+          "question": "When did the Antofagasta operation produce a Successful classification?",
           "options": {
-            "A": "9 February 2024",
+            "A": "11 May 2022",
             "B": "17 May 2021",
-            "C": "11 May 2022",
-            "D": "3\u20135 Jun 2022"
+            "C": "14-day medical leave",
+            "D": "First Echo Lock event (training)"
           },
-          "user_answer": "A",
-          "correct_answer": "B",
+          "user_answer": "B",
+          "correct_answer": "A",
           "is_correct": false,
-          "clarification": "The first manifestation of Drift Read was documented on 17 May 2021.",
+          "clarification": "The Antofagasta operation produced a Successful classification on 11 May 2022.",
           "adaptation_reason": "Cold-start coverage question generated from the selected section because no prior relevant learning history exists.",
           "source_chunk_ids": [
-            "d444863f-9f11-400c-a69e-68010a78d901"
+            "8b799e0c-7ca5-48ce-b23e-de6053a2d9fc"
           ]
         },
         {
-          "question_id": "f5ded9a8-a5bd-4353-aba2-4ba5ffb92f8d",
+          "question_id": "50310582-3194-4b41-b114-27b74323ce5c",
           "section_number": 3,
-          "topic": "Operations",
-          "difficulty": "medium",
-          "question": "What was the name of the operation that resulted in a Successful classification but a 14-day medical leave?",
+          "topic": "Promotion",
+          "difficulty": "easy",
+          "question": "When was the asset promoted to Lead Officer (Field, Grade 3)?",
           "options": {
-            "A": "Tarapac\u00e1 Concession compound raid",
-            "B": "Tallinn-Asunci\u00f3n intelligence rotation",
-            "C": "Lima Audiencia counter-audit",
-            "D": "Antofagasta operation"
+            "A": "9 February 2024",
+            "B": "12 December 2009",
+            "C": "19 November 2020",
+            "D": "11 May 2022"
           },
-          "user_answer": "D",
-          "correct_answer": "D",
+          "user_answer": "A",
+          "correct_answer": "A",
           "is_correct": true,
           "clarification": null,
           "adaptation_reason": "Cold-start coverage question generated from the selected section because no prior relevant learning history exists.",
@@ -90,37 +96,37 @@
           ]
         },
         {
-          "question_id": "b7089377-4080-4cf7-a241-619f9f6fc3ff",
+          "question_id": "bc489d7d-7149-4dfe-b7ef-05ceabe4ccce",
           "section_number": 3,
-          "topic": "Drift Read",
-          "difficulty": "hard",
-          "question": "What is the ability known as Drift Read?",
+          "topic": "Operations",
+          "difficulty": "medium",
+          "question": "What was the name of the intelligence rotation led by the asset in 2025?",
           "options": {
-            "A": "The ability to read minds",
-            "B": "The ability to communicate with animals",
-            "C": "The ability to sense changes in the environment",
-            "D": "The ability to manipulate objects with one's mind"
+            "A": "Tarapac\u00e1 Concession compound raid",
+            "B": "Tallinn-Asunci\u00f3n intelligence rotation",
+            "C": "Lima Audiencia counter-audit",
+            "D": "Potos\u00ed operation"
           },
           "user_answer": "A",
-          "correct_answer": "C",
+          "correct_answer": "B",
           "is_correct": false,
-          "clarification": "Drift Read is the ability to sense changes in the environment.",
+          "clarification": "The asset led the Tallinn-Asunci\u00f3n intelligence rotation in 2025.",
           "adaptation_reason": "Cold-start coverage question generated from the selected section because no prior relevant learning history exists.",
           "source_chunk_ids": [
-            "8b799e0c-7ca5-48ce-b23e-de6053a2d9fc"
+            "340a12a7-b520-4aec-ab8f-141e58a0c894"
           ]
         },
         {
-          "question_id": "40cd94c9-5141-41ae-bd81-daf3540bffad",
+          "question_id": "e4f28c6d-3a23-42a4-8f36-ad5f73232d82",
           "section_number": 3,
-          "topic": "Military Career",
-          "difficulty": "medium",
-          "question": "What was her rank when she graduated from the Escuela Militar Bernardo O'Higgins?",
+          "topic": "Discharge",
+          "difficulty": "hard",
+          "question": "When was the discharge from Chilean Army?",
           "options": {
-            "A": "Cadet",
-            "B": "Junior Officer",
-            "C": "Lead Officer (Field, Grade 3)",
-            "D": "Senior Officer"
+            "A": "12 March 2019",
+            "B": "9 February 2024",
+            "C": "12 December 2009",
+            "D": "19 November 2020"
           },
           "user_answer": "A",
           "correct_answer": "A",
@@ -128,13 +134,13 @@
           "clarification": null,
           "adaptation_reason": "Cold-start coverage question generated from the selected section because no prior relevant learning history exists.",
           "source_chunk_ids": [
-            "af323091-abb2-40d1-85e2-dbe46083e48f"
+            "d444863f-9f11-400c-a69e-68010a78d901"
           ]
         },
         {
-          "question_id": "494aac3d-9895-4366-b90a-c96be67904be",
+          "question_id": "15de17e8-3256-4e03-9e57-13afc6787e3d",
           "section_number": 7,
-          "topic": "Threat Tier Classification",
+          "topic": "Threat Tier Classification System",
           "difficulty": "medium",
           "question": "What is the name of the system used to classify metahuman and organized-paramilitary threats?",
           "options": {
@@ -153,58 +159,16 @@
           ]
         },
         {
-          "question_id": "1e076bc2-eda1-40ad-965c-6e56f9ba545e",
+          "question_id": "ab492b99-013e-48d1-ac8b-4b5500cc224e",
           "section_number": 7,
-          "topic": "Emergent Threats",
+          "topic": "Threat Tier Classification System",
           "difficulty": "hard",
-          "question": "What is the probability of Mar Inverso confirmation and engagement within 2026?",
+          "question": "When was the NMOC-derived Threat Tier Schedule ratified?",
           "options": {
-            "A": "High",
-            "B": "Moderate",
-            "C": "Low",
-            "D": "Unknown"
-          },
-          "user_answer": "A",
-          "correct_answer": "A",
-          "is_correct": true,
-          "clarification": null,
-          "adaptation_reason": "Cold-start coverage question generated from the selected section because no prior relevant learning history exists.",
-          "source_chunk_ids": [
-            "9009e52b-f5d9-4d2a-a011-2a29487fb731"
-          ]
-        },
-        {
-          "question_id": "6406bfd9-45cf-4dfd-a8d7-cc6e40b3a70d",
-          "section_number": 7,
-          "topic": "Adversary Information",
-          "difficulty": "medium",
-          "question": "How many confirmed engagements has Drift Read had?",
-          "options": {
-            "A": "1",
-            "B": "2",
-            "C": "3",
-            "D": "4"
-          },
-          "user_answer": "A",
-          "correct_answer": "C",
-          "is_correct": false,
-          "clarification": "Drift Read has had 3 confirmed engagements.",
-          "adaptation_reason": "Cold-start coverage question generated from the selected section because no prior relevant learning history exists.",
-          "source_chunk_ids": [
-            "2d9439f9-91e0-4f6b-bf93-5872ab0fa811"
-          ]
-        },
-        {
-          "question_id": "0b717bd0-a116-4e90-beb4-ac781b51991d",
-          "section_number": 7,
-          "topic": "Adversary Roster",
-          "difficulty": "hard",
-          "question": "What is the primary criterion for adding an adversary to the roster?",
-          "options": {
-            "A": "Three documented engagements",
-            "B": "A single incident producing more than 5 civilian casualties",
-            "C": "Both A and B",
-            "D": "Neither A nor B"
+            "A": "11 March 2015",
+            "B": "11 March 2017",
+            "C": "Q1 2020",
+            "D": "Q1 2025"
           },
           "user_answer": "B",
           "correct_answer": "B",
@@ -212,51 +176,93 @@
           "clarification": null,
           "adaptation_reason": "Cold-start coverage question generated from the selected section because no prior relevant learning history exists.",
           "source_chunk_ids": [
-            "ef331e17-51c5-4f92-bce8-27161f1f9d3f"
+            "fa2883c0-3aa0-40f1-aa1b-4d00ea815fbc"
           ]
         },
         {
-          "question_id": "442a2648-4cbc-4360-ac3c-1a74ef388c1b",
+          "question_id": "5e5f6bd9-417f-42eb-8f66-fb2dcc69456d",
           "section_number": 7,
-          "topic": "Threat Tier Classification",
+          "topic": "Emergent Threats",
           "difficulty": "medium",
-          "question": "When was the NMOC-derived Threat Tier Schedule ratified?",
+          "question": "What is the name of the emergent threat projected to occur in northern Chile?",
           "options": {
-            "A": "11 March 2016",
-            "B": "11 March 2017",
-            "C": "11 March 2018",
-            "D": "11 March 2019"
+            "A": "Mar Inverso",
+            "B": "Quebrantadero",
+            "C": "Ron Tributary",
+            "D": "The Concession"
           },
           "user_answer": "A",
           "correct_answer": "B",
           "is_correct": false,
-          "clarification": "The NMOC-derived Threat Tier Schedule was ratified on 11 March 2017.",
+          "clarification": "The Andean Operations Bureau projects the re-emergence of Quebrantadero in northern Chile.",
           "adaptation_reason": "Cold-start coverage question generated from the selected section because no prior relevant learning history exists.",
           "source_chunk_ids": [
-            "fa2883c0-3aa0-40f1-aa1b-4d00ea815fbc"
+            "9009e52b-f5d9-4d2a-a011-2a29487fb731"
+          ]
+        },
+        {
+          "question_id": "b196da12-3864-496e-93e1-880a618cedf6",
+          "section_number": 7,
+          "topic": "Adversaries",
+          "difficulty": "easy",
+          "question": "What is the codename of the civilian adversary?",
+          "options": {
+            "A": "Quebrantadero",
+            "B": "Wilma Sandoval-Iqui",
+            "C": "Bambolla",
+            "D": "Ezekiel"
+          },
+          "user_answer": "A",
+          "correct_answer": "A",
+          "is_correct": true,
+          "clarification": null,
+          "adaptation_reason": "Cold-start coverage question generated from the selected section because no prior relevant learning history exists.",
+          "source_chunk_ids": [
+            "2d9439f9-91e0-4f6b-bf93-5872ab0fa811"
+          ]
+        },
+        {
+          "question_id": "7a1a9d8c-d856-4856-91be-3edcbb5be65b",
+          "section_number": 7,
+          "topic": "Adversaries",
+          "difficulty": "hard",
+          "question": "What is the condition for an adversary to be removed from the primary roster?",
+          "options": {
+            "A": "Two documented engagements",
+            "B": "Three documented engagements or a single incident producing more than 5 civilian casualties",
+            "C": "One documented engagement",
+            "D": "No documented engagements"
+          },
+          "user_answer": "A",
+          "correct_answer": "B",
+          "is_correct": false,
+          "clarification": "An adversary is removed from the primary roster if there are three documented engagements or a single incident producing more than 5 civilian casualties.",
+          "adaptation_reason": "Cold-start coverage question generated from the selected section because no prior relevant learning history exists.",
+          "source_chunk_ids": [
+            "ef331e17-51c5-4f92-bce8-27161f1f9d3f"
           ]
         }
       ],
       "weak_topics": [
         {
           "section_number": 7,
-          "topic": "Threat Tier Classification",
-          "attempts": 2,
-          "wrong_count": 2,
+          "topic": "Emergent Threats",
+          "attempts": 1,
+          "wrong_count": 1,
+          "correct_count": 0,
+          "weakness_score": 1.0
+        },
+        {
+          "section_number": 3,
+          "topic": "Operations",
+          "attempts": 1,
+          "wrong_count": 1,
           "correct_count": 0,
           "weakness_score": 1.0
         },
         {
           "section_number": 3,
           "topic": "Drift Read",
-          "attempts": 2,
-          "wrong_count": 2,
-          "correct_count": 0,
-          "weakness_score": 1.0
-        },
-        {
-          "section_number": 7,
-          "topic": "Adversary Information",
           "attempts": 1,
           "wrong_count": 1,
           "correct_count": 0,
@@ -264,15 +270,31 @@
         },
         {
           "section_number": 7,
-          "topic": "Adversary Roster",
+          "topic": "Adversaries",
+          "attempts": 2,
+          "wrong_count": 1,
+          "correct_count": 1,
+          "weakness_score": 0.5
+        },
+        {
+          "section_number": 7,
+          "topic": "Threat Tier Classification System",
+          "attempts": 2,
+          "wrong_count": 1,
+          "correct_count": 1,
+          "weakness_score": 0.5
+        },
+        {
+          "section_number": 3,
+          "topic": "Discharge",
           "attempts": 1,
           "wrong_count": 0,
           "correct_count": 1,
           "weakness_score": 0.0
         },
         {
-          "section_number": 7,
-          "topic": "Emergent Threats",
+          "section_number": 3,
+          "topic": "Promotion",
           "attempts": 1,
           "wrong_count": 0,
           "correct_count": 1,
@@ -281,14 +303,6 @@
         {
           "section_number": 3,
           "topic": "Military Career",
-          "attempts": 2,
-          "wrong_count": 0,
-          "correct_count": 2,
-          "weakness_score": 0.0
-        },
-        {
-          "section_number": 3,
-          "topic": "Operations",
           "attempts": 1,
           "wrong_count": 0,
           "correct_count": 1,

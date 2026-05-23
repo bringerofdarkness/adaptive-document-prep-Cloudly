@@ -1,5 +1,5 @@
 {
-  "session_id": "99ba6ee9-57d8-4343-8232-1be635a34d54",
+  "session_id": "da0ca7c4-7ea1-429b-b069-529a016f8203",
   "mode": "adaptive",
   "selected_sections": [
     8
@@ -16,9 +16,9 @@
     "weak_topics": [
       {
         "section_number": 8,
-        "topic": "Operational Territory",
-        "attempts": 3,
-        "wrong_count": 3,
+        "topic": "Former Trainer",
+        "attempts": 2,
+        "wrong_count": 2,
         "correct_count": 0,
         "weakness_score": 1.0
       },
@@ -40,9 +40,17 @@
       },
       {
         "section_number": 8,
-        "topic": "Micro-Cache Network",
+        "topic": "Operational Territory",
         "attempts": 2,
         "wrong_count": 2,
+        "correct_count": 0,
+        "weakness_score": 1.0
+      },
+      {
+        "section_number": 8,
+        "topic": "Safehouses",
+        "attempts": 1,
+        "wrong_count": 1,
         "correct_count": 0,
         "weakness_score": 1.0
       },
@@ -57,32 +65,84 @@
     ],
     "mastered_question_texts": [],
     "previous_wrong_question_texts": [
-      "Which country has restricted access to the asset's operational territory?",
+      "What is the name of the asset's former trainer?",
       "What is the name of the asset's primary operational base?",
-      "What is the name of the bilateral cooperation framework between the asset and Bolivian Servicio de Operaciones Especiales (SOE)?",
-      "How many micro-caches does the asset maintain?",
-      "What is the approximate size of the asset's operational territory?",
-      "How many micro-caches does the asset maintain?",
-      "What is the name of the bilateral cooperation framework between the asset and Bolivian Servicio de Operaciones Especiales (SOE)?",
+      "Who audits the asset's safehouse provisioning semi-annually?",
+      "Which country's Servicio de Operaciones Especiales (SOE) is involved in a bilateral cooperation framework with the asset?",
       "What is the approximate area of the asset's authorized operational territory?",
+      "What is the name of the bilateral cooperation framework between the asset and Bolivian Servicio de Operaciones Especiales (SOE)?",
+      "Who is the asset's former trainer?",
+      "What is the approximate size of the asset's authorized operational territory?",
       "Who audits the safehouse provisioning semi-annually?",
-      "What is the name of the asset's primary operational base?"
+      "What is the primary operational base of the asset?"
     ],
-    "summary": "Adaptive run: prior history found. Focus more on weak topics and avoid excessive repetition of mastered questions."
+    "summary": "Adaptive run: prior history found. Focus more on weak topics and avoid excessive repetition of mastered questions.",
+    "telemetry": {
+      "prompt_tokens": 1700,
+      "completion_tokens": 900,
+      "total_tokens": 2600,
+      "cached_applied": false
+    }
   },
   "questions": [
     {
-      "question_id": "7206834c-6544-4d0f-a846-47a0be179a82",
+      "question_id": "49dd2eff-1f58-4798-b74a-a3b87f8fa5fb",
+      "section_id": "24707465-4591-4e01-b532-4251aceaf99c",
+      "section_number": 8,
+      "topic": "Primary Base",
+      "difficulty": "medium",
+      "question": "What is the name of the asset's primary operational base?",
+      "options": {
+        "A": "Cuartel Valpara\u00edso",
+        "B": "PAMC South Cone Headquarters",
+        "C": "Avenida Altamirano 1842",
+        "D": "Valpara\u00edso"
+      },
+      "correct_answer": "A",
+      "explanation": "Cuartel Valpara\u00edso is the asset's primary operational base.",
+      "adaptation_reason": "Adaptive question generated for section 8 because prior session history marks this section as weak.",
+      "source_chunk_ids": [
+        "11e8b047-54f6-42b9-a9b8-a0e6bbf19e09"
+      ],
+      "simulated_user_answer": "B",
+      "is_correct": false,
+      "clarification": "Cuartel Valpara\u00edso is the asset's primary operational base."
+    },
+    {
+      "question_id": "2ad0a8c0-6784-4810-ac08-b85fae3be0f0",
+      "section_id": "24707465-4591-4e01-b532-4251aceaf99c",
+      "section_number": 8,
+      "topic": "Primary Base",
+      "difficulty": "medium",
+      "question": "In what year was the facility at Avenida Altamirano 1842 repurposed for PAMC use?",
+      "options": {
+        "A": "2015",
+        "B": "2016",
+        "C": "2017",
+        "D": "2018"
+      },
+      "correct_answer": "C",
+      "explanation": "The facility was repurposed for PAMC use in 2017.",
+      "adaptation_reason": "Adaptive question generated for section 8 because prior session history marks this section as weak.",
+      "source_chunk_ids": [
+        "11e8b047-54f6-42b9-a9b8-a0e6bbf19e09"
+      ],
+      "simulated_user_answer": "A",
+      "is_correct": false,
+      "clarification": "The facility was repurposed for PAMC use in 2017."
+    },
+    {
+      "question_id": "65aff89c-4c4a-4ff5-a5e8-b7facf04c48f",
       "section_id": "24707465-4591-4e01-b532-4251aceaf99c",
       "section_number": 8,
       "topic": "Operational Territory",
-      "difficulty": "medium",
-      "question": "What is the approximate size of the asset's authorized operational territory?",
+      "difficulty": "hard",
+      "question": "What is the approximate area of the asset's authorized operational territory?",
       "options": {
-        "A": "1 million km\u00b2",
+        "A": "5 million km\u00b2",
         "B": "6.8 million km\u00b2",
-        "C": "10 million km\u00b2",
-        "D": "20 million km\u00b2"
+        "C": "8 million km\u00b2",
+        "D": "10 million km\u00b2"
       },
       "correct_answer": "B",
       "explanation": "The asset's authorized operational territory spans approximately 6.8 million km\u00b2.",
@@ -95,96 +155,48 @@
       "clarification": "The asset's authorized operational territory spans approximately 6.8 million km\u00b2."
     },
     {
-      "question_id": "2206279f-5bc5-45c9-8128-8ace2d1dde1b",
+      "question_id": "beb5b7f5-887c-42b5-9c8f-5a9dbf3b3bbb",
       "section_id": "24707465-4591-4e01-b532-4251aceaf99c",
       "section_number": 8,
-      "topic": "Primary Base",
-      "difficulty": "easy",
-      "question": "What is the name of the asset's primary operational base?",
-      "options": {
-        "A": "Cuartel Valpara\u00edso",
-        "B": "PAMC South Cone Headquarters",
-        "C": "La Paz Annex",
-        "D": "Cuzco Operations Center"
-      },
-      "correct_answer": "A",
-      "explanation": "The asset's primary operational base is Cuartel Valpara\u00edso.",
-      "adaptation_reason": "Adaptive question generated for section 8 because prior session history marks this section as weak.",
-      "source_chunk_ids": [
-        "11e8b047-54f6-42b9-a9b8-a0e6bbf19e09"
-      ],
-      "simulated_user_answer": "B",
-      "is_correct": false,
-      "clarification": "The asset's primary operational base is Cuartel Valpara\u00edso."
-    },
-    {
-      "question_id": "7b57ee02-ff25-4582-9dca-4c2aa3c6bd0d",
-      "section_id": "24707465-4591-4e01-b532-4251aceaf99c",
-      "section_number": 8,
-      "topic": "Bilateral Cooperation",
-      "difficulty": "hard",
-      "question": "Which organization is part of the asset's bilateral cooperation framework in Bolivia?",
+      "topic": "Former Trainer",
+      "difficulty": "medium",
+      "question": "Which organization is mentioned as the asset's former trainer?",
       "options": {
         "A": "Bolivian Servicio de Operaciones Especiales (SOE)",
         "B": "Peruvian Direcci\u00f3n de Asuntos Metahumanos (DAM)",
         "C": "Chilean Navy",
-        "D": "Argentine Army"
+        "D": "Norwegian Intelligence Agency"
       },
       "correct_answer": "A",
-      "explanation": "The asset has a bilateral cooperation framework with the Bolivian Servicio de Operaciones Especiales (SOE).",
+      "explanation": "The Bolivian Servicio de Operaciones Especiales (SOE) is mentioned as the asset's former trainer.",
       "adaptation_reason": "Adaptive question generated for section 8 because prior session history marks this section as weak.",
       "source_chunk_ids": [
         "a819f646-02b3-4382-a957-d7ffbbb247c0"
       ],
       "simulated_user_answer": "B",
       "is_correct": false,
-      "clarification": "The asset has a bilateral cooperation framework with the Bolivian Servicio de Operaciones Especiales (SOE)."
+      "clarification": "The Bolivian Servicio de Operaciones Especiales (SOE) is mentioned as the asset's former trainer."
     },
     {
-      "question_id": "6ec2ea10-8d02-407d-82ad-899563a4e960",
+      "question_id": "1ab9ade3-f3da-41e0-989e-15f81e01039d",
       "section_id": "24707465-4591-4e01-b532-4251aceaf99c",
       "section_number": 8,
-      "topic": "Operational Territory",
-      "difficulty": "medium",
-      "question": "Which country has restricted access to the asset's operational territory?",
+      "topic": "Bilateral Cooperation",
+      "difficulty": "hard",
+      "question": "What is the name of the bilateral cooperation framework between the asset and the Bolivian Servicio de Operaciones Especiales (SOE)?",
       "options": {
-        "A": "Chile",
-        "B": "Bolivia",
-        "C": "Argentina",
-        "D": "Peru"
+        "A": "La Paz Annex 2022",
+        "B": "La Paz Annex 2023",
+        "C": "Cochabamba Protocol",
+        "D": "Santa Cruz Agreement"
       },
       "correct_answer": "A",
-      "explanation": "Easter Island is restricted in Chile.",
+      "explanation": "The answer is grounded in the retrieved source context.",
       "adaptation_reason": "Adaptive question generated for section 8 because prior session history marks this section as weak.",
-      "source_chunk_ids": [
-        "bf0015aa-d18c-4de4-921a-1871f08b8f33"
-      ],
+      "source_chunk_ids": [],
       "simulated_user_answer": "B",
       "is_correct": false,
-      "clarification": "Easter Island is restricted in Chile."
-    },
-    {
-      "question_id": "c56e43c7-0df3-4bf7-9ec4-3096afe43ceb",
-      "section_id": "24707465-4591-4e01-b532-4251aceaf99c",
-      "section_number": 8,
-      "topic": "Primary Base",
-      "difficulty": "easy",
-      "question": "In what year was the asset's primary operational base repurposed for PAMC use?",
-      "options": {
-        "A": "2015",
-        "B": "2017",
-        "C": "2020",
-        "D": "2023"
-      },
-      "correct_answer": "B",
-      "explanation": "The facility was repurposed for PAMC use in 2017.",
-      "adaptation_reason": "Adaptive question generated for section 8 because prior session history marks this section as weak.",
-      "source_chunk_ids": [
-        "11e8b047-54f6-42b9-a9b8-a0e6bbf19e09"
-      ],
-      "simulated_user_answer": "A",
-      "is_correct": false,
-      "clarification": "The facility was repurposed for PAMC use in 2017."
+      "clarification": "The answer is grounded in the retrieved source context."
     }
   ]
 }
