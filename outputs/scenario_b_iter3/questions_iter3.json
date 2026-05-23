@@ -1,5 +1,5 @@
 {
-  "session_id": "da0ca7c4-7ea1-429b-b069-529a016f8203",
+  "session_id": "be42e8ba-1165-4d61-a942-91e638fd6d27",
   "mode": "adaptive",
   "selected_sections": [
     8
@@ -16,7 +16,7 @@
     "weak_topics": [
       {
         "section_number": 8,
-        "topic": "Former Trainer",
+        "topic": "Primary Base",
         "attempts": 2,
         "wrong_count": 2,
         "correct_count": 0,
@@ -24,7 +24,7 @@
       },
       {
         "section_number": 8,
-        "topic": "Primary Base",
+        "topic": "Micro-Cache Network",
         "attempts": 2,
         "wrong_count": 2,
         "correct_count": 0,
@@ -65,16 +65,16 @@
     ],
     "mastered_question_texts": [],
     "previous_wrong_question_texts": [
-      "What is the name of the asset's former trainer?",
       "What is the name of the asset's primary operational base?",
-      "Who audits the asset's safehouse provisioning semi-annually?",
-      "Which country's Servicio de Operaciones Especiales (SOE) is involved in a bilateral cooperation framework with the asset?",
+      "What is the purpose of semi-annual auditing of safehouse provisioning?",
+      "How many micro-caches does the asset maintain?",
+      "What is the name of the bilateral cooperation framework between the asset and Bolivian Servicio de Operaciones Especiales (SOE)?",
       "What is the approximate area of the asset's authorized operational territory?",
       "What is the name of the bilateral cooperation framework between the asset and Bolivian Servicio de Operaciones Especiales (SOE)?",
-      "Who is the asset's former trainer?",
-      "What is the approximate size of the asset's authorized operational territory?",
+      "How many micro-caches does the asset maintain?",
+      "What is the approximate area of the asset's authorized operational territory?",
       "Who audits the safehouse provisioning semi-annually?",
-      "What is the primary operational base of the asset?"
+      "What is the name of the asset's primary operational base?"
     ],
     "summary": "Adaptive run: prior history found. Focus more on weak topics and avoid excessive repetition of mastered questions.",
     "telemetry": {
@@ -86,11 +86,11 @@
   },
   "questions": [
     {
-      "question_id": "49dd2eff-1f58-4798-b74a-a3b87f8fa5fb",
-      "section_id": "24707465-4591-4e01-b532-4251aceaf99c",
+      "question_id": "84176ca1-5c20-408d-8906-9bfd0e5e7c6e",
+      "section_id": "e8c4281d-d318-4f91-a1b8-31472f9aac4c",
       "section_number": 8,
       "topic": "Primary Base",
-      "difficulty": "medium",
+      "difficulty": "easy",
       "question": "What is the name of the asset's primary operational base?",
       "options": {
         "A": "Cuartel Valpara\u00edso",
@@ -99,18 +99,18 @@
         "D": "Valpara\u00edso"
       },
       "correct_answer": "A",
-      "explanation": "Cuartel Valpara\u00edso is the asset's primary operational base.",
+      "explanation": "The primary operational base is Cuartel Valpara\u00edso.",
       "adaptation_reason": "Adaptive question generated for section 8 because prior session history marks this section as weak.",
       "source_chunk_ids": [
-        "11e8b047-54f6-42b9-a9b8-a0e6bbf19e09"
+        "24be38b2-5941-44e6-a3b4-ea798ef61d53"
       ],
       "simulated_user_answer": "B",
       "is_correct": false,
-      "clarification": "Cuartel Valpara\u00edso is the asset's primary operational base."
+      "clarification": "The primary operational base is Cuartel Valpara\u00edso."
     },
     {
-      "question_id": "2ad0a8c0-6784-4810-ac08-b85fae3be0f0",
-      "section_id": "24707465-4591-4e01-b532-4251aceaf99c",
+      "question_id": "0c88b096-a5f1-440c-999a-1e5eceef3717",
+      "section_id": "e8c4281d-d318-4f91-a1b8-31472f9aac4c",
       "section_number": 8,
       "topic": "Primary Base",
       "difficulty": "medium",
@@ -122,81 +122,83 @@
         "D": "2018"
       },
       "correct_answer": "C",
-      "explanation": "The facility was repurposed for PAMC use in 2017.",
+      "explanation": "The facility was repurposed in 2017.",
       "adaptation_reason": "Adaptive question generated for section 8 because prior session history marks this section as weak.",
       "source_chunk_ids": [
-        "11e8b047-54f6-42b9-a9b8-a0e6bbf19e09"
+        "24be38b2-5941-44e6-a3b4-ea798ef61d53"
       ],
       "simulated_user_answer": "A",
       "is_correct": false,
-      "clarification": "The facility was repurposed for PAMC use in 2017."
+      "clarification": "The facility was repurposed in 2017."
     },
     {
-      "question_id": "65aff89c-4c4a-4ff5-a5e8-b7facf04c48f",
-      "section_id": "24707465-4591-4e01-b532-4251aceaf99c",
+      "question_id": "46ed3772-ea82-4a1f-b8b7-3b3842a0cac7",
+      "section_id": "e8c4281d-d318-4f91-a1b8-31472f9aac4c",
       "section_number": 8,
-      "topic": "Operational Territory",
+      "topic": "Primary Base",
       "difficulty": "hard",
-      "question": "What is the approximate area of the asset's authorized operational territory?",
+      "question": "What is the designation of the asset's primary operational base?",
       "options": {
-        "A": "5 million km\u00b2",
-        "B": "6.8 million km\u00b2",
-        "C": "8 million km\u00b2",
-        "D": "10 million km\u00b2"
+        "A": "PAMC North Cone Headquarters",
+        "B": "PAMC South Cone Headquarters",
+        "C": "Cuartel Valpara\u00edso",
+        "D": "Avenida Altamirano 1842"
       },
       "correct_answer": "B",
-      "explanation": "The asset's authorized operational territory spans approximately 6.8 million km\u00b2.",
+      "explanation": "The primary operational base is designated PAMC South Cone Headquarters.",
       "adaptation_reason": "Adaptive question generated for section 8 because prior session history marks this section as weak.",
       "source_chunk_ids": [
-        "bf0015aa-d18c-4de4-921a-1871f08b8f33"
+        "24be38b2-5941-44e6-a3b4-ea798ef61d53"
       ],
       "simulated_user_answer": "A",
       "is_correct": false,
-      "clarification": "The asset's authorized operational territory spans approximately 6.8 million km\u00b2."
+      "clarification": "The primary operational base is designated PAMC South Cone Headquarters."
     },
     {
-      "question_id": "beb5b7f5-887c-42b5-9c8f-5a9dbf3b3bbb",
-      "section_id": "24707465-4591-4e01-b532-4251aceaf99c",
+      "question_id": "b3bcec24-bcc4-449a-80ce-e0a5500daf1c",
+      "section_id": "e8c4281d-d318-4f91-a1b8-31472f9aac4c",
       "section_number": 8,
-      "topic": "Former Trainer",
-      "difficulty": "medium",
-      "question": "Which organization is mentioned as the asset's former trainer?",
+      "topic": "Micro-Cache Network",
+      "difficulty": "easy",
+      "question": "How many micro-caches does the asset maintain?",
       "options": {
-        "A": "Bolivian Servicio de Operaciones Especiales (SOE)",
-        "B": "Peruvian Direcci\u00f3n de Asuntos Metahumanos (DAM)",
-        "C": "Chilean Navy",
-        "D": "Norwegian Intelligence Agency"
+        "A": "10",
+        "B": "15",
+        "C": "19",
+        "D": "20"
       },
-      "correct_answer": "A",
-      "explanation": "The Bolivian Servicio de Operaciones Especiales (SOE) is mentioned as the asset's former trainer.",
+      "correct_answer": "C",
+      "explanation": "The asset maintains 19 micro-caches.",
       "adaptation_reason": "Adaptive question generated for section 8 because prior session history marks this section as weak.",
       "source_chunk_ids": [
-        "a819f646-02b3-4382-a957-d7ffbbb247c0"
+        "f8e21348-03e4-477f-8aad-ab5e77965545"
+      ],
+      "simulated_user_answer": "A",
+      "is_correct": false,
+      "clarification": "The asset maintains 19 micro-caches."
+    },
+    {
+      "question_id": "55afb345-9a12-4189-8566-6454b0fd91d1",
+      "section_id": "e8c4281d-d318-4f91-a1b8-31472f9aac4c",
+      "section_number": 8,
+      "topic": "Micro-Cache Network",
+      "difficulty": "medium",
+      "question": "Who audits safehouse provisioning semi-annually?",
+      "options": {
+        "A": "Cpl. Vendrame",
+        "B": "The asset's primary operational base commander",
+        "C": "The asset's trainer",
+        "D": "The asset's handler"
+      },
+      "correct_answer": "A",
+      "explanation": "Cpl. Vendrame audits safehouse provisioning semi-annually.",
+      "adaptation_reason": "Adaptive question generated for section 8 because prior session history marks this section as weak.",
+      "source_chunk_ids": [
+        "f8e21348-03e4-477f-8aad-ab5e77965545"
       ],
       "simulated_user_answer": "B",
       "is_correct": false,
-      "clarification": "The Bolivian Servicio de Operaciones Especiales (SOE) is mentioned as the asset's former trainer."
-    },
-    {
-      "question_id": "1ab9ade3-f3da-41e0-989e-15f81e01039d",
-      "section_id": "24707465-4591-4e01-b532-4251aceaf99c",
-      "section_number": 8,
-      "topic": "Bilateral Cooperation",
-      "difficulty": "hard",
-      "question": "What is the name of the bilateral cooperation framework between the asset and the Bolivian Servicio de Operaciones Especiales (SOE)?",
-      "options": {
-        "A": "La Paz Annex 2022",
-        "B": "La Paz Annex 2023",
-        "C": "Cochabamba Protocol",
-        "D": "Santa Cruz Agreement"
-      },
-      "correct_answer": "A",
-      "explanation": "The answer is grounded in the retrieved source context.",
-      "adaptation_reason": "Adaptive question generated for section 8 because prior session history marks this section as weak.",
-      "source_chunk_ids": [],
-      "simulated_user_answer": "B",
-      "is_correct": false,
-      "clarification": "The answer is grounded in the retrieved source context."
+      "clarification": "Cpl. Vendrame audits safehouse provisioning semi-annually."
     }
   ]
 }

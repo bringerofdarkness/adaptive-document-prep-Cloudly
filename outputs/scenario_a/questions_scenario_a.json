@@ -1,5 +1,5 @@
 {
-  "session_id": "82baa664-a29d-4ba5-9b62-5d28922115a9",
+  "session_id": "c76f85f2-d7a2-4738-a4f2-b41337cc4148",
   "mode": "cold_start",
   "selected_sections": [
     3,
@@ -27,8 +27,8 @@
   },
   "questions": [
     {
-      "question_id": "2e0be2b4-3ff4-4186-8170-b794f4cc5c8b",
-      "section_id": "8ec27f2c-0867-4d0b-9417-77cff5da8703",
+      "question_id": "3e5485ce-aa75-4bab-8bda-6afb8e3b3d7a",
+      "section_id": "1139558d-3a51-4215-89d4-24c0df4c78db",
       "section_number": 3,
       "topic": "Military Career",
       "difficulty": "medium",
@@ -43,88 +43,88 @@
       "explanation": "She entered the Escuela Militar Bernardo O'Higgins on 4 March 2005.",
       "adaptation_reason": "Cold-start coverage question generated from the selected section because no prior relevant learning history exists.",
       "source_chunk_ids": [
-        "af323091-abb2-40d1-85e2-dbe46083e48f"
+        "288ce16f-b79f-4631-9825-fb7b6954b4f7"
       ],
       "simulated_user_answer": "A",
       "is_correct": true,
       "clarification": null
     },
     {
-      "question_id": "d2f385bc-e4fc-49f6-86cd-dda4b9a4cabe",
-      "section_id": "8ec27f2c-0867-4d0b-9417-77cff5da8703",
+      "question_id": "e1a9679a-ffc5-40de-901e-8681ab003acb",
+      "section_id": "1139558d-3a51-4215-89d4-24c0df4c78db",
       "section_number": 3,
-      "topic": "Drift Read",
+      "topic": "Military Career",
       "difficulty": "hard",
-      "question": "When did the Antofagasta operation produce a Successful classification?",
+      "question": "What was the result of the Antofagasta operation?",
       "options": {
-        "A": "11 May 2022",
-        "B": "17 May 2021",
-        "C": "14-day medical leave",
-        "D": "First Echo Lock event (training)"
+        "A": "Unsuccessful classification",
+        "B": "Successful classification but resulted in a 14-day medical leave",
+        "C": "Failed operation",
+        "D": "No result"
       },
-      "correct_answer": "A",
-      "explanation": "The Antofagasta operation produced a Successful classification on 11 May 2022.",
+      "correct_answer": "B",
+      "explanation": "The Antofagasta operation produced a Successful classification but resulted in a 14-day medical leave.",
       "adaptation_reason": "Cold-start coverage question generated from the selected section because no prior relevant learning history exists.",
       "source_chunk_ids": [
-        "8b799e0c-7ca5-48ce-b23e-de6053a2d9fc"
+        "939c86cc-5492-4ebd-b1aa-3c7addf527a6"
       ],
-      "simulated_user_answer": "B",
+      "simulated_user_answer": "A",
       "is_correct": false,
-      "clarification": "The Antofagasta operation produced a Successful classification on 11 May 2022."
+      "clarification": "The Antofagasta operation produced a Successful classification but resulted in a 14-day medical leave."
     },
     {
-      "question_id": "50310582-3194-4b41-b114-27b74323ce5c",
-      "section_id": "8ec27f2c-0867-4d0b-9417-77cff5da8703",
+      "question_id": "68f893bc-608f-4700-b585-28549dcbc4fb",
+      "section_id": "1139558d-3a51-4215-89d4-24c0df4c78db",
       "section_number": 3,
-      "topic": "Promotion",
+      "topic": "Military Career",
       "difficulty": "easy",
-      "question": "When was the asset promoted to Lead Officer (Field, Grade 3)?",
+      "question": "When was she promoted to Lead Officer (Field, Grade 3)?",
       "options": {
         "A": "9 February 2024",
         "B": "12 December 2009",
         "C": "19 November 2020",
-        "D": "11 May 2022"
+        "D": "4 March 2005"
       },
       "correct_answer": "A",
-      "explanation": "The asset was promoted to Lead Officer (Field, Grade 3) on 9 February 2024.",
+      "explanation": "On 9 February 2024, the asset was promoted to Lead Officer (Field, Grade 3).",
       "adaptation_reason": "Cold-start coverage question generated from the selected section because no prior relevant learning history exists.",
       "source_chunk_ids": [
-        "340a12a7-b520-4aec-ab8f-141e58a0c894"
+        "debf9eaa-4a8a-4889-a922-bfc3b0627d76"
       ],
       "simulated_user_answer": "A",
       "is_correct": true,
       "clarification": null
     },
     {
-      "question_id": "bc489d7d-7149-4dfe-b7ef-05ceabe4ccce",
-      "section_id": "8ec27f2c-0867-4d0b-9417-77cff5da8703",
+      "question_id": "870efa30-2ebc-45b0-af25-27918c524e47",
+      "section_id": "1139558d-3a51-4215-89d4-24c0df4c78db",
       "section_number": 3,
-      "topic": "Operations",
+      "topic": "Military Career",
       "difficulty": "medium",
-      "question": "What was the name of the intelligence rotation led by the asset in 2025?",
+      "question": "What was the name of the operation where Drift Read was first manifested?",
       "options": {
         "A": "Tarapac\u00e1 Concession compound raid",
         "B": "Tallinn-Asunci\u00f3n intelligence rotation",
-        "C": "Lima Audiencia counter-audit",
-        "D": "Potos\u00ed operation"
+        "C": "Antofagasta operation",
+        "D": "Drift Read operation"
       },
-      "correct_answer": "B",
-      "explanation": "The asset led the Tallinn-Asunci\u00f3n intelligence rotation in 2025.",
+      "correct_answer": "C",
+      "explanation": "The Antofagasta operation produced the first manifestation of what would be designated Drift Read.",
       "adaptation_reason": "Cold-start coverage question generated from the selected section because no prior relevant learning history exists.",
       "source_chunk_ids": [
-        "340a12a7-b520-4aec-ab8f-141e58a0c894"
+        "939c86cc-5492-4ebd-b1aa-3c7addf527a6"
       ],
       "simulated_user_answer": "A",
       "is_correct": false,
-      "clarification": "The asset led the Tallinn-Asunci\u00f3n intelligence rotation in 2025."
+      "clarification": "The Antofagasta operation produced the first manifestation of what would be designated Drift Read."
     },
     {
-      "question_id": "e4f28c6d-3a23-42a4-8f36-ad5f73232d82",
-      "section_id": "8ec27f2c-0867-4d0b-9417-77cff5da8703",
+      "question_id": "42ba5831-301d-443a-ac47-be0d54dc8d98",
+      "section_id": "1139558d-3a51-4215-89d4-24c0df4c78db",
       "section_number": 3,
-      "topic": "Discharge",
+      "topic": "Military Career",
       "difficulty": "hard",
-      "question": "When was the discharge from Chilean Army?",
+      "question": "What was the date of her discharge from the Chilean Army?",
       "options": {
         "A": "12 March 2019",
         "B": "9 February 2024",
@@ -132,20 +132,18 @@
         "D": "19 November 2020"
       },
       "correct_answer": "A",
-      "explanation": "The discharge from Chilean Army was on 12 March 2019.",
+      "explanation": "The answer is grounded in the retrieved source context.",
       "adaptation_reason": "Cold-start coverage question generated from the selected section because no prior relevant learning history exists.",
-      "source_chunk_ids": [
-        "d444863f-9f11-400c-a69e-68010a78d901"
-      ],
+      "source_chunk_ids": [],
       "simulated_user_answer": "A",
       "is_correct": true,
       "clarification": null
     },
     {
-      "question_id": "15de17e8-3256-4e03-9e57-13afc6787e3d",
-      "section_id": "ac56b161-10e2-41eb-a721-ac875f6fdc6e",
+      "question_id": "38360f63-3c2a-4eea-b0b5-d14f39f1c651",
+      "section_id": "145e0eca-b0af-4642-abd6-7f45578672ee",
       "section_number": 7,
-      "topic": "Threat Tier Classification System",
+      "topic": "Threat Tier Classification",
       "difficulty": "medium",
       "question": "What is the name of the system used to classify metahuman and organized-paramilitary threats?",
       "options": {
@@ -158,103 +156,103 @@
       "explanation": "The PAMC Threat Tier Classification System is used to classify metahuman and organized-paramilitary threats.",
       "adaptation_reason": "Cold-start coverage question generated from the selected section because no prior relevant learning history exists.",
       "source_chunk_ids": [
-        "fa2883c0-3aa0-40f1-aa1b-4d00ea815fbc"
+        "a0584067-e77e-4e92-949a-6d94e226a54b"
       ],
       "simulated_user_answer": "B",
       "is_correct": false,
       "clarification": "The PAMC Threat Tier Classification System is used to classify metahuman and organized-paramilitary threats."
     },
     {
-      "question_id": "ab492b99-013e-48d1-ac8b-4b5500cc224e",
-      "section_id": "ac56b161-10e2-41eb-a721-ac875f6fdc6e",
+      "question_id": "dfd888db-7e07-45e0-a4ff-6fc9ca2bfbe8",
+      "section_id": "145e0eca-b0af-4642-abd6-7f45578672ee",
       "section_number": 7,
-      "topic": "Threat Tier Classification System",
+      "topic": "Emergent Threats",
       "difficulty": "hard",
-      "question": "When was the NMOC-derived Threat Tier Schedule ratified?",
+      "question": "What is the probability of Mar Inverso confirmation and engagement within 2026?",
       "options": {
-        "A": "11 March 2015",
-        "B": "11 March 2017",
-        "C": "Q1 2020",
-        "D": "Q1 2025"
+        "A": "Low",
+        "B": "Moderate",
+        "C": "High",
+        "D": "Unknown"
       },
-      "correct_answer": "B",
-      "explanation": "The NMOC-derived Threat Tier Schedule was ratified on 11 March 2017.",
+      "correct_answer": "C",
+      "explanation": "The Andean Operations Bureau projects a high probability of Mar Inverso confirmation and engagement within 2026.",
       "adaptation_reason": "Cold-start coverage question generated from the selected section because no prior relevant learning history exists.",
       "source_chunk_ids": [
-        "fa2883c0-3aa0-40f1-aa1b-4d00ea815fbc"
+        "3c10bce6-dd74-4617-ae85-5cf522ccdede"
+      ],
+      "simulated_user_answer": "C",
+      "is_correct": true,
+      "clarification": null
+    },
+    {
+      "question_id": "523e5ac9-00ab-4125-8192-53680ebf2a0f",
+      "section_id": "145e0eca-b0af-4642-abd6-7f45578672ee",
+      "section_number": 7,
+      "topic": "Adversary Engagement",
+      "difficulty": "medium",
+      "question": "How many confirmed engagements has Drift Read been involved in?",
+      "options": {
+        "A": "1",
+        "B": "2",
+        "C": "3",
+        "D": "4"
+      },
+      "correct_answer": "C",
+      "explanation": "Drift Read has been involved in 3 confirmed engagements.",
+      "adaptation_reason": "Cold-start coverage question generated from the selected section because no prior relevant learning history exists.",
+      "source_chunk_ids": [
+        "643707a4-6062-4ea2-9cfc-4e06a043ed49"
+      ],
+      "simulated_user_answer": "A",
+      "is_correct": false,
+      "clarification": "Drift Read has been involved in 3 confirmed engagements."
+    },
+    {
+      "question_id": "3b87cb8c-720d-4fb8-a6ad-cf005239afda",
+      "section_id": "145e0eca-b0af-4642-abd6-7f45578672ee",
+      "section_number": 7,
+      "topic": "Adversary Roster",
+      "difficulty": "hard",
+      "question": "What is the primary criterion for adding an adversary to the roster?",
+      "options": {
+        "A": "Three documented engagements",
+        "B": "A single incident producing more than 5 civilian casualties",
+        "C": "Both A and B",
+        "D": "Neither A nor B"
+      },
+      "correct_answer": "B",
+      "explanation": "A single incident producing more than 5 civilian casualties is the primary criterion for adding an adversary to the roster.",
+      "adaptation_reason": "Cold-start coverage question generated from the selected section because no prior relevant learning history exists.",
+      "source_chunk_ids": [
+        "84b0217b-2f57-41fa-b3bf-85a4cc3c40ee"
       ],
       "simulated_user_answer": "B",
       "is_correct": true,
       "clarification": null
     },
     {
-      "question_id": "5e5f6bd9-417f-42eb-8f66-fb2dcc69456d",
-      "section_id": "ac56b161-10e2-41eb-a721-ac875f6fdc6e",
+      "question_id": "9008ad5b-df76-48bd-8152-3760d0519ebf",
+      "section_id": "145e0eca-b0af-4642-abd6-7f45578672ee",
       "section_number": 7,
-      "topic": "Emergent Threats",
+      "topic": "Defunct Adversaries",
       "difficulty": "medium",
-      "question": "What is the name of the emergent threat projected to occur in northern Chile?",
+      "question": "What is the name of the former adversary who is confirmed deceased?",
       "options": {
-        "A": "Mar Inverso",
-        "B": "Quebrantadero",
-        "C": "Ron Tributary",
-        "D": "The Concession"
+        "A": "Bambolla",
+        "B": "Ezekiel",
+        "C": "Quebrantadero",
+        "D": "Wilma Sandoval-Iqui"
       },
       "correct_answer": "B",
-      "explanation": "The Andean Operations Bureau projects the re-emergence of Quebrantadero in northern Chile.",
+      "explanation": "Ezekiel is the former adversary who is confirmed deceased.",
       "adaptation_reason": "Cold-start coverage question generated from the selected section because no prior relevant learning history exists.",
       "source_chunk_ids": [
-        "9009e52b-f5d9-4d2a-a011-2a29487fb731"
+        "84b0217b-2f57-41fa-b3bf-85a4cc3c40ee"
       ],
       "simulated_user_answer": "A",
       "is_correct": false,
-      "clarification": "The Andean Operations Bureau projects the re-emergence of Quebrantadero in northern Chile."
-    },
-    {
-      "question_id": "b196da12-3864-496e-93e1-880a618cedf6",
-      "section_id": "ac56b161-10e2-41eb-a721-ac875f6fdc6e",
-      "section_number": 7,
-      "topic": "Adversaries",
-      "difficulty": "easy",
-      "question": "What is the codename of the civilian adversary?",
-      "options": {
-        "A": "Quebrantadero",
-        "B": "Wilma Sandoval-Iqui",
-        "C": "Bambolla",
-        "D": "Ezekiel"
-      },
-      "correct_answer": "A",
-      "explanation": "The codename of the civilian adversary is Quebrantadero.",
-      "adaptation_reason": "Cold-start coverage question generated from the selected section because no prior relevant learning history exists.",
-      "source_chunk_ids": [
-        "2d9439f9-91e0-4f6b-bf93-5872ab0fa811"
-      ],
-      "simulated_user_answer": "A",
-      "is_correct": true,
-      "clarification": null
-    },
-    {
-      "question_id": "7a1a9d8c-d856-4856-91be-3edcbb5be65b",
-      "section_id": "ac56b161-10e2-41eb-a721-ac875f6fdc6e",
-      "section_number": 7,
-      "topic": "Adversaries",
-      "difficulty": "hard",
-      "question": "What is the condition for an adversary to be removed from the primary roster?",
-      "options": {
-        "A": "Two documented engagements",
-        "B": "Three documented engagements or a single incident producing more than 5 civilian casualties",
-        "C": "One documented engagement",
-        "D": "No documented engagements"
-      },
-      "correct_answer": "B",
-      "explanation": "An adversary is removed from the primary roster if there are three documented engagements or a single incident producing more than 5 civilian casualties.",
-      "adaptation_reason": "Cold-start coverage question generated from the selected section because no prior relevant learning history exists.",
-      "source_chunk_ids": [
-        "ef331e17-51c5-4f92-bce8-27161f1f9d3f"
-      ],
-      "simulated_user_answer": "A",
-      "is_correct": false,
-      "clarification": "An adversary is removed from the primary roster if there are three documented engagements or a single incident producing more than 5 civilian casualties."
+      "clarification": "Ezekiel is the former adversary who is confirmed deceased."
     }
   ]
 }

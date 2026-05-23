@@ -1,11 +1,11 @@
 {
-  "snapshot_created_at": "2026-05-23T00:18:27.590243",
-  "current_session_id": "34fd0837-7a39-4d67-862e-054de28fa545",
+  "snapshot_created_at": "2026-05-23T00:46:22.333685",
+  "current_session_id": "b2427928-8094-420c-ab08-36a25aa36ce8",
   "recent_session_count": 1,
   "recent_sessions": [
     {
-      "session_id": "34fd0837-7a39-4d67-862e-054de28fa545",
-      "timestamp": "2026-05-23T00:18:27.491501",
+      "session_id": "b2427928-8094-420c-ab08-36a25aa36ce8",
+      "timestamp": "2026-05-23T00:46:22.248524",
       "mode": "cold_start",
       "selected_sections": [
         5,
@@ -33,37 +33,16 @@
       },
       "questions_asked": [
         {
-          "question_id": "a02dcc01-2510-4129-9cdd-b071033f0024",
+          "question_id": "02d49575-4381-428c-8dd5-3e50bd66b9ed",
           "section_number": 5,
           "topic": "Sequential Suspension",
           "difficulty": "medium",
-          "question": "What is the Doctrine of Sequential Suspension (DSS)?",
+          "question": "When was the Doctrine of Sequential Suspension articulated by the asset?",
           "options": {
-            "A": "A combat tactic used to engage targets.",
-            "B": "A formal combat doctrine articulated by the asset on 19 June 2022.",
-            "C": "A reconnaissance protocol used for cell-led operations.",
-            "D": "A technique used to clear the contact-exclusion field."
-          },
-          "user_answer": "B",
-          "correct_answer": "B",
-          "is_correct": true,
-          "clarification": null,
-          "adaptation_reason": "Cold-start coverage question generated from the selected section because no prior relevant learning history exists.",
-          "source_chunk_ids": [
-            "68144153-edc2-4d07-b82f-9491716eed7b"
-          ]
-        },
-        {
-          "question_id": "72723399-5e75-4d11-aa96-3cbf2bed0cba",
-          "section_number": 5,
-          "topic": "PAMC Internal Bulletin",
-          "difficulty": "hard",
-          "question": "What is the primary directive of PAMC Internal Bulletin 22-19?",
-          "options": {
-            "A": "Acquire targets only when extraction is mapped.",
-            "B": "Never activate without verifying the contact-exclusion radius.",
-            "C": "Hold one activation in reserve until extraction.",
-            "D": "Civilian risk overrides cooldown discipline."
+            "A": "19 June 2022",
+            "B": "20 June 2022",
+            "C": "18 June 2022",
+            "D": "21 June 2022"
           },
           "user_answer": "A",
           "correct_answer": "A",
@@ -71,41 +50,41 @@
           "clarification": null,
           "adaptation_reason": "Cold-start coverage question generated from the selected section because no prior relevant learning history exists.",
           "source_chunk_ids": [
-            "c3f3119b-078d-4ece-9ce7-e165c5f4fc65"
+            "976f6a6b-61e3-4276-be66-99101b7052da"
           ]
         },
         {
-          "question_id": "b2a2cdac-6dbb-494d-b8c6-e7b2ea3b72b7",
+          "question_id": "b4febf53-b4f0-43e8-b5bf-35830083b616",
           "section_number": 5,
-          "topic": "Contact-Exclusion Rule",
+          "topic": "Operational Tactics",
+          "difficulty": "hard",
+          "question": "What is the primary purpose of the contact-exclusion rule?",
+          "options": {
+            "A": "To prevent civilian casualties",
+            "B": "To ensure accurate target acquisition",
+            "C": "To maintain a safe distance from the target",
+            "D": "To verify the contact-exclusion radius"
+          },
+          "user_answer": "B",
+          "correct_answer": "B",
+          "is_correct": true,
+          "clarification": null,
+          "adaptation_reason": "Cold-start coverage question generated from the selected section because no prior relevant learning history exists.",
+          "source_chunk_ids": [
+            "46195733-4fd6-427d-9407-c6cf463cbd85"
+          ]
+        },
+        {
+          "question_id": "b1c72f2f-bb73-4bb4-af8d-a8abbb3b548e",
+          "section_number": 5,
+          "topic": "Combat Doctrine",
           "difficulty": "easy",
-          "question": "What happens to the contact-exclusion field after ~0.3 seconds?",
+          "question": "What is the purpose of the cooldown discipline?",
           "options": {
-            "A": "The contact-exclusion field remains active.",
-            "B": "The contact-exclusion field clears.",
-            "C": "The contact-exclusion field is reactivated.",
-            "D": "The contact-exclusion field is disabled."
-          },
-          "user_answer": "B",
-          "correct_answer": "B",
-          "is_correct": true,
-          "clarification": null,
-          "adaptation_reason": "Cold-start coverage question generated from the selected section because no prior relevant learning history exists.",
-          "source_chunk_ids": [
-            "e8a95d90-b765-405a-b3e6-32dd90daba3f"
-          ]
-        },
-        {
-          "question_id": "42479d02-039e-4dba-8340-f3e370154aba",
-          "section_number": 5,
-          "topic": "Reconnaissance Sequencing Standard",
-          "difficulty": "hard",
-          "question": "What is the purpose of the 72-hour saturation protocol in pre-engagement reconnaissance?",
-          "options": {
-            "A": "To gather intelligence on the target.",
-            "B": "To conduct a physical site survey.",
-            "C": "To conduct an electromagnetic survey.",
-            "D": "To verify the contact-exclusion radius."
+            "A": "To override tactical opportunity",
+            "B": "To ensure accurate target acquisition",
+            "C": "To prevent civilian casualties",
+            "D": "To maintain a safe distance from the target"
           },
           "user_answer": "A",
           "correct_answer": "A",
@@ -113,20 +92,41 @@
           "clarification": null,
           "adaptation_reason": "Cold-start coverage question generated from the selected section because no prior relevant learning history exists.",
           "source_chunk_ids": [
-            "9c37bd6d-9f59-42a7-acc3-32da296cab05"
+            "c300613b-de19-496f-9f09-f00e666d7cef"
           ]
         },
         {
-          "question_id": "7005266c-47d6-429e-9966-b8136b0fd3e9",
+          "question_id": "43860d4a-034c-464c-985f-b6e0624a0328",
           "section_number": 5,
-          "topic": "Civilian Risk",
+          "topic": "Reconnaissance Sequencing",
           "difficulty": "medium",
-          "question": "What overrides cooldown discipline?",
+          "question": "What is the purpose of the 72-hour saturation protocol?",
           "options": {
-            "A": "Tactical opportunity.",
-            "B": "Civilian risk.",
-            "C": "Engagement target acquisition.",
-            "D": "Physical site survey."
+            "A": "To gather intelligence on the target",
+            "B": "To verify the contact-exclusion radius",
+            "C": "To ensure accurate target acquisition",
+            "D": "To prevent civilian casualties"
+          },
+          "user_answer": "A",
+          "correct_answer": "A",
+          "is_correct": true,
+          "clarification": null,
+          "adaptation_reason": "Cold-start coverage question generated from the selected section because no prior relevant learning history exists.",
+          "source_chunk_ids": [
+            "2255756c-1713-4a94-b22e-744c5c082918"
+          ]
+        },
+        {
+          "question_id": "701c1ecb-1716-48ef-862b-986e2855199b",
+          "section_number": 5,
+          "topic": "Operational Tactics",
+          "difficulty": "hard",
+          "question": "What is the purpose of the PAMC Internal Bulletin 22-19?",
+          "options": {
+            "A": "To articulate the Doctrine of Sequential Suspension",
+            "B": "To provide guidelines for target acquisition",
+            "C": "To ensure accurate target acquisition",
+            "D": "To prevent civilian casualties"
           },
           "user_answer": "B",
           "correct_answer": "B",
@@ -134,62 +134,62 @@
           "clarification": null,
           "adaptation_reason": "Cold-start coverage question generated from the selected section because no prior relevant learning history exists.",
           "source_chunk_ids": [
-            "c3f3119b-078d-4ece-9ce7-e165c5f4fc65"
+            "976f6a6b-61e3-4276-be66-99101b7052da"
           ]
         },
         {
-          "question_id": "73c5690f-2e5a-4f19-baf6-e2056a3665cc",
+          "question_id": "2a185525-dae2-44bb-8660-285a1b363b44",
           "section_number": 8,
           "topic": "Primary Base",
           "difficulty": "easy",
-          "question": "What is the primary operational base of the asset?",
+          "question": "What is the name of the asset's primary operational base?",
           "options": {
             "A": "Cuartel Valpara\u00edso",
             "B": "PAMC South Cone Headquarters",
             "C": "Avenida Altamirano 1842",
-            "D": "Valpara\u00edso"
+            "D": "La Paz Annex 2023"
           },
           "user_answer": "B",
           "correct_answer": "A",
           "is_correct": false,
-          "clarification": "Cuartel Valpara\u00edso is the primary operational base of the asset.",
+          "clarification": "The asset's primary operational base is Cuartel Valpara\u00edso.",
           "adaptation_reason": "Cold-start coverage question generated from the selected section because no prior relevant learning history exists.",
           "source_chunk_ids": [
-            "11e8b047-54f6-42b9-a9b8-a0e6bbf19e09"
+            "24be38b2-5941-44e6-a3b4-ea798ef61d53"
           ]
         },
         {
-          "question_id": "effabc76-5e88-4feb-9625-c413d1b75c28",
+          "question_id": "92c27805-34d9-4e3d-8b85-5bb43839d34c",
           "section_number": 8,
           "topic": "Safehouse Provisioning",
           "difficulty": "medium",
           "question": "Who audits the safehouse provisioning semi-annually?",
           "options": {
             "A": "Cpl. Vendrame",
-            "B": "The asset",
-            "C": "PAMC",
-            "D": "The cell"
+            "B": "The asset's former trainer",
+            "C": "Peruvian Direcci\u00f3n de Asuntos Metahumanos (DAM)",
+            "D": "Bolivian Servicio de Operaciones Especiales (SOE)"
           },
           "user_answer": "B",
           "correct_answer": "A",
           "is_correct": false,
-          "clarification": "Cpl. Vendrame audits the safehouse provisioning semi-annually on behalf of the cell.",
+          "clarification": "Cpl. Vendrame audits the safehouse provisioning semi-annually.",
           "adaptation_reason": "Cold-start coverage question generated from the selected section because no prior relevant learning history exists.",
           "source_chunk_ids": [
-            "421ff765-5d8f-4b26-b568-e8e439c15860"
+            "f8e21348-03e4-477f-8aad-ab5e77965545"
           ]
         },
         {
-          "question_id": "5419b405-51b4-4a24-ad68-689d146a78c8",
+          "question_id": "07c670e7-5a0d-4e83-b95c-4866bb50557e",
           "section_number": 8,
           "topic": "Operational Territory",
           "difficulty": "hard",
-          "question": "What is the approximate size of the asset's authorized operational territory?",
+          "question": "What is the approximate area of the asset's authorized operational territory?",
           "options": {
             "A": "6.8 million km\u00b2",
             "B": "10 million km\u00b2",
-            "C": "5.5 million km\u00b2",
-            "D": "4.2 million km\u00b2"
+            "C": "5 million km\u00b2",
+            "D": "3 million km\u00b2"
           },
           "user_answer": "B",
           "correct_answer": "A",
@@ -197,50 +197,48 @@
           "clarification": "The asset's authorized operational territory spans approximately 6.8 million km\u00b2.",
           "adaptation_reason": "Cold-start coverage question generated from the selected section because no prior relevant learning history exists.",
           "source_chunk_ids": [
-            "bf0015aa-d18c-4de4-921a-1871f08b8f33"
+            "3569b325-dd47-4071-974e-f59aa53c2a42"
           ]
         },
         {
-          "question_id": "f0378532-8da6-4726-b581-f29cdd242181",
+          "question_id": "55de75b8-e0e2-490c-b4a4-b16d94cb0276",
           "section_number": 8,
-          "topic": "Former Trainer",
+          "topic": "Micro-Cache Network",
           "difficulty": "medium",
-          "question": "Who is the asset's former trainer?",
+          "question": "How many micro-caches does the asset maintain?",
           "options": {
-            "A": "Bolivian Servicio de Operaciones Especiales (SOE)",
-            "B": "Peruvian Direcci\u00f3n de Asuntos Metahumanos (DAM)",
-            "C": "The asset's former trainer is not specified",
-            "D": "Cuzco operations"
+            "A": "10",
+            "B": "19",
+            "C": "20",
+            "D": "15"
           },
-          "user_answer": "B",
-          "correct_answer": "A",
+          "user_answer": "A",
+          "correct_answer": "B",
           "is_correct": false,
-          "clarification": "The asset's former trainer is Bolivian Servicio de Operaciones Especiales (SOE).",
+          "clarification": "The asset maintains a network of 19 micro-caches.",
           "adaptation_reason": "Cold-start coverage question generated from the selected section because no prior relevant learning history exists.",
           "source_chunk_ids": [
-            "a819f646-02b3-4382-a957-d7ffbbb247c0"
+            "f8e21348-03e4-477f-8aad-ab5e77965545"
           ]
         },
         {
-          "question_id": "fad4999a-91f8-44e3-8eab-062f50d37c7c",
+          "question_id": "cd4b362a-8ebd-4aa3-ac52-5fed469eda7e",
           "section_number": 8,
           "topic": "Bilateral Cooperation",
           "difficulty": "hard",
           "question": "What is the name of the bilateral cooperation framework between the asset and Bolivian Servicio de Operaciones Especiales (SOE)?",
           "options": {
             "A": "La Paz Annex 2023",
-            "B": "Cuzco operations",
+            "B": "Cuartel Valpara\u00edso",
             "C": "PAMC South Cone Headquarters",
-            "D": "Valpara\u00edso"
+            "D": "Avenida Altamirano 1842"
           },
           "user_answer": "B",
           "correct_answer": "A",
           "is_correct": false,
-          "clarification": "The bilateral cooperation framework between the asset and Bolivian Servicio de Operaciones Especiales (SOE) is La Paz Annex 2023.",
+          "clarification": "The answer is grounded in the retrieved source context.",
           "adaptation_reason": "Cold-start coverage question generated from the selected section because no prior relevant learning history exists.",
-          "source_chunk_ids": [
-            "a819f646-02b3-4382-a957-d7ffbbb247c0"
-          ]
+          "source_chunk_ids": []
         }
       ],
       "weak_topics": [
@@ -254,7 +252,7 @@
         },
         {
           "section_number": 8,
-          "topic": "Former Trainer",
+          "topic": "Micro-Cache Network",
           "attempts": 1,
           "wrong_count": 1,
           "correct_count": 0,
@@ -286,7 +284,15 @@
         },
         {
           "section_number": 5,
-          "topic": "Civilian Risk",
+          "topic": "Operational Tactics",
+          "attempts": 2,
+          "wrong_count": 0,
+          "correct_count": 2,
+          "weakness_score": 0.0
+        },
+        {
+          "section_number": 5,
+          "topic": "Reconnaissance Sequencing",
           "attempts": 1,
           "wrong_count": 0,
           "correct_count": 1,
@@ -294,23 +300,7 @@
         },
         {
           "section_number": 5,
-          "topic": "Reconnaissance Sequencing Standard",
-          "attempts": 1,
-          "wrong_count": 0,
-          "correct_count": 1,
-          "weakness_score": 0.0
-        },
-        {
-          "section_number": 5,
-          "topic": "Contact-Exclusion Rule",
-          "attempts": 1,
-          "wrong_count": 0,
-          "correct_count": 1,
-          "weakness_score": 0.0
-        },
-        {
-          "section_number": 5,
-          "topic": "PAMC Internal Bulletin",
+          "topic": "Combat Doctrine",
           "attempts": 1,
           "wrong_count": 0,
           "correct_count": 1,
