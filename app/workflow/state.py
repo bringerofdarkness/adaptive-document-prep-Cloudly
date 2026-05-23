@@ -1,5 +1,4 @@
 from typing import TypedDict
-
 from app.schemas.question import MCQSet
 
 
@@ -16,3 +15,4 @@ class PrepWorkflowState(TypedDict, total=False):
     scoring_payload: dict
     session: object
     result: dict
+    active_llm_provider: str  # Tracks runtime provider shifts
