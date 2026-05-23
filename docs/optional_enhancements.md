@@ -40,16 +40,27 @@ This document outlines the architectural performance enhancements and behavioral
 ## 3. Future Scalability Roadmap
 
 The following structural components are designed as progressive milestones to scale the application horizontally under high-concurrency enterprise workloads:
-[ incoming api request ]
-                         │
-                         ▼
-           ┌───────────────────────────┐
-           │    FastAPI Rate Limiter   │
-           └─────────────┬─────────────┘
-                         │
-        Cache Hit?       ▼       Cache Miss?
-   ┌─────────────────────┴─────────────────────┐
-   ▼                                           ▼
+
+                  [ incoming api request ]
+                             │
+                             ▼
+               ┌───────────────────────────┐
+               │    FastAPI Rate Limiter   │
+               └─────────────┬─────────────┘
+                             │
+            Cache Hit?       ▼       Cache Miss?
+       ┌─────────────────────┴─────────────────────┐
+       ▼                                           ▼
+┌──────────────┐                            ┌──────────────┐
+│  Redis Cache │                            │ LangGraph Engine│
+│ (Response in │                            │ (Asynchronous│
+│   < 5 ms)    │                            │ Task Queue)  │
+└──────────────┘                            └──────┬───────┘
+                                                   │
+                                                   ▼
+                                            ┌──────────────┐
+                                            │ Celery Worker│
+                                            └──────────────┘
 
 ### High-Speed Caching Tier (Redis Integration)
 * **Objective**: Offload high-frequency data lookups for static domain entities like raw document chunks and section splits.
