@@ -1,3 +1,4 @@
+
 # Optional Enhancements & Production Performance Metrics
 
 This document outlines the architectural performance enhancements and behavioral metrics implemented within the Adaptive Document Preparation System. These engineering choices transition the core framework from a baseline prototype into a production-grade, highly observable, and horizontally scalable backend asset.
@@ -7,11 +8,11 @@ This document outlines the architectural performance enhancements and behavioral
 ## 1. Relational Database Performance Optimization
 
 ### History Lookup Latency Reduction
-* **Problem Statement**: At operational scale, evaluating student mastery requires checking prior session histories across multiple cross-referenced entities. Sequential table scans result in an $O(N)$ time complexity for state analysis, causing query latency to degrade lineally as user history expands.
+* **Problem Statement**: At operational scale, evaluating student mastery requires checking prior session histories across multiple cross-referenced entities. Sequential table scans result in an O(N) time complexity for state analysis, causing query latency to degrade lineally as user history expands.
 * **Engineering Solution**: Implemented explicit composite and covered B-Tree database indices natively via the SQLAlchemy ORM layer.
   * `idx_weak_topic_perf_sorting` applied to `weak_topic_stats(document_id, section_number, weakness_score, wrong_count)`.
   * `idx_gen_questions_doc_section` applied to `generated_questions(document_id, section_number)`.
-* **Empirical Impact**: Optimized the state calculation paths from a sequential scan down to a balanced log-search lookup. This drops query time complexity from $O(N)$ to $O(\log N)$, securing an estimated **85%+ latency reduction** on lookups during continuous adaptive evaluation cycles.
+* **Empirical Impact**: Optimized the state calculation paths from a sequential scan down to a balanced log-search lookup. This drops query time complexity from O(N) to O(log N), securing an estimated **85%+ latency reduction** on lookups during continuous adaptive evaluation cycles.
 
 ### Zero-Repetition Data Integrity (% Optimal Result)
 * **Problem Statement**: Ensuring strict content variation while avoiding question repetition requires joining heavy datasets under tight execution deadlines.
@@ -23,7 +24,7 @@ This document outlines the architectural performance enhancements and behavioral
 ## 2. Advanced Resiliency & Telemetry Architecture
 
 ### Automated Circuit Breaker Topology
-* **Design Philosophy**: Protects runtime execution blocks against unexpected upstream provider outages, HTTP `429 Too Many Requests` rate-limiting bottlenecks, and erratic network jitter.
+* **Design Philosophy**: Protects runtime execution blocks against unexpected upstream provider outages, HTTP 429 Too Many Requests rate-limiting bottlenecks, and erratic network jitter.
 * **Execution Flow**: Wraps core API connectors inside an automated exponential backoff mechanism using structural tracking tokens. If the configured remote provider triggers persistent failures over 3 sequential retry loops, the circuit breaks automatically and routes execution seamlessly into a local structural mock fallback interface.
 * **Resiliency Metric**: Achieves **0% system termination risk** from transient upstream API dependencies, safeguarding application availability.
 
@@ -41,6 +42,7 @@ This document outlines the architectural performance enhancements and behavioral
 
 The following structural components are designed as progressive milestones to scale the application horizontally under high-concurrency enterprise workloads:
 
+```text
                   [ incoming api request ]
                              │
                              ▼
@@ -61,11 +63,12 @@ The following structural components are designed as progressive milestones to sc
                                             ┌──────────────┐
                                             │ Celery Worker│
                                             └──────────────┘
+```
 
 ### High-Speed Caching Tier (Redis Integration)
 * **Objective**: Offload high-frequency data lookups for static domain entities like raw document chunks and section splits.
-* **Implementation**: Introduce an in-memory Redis database layer directly upstream of the PostgreSQL layer. API endpoints query the cache cluster first, yielding near-instantaneous response times ($\le 5\text{ ms}$) and mitigating database read load by up to **90%**.
+* **Implementation**: Introduce an in-memory Redis database layer directly upstream of the PostgreSQL layer. API endpoints query the cache cluster first, yielding near-instantaneous response times (<= 5 ms) and mitigating database read load by up to **90%**.
 
 ### Production Task Decoupling (Celery & Message Brokers)
 * **Objective**: Remove long-running LLM generation and vector embedding processes from the primary HTTP request/response thread.
-* **Implementation**: Transition synchronous execution pipelines into non-blocking, asynchronous tasks handled by a Celery worker pool backed by a RabbitMQ message broker. The API layer instantly returns a `202 Accepted` status along with a unique tracking token, shifting workloads to background worker tasks to ensure an ultra-low Time-To-First-Byte (TTFB).
+* **Implementation**: Transition synchronous execution pipelines into non-blocking, asynchronous tasks handled by a Celery worker pool backed by a RabbitMQ message broker. The API layer instantly returns a 202 Accepted status along with a unique tracking token, shifting workloads to background worker tasks to ensure an ultra-low Time-To-First-Byte (TTFB).
