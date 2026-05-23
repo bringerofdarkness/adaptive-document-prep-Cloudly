@@ -1,5 +1,5 @@
 {
-  "session_id": "b2427928-8094-420c-ab08-36a25aa36ce8",
+  "session_id": "0983e44f-a125-4778-9294-d38b658152d2",
   "mode": "cold_start",
   "selected_sections": [
     5,
@@ -27,232 +27,234 @@
   },
   "questions": [
     {
-      "question_id": "02d49575-4381-428c-8dd5-3e50bd66b9ed",
-      "section_id": "a5c39220-87bf-43ce-924a-ea6f1c98bd65",
+      "question_id": "3dbac2bd-fb38-4bcd-ba74-b9be801e176c",
+      "section_id": "4ac2a618-adca-4d81-af68-92d4a84e06d3",
       "section_number": 5,
-      "topic": "Sequential Suspension",
+      "topic": "Section 5 concept 1",
       "difficulty": "medium",
-      "question": "When was the Doctrine of Sequential Suspension articulated by the asset?",
+      "question": "Section 5 question 1: Which option best reflects Section 5 concept 1?",
       "options": {
-        "A": "19 June 2022",
-        "B": "20 June 2022",
-        "C": "18 June 2022",
-        "D": "21 June 2022"
+        "A": "Section 5. Operational Tactics and Combat Doctrine 5.1 The Doctrine of Sequential Suspension The asset's formal combat doctrine, the Doctrine of Sequential Suspension (DSS), was articulated by the asset on 19 June 2022...",
+        "B": "A statement from an unrelated section.",
+        "C": "A contradictory interpretation of the selected material.",
+        "D": "A generic answer not grounded in the selected section."
       },
       "correct_answer": "A",
-      "explanation": "The Doctrine of Sequential Suspension was articulated by the asset on 19 June 2022.",
+      "explanation": "Option A is correct because it is directly grounded in the retrieved chunk from the selected section.",
       "adaptation_reason": "Cold-start coverage question generated from the selected section because no prior relevant learning history exists.",
       "source_chunk_ids": [
-        "976f6a6b-61e3-4276-be66-99101b7052da"
+        "04c40b3f-7d51-4b62-8bfe-20af288470a7"
       ],
       "simulated_user_answer": "A",
       "is_correct": true,
       "clarification": null
     },
     {
-      "question_id": "b4febf53-b4f0-43e8-b5bf-35830083b616",
-      "section_id": "a5c39220-87bf-43ce-924a-ea6f1c98bd65",
+      "question_id": "0dfbf76a-c67f-4379-9ee2-75c3443ab36d",
+      "section_id": "4ac2a618-adca-4d81-af68-92d4a84e06d3",
       "section_number": 5,
-      "topic": "Operational Tactics",
-      "difficulty": "hard",
-      "question": "What is the primary purpose of the contact-exclusion rule?",
+      "topic": "Section 5 concept 7",
+      "difficulty": "medium",
+      "question": "Section 5 question 2: Which option best reflects Section 5 concept 7?",
       "options": {
-        "A": "To prevent civilian casualties",
-        "B": "To ensure accurate target acquisition",
-        "C": "To maintain a safe distance from the target",
-        "D": "To verify the contact-exclusion radius"
-      },
-      "correct_answer": "B",
-      "explanation": "The contact-exclusion rule is used to ensure accurate target acquisition.",
-      "adaptation_reason": "Cold-start coverage question generated from the selected section because no prior relevant learning history exists.",
-      "source_chunk_ids": [
-        "46195733-4fd6-427d-9407-c6cf463cbd85"
-      ],
-      "simulated_user_answer": "B",
-      "is_correct": true,
-      "clarification": null
-    },
-    {
-      "question_id": "b1c72f2f-bb73-4bb4-af8d-a8abbb3b548e",
-      "section_id": "a5c39220-87bf-43ce-924a-ea6f1c98bd65",
-      "section_number": 5,
-      "topic": "Combat Doctrine",
-      "difficulty": "easy",
-      "question": "What is the purpose of the cooldown discipline?",
-      "options": {
-        "A": "To override tactical opportunity",
-        "B": "To ensure accurate target acquisition",
-        "C": "To prevent civilian casualties",
-        "D": "To maintain a safe distance from the target"
+        "A": "irectives (PAMC Internal Bulletin 22-19): 1. Acquire targets only when extraction is mapped. 2. Never activate without verifying the contact-exclusion radius. 3. Hold one activation in reserve until extraction. 4....",
+        "B": "A statement from an unrelated section.",
+        "C": "A contradictory interpretation of the selected material.",
+        "D": "A generic answer not grounded in the selected section."
       },
       "correct_answer": "A",
-      "explanation": "The cooldown discipline is used to override tactical opportunity.",
+      "explanation": "Option A is correct because it is directly grounded in the retrieved chunk from the selected section.",
       "adaptation_reason": "Cold-start coverage question generated from the selected section because no prior relevant learning history exists.",
       "source_chunk_ids": [
-        "c300613b-de19-496f-9f09-f00e666d7cef"
+        "d0bddff7-8fb4-4694-8d46-f0f62d500d0b"
       ],
       "simulated_user_answer": "A",
       "is_correct": true,
       "clarification": null
     },
     {
-      "question_id": "43860d4a-034c-464c-985f-b6e0624a0328",
-      "section_id": "a5c39220-87bf-43ce-924a-ea6f1c98bd65",
+      "question_id": "9cb1605a-7fbf-42a9-9936-b4d8a2180ad3",
+      "section_id": "4ac2a618-adca-4d81-af68-92d4a84e06d3",
       "section_number": 5,
-      "topic": "Reconnaissance Sequencing",
+      "topic": "Section 5 concept 4",
       "difficulty": "medium",
-      "question": "What is the purpose of the 72-hour saturation protocol?",
+      "question": "Section 5 question 3: Which option best reflects Section 5 concept 4?",
       "options": {
-        "A": "To gather intelligence on the target",
-        "B": "To verify the contact-exclusion radius",
-        "C": "To ensure accurate target acquisition",
-        "D": "To prevent civilian casualties"
+        "A": "ion pattern around the contact-exclusion rule (\u00a72.8): 1. Asset releases an object she is holding. 2. After ~0.3 seconds, the contact-exclusion field clears. 3. Asset suspends the released object before it strikes...",
+        "B": "A statement from an unrelated section.",
+        "C": "A contradictory interpretation of the selected material.",
+        "D": "A generic answer not grounded in the selected section."
       },
       "correct_answer": "A",
-      "explanation": "The 72-hour saturation protocol is used to gather intelligence on the target.",
+      "explanation": "Option A is correct because it is directly grounded in the retrieved chunk from the selected section.",
       "adaptation_reason": "Cold-start coverage question generated from the selected section because no prior relevant learning history exists.",
       "source_chunk_ids": [
-        "2255756c-1713-4a94-b22e-744c5c082918"
+        "55df33e2-9b04-490a-b098-90f0adcfd956"
       ],
       "simulated_user_answer": "A",
       "is_correct": true,
       "clarification": null
     },
     {
-      "question_id": "701c1ecb-1716-48ef-862b-986e2855199b",
-      "section_id": "a5c39220-87bf-43ce-924a-ea6f1c98bd65",
+      "question_id": "b64883ee-0f17-48a6-aed3-9640c16dcb93",
+      "section_id": "4ac2a618-adca-4d81-af68-92d4a84e06d3",
       "section_number": 5,
-      "topic": "Operational Tactics",
-      "difficulty": "hard",
-      "question": "What is the purpose of the PAMC Internal Bulletin 22-19?",
+      "topic": "Section 5 concept 6",
+      "difficulty": "medium",
+      "question": "Section 5 question 4: Which option best reflects Section 5 concept 6?",
       "options": {
-        "A": "To articulate the Doctrine of Sequential Suspension",
-        "B": "To provide guidelines for target acquisition",
-        "C": "To ensure accurate target acquisition",
-        "D": "To prevent civilian casualties"
+        "A": "civilian-risk grounds since 2019: 31. 5.9 Reconnaissance Sequencing Standard pre-engagement reconnaissance for cell-led operations follows the 72-hour saturation protocol: T\u221272h to T\u221248h: passive surveillance (Pajarera...",
+        "B": "A statement from an unrelated section.",
+        "C": "A contradictory interpretation of the selected material.",
+        "D": "A generic answer not grounded in the selected section."
       },
-      "correct_answer": "B",
-      "explanation": "The PAMC Internal Bulletin 22-19 provides guidelines for target acquisition.",
+      "correct_answer": "A",
+      "explanation": "Option A is correct because it is directly grounded in the retrieved chunk from the selected section.",
       "adaptation_reason": "Cold-start coverage question generated from the selected section because no prior relevant learning history exists.",
       "source_chunk_ids": [
-        "976f6a6b-61e3-4276-be66-99101b7052da"
+        "7634fbfa-7d7b-4deb-93a9-8c5bc47fb487"
       ],
-      "simulated_user_answer": "B",
+      "simulated_user_answer": "A",
       "is_correct": true,
       "clarification": null
     },
     {
-      "question_id": "2a185525-dae2-44bb-8660-285a1b363b44",
-      "section_id": "e8c4281d-d318-4f91-a1b8-31472f9aac4c",
-      "section_number": 8,
-      "topic": "Primary Base",
-      "difficulty": "easy",
-      "question": "What is the name of the asset's primary operational base?",
-      "options": {
-        "A": "Cuartel Valpara\u00edso",
-        "B": "PAMC South Cone Headquarters",
-        "C": "Avenida Altamirano 1842",
-        "D": "La Paz Annex 2023"
-      },
-      "correct_answer": "A",
-      "explanation": "The asset's primary operational base is Cuartel Valpara\u00edso.",
-      "adaptation_reason": "Cold-start coverage question generated from the selected section because no prior relevant learning history exists.",
-      "source_chunk_ids": [
-        "24be38b2-5941-44e6-a3b4-ea798ef61d53"
-      ],
-      "simulated_user_answer": "B",
-      "is_correct": false,
-      "clarification": "The asset's primary operational base is Cuartel Valpara\u00edso."
-    },
-    {
-      "question_id": "92c27805-34d9-4e3d-8b85-5bb43839d34c",
-      "section_id": "e8c4281d-d318-4f91-a1b8-31472f9aac4c",
-      "section_number": 8,
-      "topic": "Safehouse Provisioning",
+      "question_id": "c4e6aa88-6f21-4eb7-9917-045392a7a17c",
+      "section_id": "4ac2a618-adca-4d81-af68-92d4a84e06d3",
+      "section_number": 5,
+      "topic": "Section 5 concept 2",
       "difficulty": "medium",
-      "question": "Who audits the safehouse provisioning semi-annually?",
+      "question": "Section 5 question 5: Which option best reflects Section 5 concept 2?",
       "options": {
-        "A": "Cpl. Vendrame",
-        "B": "The asset's former trainer",
-        "C": "Peruvian Direcci\u00f3n de Asuntos Metahumanos (DAM)",
-        "D": "Bolivian Servicio de Operaciones Especiales (SOE)"
+        "A": "The Three-Two-One Rule The asset's signature tactical heuristic, drilled into Cell Halc\u00f3n operations and taught at Lima Academy: Three activations maximum per 60-second window Two active sightlines maintained at any...",
+        "B": "A statement from an unrelated section.",
+        "C": "A contradictory interpretation of the selected material.",
+        "D": "A generic answer not grounded in the selected section."
       },
       "correct_answer": "A",
-      "explanation": "Cpl. Vendrame audits the safehouse provisioning semi-annually.",
+      "explanation": "Option A is correct because it is directly grounded in the retrieved chunk from the selected section.",
       "adaptation_reason": "Cold-start coverage question generated from the selected section because no prior relevant learning history exists.",
       "source_chunk_ids": [
-        "f8e21348-03e4-477f-8aad-ab5e77965545"
-      ],
-      "simulated_user_answer": "B",
-      "is_correct": false,
-      "clarification": "Cpl. Vendrame audits the safehouse provisioning semi-annually."
-    },
-    {
-      "question_id": "07c670e7-5a0d-4e83-b95c-4866bb50557e",
-      "section_id": "e8c4281d-d318-4f91-a1b8-31472f9aac4c",
-      "section_number": 8,
-      "topic": "Operational Territory",
-      "difficulty": "hard",
-      "question": "What is the approximate area of the asset's authorized operational territory?",
-      "options": {
-        "A": "6.8 million km\u00b2",
-        "B": "10 million km\u00b2",
-        "C": "5 million km\u00b2",
-        "D": "3 million km\u00b2"
-      },
-      "correct_answer": "A",
-      "explanation": "The asset's authorized operational territory spans approximately 6.8 million km\u00b2.",
-      "adaptation_reason": "Cold-start coverage question generated from the selected section because no prior relevant learning history exists.",
-      "source_chunk_ids": [
-        "3569b325-dd47-4071-974e-f59aa53c2a42"
-      ],
-      "simulated_user_answer": "B",
-      "is_correct": false,
-      "clarification": "The asset's authorized operational territory spans approximately 6.8 million km\u00b2."
-    },
-    {
-      "question_id": "55de75b8-e0e2-490c-b4a4-b16d94cb0276",
-      "section_id": "e8c4281d-d318-4f91-a1b8-31472f9aac4c",
-      "section_number": 8,
-      "topic": "Micro-Cache Network",
-      "difficulty": "medium",
-      "question": "How many micro-caches does the asset maintain?",
-      "options": {
-        "A": "10",
-        "B": "19",
-        "C": "20",
-        "D": "15"
-      },
-      "correct_answer": "B",
-      "explanation": "The asset maintains a network of 19 micro-caches.",
-      "adaptation_reason": "Cold-start coverage question generated from the selected section because no prior relevant learning history exists.",
-      "source_chunk_ids": [
-        "f8e21348-03e4-477f-8aad-ab5e77965545"
+        "fbdd6550-902f-4922-be45-6a11e2f79d18"
       ],
       "simulated_user_answer": "A",
-      "is_correct": false,
-      "clarification": "The asset maintains a network of 19 micro-caches."
+      "is_correct": true,
+      "clarification": null
     },
     {
-      "question_id": "cd4b362a-8ebd-4aa3-ac52-5fed469eda7e",
-      "section_id": "e8c4281d-d318-4f91-a1b8-31472f9aac4c",
+      "question_id": "7aa47bc3-1ff5-4e1b-b25b-3dfd17592386",
+      "section_id": "9d5e342c-b654-4257-ba13-d30f822d9422",
       "section_number": 8,
-      "topic": "Bilateral Cooperation",
-      "difficulty": "hard",
-      "question": "What is the name of the bilateral cooperation framework between the asset and Bolivian Servicio de Operaciones Especiales (SOE)?",
+      "topic": "Section 8 concept 1",
+      "difficulty": "medium",
+      "question": "Section 8 question 1: Which option best reflects Section 8 concept 1?",
       "options": {
-        "A": "La Paz Annex 2023",
-        "B": "Cuartel Valpara\u00edso",
-        "C": "PAMC South Cone Headquarters",
-        "D": "Avenida Altamirano 1842"
+        "A": "Section 8. Known Bases, Safehouses, and Operational Territory 8.1 Primary Base: Cuartel Valpara\u00edso The asset's primary operational base is Cuartel Valpara\u00edso, designated PAMC South Cone Headquarters. The facility...",
+        "B": "A statement from an unrelated section.",
+        "C": "A contradictory interpretation of the selected material.",
+        "D": "A generic answer not grounded in the selected section."
       },
       "correct_answer": "A",
-      "explanation": "The answer is grounded in the retrieved source context.",
+      "explanation": "Option A is correct because it is directly grounded in the retrieved chunk from the selected section.",
       "adaptation_reason": "Cold-start coverage question generated from the selected section because no prior relevant learning history exists.",
-      "source_chunk_ids": [],
+      "source_chunk_ids": [
+        "6d68ed53-037a-4281-84fa-57145baca38e"
+      ],
       "simulated_user_answer": "B",
       "is_correct": false,
-      "clarification": "The answer is grounded in the retrieved source context."
+      "clarification": "Option A is correct because it is directly grounded in the retrieved chunk from the selected section."
+    },
+    {
+      "question_id": "4700e13a-2a4f-45a6-99bd-8581f8fc008e",
+      "section_id": "9d5e342c-b654-4257-ba13-d30f822d9422",
+      "section_number": 8,
+      "topic": "Section 8 concept 3",
+      "difficulty": "medium",
+      "question": "Section 8 question 2: Which option best reflects Section 8 concept 3?",
+      "options": {
+        "A": "xin-7 spare blister packs 1 backup PAMC-issued identity package (Norwegian, Argentine, Bolivian alternates) 2,000 USD-equivalent local currency in mixed denominations Safehouse provisioning is audited semi-annually by...",
+        "B": "A statement from an unrelated section.",
+        "C": "A contradictory interpretation of the selected material.",
+        "D": "A generic answer not grounded in the selected section."
+      },
+      "correct_answer": "A",
+      "explanation": "Option A is correct because it is directly grounded in the retrieved chunk from the selected section.",
+      "adaptation_reason": "Cold-start coverage question generated from the selected section because no prior relevant learning history exists.",
+      "source_chunk_ids": [
+        "91ede720-8f85-445d-a74e-5bc2c5253dd1"
+      ],
+      "simulated_user_answer": "B",
+      "is_correct": false,
+      "clarification": "Option A is correct because it is directly grounded in the retrieved chunk from the selected section."
+    },
+    {
+      "question_id": "12b6dc7a-5141-488e-b161-ec1a74ffe807",
+      "section_id": "9d5e342c-b654-4257-ba13-d30f822d9422",
+      "section_number": 8,
+      "topic": "Section 8 concept 4",
+      "difficulty": "medium",
+      "question": "Section 8 question 3: Which option best reflects Section 8 concept 4?",
+      "options": {
+        "A": ". 8.5 Operational Territory The asset's authorized operational territory spans approximately 6.8 million km\u00b2, encompassing the western and southern Andean states: Chile \u2014 full territory, including offshore islands...",
+        "B": "A statement from an unrelated section.",
+        "C": "A contradictory interpretation of the selected material.",
+        "D": "A generic answer not grounded in the selected section."
+      },
+      "correct_answer": "A",
+      "explanation": "Option A is correct because it is directly grounded in the retrieved chunk from the selected section.",
+      "adaptation_reason": "Cold-start coverage question generated from the selected section because no prior relevant learning history exists.",
+      "source_chunk_ids": [
+        "667775f3-34d5-423b-a644-a3421ab481d4"
+      ],
+      "simulated_user_answer": "B",
+      "is_correct": false,
+      "clarification": "Option A is correct because it is directly grounded in the retrieved chunk from the selected section."
+    },
+    {
+      "question_id": "f25484cd-61bd-4f68-8f15-413b24bdce97",
+      "section_id": "9d5e342c-b654-4257-ba13-d30f822d9422",
+      "section_number": 8,
+      "topic": "Section 8 concept 6",
+      "difficulty": "medium",
+      "question": "Section 8 question 4: Which option best reflects Section 8 concept 6?",
+      "options": {
+        "A": "the asset's former trainer Bolivian Servicio de Operaciones Especiales (SOE) \u2014 bilateral cooperation framework, La Paz Annex 2023 Peruvian Direcci\u00f3n de Asuntos Metahumanos (DAM) \u2014 observation-only sharing for Cuzco...",
+        "B": "A statement from an unrelated section.",
+        "C": "A contradictory interpretation of the selected material.",
+        "D": "A generic answer not grounded in the selected section."
+      },
+      "correct_answer": "A",
+      "explanation": "Option A is correct because it is directly grounded in the retrieved chunk from the selected section.",
+      "adaptation_reason": "Cold-start coverage question generated from the selected section because no prior relevant learning history exists.",
+      "source_chunk_ids": [
+        "41553014-6633-4a10-98c1-1ae3cc602760"
+      ],
+      "simulated_user_answer": "B",
+      "is_correct": false,
+      "clarification": "Option A is correct because it is directly grounded in the retrieved chunk from the selected section."
+    },
+    {
+      "question_id": "981ec339-cf8f-4a37-82e3-495398e9c87f",
+      "section_id": "9d5e342c-b654-4257-ba13-d30f822d9422",
+      "section_number": 8,
+      "topic": "Section 8 concept 5",
+      "difficulty": "medium",
+      "question": "Section 8 question 5: Which option best reflects Section 8 concept 5?",
+      "options": {
+        "A": "t entered since the 2018 incident Salar de Uyuni Sector 4 (Bolivia) Strategic; ongoing classified PAMC investigation since 2023 Limited access, prior coordination required Easter Island Jurisdictional; pending bilateral...",
+        "B": "A statement from an unrelated section.",
+        "C": "A contradictory interpretation of the selected material.",
+        "D": "A generic answer not grounded in the selected section."
+      },
+      "correct_answer": "A",
+      "explanation": "Option A is correct because it is directly grounded in the retrieved chunk from the selected section.",
+      "adaptation_reason": "Cold-start coverage question generated from the selected section because no prior relevant learning history exists.",
+      "source_chunk_ids": [
+        "88947449-73f5-4a4a-999a-216bbadaa4d7"
+      ],
+      "simulated_user_answer": "B",
+      "is_correct": false,
+      "clarification": "Option A is correct because it is directly grounded in the retrieved chunk from the selected section."
     }
   ]
 }

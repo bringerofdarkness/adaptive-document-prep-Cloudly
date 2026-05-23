@@ -1,47 +1,21 @@
 from fastapi.testclient import TestClient
-
 from app.main import app
-
 
 client = TestClient(app)
 
+def test_prep_start_returns_queued_status_and_task_id(monkeypatch) -> None:
+    # Create a mock task object that mimics Celery's dynamic return behavior
+    class FakeTask:
+        id = "mock-task-id-12345"
 
-def test_prep_start_hides_correct_answer(monkeypatch) -> None:
-    def fake_start_interactive_prep_session(
-        db,
-        selected_section_numbers,
-        questions_per_section,
-    ) -> dict:
-        return {
-            "session_id": "session-1",
-            "document_id": "document-1",
-            "mode": "cold_start",
-            "selected_sections": selected_section_numbers,
-            "total_questions": 1,
-            "adaptation_summary": "Cold-start run.",
-            "questions": [
-                {
-                    "question_id": "question-1",
-                    "section_number": selected_section_numbers[0],
-                    "topic": "Doctrine",
-                    "difficulty": "medium",
-                    "question": "What is the selected-section concept?",
-                    "options": {
-                        "A": "Correct option",
-                        "B": "Wrong option",
-                        "C": "Wrong option",
-                        "D": "Wrong option",
-                    },
-                    "adaptation_reason": "Cold-start coverage.",
-                }
-            ],
-        }
+    def fake_send_task(name, kwargs=None):
+        return FakeTask()
 
-    monkeypatch.setattr(
-        "app.api.routes_prep.start_interactive_prep_session",
-        fake_start_interactive_prep_session,
-    )
+    # Monkeypatch the celery_app instance used inside your API routes layer
+    from app.api.routes_prep import celery_app
+    monkeypatch.setattr(celery_app, "send_task", fake_send_task)
 
+    # Issue an asynchronous launch post request to the API
     response = client.post(
         "/prep/start",
         json={
@@ -50,24 +24,16 @@ def test_prep_start_hides_correct_answer(monkeypatch) -> None:
         },
     )
 
-    assert response.status_code == 200
-
+    # Validate your asynchronous contract constraints
+    assert response.status_code == 202
     payload = response.json()
-    question = payload["questions"][0]
-
-    assert payload["session_id"] == "session-1"
-    assert payload["mode"] == "cold_start"
-    assert question["options"]["A"] == "Correct option"
-    assert "correct_answer" not in question
-    assert "explanation" not in question
+    assert payload["task_id"] == "mock-task-id-12345"
+    assert payload["status"] == "QUEUED"
+    assert "message" in payload
 
 
 def test_prep_submit_returns_score_and_clarification(monkeypatch) -> None:
-    def fake_submit_interactive_prep_answers(
-        db,
-        session_id,
-        answers,
-    ) -> dict:
+    def fake_submit_interactive_prep_answers(db, session_id, answers) -> dict:
         return {
             "session_id": session_id,
             "score": 0.0,

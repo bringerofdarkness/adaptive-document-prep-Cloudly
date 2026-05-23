@@ -1,5 +1,5 @@
 {
-  "session_id": "c76f85f2-d7a2-4738-a4f2-b41337cc4148",
+  "session_id": "7a124390-402e-4c69-bc3a-9ed7c3da38b4",
   "mode": "cold_start",
   "selected_sections": [
     3,
@@ -27,232 +27,234 @@
   },
   "questions": [
     {
-      "question_id": "3e5485ce-aa75-4bab-8bda-6afb8e3b3d7a",
-      "section_id": "1139558d-3a51-4215-89d4-24c0df4c78db",
+      "question_id": "074487d2-1748-4676-84a2-761a79ef6cef",
+      "section_id": "0efa9731-8883-4de5-af97-338066cc16b0",
       "section_number": 3,
-      "topic": "Military Career",
+      "topic": "Section 3 concept 2",
       "difficulty": "medium",
-      "question": "When did she enter the Escuela Militar Bernardo O'Higgins?",
+      "question": "Section 3 question 1: Which option best reflects Section 3 concept 2?",
       "options": {
-        "A": "4 March 2005",
-        "B": "12 December 2009",
-        "C": "9 February 2024",
-        "D": "19 November 2020"
+        "A": "es in the Ays\u00e9n Region is recorded in subsequent autobiographical interviews as a formative experience. 3.2 Military Cadet and Junior Officer Years (2005\u20132014) She entered the Escuela Militar Bernardo O'Higgins on 4...",
+        "B": "A statement from an unrelated section.",
+        "C": "A contradictory interpretation of the selected material.",
+        "D": "A generic answer not grounded in the selected section."
       },
       "correct_answer": "A",
-      "explanation": "She entered the Escuela Militar Bernardo O'Higgins on 4 March 2005.",
+      "explanation": "Option A is correct because it is directly grounded in the retrieved chunk from the selected section.",
       "adaptation_reason": "Cold-start coverage question generated from the selected section because no prior relevant learning history exists.",
       "source_chunk_ids": [
-        "288ce16f-b79f-4631-9825-fb7b6954b4f7"
+        "8080edb3-c77c-4b01-be7c-daead618fc8a"
       ],
       "simulated_user_answer": "A",
       "is_correct": true,
       "clarification": null
     },
     {
-      "question_id": "e1a9679a-ffc5-40de-901e-8681ab003acb",
-      "section_id": "1139558d-3a51-4215-89d4-24c0df4c78db",
+      "question_id": "d22447de-4203-4d5c-bcc5-17c3ab2d492f",
+      "section_id": "0efa9731-8883-4de5-af97-338066cc16b0",
       "section_number": 3,
-      "topic": "Military Career",
-      "difficulty": "hard",
-      "question": "What was the result of the Antofagasta operation?",
-      "options": {
-        "A": "Unsuccessful classification",
-        "B": "Successful classification but resulted in a 14-day medical leave",
-        "C": "Failed operation",
-        "D": "No result"
-      },
-      "correct_answer": "B",
-      "explanation": "The Antofagasta operation produced a Successful classification but resulted in a 14-day medical leave.",
-      "adaptation_reason": "Cold-start coverage question generated from the selected section because no prior relevant learning history exists.",
-      "source_chunk_ids": [
-        "939c86cc-5492-4ebd-b1aa-3c7addf527a6"
-      ],
-      "simulated_user_answer": "A",
-      "is_correct": false,
-      "clarification": "The Antofagasta operation produced a Successful classification but resulted in a 14-day medical leave."
-    },
-    {
-      "question_id": "68f893bc-608f-4700-b585-28549dcbc4fb",
-      "section_id": "1139558d-3a51-4215-89d4-24c0df4c78db",
-      "section_number": 3,
-      "topic": "Military Career",
-      "difficulty": "easy",
-      "question": "When was she promoted to Lead Officer (Field, Grade 3)?",
-      "options": {
-        "A": "9 February 2024",
-        "B": "12 December 2009",
-        "C": "19 November 2020",
-        "D": "4 March 2005"
-      },
-      "correct_answer": "A",
-      "explanation": "On 9 February 2024, the asset was promoted to Lead Officer (Field, Grade 3).",
-      "adaptation_reason": "Cold-start coverage question generated from the selected section because no prior relevant learning history exists.",
-      "source_chunk_ids": [
-        "debf9eaa-4a8a-4889-a922-bfc3b0627d76"
-      ],
-      "simulated_user_answer": "A",
-      "is_correct": true,
-      "clarification": null
-    },
-    {
-      "question_id": "870efa30-2ebc-45b0-af25-27918c524e47",
-      "section_id": "1139558d-3a51-4215-89d4-24c0df4c78db",
-      "section_number": 3,
-      "topic": "Military Career",
+      "topic": "Section 3 concept 10",
       "difficulty": "medium",
-      "question": "What was the name of the operation where Drift Read was first manifested?",
+      "question": "Section 3 question 2: Which option best reflects Section 3 concept 10?",
       "options": {
-        "A": "Tarapac\u00e1 Concession compound raid",
-        "B": "Tallinn-Asunci\u00f3n intelligence rotation",
-        "C": "Antofagasta operation",
-        "D": "Drift Read operation"
-      },
-      "correct_answer": "C",
-      "explanation": "The Antofagasta operation produced the first manifestation of what would be designated Drift Read.",
-      "adaptation_reason": "Cold-start coverage question generated from the selected section because no prior relevant learning history exists.",
-      "source_chunk_ids": [
-        "939c86cc-5492-4ebd-b1aa-3c7addf527a6"
-      ],
-      "simulated_user_answer": "A",
-      "is_correct": false,
-      "clarification": "The Antofagasta operation produced the first manifestation of what would be designated Drift Read."
-    },
-    {
-      "question_id": "42ba5831-301d-443a-ac47-be0d54dc8d98",
-      "section_id": "1139558d-3a51-4215-89d4-24c0df4c78db",
-      "section_number": 3,
-      "topic": "Military Career",
-      "difficulty": "hard",
-      "question": "What was the date of her discharge from the Chilean Army?",
-      "options": {
-        "A": "12 March 2019",
-        "B": "9 February 2024",
-        "C": "12 December 2009",
-        "D": "19 November 2020"
+        "A": "discharge from Chilean Army 12 Mar 2019 PAMC service agreement signed SLATEFALL_DOSSIER.md 2026-05-18 14 / 50 Date Event 7 May 2019 Codename SLATEFALL assigned 19 Nov 2020 First Echo Lock event (training) 17 May 2021...",
+        "B": "A statement from an unrelated section.",
+        "C": "A contradictory interpretation of the selected material.",
+        "D": "A generic answer not grounded in the selected section."
       },
       "correct_answer": "A",
-      "explanation": "The answer is grounded in the retrieved source context.",
-      "adaptation_reason": "Cold-start coverage question generated from the selected section because no prior relevant learning history exists.",
-      "source_chunk_ids": [],
-      "simulated_user_answer": "A",
-      "is_correct": true,
-      "clarification": null
-    },
-    {
-      "question_id": "38360f63-3c2a-4eea-b0b5-d14f39f1c651",
-      "section_id": "145e0eca-b0af-4642-abd6-7f45578672ee",
-      "section_number": 7,
-      "topic": "Threat Tier Classification",
-      "difficulty": "medium",
-      "question": "What is the name of the system used to classify metahuman and organized-paramilitary threats?",
-      "options": {
-        "A": "PAMC Threat Tier Classification System",
-        "B": "NMOC-derived Threat Tier Schedule",
-        "C": "Threat Tier Schedule",
-        "D": "Tier Assignment Criteria"
-      },
-      "correct_answer": "A",
-      "explanation": "The PAMC Threat Tier Classification System is used to classify metahuman and organized-paramilitary threats.",
+      "explanation": "Option A is correct because it is directly grounded in the retrieved chunk from the selected section.",
       "adaptation_reason": "Cold-start coverage question generated from the selected section because no prior relevant learning history exists.",
       "source_chunk_ids": [
-        "a0584067-e77e-4e92-949a-6d94e226a54b"
+        "814e4c07-7c4b-4841-b9be-b82c916e4be1"
       ],
       "simulated_user_answer": "B",
       "is_correct": false,
-      "clarification": "The PAMC Threat Tier Classification System is used to classify metahuman and organized-paramilitary threats."
+      "clarification": "Option A is correct because it is directly grounded in the retrieved chunk from the selected section."
     },
     {
-      "question_id": "dfd888db-7e07-45e0-a4ff-6fc9ca2bfbe8",
-      "section_id": "145e0eca-b0af-4642-abd6-7f45578672ee",
-      "section_number": 7,
-      "topic": "Emergent Threats",
-      "difficulty": "hard",
-      "question": "What is the probability of Mar Inverso confirmation and engagement within 2026?",
+      "question_id": "15c9252b-77e4-4b91-ae46-4dd07e58455c",
+      "section_id": "0efa9731-8883-4de5-af97-338066cc16b0",
+      "section_number": 3,
+      "topic": "Section 3 concept 9",
+      "difficulty": "medium",
+      "question": "Section 3 question 3: Which option best reflects Section 3 concept 9?",
       "options": {
-        "A": "Low",
-        "B": "Moderate",
-        "C": "High",
-        "D": "Unknown"
+        "A": "ns On 9 February 2024, the asset was promoted to Lead Officer (Field, Grade 3) with expanded command authority. During 2024 and 2025 she led 23 logged operations, including: Tarapac\u00e1 Concession compound raid (Case...",
+        "B": "A statement from an unrelated section.",
+        "C": "A contradictory interpretation of the selected material.",
+        "D": "A generic answer not grounded in the selected section."
       },
-      "correct_answer": "C",
-      "explanation": "The Andean Operations Bureau projects a high probability of Mar Inverso confirmation and engagement within 2026.",
+      "correct_answer": "A",
+      "explanation": "Option A is correct because it is directly grounded in the retrieved chunk from the selected section.",
       "adaptation_reason": "Cold-start coverage question generated from the selected section because no prior relevant learning history exists.",
       "source_chunk_ids": [
-        "3c10bce6-dd74-4617-ae85-5cf522ccdede"
+        "a63e44af-4d4c-4fe9-8546-e730cc11de67"
       ],
-      "simulated_user_answer": "C",
+      "simulated_user_answer": "A",
       "is_correct": true,
       "clarification": null
     },
     {
-      "question_id": "523e5ac9-00ab-4125-8192-53680ebf2a0f",
-      "section_id": "145e0eca-b0af-4642-abd6-7f45578672ee",
-      "section_number": 7,
-      "topic": "Adversary Engagement",
+      "question_id": "e4996f8b-c4e5-42dc-a1e6-a299f8651236",
+      "section_id": "0efa9731-8883-4de5-af97-338066cc16b0",
+      "section_number": 3,
+      "topic": "Section 3 concept 7",
       "difficulty": "medium",
-      "question": "How many confirmed engagements has Drift Read been involved in?",
+      "question": "Section 3 question 4: Which option best reflects Section 3 concept 7?",
       "options": {
-        "A": "1",
-        "B": "2",
-        "C": "3",
-        "D": "4"
+        "A": "ctors \u2014 the first manifestation of what would be designated Drift Read (\u00a72.10). The ability has remained continuously active since. The Antofagasta operation produced a Successful classification but resulted in a 14-day...",
+        "B": "A statement from an unrelated section.",
+        "C": "A contradictory interpretation of the selected material.",
+        "D": "A generic answer not grounded in the selected section."
       },
-      "correct_answer": "C",
-      "explanation": "Drift Read has been involved in 3 confirmed engagements.",
+      "correct_answer": "A",
+      "explanation": "Option A is correct because it is directly grounded in the retrieved chunk from the selected section.",
       "adaptation_reason": "Cold-start coverage question generated from the selected section because no prior relevant learning history exists.",
       "source_chunk_ids": [
-        "643707a4-6062-4ea2-9cfc-4e06a043ed49"
-      ],
-      "simulated_user_answer": "A",
-      "is_correct": false,
-      "clarification": "Drift Read has been involved in 3 confirmed engagements."
-    },
-    {
-      "question_id": "3b87cb8c-720d-4fb8-a6ad-cf005239afda",
-      "section_id": "145e0eca-b0af-4642-abd6-7f45578672ee",
-      "section_number": 7,
-      "topic": "Adversary Roster",
-      "difficulty": "hard",
-      "question": "What is the primary criterion for adding an adversary to the roster?",
-      "options": {
-        "A": "Three documented engagements",
-        "B": "A single incident producing more than 5 civilian casualties",
-        "C": "Both A and B",
-        "D": "Neither A nor B"
-      },
-      "correct_answer": "B",
-      "explanation": "A single incident producing more than 5 civilian casualties is the primary criterion for adding an adversary to the roster.",
-      "adaptation_reason": "Cold-start coverage question generated from the selected section because no prior relevant learning history exists.",
-      "source_chunk_ids": [
-        "84b0217b-2f57-41fa-b3bf-85a4cc3c40ee"
+        "e52890f6-6e49-4182-8ef7-d9ab92890bff"
       ],
       "simulated_user_answer": "B",
+      "is_correct": false,
+      "clarification": "Option A is correct because it is directly grounded in the retrieved chunk from the selected section."
+    },
+    {
+      "question_id": "30142e6d-8c53-4aec-819f-a99ba570b02b",
+      "section_id": "0efa9731-8883-4de5-af97-338066cc16b0",
+      "section_number": 3,
+      "topic": "Section 3 concept 3",
+      "difficulty": "medium",
+      "question": "Section 3 question 5: Which option best reflects Section 3 concept 3?",
+      "options": {
+        "A": "2014\u20132018) From 2014 through mid-2018, Calvache-Renstr\u00f6m served as a senior instructor at the Centro de Entrenamiento de Monta\u00f1a, attaining the rank of Capit\u00e1n on 1 March 2017. During this period she led 11 instructor...",
+        "B": "A statement from an unrelated section.",
+        "C": "A contradictory interpretation of the selected material.",
+        "D": "A generic answer not grounded in the selected section."
+      },
+      "correct_answer": "A",
+      "explanation": "Option A is correct because it is directly grounded in the retrieved chunk from the selected section.",
+      "adaptation_reason": "Cold-start coverage question generated from the selected section because no prior relevant learning history exists.",
+      "source_chunk_ids": [
+        "f7119ae9-9801-4ed1-aa88-baa0420a82e7"
+      ],
+      "simulated_user_answer": "A",
       "is_correct": true,
       "clarification": null
     },
     {
-      "question_id": "9008ad5b-df76-48bd-8152-3760d0519ebf",
-      "section_id": "145e0eca-b0af-4642-abd6-7f45578672ee",
+      "question_id": "0a926c5a-1d5f-42bf-b58f-cb081b1f1e67",
+      "section_id": "d92c8fe7-829a-42df-b341-ad05ff4d7aaf",
       "section_number": 7,
-      "topic": "Defunct Adversaries",
+      "topic": "Section 7 concept 1",
       "difficulty": "medium",
-      "question": "What is the name of the former adversary who is confirmed deceased?",
+      "question": "Section 7 question 1: Which option best reflects Section 7 concept 1?",
       "options": {
-        "A": "Bambolla",
-        "B": "Ezekiel",
-        "C": "Quebrantadero",
-        "D": "Wilma Sandoval-Iqui"
+        "A": "Section 7. Adversaries and Documented Threats 7.1 PAMC Threat Tier Classification System The Cooperative classifies metahuman and organized-paramilitary threats into five tiers under the NMOC-derived Threat Tier...",
+        "B": "A statement from an unrelated section.",
+        "C": "A contradictory interpretation of the selected material.",
+        "D": "A generic answer not grounded in the selected section."
       },
-      "correct_answer": "B",
-      "explanation": "Ezekiel is the former adversary who is confirmed deceased.",
+      "correct_answer": "A",
+      "explanation": "Option A is correct because it is directly grounded in the retrieved chunk from the selected section.",
       "adaptation_reason": "Cold-start coverage question generated from the selected section because no prior relevant learning history exists.",
       "source_chunk_ids": [
-        "84b0217b-2f57-41fa-b3bf-85a4cc3c40ee"
+        "f5b5678e-da3c-4b45-bc2f-c45b97e2cdc8"
+      ],
+      "simulated_user_answer": "B",
+      "is_correct": false,
+      "clarification": "Option A is correct because it is directly grounded in the retrieved chunk from the selected section."
+    },
+    {
+      "question_id": "5f3d4894-8f50-4deb-85f9-ab2c46f90aa1",
+      "section_id": "d92c8fe7-829a-42df-b341-ad05ff4d7aaf",
+      "section_number": 7,
+      "topic": "Section 7 concept 12",
+      "difficulty": "medium",
+      "question": "Section 7 question 2: Which option best reflects Section 7 concept 12?",
+      "options": {
+        "A": "ron Tributary 2 2 0 0 The Concession 5 4 0 1 Mar Inverso 0 \u2014 \u2014 \u2014 7.13 Emergent Threat Forecast (2026\u20132027) The Andean Operations Bureau projects the following emergent threats over the next 18 months: 1. Mar Inverso...",
+        "B": "A statement from an unrelated section.",
+        "C": "A contradictory interpretation of the selected material.",
+        "D": "A generic answer not grounded in the selected section."
+      },
+      "correct_answer": "A",
+      "explanation": "Option A is correct because it is directly grounded in the retrieved chunk from the selected section.",
+      "adaptation_reason": "Cold-start coverage question generated from the selected section because no prior relevant learning history exists.",
+      "source_chunk_ids": [
+        "dabe2826-79bd-40a3-abba-b030a5b7846d"
       ],
       "simulated_user_answer": "A",
+      "is_correct": true,
+      "clarification": null
+    },
+    {
+      "question_id": "4cbcbd82-db28-4e51-8100-65764800377c",
+      "section_id": "d92c8fe7-829a-42df-b341-ad05ff4d7aaf",
+      "section_number": 7,
+      "topic": "Section 7 concept 5",
+      "difficulty": "medium",
+      "question": "Section 7 question 3: Which option best reflects Section 7 concept 5?",
+      "options": {
+        "A": "(which depends on visual perception). Drift Read provides partial counter-defense within 3 m. Engagement history: 3 confirmed engagements (Iquique 2023, Antofagasta 2024, Arica 2025); all inconclusive. He is the...",
+        "B": "A statement from an unrelated section.",
+        "C": "A contradictory interpretation of the selected material.",
+        "D": "A generic answer not grounded in the selected section."
+      },
+      "correct_answer": "A",
+      "explanation": "Option A is correct because it is directly grounded in the retrieved chunk from the selected section.",
+      "adaptation_reason": "Cold-start coverage question generated from the selected section because no prior relevant learning history exists.",
+      "source_chunk_ids": [
+        "49754fd1-98c5-4fcd-a041-c05014ec5fc1"
+      ],
+      "simulated_user_answer": "B",
       "is_correct": false,
-      "clarification": "Ezekiel is the former adversary who is confirmed deceased."
+      "clarification": "Option A is correct because it is directly grounded in the retrieved chunk from the selected section."
+    },
+    {
+      "question_id": "dd212713-b760-4a4c-ba81-88fbe8fb7207",
+      "section_id": "d92c8fe7-829a-42df-b341-ad05ff4d7aaf",
+      "section_number": 7,
+      "topic": "Section 7 concept 14",
+      "difficulty": "medium",
+      "question": "Section 7 question 4: Which option best reflects Section 7 concept 14?",
+      "options": {
+        "A": "the primary adversary roster requires either three documented engagements or a single incident producing more than 5 civilian casualties. 7.15 Defunct or Neutralized Adversaries (Historical) The following former...",
+        "B": "A statement from an unrelated section.",
+        "C": "A contradictory interpretation of the selected material.",
+        "D": "A generic answer not grounded in the selected section."
+      },
+      "correct_answer": "A",
+      "explanation": "Option A is correct because it is directly grounded in the retrieved chunk from the selected section.",
+      "adaptation_reason": "Cold-start coverage question generated from the selected section because no prior relevant learning history exists.",
+      "source_chunk_ids": [
+        "ad24cbf5-3717-4f04-a296-4dc32dfc4321"
+      ],
+      "simulated_user_answer": "A",
+      "is_correct": true,
+      "clarification": null
+    },
+    {
+      "question_id": "1073e83d-bb63-4548-a1f5-e5a64ac035d7",
+      "section_id": "d92c8fe7-829a-42df-b341-ad05ff4d7aaf",
+      "section_number": 7,
+      "topic": "Section 7 concept 9",
+      "difficulty": "medium",
+      "question": "Section 7 question 5: Which option best reflects Section 7 concept 9?",
+      "options": {
+        "A": "1). The cell has clashed with PAMC operations 7 times since 2022. SLATEFALL has engaged the cell on 2 occasions (Tarapac\u00e1 2024, Cuzco 2025), with successful outcomes. 7.9 The Concession SLATEFALL_DOSSIER.md 2026-05-18...",
+        "B": "A statement from an unrelated section.",
+        "C": "A contradictory interpretation of the selected material.",
+        "D": "A generic answer not grounded in the selected section."
+      },
+      "correct_answer": "A",
+      "explanation": "Option A is correct because it is directly grounded in the retrieved chunk from the selected section.",
+      "adaptation_reason": "Cold-start coverage question generated from the selected section because no prior relevant learning history exists.",
+      "source_chunk_ids": [
+        "1cfcf63f-c3cd-47b0-834c-cad8a5930fed"
+      ],
+      "simulated_user_answer": "B",
+      "is_correct": false,
+      "clarification": "Option A is correct because it is directly grounded in the retrieved chunk from the selected section."
     }
   ]
 }
