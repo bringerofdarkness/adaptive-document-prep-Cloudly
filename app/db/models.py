@@ -1,7 +1,7 @@
 from datetime import datetime
 from uuid import uuid4
 
-from sqlalchemy import Boolean, DateTime, Float, ForeignKey, Integer, JSON, String, Text
+from sqlalchemy import Boolean, DateTime, Float, ForeignKey, Integer, JSON, String, Text, Index
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 
 from app.db.session import Base
@@ -87,6 +87,10 @@ class PrepSession(Base):
 class GeneratedQuestion(Base):
     __tablename__ = "generated_questions"
 
+    __table_args__ = (
+        Index("idx_gen_questions_doc_section", "document_id", "section_number"),
+    )
+
     id: Mapped[str] = mapped_column(String(36), primary_key=True, default=uuid_str)
     session_id: Mapped[str] = mapped_column(ForeignKey("prep_sessions.id", ondelete="CASCADE"), nullable=False)
     document_id: Mapped[str] = mapped_column(ForeignKey("documents.id", ondelete="CASCADE"), nullable=False)
@@ -113,6 +117,10 @@ class GeneratedQuestion(Base):
 class UserAnswer(Base):
     __tablename__ = "user_answers"
 
+    __table_args__ = (
+        Index("idx_user_answers_eval", "question_id", "is_correct"),
+    )
+
     id: Mapped[str] = mapped_column(String(36), primary_key=True, default=uuid_str)
     session_id: Mapped[str] = mapped_column(ForeignKey("prep_sessions.id", ondelete="CASCADE"), nullable=False)
     question_id: Mapped[str] = mapped_column(ForeignKey("generated_questions.id", ondelete="CASCADE"), nullable=False)
@@ -127,6 +135,16 @@ class UserAnswer(Base):
 
 class WeakTopicStat(Base):
     __tablename__ = "weak_topic_stats"
+
+    __table_args__ = (
+        Index(
+            "idx_weak_topic_perf_sorting",
+            "document_id",
+            "section_number",
+            "weakness_score",
+            "wrong_count"
+        ),
+    )
 
     id: Mapped[str] = mapped_column(String(36), primary_key=True, default=uuid_str)
     document_id: Mapped[str] = mapped_column(ForeignKey("documents.id", ondelete="CASCADE"), nullable=False)
