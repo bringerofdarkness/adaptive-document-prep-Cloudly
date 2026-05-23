@@ -81,18 +81,19 @@ Recommended reading order:
     - [5.4 Create `.env`](#54-create-env)
   - [6. Environment Variables](#6-environment-variables)
   - [7. Start Docker Services](#7-start-docker-services)
-  - [8. Prepare the Knowledge Base](#8-prepare-the-knowledge-base)
   - [9. Run Evaluation Scenarios](#9-run-evaluation-scenarios)
     - [9.1 Run Scenario A only](#91-run-scenario-a-only)
     - [9.2 Run Scenario B only](#92-run-scenario-b-only)
     - [9.3 Run full evaluation](#93-run-full-evaluation)
   - [10. Verify Output Counts](#10-verify-output-counts)
   - [11. Run Tests](#11-run-tests)
+    - [11.2 Run Celery Background Workers](#112-run-celery-background-workers)
   - [12. Run the FastAPI Server](#12-run-the-fastapi-server)
   - [13. API Usage](#13-api-usage)
     - [13.1 Health check](#131-health-check)
     - [13.2 List latest document sections](#132-list-latest-document-sections)
     - [13.3 Start a prep session](#133-start-a-prep-session)
+      - [13.3.2 Track Worker Task Generation Status](#1332-track-worker-task-generation-status)
     - [13.4 Submit answers](#134-submit-answers)
     - [13.5 Retrieve a session](#135-retrieve-a-session)
     - [13.6 Retrieve KB snapshot](#136-retrieve-kb-snapshot)
@@ -228,6 +229,7 @@ Required services:
 ```text
 PostgreSQL
 Qdrant
+Redis (Port 6380)
 ```
 
 These services are started through Docker Compose.
@@ -320,12 +322,22 @@ EMBEDDING_MODEL=sentence-transformers/all-MiniLM-L6-v2
 LLM_PROVIDER=groq
 GROQ_API_KEY=your_groq_api_key_here
 GEMINI_API_KEY=
+
+# Asynchronous Worker & Cache Layer Configurations
+REDIS_HOST=localhost
+REDIS_PORT=6380
+REDIS_DB=0
+CELERY_BROKER_URL=redis://localhost:6380/0
+CELERY_RESULT_BACKEND=redis://localhost:6380/0
+
+# Isolation Mode for Local Embeddings
+HF_HUB_OFFLINE=1
 ```
 
 Local FastAPI is normally run on port `18000`:
 
 ```text
-http://127.0.0.1:18000/docs
+[http://127.0.0.1:18000/docs](<http://127.0.0.1:18000/docs](http://127.0.0.1:18000/docs>)
 ```
 
 ---
@@ -349,6 +361,7 @@ Expected containers:
 ```text
 adaptive_doc_postgres
 adaptive_doc_qdrant
+adaptive_doc_redis_6380
 ```
 
 Check PostgreSQL:
@@ -360,7 +373,7 @@ docker exec adaptive_doc_postgres pg_isready -U postgres -d adaptive_doc_prep
 Check Qdrant:
 
 ```powershell
-Invoke-RestMethod http://127.0.0.1:16433/healthz
+Invoke-RestMethod [http://127.0.0.1:16433/healthz](http://127.0.0.1:16433/healthz)
 ```
 
 Expected Qdrant result:
@@ -368,6 +381,14 @@ Expected Qdrant result:
 ```text
 healthz check passed
 ```
+Check Redis connection status and availability:
+```powershell
+.\.venv\Scripts\python.exe -c "import redis; r = redis.Redis(host='localhost', port=6380, db=0); print('Redis Live:', r.ping())"
+```
+Expected Redis result:
+
+```text
+Redis Live: True
 
 ---
 
@@ -559,6 +580,11 @@ Scoring logic
 /prep/start API contract
 /prep/submit API contract
 ```
+### 11.2 Run Celery Background Workers
+
+```powershell
+python -m pytest tests
+```
 
 ---
 
@@ -646,28 +672,76 @@ Example response shape:
 
 ```json
 {
-  "session_id": "session-id",
-  "document_id": "document-id",
-  "mode": "adaptive",
-  "selected_sections": [5, 8],
-  "total_questions": 2,
-  "adaptation_summary": "Adaptive run: prior history found...",
-  "questions": [
-    {
-      "question_id": "question-id",
-      "section_number": 8,
-      "topic": "Operational Territory",
-      "difficulty": "medium",
-      "question": "What is the name of the asset's primary operational base?",
-      "options": {
-        "A": "Cuartel Valparaíso",
-        "B": "PAMC South Cone Headquarters",
-        "C": "Avenida Altamirano 1842",
-        "D": "Valparaíso"
+  "task_id": "9f194adb-409b-476a-a2e3-b368e5bd0159",
+  "status": "QUEUED",
+  "message": "Adaptive generation pipeline initiated successfully in background thread workers."
+}
+```
+#### 13.3.2 Track Worker Task Generation Status
+```text
+GET /prep/tasks/{task_id}
+```
+
+Request:
+
+```json
+{
+  "task_id": "9f194adb-409b-476a-a2e3-b368e5bd0159",
+  "status": "SUCCESS",
+  "session_id": "2f85a094-bb62-4aae-968f-6dfd70941eb8",
+  "total_questions": 6,
+  "selected_sections": [5, 8]
+}
+```
+
+Example response shape:
+
+```json
+{
+    "task_id": "a6f92a4e-4edc-41d2-9539-985bcd445c72",
+  "status": "SUCCESS",
+  "result": {
+    "session_id": "4063d76e-13e0-4296-aec7-231139f555f7",
+    "document_id": "33283ea0-348f-44e1-9bbf-b20f381ebd57",
+    "mode": "adaptive",
+    "selected_sections": [
+      1,
+      2
+    ],
+    "total_questions": 2,
+    "adaptation_summary": "Adaptive run: prior history found, but no repeated weak topics yet. Generate fresh coverage while avoiding mastered repetition.",
+    "questions": [
+      {
+        "question_id": "a8c9878e-585b-4302-a1a1-650340c05abe",
+        "section_number": 1,
+        "topic": "Physical Description",
+        "difficulty": "easy",
+        "question": "What is the height of the subject?",
+        "options": {
+          "A": "1.68 m",
+          "B": "1.70 m",
+          "C": "1.72 m",
+          "D": "1.75 m"
+        },
+        "adaptation_reason": "Returning-run question generated using previous session history without a section-specific weak topic."
       },
-      "adaptation_reason": "Adaptive question generated for section 8 because prior session history marks this section as weak."
-    }
-  ]
+      {
+        "question_id": "1103d9a6-259c-4833-a74f-14178d763262",
+        "section_number": 2,
+        "topic": "Sensory Deprivation",
+        "difficulty": "medium",
+        "question": "What is the effect of visual occlusion for more than 40 minutes?",
+        "options": {
+          "A": "Permanent power suppression",
+          "B": "Transient power suppression",
+          "C": "No effect on power",
+          "D": "Increased power"
+        },
+        "adaptation_reason": "Returning-run question generated using previous session history without a section-specific weak topic."
+      }
+    ]
+  }
+}
 }
 ```
 
