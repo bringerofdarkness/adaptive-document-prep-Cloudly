@@ -1,4 +1,4 @@
-from typing import Literal
+from typing import Literal, Optional, Any
 
 from pydantic import BaseModel, Field
 
@@ -75,3 +75,8 @@ class PrepSubmitResponse(BaseModel):
     correct_count: int
     wrong_count: int
     results: list[PrepQuestionResult]
+
+class TaskStatusResponse(BaseModel):
+    task_id: str
+    status: str  # PENDING, STARTED, SUCCESS, FAILURE
+    result: Optional[Any] = None

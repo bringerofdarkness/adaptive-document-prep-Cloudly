@@ -1,9 +1,9 @@
-from datetime import datetime
-
+from datetime import datetime, timezone
 from sqlalchemy.orm import Session
-
 from app.db.models import GeneratedQuestion, KBSnapshot, PrepSession, UserAnswer, WeakTopicStat
 from app.schemas.question import MCQSet
+
+VALID_ANSWER_KEYS = {"A", "B", "C", "D"}
 
 
 def _update_weak_topic_stat(
@@ -40,7 +40,7 @@ def _update_weak_topic_stat(
         stat.wrong_count += 1
 
     stat.weakness_score = round(stat.wrong_count / stat.attempts, 4)
-    stat.last_seen_at = datetime.utcnow()
+    stat.last_seen_at = datetime.now(timezone.utc).replace(tzinfo=None)
 
 
 def create_prep_session_with_results(
@@ -53,14 +53,11 @@ def create_prep_session_with_results(
     adaptation_payload: dict | None = None,
     adaptation_summary: str | None = None,
 ) -> PrepSession:
-    # Safely isolate the metadata map payload to avoid mutating state records
     meta_payload = dict(adaptation_payload or {})
     
-    # Check for execution telemetry fields inside the scoring payloads or upstream state
     if "telemetry" in scoring_payload:
         meta_payload["telemetry"] = scoring_payload["telemetry"]
     else:
-        # Inject standard baseline structural telemetry boundaries to ensure contract validity
         meta_payload["telemetry"] = {
             "prompt_tokens": 0,
             "completion_tokens": 0,
@@ -134,6 +131,7 @@ def create_prep_session_with_results(
 
     return session
 
+
 def clear_prep_history_for_document(
     db: Session,
     document_id: str,
@@ -165,8 +163,6 @@ def clear_prep_history_for_document(
     )
 
     db.commit()
-
-VALID_ANSWER_KEYS = {"A", "B", "C", "D"}
 
 
 def create_prep_session_with_questions(

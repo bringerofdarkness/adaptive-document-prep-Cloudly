@@ -1,6 +1,5 @@
 import json
 
-MAX_CONTEXT_CHUNKS = 4
 MAX_CHARS_PER_CHUNK = 350
 MAX_WEAK_TOPICS = 3
 MAX_HISTORY_ITEMS = 2
@@ -35,6 +34,7 @@ def _compact_adaptation_payload(adaptation_payload: dict) -> dict:
         )[:MAX_HISTORY_ITEMS],
     }
 
+
 def _adaptation_reason_guidance(compact_adaptation_payload: dict) -> str:
     mode = compact_adaptation_payload.get("mode", "cold_start")
     weak_topics = compact_adaptation_payload.get("weak_topics", [])
@@ -64,9 +64,11 @@ def build_mcq_generation_prompt(
     questions_per_section: int,
     adaptation_payload: dict,
 ) -> str:
+    # Dynamically scale chunk bounds allowing 2 high-quality chunks per evaluated section minimum
+    dynamic_chunk_limit = max(4, len(selected_section_numbers) * 2)
     context_blocks = []
 
-    for chunk in retrieved_chunks[:MAX_CONTEXT_CHUNKS]:
+    for chunk in retrieved_chunks[:dynamic_chunk_limit]:
         context_blocks.append(
             {
                 "chunk_id": chunk["chunk_id"],
@@ -97,9 +99,11 @@ Retrieved source chunks:
 
 Rules:
 - Use only selected sections and provided chunks.
-- Return JSON only, no markdown.
-- Generate exactly {questions_per_section} questions per selected section.
-- Each MCQ must have A, B, C, D, one correct answer, concise explanation, and adaptation_reason.
+- Return JSON only, no markdown wrappers, conversational intros, or trailing prose.
+- Generate exactly {questions_per_section} distinct questions for EACH of the following individual sections: {selected_section_numbers}.
+- Total compiled array length MUST equal exactly {len(selected_section_numbers) * questions_per_section} questions.
+- Each MCQ must have A, B, C, D, one correct_answer, concise explanation, and adaptation_reason.
+- Guidance for adaptation fields: {adaptation_reason_guidance}
 - If weak_topics exist, prioritize them. Avoid close repeats of mastered questions.
 - Every question text must be unique.
 - Each question must test a different specific fact, concept, or relationship from the provided chunks.

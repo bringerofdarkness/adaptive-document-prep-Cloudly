@@ -24,6 +24,11 @@ class Settings(BaseSettings):
     gemini_api_key: str | None = None
     groq_api_key: str | None = None
 
+
+    redis_url: str = "redis://localhost:6380/0"
+    qdrant_score_threshold: float = 0.75
+    
+
     model_config = SettingsConfigDict(
         env_file=".env",
         env_file_encoding="utf-8",
