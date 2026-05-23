@@ -53,6 +53,21 @@ def create_prep_session_with_results(
     adaptation_payload: dict | None = None,
     adaptation_summary: str | None = None,
 ) -> PrepSession:
+    # Safely isolate the metadata map payload to avoid mutating state records
+    meta_payload = dict(adaptation_payload or {})
+    
+    # Check for execution telemetry fields inside the scoring payloads or upstream state
+    if "telemetry" in scoring_payload:
+        meta_payload["telemetry"] = scoring_payload["telemetry"]
+    else:
+        # Inject standard baseline structural telemetry boundaries to ensure contract validity
+        meta_payload["telemetry"] = {
+            "prompt_tokens": 0,
+            "completion_tokens": 0,
+            "total_tokens": 0,
+            "cached_applied": False
+        }
+
     session = PrepSession(
         document_id=document_id,
         mode=mode,
@@ -61,7 +76,7 @@ def create_prep_session_with_results(
         total_questions=scoring_payload["total_questions"],
         correct_count=scoring_payload["correct_count"],
         wrong_count=scoring_payload["wrong_count"],
-        adaptation_payload=adaptation_payload or {},
+        adaptation_payload=meta_payload,
         adaptation_summary=adaptation_summary,
     )
 
