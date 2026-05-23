@@ -31,6 +31,25 @@ The goal is not only to build a basic RAG system. The main goal is to prove adap
 
 ---
 
+## Documentation
+
+| File | Purpose |
+|---|---|
+| `docs/architecture.md` | Hybrid RAG architecture and retrieval flow |
+| `docs/database_schema.md` | PostgreSQL schema and KB relationships |
+| `docs/adaptation_strategy.md` | Adaptive logic and weak-topic tracking |
+| `docs/optional_enhancements.md` | Optional Enhancements |
+
+### Recommended Reading Order
+
+```text
+1. docs/architecture.md
+2. docs/database_schema.md
+3. docs/adaptation_strategy.md
+```
+
+---
+
 ## Architecture Overview
 
 ```text
@@ -80,6 +99,8 @@ The goal is not only to build a basic RAG system. The main goal is to prove adap
 
 - [Adaptive Document Preparation System](#adaptive-document-preparation-system)
   - [Tech Stack](#tech-stack)
+  - [Documentation](#documentation)
+    - [Recommended Reading Order](#recommended-reading-order)
   - [Architecture Overview](#architecture-overview)
 - [Table of Contents](#table-of-contents)
 - [1. Project Highlights](#1-project-highlights)
@@ -170,8 +191,6 @@ The goal is not only to build a basic RAG system. The main goal is to prove adap
 - [28. Development Note](#28-development-note)
   - [AI Tools Used](#ai-tools-used)
 - [29. Final Project Pitch](#29-final-project-pitch)
-  - [Documentation](#documentation)
-    - [Recommended Reading Order](#recommended-reading-order)
   - [License](#license)
 
 ---
@@ -1058,23 +1077,6 @@ The project demonstrates deterministic adaptive preparation behavior across repe
 
 ---
 
-## Documentation
-
-| File | Purpose |
-|---|---|
-| `docs/architecture.md` | Hybrid RAG architecture and retrieval flow |
-| `docs/database_schema.md` | PostgreSQL schema and KB relationships |
-| `docs/adaptation_strategy.md` | Adaptive logic and weak-topic tracking |
-
-### Recommended Reading Order
-
-```text
-1. docs/architecture.md
-2. docs/database_schema.md
-3. docs/adaptation_strategy.md
-```
-
----
 
 ## License
 
