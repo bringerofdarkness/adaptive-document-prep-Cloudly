@@ -390,6 +390,8 @@ LLM_PROVIDER=mock
 ```env
 APP_NAME="Adaptive Document Preparation System"
 APP_ENV=local
+API_HOST=0.0.0.0
+API_PORT=8000
 
 POSTGRES_HOST=localhost
 POSTGRES_PORT=5433
@@ -403,18 +405,19 @@ QDRANT_COLLECTION=slatefall_chunks
 
 EMBEDDING_MODEL=sentence-transformers/all-MiniLM-L6-v2
 
-LLM_PROVIDER=groq
-GROQ_API_KEY=your_groq_api_key_here
+LLM_PROVIDER=mock
 GEMINI_API_KEY=
+GROQ_API_KEY=
 
+# Redis & Celery Message Broker Configurations
 REDIS_HOST=localhost
 REDIS_PORT=6380
 REDIS_DB=0
-
 CELERY_BROKER_URL=redis://localhost:6380/0
 CELERY_RESULT_BACKEND=redis://localhost:6380/0
 
-HF_HUB_OFFLINE=1
+# Algorithmic Retrieval Engineering Boundaries
+QDRANT_SCORE_THRESHOLD=0.75   
 ```
 
 ---
