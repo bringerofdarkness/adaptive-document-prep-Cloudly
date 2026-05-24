@@ -1,16 +1,10 @@
 # Adaptive Document Preparation System
 
-A production-style adaptive RAG backend for PDF-based study preparation and MCQ generation.
+<p align="center">
+  <b>Production-Style Adaptive RAG Backend for PDF-Based Study Preparation & MCQ Generation</b>
+</p>
 
-This project ingests a structured multi-section PDF, stores document sections and learning history in PostgreSQL, indexes semantic chunk embeddings in Qdrant, retrieves only user-selected sections, generates MCQs through an LLM, validates structured outputs, scores answers, identifies weak topics, and adapts future question generation based on previous mistakes.
-
-The goal is not only to build a basic RAG system. The main goal is to prove adaptive preparation behavior across repeated study sessions.
-
----
-
-## Tech Stack
-
-<p align="left">
+<p align="center">
   <img src="https://img.shields.io/badge/Python-3.13-blue?logo=python&logoColor=white" />
   <img src="https://img.shields.io/badge/FastAPI-REST%20API-009688?logo=fastapi&logoColor=white" />
   <img src="https://img.shields.io/badge/PostgreSQL-Knowledge%20Base-4169E1?logo=postgresql&logoColor=white" />
@@ -31,16 +25,38 @@ The goal is not only to build a basic RAG system. The main goal is to prove adap
 
 ---
 
-## Documentation
+## Overview
+
+A production-style adaptive RAG backend designed for structured PDF-based study preparation and intelligent MCQ generation.
+
+This system:
+
+- Ingests structured multi-section PDFs
+- Stores relational learning history in PostgreSQL
+- Stores semantic chunk embeddings in Qdrant
+- Retrieves only user-selected sections
+- Generates MCQs through an LLM
+- Validates structured outputs
+- Scores answer submissions
+- Tracks weak topics over time
+- Adapts future question generation using historical performance
+
+The primary goal is not just retrieval-augmented generation — it is demonstrating **adaptive preparation behavior across repeated study sessions**.
+
+---
+
+# Documentation
 
 | File | Purpose |
 |---|---|
 | `docs/architecture.md` | Hybrid RAG architecture and retrieval flow |
 | `docs/database_schema.md` | PostgreSQL schema and KB relationships |
 | `docs/adaptation_strategy.md` | Adaptive logic and weak-topic tracking |
-| `docs/optional_enhancements.md` | Optional Enhancements |
+| `docs/optional_enhancements.md` | Optional enhancements and scalability ideas |
 
-### Recommended Reading Order
+---
+
+## Recommended Reading Order
 
 ```text
 1. docs/architecture.md
@@ -50,12 +66,12 @@ The goal is not only to build a basic RAG system. The main goal is to prove adap
 
 ---
 
-## Architecture Overview
+# Architecture Overview
 
 ```text
                            ┌────────────────────┐
-                           │  Structured PDF    │
-                           │ SLATEFALL_DOSSIER │
+                           │   Structured PDF   │
+                           │ SLATEFALL_DOSSIER  │
                            └─────────┬──────────┘
                                      │
                                      ▼
@@ -98,16 +114,17 @@ The goal is not only to build a basic RAG system. The main goal is to prove adap
 # Table of Contents
 
 - [Adaptive Document Preparation System](#adaptive-document-preparation-system)
-  - [Tech Stack](#tech-stack)
-  - [Documentation](#documentation)
-    - [Recommended Reading Order](#recommended-reading-order)
-  - [Architecture Overview](#architecture-overview)
+  - [Overview](#overview)
+- [Documentation](#documentation)
+  - [Recommended Reading Order](#recommended-reading-order)
+- [Architecture Overview](#architecture-overview)
 - [Table of Contents](#table-of-contents)
 - [1. Project Highlights](#1-project-highlights)
-    - [Core Adaptive Logic](#core-adaptive-logic)
+  - [Features](#features)
+  - [Core Adaptive Logic](#core-adaptive-logic)
 - [2. Current Verified Status](#2-current-verified-status)
   - [Verified Features](#verified-features)
-    - [Latest Verified Adaptive Runs](#latest-verified-adaptive-runs)
+  - [Latest Verified Adaptive Runs](#latest-verified-adaptive-runs)
 - [3. Repository](#3-repository)
 - [4. Prerequisites](#4-prerequisites)
   - [Recommended Environment](#recommended-environment)
@@ -121,7 +138,7 @@ The goal is not only to build a basic RAG system. The main goal is to prove adap
   - [5.4 Create `.env`](#54-create-env)
     - [Windows PowerShell](#windows-powershell-1)
     - [macOS / Linux](#macos--linux-1)
-    - [Optional Deterministic Local Testing](#optional-deterministic-local-testing)
+  - [Optional Deterministic Local Testing](#optional-deterministic-local-testing)
 - [6. Environment Variables](#6-environment-variables)
 - [7. Start Docker Services](#7-start-docker-services)
   - [Verify Services](#verify-services)
@@ -129,23 +146,17 @@ The goal is not only to build a basic RAG system. The main goal is to prove adap
     - [Qdrant](#qdrant)
     - [Redis](#redis)
 - [8. Prepare the Knowledge Base (Idempotent Setup)](#8-prepare-the-knowledge-base-idempotent-setup)
-  - [Step 1 — Reset Relational Tables](#step-1--reset-relational-tables)
+  - [Step 1 — Reset Database](#step-1--reset-database)
   - [Step 2 — Clear Qdrant Collection](#step-2--clear-qdrant-collection)
-  - [Step 3 — Ingest PDF Structure](#step-3--ingest-pdf-structure)
-    - [Expected Output](#expected-output)
-  - [Step 4 — Index Embeddings into Qdrant](#step-4--index-embeddings-into-qdrant)
-    - [Expected Output](#expected-output-1)
-  - [Step 5 — Verify Point Counts](#step-5--verify-point-counts)
+  - [Step 3 — Ingest PDF](#step-3--ingest-pdf)
+  - [Step 4 — Index Embeddings](#step-4--index-embeddings)
+  - [Step 5 — Verify Counts](#step-5--verify-counts)
 - [9. Run Evaluation Scenarios](#9-run-evaluation-scenarios)
-  - [9.1 Run Scenario A Only](#91-run-scenario-a-only)
-    - [Generated Files](#generated-files)
-  - [9.2 Run Scenario B Only](#92-run-scenario-b-only)
-    - [Generated Files](#generated-files-1)
+  - [9.1 Run Scenario A](#91-run-scenario-a)
+  - [9.2 Run Scenario B](#92-run-scenario-b)
   - [9.3 Run Full Evaluation](#93-run-full-evaluation)
 - [10. Verify Output Counts](#10-verify-output-counts)
-    - [Expected Counts](#expected-counts)
 - [11. Run Tests](#11-run-tests)
-    - [Latest Status](#latest-status)
 - [12. Run Async Workers \& Backend Server](#12-run-async-workers--backend-server)
   - [12.1 Run Celery Worker](#121-run-celery-worker)
   - [12.2 Run FastAPI Server](#122-run-fastapi-server)
@@ -153,7 +164,7 @@ The goal is not only to build a basic RAG system. The main goal is to prove adap
   - [13.1 Health Check](#131-health-check)
   - [13.2 List Latest Document Sections](#132-list-latest-document-sections)
   - [13.3 Start a Prep Session](#133-start-a-prep-session)
-    - [Response Example](#response-example)
+  - [Response Example](#response-example)
   - [13.4 Track Worker Task Status](#134-track-worker-task-status)
   - [13.5 PostgreSQL Session Verification](#135-postgresql-session-verification)
   - [13.6 Submit Batch Answers](#136-submit-batch-answers)
@@ -175,7 +186,6 @@ The goal is not only to build a basic RAG system. The main goal is to prove adap
   - [Mock Framework](#mock-framework)
 - [20. MCQ Validation](#20-mcq-validation)
 - [21. Encoding Cleanup](#21-encoding-cleanup)
-    - [Example](#example)
 - [22. Project Speciality](#22-project-speciality)
 - [23. Known Limitations](#23-known-limitations)
   - [LLM Non-Determinism](#llm-non-determinism)
@@ -191,28 +201,30 @@ The goal is not only to build a basic RAG system. The main goal is to prove adap
 - [28. Development Note](#28-development-note)
   - [AI Tools Used](#ai-tools-used)
 - [29. Final Project Pitch](#29-final-project-pitch)
-  - [License](#license)
+- [License](#license)
 
 ---
 
 # 1. Project Highlights
 
-This project implements the complete prep flow required by the assessment:
+This project implements the complete adaptive prep pipeline required by the assessment.
 
-- User selects one or more PDF sections to study.
-- The system checks prior prep history for those sections.
-- The system retrieves only chunks from the selected sections.
-- The system generates **N MCQs per selected section**.
-- The system presents questions without exposing correct answers.
-- The user or simulation submits answers.
-- The system scores the session.
-- Wrong answers receive correct answers and concise clarification.
-- The session is persisted to PostgreSQL.
-- Weak topics are updated from wrong answers.
-- Future runs adapt question generation based on stored history.
-- Scenario A and Scenario B outputs are exported for reviewer inspection.
+## Features
 
-### Core Adaptive Logic
+- User selects one or more PDF sections to study
+- System checks previous prep history
+- Strict selected-section retrieval
+- MCQ generation per selected section
+- Question delivery without exposing answers
+- Batch answer submission
+- Session scoring
+- Weak-topic tracking
+- Adaptive future question generation
+- Scenario A and Scenario B export generation
+
+---
+
+## Core Adaptive Logic
 
 ```text
 first-time relevant run -> cold_start
@@ -228,30 +240,32 @@ Core backend functionality is fully operational.
 ## Verified Features
 
 ```text
-PDF ingestion                         Passed
-10-section extraction                 Passed
-PostgreSQL persistence                Passed
-Qdrant indexing                       Passed
-Strict selected-section retrieval     Passed
-Groq MCQ generation                   Passed
-Mock fallback generation              Passed
-N=5 Scenario A/B generation           Passed
-Backend-owned adaptation metadata     Passed
-LLM retry reliability                 Improved
-MCQ validation                        Passed
-Scenario A                            Passed
-Scenario B                            Passed
-KB snapshot export                    Passed
-FastAPI Swagger flow                  Passed
-/prep/start                           Passed
-/prep/task/{task_id}                  Passed
-/prep/submit                          Passed
-/sessions/{session_id}                Passed
-/kb/snapshot                          Passed
-Automated tests                       6 passed
+PDF ingestion                              Passed
+10-section extraction                      Passed
+PostgreSQL persistence                     Passed
+Qdrant indexing                            Passed
+Strict selected-section retrieval          Passed
+Groq MCQ generation                        Passed
+Mock fallback generation                   Passed
+N=5 Scenario A/B generation                Passed
+Backend-owned adaptation metadata          Passed
+LLM retry reliability                      Improved
+MCQ validation                             Passed
+Scenario A                                 Passed
+Scenario B                                 Passed
+KB snapshot export                         Passed
+FastAPI Swagger flow                       Passed
+/prep/start                                Passed
+/prep/task/{task_id}                       Passed
+/prep/submit                               Passed
+/sessions/{session_id}                     Passed
+/kb/snapshot                               Passed
+Automated tests                            6 passed
 ```
 
-### Latest Verified Adaptive Runs
+---
+
+## Latest Verified Adaptive Runs
 
 ```text
 Scenario B iteration 1 | sections [5, 8]    | mode=cold_start | score=50.0
@@ -280,6 +294,8 @@ Windows PowerShell or compatible terminal
 Groq API key for real LLM generation
 ```
 
+---
+
 ## Required Services
 
 ```text
@@ -288,7 +304,7 @@ Qdrant (Port 16433)
 Redis (Port 6380)
 ```
 
-These services are started through Docker Compose.
+All services run through Docker Compose.
 
 ---
 
@@ -309,7 +325,9 @@ cd adaptive-document-prep-Cloudly
 ### Windows PowerShell
 
 ```powershell
-python -m venv .venv
+Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass
+
+py -m venv .venv
 
 .\.venv\Scripts\Activate.ps1
 ```
@@ -348,14 +366,16 @@ Copy-Item .env.example .env
 cp .env.example .env
 ```
 
-Then configure your Groq API key:
+Configure your API key:
 
 ```env
 LLM_PROVIDER=groq
 GROQ_API_KEY=your_groq_api_key_here
 ```
 
-### Optional Deterministic Local Testing
+---
+
+## Optional Deterministic Local Testing
 
 ```env
 LLM_PROVIDER=mock
@@ -387,7 +407,6 @@ LLM_PROVIDER=groq
 GROQ_API_KEY=your_groq_api_key_here
 GEMINI_API_KEY=
 
-# Async Worker & Cache Layer
 REDIS_HOST=localhost
 REDIS_PORT=6380
 REDIS_DB=0
@@ -395,7 +414,6 @@ REDIS_DB=0
 CELERY_BROKER_URL=redis://localhost:6380/0
 CELERY_RESULT_BACKEND=redis://localhost:6380/0
 
-# Isolation Mode
 HF_HUB_OFFLINE=1
 ```
 
@@ -407,19 +425,7 @@ HF_HUB_OFFLINE=1
 docker compose up -d
 ```
 
-Check containers:
-
-```powershell
-docker ps
-```
-
-Expected services:
-
-```text
-adaptive_doc_postgres
-adaptive_doc_qdrant
-adaptive_doc_redis_6380
-```
+---
 
 ## Verify Services
 
@@ -445,13 +451,15 @@ python -c "import redis; r = redis.Redis(host='localhost', port=6380, db=0); pri
 
 # 8. Prepare the Knowledge Base (Idempotent Setup)
 
-The main PDF must exist at:
+PDF location:
 
 ```text
 data/SLATEFALL_DOSSIER.pdf
 ```
 
-## Step 1 — Reset Relational Tables
+---
+
+## Step 1 — Reset Database
 
 ```powershell
 python -m cli.reset_db reset
@@ -467,13 +475,13 @@ Invoke-RestMethod -Uri http://localhost:16433/collections/slatefall_chunks -Meth
 
 ---
 
-## Step 3 — Ingest PDF Structure
+## Step 3 — Ingest PDF
 
 ```powershell
 python -m cli.ingest_pdf
 ```
 
-### Expected Output
+Expected:
 
 ```text
 Pages: 50
@@ -483,13 +491,13 @@ Chunks: 101
 
 ---
 
-## Step 4 — Index Embeddings into Qdrant
+## Step 4 — Index Embeddings
 
 ```powershell
 python -m cli.index_qdrant
 ```
 
-### Expected Output
+Expected:
 
 ```text
 Chunks to index: 101
@@ -498,33 +506,35 @@ Qdrant indexing complete.
 
 ---
 
-## Step 5 — Verify Point Counts
+## Step 5 — Verify Counts
 
 ```powershell
-Invoke-RestMethod -Uri http://localhost:16433/collections/slatefall_chunks
+Invoke-RestMethod -Uri http://localhost:16433/collections/slatefall_chunks `
+| Select-Object -ExpandProperty result `
+| Select-Object status, points_count
 ```
 
-Ensure:
+Expected:
 
 ```text
-points_count = 101
+status points_count
+------ ------------
+green           101
 ```
 
 ---
 
 # 9. Run Evaluation Scenarios
 
-The assessment requires exported outputs for both Scenario A and Scenario B.
-
 ---
 
-## 9.1 Run Scenario A Only
+## 9.1 Run Scenario A
 
 ```powershell
 python -m cli.run_scenario_a --questions-per-section 5
 ```
 
-### Generated Files
+Generated:
 
 ```text
 outputs/scenario_a/questions_scenario_a.json
@@ -533,13 +543,13 @@ outputs/scenario_a/kb_snapshot_scenario_a.json
 
 ---
 
-## 9.2 Run Scenario B Only
+## 9.2 Run Scenario B
 
 ```powershell
 python -m cli.run_scenario_b --questions-per-section 5
 ```
 
-### Generated Files
+Generated:
 
 ```text
 outputs/scenario_b_iter1/questions_iter1.json
@@ -574,7 +584,7 @@ python -m cli.run_evaluation --questions-per-section 5
 (Get-Content outputs\scenario_b_iter3\questions_iter3.json | ConvertFrom-Json).questions.Count
 ```
 
-### Expected Counts
+Expected:
 
 ```text
 10
@@ -591,7 +601,7 @@ python -m cli.run_evaluation --questions-per-section 5
 python -m pytest tests
 ```
 
-### Latest Status
+Expected:
 
 ```text
 6 passed
@@ -601,14 +611,16 @@ python -m pytest tests
 
 # 12. Run Async Workers & Backend Server
 
-Open two separate terminals with active virtual environments.
+Open two terminals.
 
 ---
 
 ## 12.1 Run Celery Worker
 
 ```powershell
-celery -A app.background.worker.celery_app worker --loglevel=info -P solo
+$env:PYTHONPATH="."
+
+celery -A app.core.celery_app.celery_app worker --loglevel=info -P solo
 ```
 
 ---
@@ -616,6 +628,8 @@ celery -A app.background.worker.celery_app worker --loglevel=info -P solo
 ## 12.2 Run FastAPI Server
 
 ```powershell
+$env:PYTHONPATH="."
+
 python -m uvicorn app.main:app --host 127.0.0.1 --port 18000
 ```
 
@@ -656,7 +670,9 @@ Invoke-RestMethod -Uri http://127.0.0.1:18000/prep/start `
 -Body '{"selected_section_numbers": [5, 8], "questions_per_section": 5}'
 ```
 
-### Response Example
+---
+
+## Response Example
 
 ```json
 {
@@ -679,7 +695,8 @@ Invoke-RestMethod -Uri http://127.0.0.1:18000/prep/task/6e007c87-d6db-44c4-96ba-
 ## 13.5 PostgreSQL Session Verification
 
 ```powershell
-docker exec -it adaptive_doc_postgres psql -U postgres -d adaptive_doc_prep -c "SELECT id, mode, score, total_questions, selected_section_numbers FROM prep_sessions ORDER BY created_at DESC LIMIT 1;"
+docker exec -it adaptive_doc_postgres psql -U postgres -d adaptive_doc_prep `
+-c "SELECT id, mode, score, total_questions, selected_section_numbers FROM prep_sessions ORDER BY created_at DESC LIMIT 1;"
 ```
 
 ---
@@ -706,16 +723,16 @@ Invoke-RestMethod -Uri http://127.0.0.1:18000/prep/submit `
 ### Verify Session Updates
 
 ```powershell
-docker exec -it adaptive_doc_postgres psql -U postgres -d adaptive_doc_prep -c "SELECT id, score, correct_count, wrong_count FROM prep_sessions ORDER BY created_at DESC LIMIT 1;"
+docker exec -it adaptive_doc_postgres psql -U postgres -d adaptive_doc_prep `
+-c "SELECT id, score, correct_count, wrong_count FROM prep_sessions ORDER BY created_at DESC LIMIT 1;"
 ```
 
 ### Audit Question Schema
 
 ```powershell
-docker exec -it adaptive_doc_postgres psql -U postgres -d adaptive_doc_prep -c "SELECT section_number, topic, difficulty, question_text, correct_answer FROM generated_questions LIMIT 2;"
+docker exec -it adaptive_doc_postgres psql -U postgres -d adaptive_doc_prep `
+-c "SELECT section_number, topic, difficulty, question_text, correct_answer FROM generated_questions LIMIT 2;"
 ```
-
-> Press `q` to exit pager view.
 
 ---
 
@@ -724,8 +741,6 @@ docker exec -it adaptive_doc_postgres psql -U postgres -d adaptive_doc_prep -c "
 ```http
 GET /kb/snapshot
 ```
-
-Returns a human-readable snapshot of the latest learning sequences.
 
 ---
 
@@ -754,6 +769,8 @@ Qdrant     = Section-filtered semantic retrieval
 LangGraph  = Adaptive orchestration workflow
 ```
 
+---
+
 ## Ingestion Architecture
 
 ```text
@@ -772,6 +789,8 @@ Section Splitter
                      ▼
                Qdrant Vector Store
 ```
+
+---
 
 ## Prep-Time Architecture
 
@@ -814,15 +833,11 @@ simulate_and_score_answers
 persist_session
 ```
 
-This guarantees deterministic tracking across adaptive Scenario B iterations.
-
 ---
 
 # 17. Knowledge Base Design
 
-Relational modeling handles historical performance indexing over semantic retrieval.
-
-This allows:
+Relational modeling enables:
 
 - Weak-topic aggregation
 - Historical session tracking
@@ -840,13 +855,15 @@ This allows:
 No prior history exists for selected sections.
 ```
 
+---
+
 ## Adaptive
 
 ```text
-Previous mistakes and weak topics influence new question generation.
+Previous mistakes and weak topics influence future question generation.
 ```
 
-The backend explicitly owns adaptation metadata generation instead of delegating trust to LLM outputs.
+The backend explicitly owns adaptation metadata generation rather than delegating trust to LLM outputs.
 
 ---
 
@@ -858,15 +875,17 @@ The backend explicitly owns adaptation metadata generation instead of delegating
 Groq Cloud Hosted API
 ```
 
-Chosen for:
+Benefits:
 
 - Fast inference
 - Strong JSON adherence
 - Lightweight deployment requirements
 
+---
+
 ## Mock Framework
 
-Deterministic mock generation exists for:
+Used for:
 
 - Offline testing
 - Unit testing
@@ -876,7 +895,7 @@ Deterministic mock generation exists for:
 
 # 20. MCQ Validation
 
-Validation pipeline guarantees:
+Validation guarantees:
 
 - Exactly 4 answer choices
 - Strict A/B/C/D schema
@@ -887,15 +906,15 @@ Validation pipeline guarantees:
 
 # 21. Encoding Cleanup
 
-The project uses `ftfy` normalization to repair mojibake parsing artifacts.
+The project uses `ftfy` normalization to repair mojibake artifacts.
 
-### Example
+Example:
 
 ```text
 Cuartel ValparaÃ­so
 ```
 
-becomes
+becomes:
 
 ```text
 Cuartel Valparaíso
@@ -905,9 +924,7 @@ Cuartel Valparaíso
 
 # 22. Project Speciality
 
-The main engineering focus is proving measurable adaptivity.
-
-Scenario B demonstrates:
+Main engineering contribution:
 
 ```text
 failure in earlier sessions
@@ -925,9 +942,9 @@ targeted follow-up evaluation
 
 ## LLM Non-Determinism
 
-Minor output variance may occur across environments.
+Minor variance may occur across environments.
 
-Mitigation:
+Mitigated using:
 
 ```text
 Low temperature configuration
@@ -939,15 +956,13 @@ Retry enforcement
 
 ## Cold Starts
 
-Initial model loads may briefly delay first-run execution.
+Initial model loads may delay first-run execution slightly.
 
 ---
 
 # 24. Output Commit Strategy
 
-The `outputs/` directory stores reviewer-ready execution artifacts.
-
-This avoids forcing reviewers to immediately rebuild the entire stack.
+The `outputs/` directory stores reviewer-ready execution artifacts for rapid evaluation.
 
 ---
 
@@ -968,9 +983,12 @@ python -m pytest tests
 # Execute Full Evaluation
 python -m cli.run_evaluation --questions-per-section 5
 
-# Start Backend
-celery -A app.background.worker.celery_app worker --loglevel=info -P solo
+# Start Worker
+$env:PYTHONPATH="."
+celery -A app.core.celery_app.celery_app worker --loglevel=info -P solo
 
+# Start API (Separate Terminal)
+$env:PYTHONPATH="."
 python -m uvicorn app.main:app --host 127.0.0.1 --port 18000
 ```
 
@@ -1032,7 +1050,11 @@ python -m cli.run_evaluation --questions-per-section 5
 ## Workers & API
 
 ```powershell
-celery -A app.background.worker.celery_app worker --loglevel=info -P solo
+$env:PYTHONPATH="."
+
+celery -A app.core.celery_app.celery_app worker --loglevel=info -P solo
+
+$env:PYTHONPATH="."
 
 python -m uvicorn app.main:app --host 127.0.0.1 --port 18000
 ```
@@ -1050,7 +1072,9 @@ AI tools were used as supplementary assistants for:
 - Documentation refinement
 - Reviewing implementation decisions
 
-All final architectural decisions, implementation logic, testing, validation, and repository maintenance were reviewed and owned by the project author.
+All final architecture, implementation, testing, validation, and maintenance decisions were reviewed and owned by the project author.
+
+---
 
 ## AI Tools Used
 
@@ -1061,23 +1085,22 @@ All final architectural decisions, implementation logic, testing, validation, an
 
 # 29. Final Project Pitch
 
-This project is a production-style adaptive RAG backend that:
+This project demonstrates a production-style adaptive RAG backend that:
 
 - Ingests structured PDFs
-- Stores semantic chunks in Qdrant
+- Stores semantic embeddings in Qdrant
 - Maintains learning history in PostgreSQL
 - Generates MCQs using LLMs
 - Validates structured outputs
-- Scores answers
-- Tracks weak topics over time
-- Adapts future question generation based on previous mistakes
-- Exports reviewer-ready Scenario A and Scenario B outputs
+- Scores answer submissions
+- Tracks weak topics
+- Adapts future question generation
+- Exports reviewer-ready Scenario outputs
 
-The project demonstrates deterministic adaptive preparation behavior across repeated study sessions while maintaining strict retrieval boundaries, persistence guarantees, and audit-ready evaluation outputs.
+The system demonstrates deterministic adaptive preparation behavior across repeated study sessions while maintaining strict retrieval boundaries, persistence guarantees, and audit-ready evaluation outputs.
 
 ---
 
-
-## License
+# License
 
 This project is intended for educational, research, and engineering portfolio demonstration purposes.

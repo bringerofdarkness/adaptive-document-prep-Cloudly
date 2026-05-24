@@ -24,15 +24,22 @@ class Settings(BaseSettings):
     gemini_api_key: str | None = None
     groq_api_key: str | None = None
 
-
+    # 🔗 Redis এবং Celery-র নতুন কনফিগারেশন ফিল্ডসমূহ
     redis_url: str = "redis://localhost:6380/0"
-    qdrant_score_threshold: float = 0.75
+    redis_host: str = "localhost"
+    redis_port: int = 6380
+    redis_db: int = 0
+    celery_broker_url: str = "redis://localhost:6380/0"
+    celery_result_backend: str = "redis://localhost:6380/0"
     
+    qdrant_score_threshold: float = 0.75
 
+    # ⚙️ অতিরিক্ত ভ্যারিয়েবল ব্লকিং এড়াতে extra="ignore" সেট করা হলো
     model_config = SettingsConfigDict(
         env_file=".env",
         env_file_encoding="utf-8",
         case_sensitive=False,
+        extra="ignore", 
     )
 
     @property
