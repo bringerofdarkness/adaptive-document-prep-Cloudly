@@ -164,6 +164,7 @@ The primary goal is not just retrieval-augmented generation — it is demonstrat
   - [13.1 Health Check](#131-health-check)
   - [13.2 List Latest Document Sections](#132-list-latest-document-sections)
   - [13.3 Start a Prep Session](#133-start-a-prep-session)
+  - [Response Example](#response-example)
   - [13.4 Track Worker Task Status](#134-track-worker-task-status)
   - [13.5 PostgreSQL Session Verification](#135-postgresql-session-verification)
   - [13.6 Submit Batch Answers](#136-submit-batch-answers)
@@ -669,15 +670,11 @@ GET /documents/latest/sections
 Invoke-RestMethod -Uri http://127.0.0.1:18000/prep/start `
 -Method Post `
 -ContentType "application/json" `
--Body
-
+-Body '{
+  "selected_section_numbers": [5, 8],
+  "questions_per_section": 5
+}'
 ```
-'{"selected_section_numbers": [5, 8],
-
- "questions_per_section": 5}'
- 
- ```
-
 
 ---
 
