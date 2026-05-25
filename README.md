@@ -47,12 +47,67 @@ The primary goal is not just retrieval-augmented generation — it is demonstrat
 
 # Documentation
 
-| File | Purpose |
-|---|---|
-| [`docs/architecture.md`](docs/architecture.md) | Hybrid RAG architecture and retrieval flow |
-| [`docs/database_schema.md`](docs/database_schema.md) | PostgreSQL schema and KB relationships |
-| [`docs/adaptation_strategy.md`](docs/adaptation_strategy.md) | Adaptive logic and weak-topic tracking |
-| [`docs/optional_enhancements.md`](docs/optional_enhancements.md) | Optional enhancements and scalability ideas |
+<table>
+<tr>
+<th align="left">File</th>
+<th align="left">Purpose</th>
+</tr>
+
+<tr>
+<td>
+
+<a href="docs/architecture.md">Architecture</a>
+
+</td>
+<td>
+Hybrid RAG architecture and retrieval flow
+</td>
+</tr>
+
+<tr>
+<td>
+
+<a href="docs/database_schema.md">Database Schema</a>
+
+</td>
+<td>
+PostgreSQL schema and KB relationships
+</td>
+</tr>
+
+<tr>
+<td>
+
+<a href="docs/adaptation_strategy.md">Adaptation Strategy</a>
+
+</td>
+<td>
+Adaptive logic and weak-topic tracking
+</td>
+</tr>
+
+<tr>
+<td>
+
+<a href="docs/optional_enhancements.md">Optional Enhancements</a>
+
+</td>
+<td>
+Optional enhancements and scalability ideas
+</td>
+</tr>
+
+</table>
+
+---
+
+## Recommended Reading Order
+
+```text
+1. docs/architecture.md
+2. docs/database_schema.md
+3. docs/adaptation_strategy.md
+```
 
 ---
 
@@ -128,6 +183,7 @@ The primary goal is not just retrieval-augmented generation — it is demonstrat
 - [Documentation](#documentation)
   - [Recommended Reading Order](#recommended-reading-order)
   - [Recommended Reading Order](#recommended-reading-order-1)
+  - [Recommended Reading Order](#recommended-reading-order-2)
 - [Architecture Overview](#architecture-overview)
 - [Table of Contents](#table-of-contents)
 - [1. Project Highlights](#1-project-highlights)
