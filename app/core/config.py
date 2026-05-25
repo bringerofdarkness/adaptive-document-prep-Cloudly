@@ -24,7 +24,7 @@ class Settings(BaseSettings):
     gemini_api_key: str | None = None
     groq_api_key: str | None = None
 
-    # 🔗 Redis এবং Celery-র নতুন কনফিগারেশন ফিল্ডসমূহ
+    # 🔗 Redis and Celery Configuration
     redis_url: str = "redis://localhost:6380/0"
     redis_host: str = "localhost"
     redis_port: int = 6380
@@ -34,7 +34,13 @@ class Settings(BaseSettings):
     
     qdrant_score_threshold: float = 0.75
 
-    # ⚙️ অতিরিক্ত ভ্যারিয়েবল ব্লকিং এড়াতে extra="ignore" সেট করা হলো
+    # 📦 MinIO Object Storage Configuration
+    minio_endpoint: str = "localhost:9000"
+    minio_access_key: str = "minioadmin"
+    minio_secret_key: str = "minioadminpassword"
+    minio_secure: bool = False
+    minio_bucket_name: str = "raw-dossiers"
+
     model_config = SettingsConfigDict(
         env_file=".env",
         env_file_encoding="utf-8",

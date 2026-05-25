@@ -488,6 +488,15 @@ CELERY_RESULT_BACKEND=redis://localhost:6380/0
 
 
 QDRANT_SCORE_THRESHOLD=0.75   zx
+
+### MinIO Storage Environment Configuration
+
+```env
+MINIO_ENDPOINT=localhost:9000
+MINIO_ACCESS_KEY=minioadmin
+MINIO_SECRET_KEY=minioadminpassword
+MINIO_SECURE=False
+MINIO_BUCKET_NAME=raw-dossiers
 ```
 
 ---

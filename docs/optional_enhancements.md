@@ -478,6 +478,11 @@ This makes it possible to validate adaptive behavior externally without rebuildi
 
 ---
 
+## 8. S3-Compatible Cloud Object Storage Gateway (MinIO Integration)
+- **Baseline Condition:** Raw documents and incoming assessment sources were stored directly on the local server file system, limiting horizontal scaling, decoupling potential, and distributed cloud worker synchronization.
+- **Advanced Engineering Solution:** Integrated a local cloud-native MinIO instance running as an isolated storage tier bound to local network sockets. Re-configured Pydantic settings via `extra="ignore"` structures to map S3 keys safely.
+- **Empirical Impact:** Standardizes document ingestion under a true Medallion Architecture (Bronze landing zone). Prepares the framework for high-throughput multi-worker reads via stateless cloud workers.
+
 # 9. Production Scalability Considerations
 
 The architecture was intentionally designed with horizontal scalability in mind.
