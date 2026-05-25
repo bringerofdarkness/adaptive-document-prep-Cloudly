@@ -220,7 +220,6 @@ def submit_answers_for_session(
     answer_map: dict[str, str],
 ) -> dict:
     session = db.query(PrepSession).filter(PrepSession.id == session_id).first()
-
     if session is None:
         raise ValueError(f"Session not found: {session_id}")
 
@@ -229,7 +228,6 @@ def submit_answers_for_session(
         .filter(UserAnswer.session_id == session_id)
         .count()
     )
-
     if existing_answer_count > 0:
         raise ValueError("Answers have already been submitted for this session.")
 
@@ -239,36 +237,31 @@ def submit_answers_for_session(
         .order_by(GeneratedQuestion.created_at.asc())
         .all()
     )
-
     if not questions:
         raise ValueError("No questions found for this session.")
 
     missing_question_ids = [
-        question.id
-        for question in questions
-        if question.id not in answer_map
+        q.id for q in questions if q.id not in answer_map
     ]
-
     if missing_question_ids:
         raise ValueError(f"Missing answers for questions: {missing_question_ids}")
 
     results = []
+    answer_rows = []
     correct_count = 0
 
     for question in questions:
         selected_answer = str(answer_map[question.id]).strip().upper()
-
         if selected_answer not in VALID_ANSWER_KEYS:
             raise ValueError(f"Invalid answer for question_id={question.id}")
 
         is_correct = selected_answer == question.correct_answer
-
         if is_correct:
             correct_count += 1
 
         clarification = None if is_correct else question.explanation
 
-        db.add(
+        answer_rows.append(
             UserAnswer(
                 session_id=session.id,
                 question_id=question.id,
@@ -299,12 +292,12 @@ def submit_answers_for_session(
             }
         )
 
-    total_questions = len(questions)
-    wrong_count = total_questions - correct_count
+    db.add_all(answer_rows)
 
+    total_questions = len(questions)
     session.total_questions = total_questions
     session.correct_count = correct_count
-    session.wrong_count = wrong_count
+    session.wrong_count = total_questions - correct_count
     session.score = round((correct_count / total_questions) * 100, 2)
 
     db.commit()

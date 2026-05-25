@@ -14,11 +14,7 @@ def retrieve_chunks_for_sections(
     query: str,
     limit: int = 8,
 ) -> list[dict]:
-    """
-    Retrieve chunks only from selected sections using strict Qdrant metadata filtering.
-    Retrieval is balanced per selected section so adaptive runs do not over-focus
-    on only one section when multiple sections are selected.
-    """
+    
     if not selected_section_numbers:
         raise ValueError("At least one section number must be selected.")
 
@@ -33,12 +29,8 @@ def retrieve_chunks_for_sections(
         qdrant_filter = Filter(
             must=[
                 FieldCondition(
-                    key="document_id",
-                    match=MatchValue(value=document.id),
-                ),
-                FieldCondition(
                     key="section_number",
-                    match=MatchValue(value=section_number),
+                    match=MatchValue(value=int(section_number)),
                 ),
             ]
         )
@@ -60,56 +52,9 @@ def retrieve_chunks_for_sections(
         return []
 
     chunks = db.query(Chunk).filter(Chunk.id.in_(chunk_ids)).all()
-    chunks_by_id = {chunk.id: chunk for chunk in chunks}
+    chunks_by_id = {str(chunk.id): chunk for chunk in chunks}
 
     retrieved = []
-
-    for point in points:
-        chunk_id = str(point.payload["chunk_id"])
-        chunk = chunks_by_id.get(chunk_id)
-
-        if chunk is None:
-            continue
-
-        retrieved.append(
-            {
-                "chunk_id": chunk.id,
-                "section_id": chunk.section_id,
-                "section_number": chunk.section_number,
-                "chunk_index": chunk.chunk_index,
-                "page_number": chunk.page_number,
-                "score": point.score,
-                "text": chunk.text,
-                "text_preview": chunk.text_preview,
-            }
-        )
-
-    return retrieved
-
-    response = client.query_points(
-        collection_name=settings.qdrant_collection,
-        query=query_vector,
-        query_filter=qdrant_filter,
-        limit=limit,
-        with_payload=True,
-    )
-
-    points = response.points
-    chunk_ids = [str(point.payload["chunk_id"]) for point in points]
-
-    if not chunk_ids:
-        return []
-
-    chunks = (
-        db.query(Chunk)
-        .filter(Chunk.id.in_(chunk_ids))
-        .all()
-    )
-
-    chunks_by_id = {chunk.id: chunk for chunk in chunks}
-
-    retrieved = []
-
     for point in points:
         chunk_id = str(point.payload["chunk_id"])
         chunk = chunks_by_id.get(chunk_id)

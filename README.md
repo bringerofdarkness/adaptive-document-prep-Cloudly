@@ -1,11 +1,15 @@
 # Adaptive Document Preparation System
 
 <p align="center">
-  <b>Production-Style Adaptive RAG Backend for PDF-Based Study Preparation & MCQ Generation</b>
+  <b>
+    Production-Style Adaptive RAG Backend & Interactive Streamlit Interface
+    for PDF-Based Study Preparation and MCQ Generation
+  </b>
 </p>
 
 <p align="center">
   <img src="https://img.shields.io/badge/Python-3.13-blue?logo=python&logoColor=white" />
+  <img src="https://img.shields.io/badge/Streamlit-Presentation-FF4B4B?logo=streamlit&logoColor=white" />
   <img src="https://img.shields.io/badge/FastAPI-REST%20API-009688?logo=fastapi&logoColor=white" />
   <img src="https://img.shields.io/badge/PostgreSQL-Knowledge%20Base-4169E1?logo=postgresql&logoColor=white" />
   <img src="https://img.shields.io/badge/Qdrant-Vector%20Store-DC244C" />
@@ -25,23 +29,21 @@
 
 ---
 
-## Overview
+# Overview
 
-A production-style adaptive RAG backend designed for structured PDF-based study preparation and intelligent MCQ generation.
+Adaptive Document Preparation System is a production-style adaptive RAG backend designed for structured PDF-based preparation workflows.
 
-This system:
+The platform ingests large multi-section PDFs, stores semantic embeddings inside Qdrant, tracks learning history in PostgreSQL, generates MCQs through LLM pipelines, scores user submissions, identifies weak topics, and adapts future question generation based on historical mistakes.
 
-- Ingests structured multi-section PDFs
-- Stores relational learning history in PostgreSQL
-- Stores semantic chunk embeddings in Qdrant
-- Retrieves only user-selected sections
-- Generates MCQs through an LLM
-- Validates structured outputs
-- Scores answer submissions
-- Tracks weak topics over time
-- Adapts future question generation using historical performance
+This project was built to demonstrate something beyond a basic RAG implementation.
 
-The primary goal is not just retrieval-augmented generation — it is demonstrating **adaptive preparation behavior across repeated study sessions**.
+The core engineering focus is:
+
+- adaptive preparation behavior
+- deterministic retrieval boundaries
+- historical learning persistence
+- reviewer-auditable evaluation workflows
+- asynchronous scalable orchestration
 
 ---
 
@@ -55,45 +57,37 @@ The primary goal is not just retrieval-augmented generation — it is demonstrat
 
 <tr>
 <td>
-
 <a href="docs/architecture.md">Architecture</a>
-
 </td>
 <td>
-Hybrid RAG architecture and retrieval flow
+Hybrid RAG architecture, ingestion pipeline, retrieval boundaries, orchestration flow
 </td>
 </tr>
 
 <tr>
 <td>
-
 <a href="docs/database_schema.md">Database Schema</a>
-
 </td>
 <td>
-PostgreSQL schema and KB relationships
+PostgreSQL relational schema, session persistence, weak-topic indexing, KB relationships
 </td>
 </tr>
 
 <tr>
 <td>
-
 <a href="docs/adaptation_strategy.md">Adaptation Strategy</a>
-
 </td>
 <td>
-Adaptive logic and weak-topic tracking
+Adaptive logic, weak-topic tracking, cold-start vs adaptive execution behavior
 </td>
 </tr>
 
 <tr>
 <td>
-
 <a href="docs/optional_enhancements.md">Optional Enhancements</a>
-
 </td>
 <td>
-Optional enhancements and scalability ideas
+Production scalability decisions, async architecture, optimization strategies, resilience engineering
 </td>
 </tr>
 
@@ -101,32 +95,13 @@ Optional enhancements and scalability ideas
 
 ---
 
-## Recommended Reading Order
+# Recommended Reading Order
 
 ```text
 1. docs/architecture.md
 2. docs/database_schema.md
 3. docs/adaptation_strategy.md
-```
-
----
-
-## Recommended Reading Order
-
-```text
-1. docs/architecture.md
-2. docs/database_schema.md
-3. docs/adaptation_strategy.md
-```
-
----
-
-## Recommended Reading Order
-
-```text
-1. docs/architecture.md
-2. docs/database_schema.md
-3. docs/adaptation_strategy.md
+4. docs/optional_enhancements.md
 ```
 
 ---
@@ -134,164 +109,95 @@ Optional enhancements and scalability ideas
 # Architecture Overview
 
 ```text
-                           ┌────────────────────┐
-                           │   Structured PDF   │
-                           │ SLATEFALL_DOSSIER  │
-                           └─────────┬──────────┘
-                                     │
-                                     ▼
-                        ┌────────────────────────┐
-                        │ PyMuPDF PDF Extraction │
-                        └─────────┬──────────────┘
-                                  │
-                    ┌─────────────┴─────────────┐
-                    ▼                           ▼
-        ┌─────────────────────┐     ┌─────────────────────┐
-        │ PostgreSQL Storage  │     │ Embedding Pipeline  │
-        │ Sections / Sessions │     │ SentenceTransformers│
-        └─────────┬───────────┘     └─────────┬───────────┘
-                  │                           │
-                  ▼                           ▼
-        ┌─────────────────────┐     ┌─────────────────────┐
-        │ Knowledge History   │     │ Qdrant Vector Store │
-        │ Weak Topics         │     │ Semantic Retrieval  │
-        └─────────┬───────────┘     └─────────┬───────────┘
-                  └─────────────┬─────────────┘
-                                ▼
-                    ┌────────────────────────┐
-                    │     LangGraph Flow     │
-                    │ Adaptive RAG Workflow  │
-                    └─────────┬──────────────┘
-                              ▼
-                    ┌────────────────────────┐
-                    │   LLM MCQ Generation   │
-                    │      Groq / Mock       │
-                    └─────────┬──────────────┘
-                              ▼
-                    ┌────────────────────────┐
-                    │ Scoring + Adaptation   │
-                    │ Weak Topic Tracking    │
-                    └────────────────────────┘
+[ User Interaction via Streamlit Web UI ]
+                                          │
+                                          ▼
+                             [ FastAPI REST API Gateway ]
+                             (Instantly Returns 202 Task)
+                                          │
+                 ┌────────────────────────┴────────────────────────┐
+                 ▼ (Async Broker Push)                             ▼ (Storage Audit)
+      [ Redis Message Broker ]                        [ MinIO S3 Object Repository ]
+            (Port 6380)                                  (Raw PDF Document Vault)
+                 │                                                 │
+                 ▼ (Worker Thread Pick)                            ▼ (Source Fetch)
+      [ Celery Asynchronous Workers ] ─────────────────────────────┘
+       - Fixed-Window Multi-Section Batching
+       - Offline Transformers Local Cache
+                 │
+                 ▼
+      [ LangGraph Stateful Workflows ]
+       (Retrieval + Adaptation Payloads)
+                 │
+                 ▼
+        [ Qdrant Vector Engine ]
+       (Strict Section Partition Filter)
+                 │
+                 ▼
+      [ Upstream LLM Inference Tier ]
+        (Groq Llama-3 / Mock Fallback)
+                 │
+                 ▼
+      [ Pydantic Validation & ftfy Cleanup ]
+                 │
+                 ▼
+      [ PostgreSQL Persistence Core ]
+       (Bulk db.add_all Relational Flushes)
+                 │
+                 ▼
+      [ Streamlit Performance Rendering ]
+       (Human-Readable Snapshots & Explanations)
 ```
 
 ---
 
 # Table of Contents
 
-- [Adaptive Document Preparation System](#adaptive-document-preparation-system)
-  - [Overview](#overview)
-- [Documentation](#documentation)
-  - [Recommended Reading Order](#recommended-reading-order)
-  - [Recommended Reading Order](#recommended-reading-order-1)
-  - [Recommended Reading Order](#recommended-reading-order-2)
-- [Architecture Overview](#architecture-overview)
-- [Table of Contents](#table-of-contents)
-- [1. Project Highlights](#1-project-highlights)
-  - [Features](#features)
-  - [Core Adaptive Logic](#core-adaptive-logic)
-- [2. Current Verified Status](#2-current-verified-status)
-  - [Verified Features](#verified-features)
-  - [Latest Verified Adaptive Runs](#latest-verified-adaptive-runs)
-- [3. Repository](#3-repository)
-- [4. Prerequisites](#4-prerequisites)
-  - [Recommended Environment](#recommended-environment)
-  - [Required Services](#required-services)
-- [5. Fresh Setup on a New PC](#5-fresh-setup-on-a-new-pc)
-  - [5.1 Clone the Repository](#51-clone-the-repository)
-  - [5.2 Create and Activate a Virtual Environment](#52-create-and-activate-a-virtual-environment)
-    - [Windows PowerShell](#windows-powershell)
-    - [macOS / Linux](#macos--linux)
-  - [5.3 Install Dependencies](#53-install-dependencies)
-  - [5.4 Create `.env`](#54-create-env)
-    - [Windows PowerShell](#windows-powershell-1)
-    - [macOS / Linux](#macos--linux-1)
-  - [Optional Deterministic Local Testing](#optional-deterministic-local-testing)
-- [6. Environment Variables](#6-environment-variables)
-- [7. Start Docker Services](#7-start-docker-services)
-  - [Verify Services](#verify-services)
-    - [PostgreSQL](#postgresql)
-    - [Qdrant](#qdrant)
-    - [Redis](#redis)
-- [8. Prepare the Knowledge Base (Idempotent Setup)](#8-prepare-the-knowledge-base-idempotent-setup)
-  - [Step 1 — Reset Database](#step-1--reset-database)
-  - [Step 2 — Clear Qdrant Collection](#step-2--clear-qdrant-collection)
-  - [Step 3 — Ingest PDF](#step-3--ingest-pdf)
-  - [Step 4 — Index Embeddings](#step-4--index-embeddings)
-  - [Step 5 — Verify Counts](#step-5--verify-counts)
-- [9. Run Evaluation Scenarios](#9-run-evaluation-scenarios)
-  - [9.1 Run Scenario A](#91-run-scenario-a)
-  - [9.2 Run Scenario B](#92-run-scenario-b)
-  - [9.3 Run Full Evaluation](#93-run-full-evaluation)
-- [10. Verify Output Counts](#10-verify-output-counts)
-- [11. Run Tests](#11-run-tests)
-- [12. Run Async Workers \& Backend Server](#12-run-async-workers--backend-server)
-  - [12.1 Run Celery Worker](#121-run-celery-worker)
-  - [12.2 Run FastAPI Server](#122-run-fastapi-server)
-- [13. API Usage \& Real-Time DB Verification](#13-api-usage--real-time-db-verification)
-  - [13.1 Health Check](#131-health-check)
-  - [13.2 List Latest Document Sections](#132-list-latest-document-sections)
-  - [13.3 Start a Prep Session](#133-start-a-prep-session)
-  - [Response Example](#response-example)
-  - [13.4 Track Worker Task Status](#134-track-worker-task-status)
-  - [13.5 PostgreSQL Session Verification](#135-postgresql-session-verification)
-  - [13.6 Submit Batch Answers](#136-submit-batch-answers)
-  - [13.7 Verify Final Database State](#137-verify-final-database-state)
-    - [Verify Session Updates](#verify-session-updates)
-    - [Audit Question Schema](#audit-question-schema)
-  - [13.8 Retrieve KB Snapshot](#138-retrieve-kb-snapshot)
-- [14. PDF Section Mapping](#14-pdf-section-mapping)
-- [15. Architecture Summary](#15-architecture-summary)
-  - [Ingestion Architecture](#ingestion-architecture)
-  - [Prep-Time Architecture](#prep-time-architecture)
-- [16. LangGraph Workflow](#16-langgraph-workflow)
-- [17. Knowledge Base Design](#17-knowledge-base-design)
-- [18. Adaptation Strategy](#18-adaptation-strategy)
-  - [Cold Start](#cold-start)
-  - [Adaptive](#adaptive)
-- [19. LLM and Model Choice](#19-llm-and-model-choice)
-  - [Primary Engine](#primary-engine)
-  - [Mock Framework](#mock-framework)
-- [20. MCQ Validation](#20-mcq-validation)
-- [21. Encoding Cleanup](#21-encoding-cleanup)
-- [22. Project Speciality](#22-project-speciality)
-- [23. Known Limitations](#23-known-limitations)
-  - [LLM Non-Determinism](#llm-non-determinism)
-  - [Cold Starts](#cold-starts)
-- [24. Output Commit Strategy](#24-output-commit-strategy)
-- [25. Suggested Project Verification Flow](#25-suggested-project-verification-flow)
-- [26. Project Structure](#26-project-structure)
-- [27. Useful Commands](#27-useful-commands)
-  - [Service Boot](#service-boot)
-  - [Database Purge](#database-purge)
-  - [Pipeline Processing](#pipeline-processing)
-  - [Workers \& API](#workers--api)
-- [28. Development Note](#28-development-note)
-  - [AI Tools Used](#ai-tools-used)
-- [29. Final Project Pitch](#29-final-project-pitch)
-- [License](#license)
+- [Project Highlights](#project-highlights)
+- [Current Verified Status](#current-verified-status)
+- [Repository](#repository)
+- [Prerequisites](#prerequisites)
+- [Fresh Setup on a New PC](#fresh-setup-on-a-new-pc)
+- [Environment Variables](#environment-variables)
+- [Start Docker Services](#start-docker-services)
+- [Prepare the Knowledge Base](#prepare-the-knowledge-base)
+- [Run Evaluation Scenarios](#run-evaluation-scenarios)
+- [Run Tests](#run-tests)
+- [Run Workers, Backend & Frontend](#run-workers-backend--frontend)
+- [API Usage](#api-usage)
+- [Architecture Summary](#architecture-summary)
+- [LangGraph Workflow](#langgraph-workflow)
+- [Adaptation Strategy](#adaptation-strategy)
+- [Project Structure](#project-structure)
+- [Useful Commands](#useful-commands)
+- [Final Project Pitch](#final-project-pitch)
 
 ---
 
-# 1. Project Highlights
+# Project Highlights
 
-This project implements the complete adaptive prep pipeline required by the assessment.
+This project implements the complete adaptive preparation workflow required by the assessment.
 
-## Features
+### Features
 
-- User selects one or more PDF sections to study
-- System checks previous prep history
-- Strict selected-section retrieval
-- MCQ generation per selected section
-- Question delivery without exposing answers
-- Batch answer submission
-- Session scoring
+- Structured PDF ingestion
+- Section-aware semantic chunking
+- PostgreSQL historical persistence
+- Qdrant vector retrieval
+- Strict selected-section filtering
+- LLM-driven MCQ generation
+- Adaptive learning sessions
 - Weak-topic tracking
-- Adaptive future question generation
-- Scenario A and Scenario B export generation
+- Async task orchestration
+- FastAPI REST backend
+- Streamlit interactive frontend
+- Reviewer-ready Scenario A/B exports
+- Mock fallback execution for offline testing
+- Deterministic validation pipelines
 
 ---
 
-## Core Adaptive Logic
+# Core Adaptive Logic
 
 ```text
 first-time relevant run -> cold_start
@@ -300,7 +206,7 @@ returning relevant run  -> adaptive
 
 ---
 
-# 2. Current Verified Status
+# Current Verified Status
 
 Core backend functionality is fully operational.
 
@@ -314,12 +220,9 @@ Qdrant indexing                            Passed
 Strict selected-section retrieval          Passed
 Groq MCQ generation                        Passed
 Mock fallback generation                   Passed
-N=5 Scenario A/B generation                Passed
-Backend-owned adaptation metadata          Passed
-LLM retry reliability                      Improved
-MCQ validation                             Passed
 Scenario A                                 Passed
 Scenario B                                 Passed
+Weak-topic persistence                     Passed
 KB snapshot export                         Passed
 FastAPI Swagger flow                       Passed
 /prep/start                                Passed
@@ -327,12 +230,13 @@ FastAPI Swagger flow                       Passed
 /prep/submit                               Passed
 /sessions/{session_id}                     Passed
 /kb/snapshot                               Passed
+Interactive Streamlit UI                   Passed
 Automated tests                            6 passed
 ```
 
 ---
 
-## Latest Verified Adaptive Runs
+# Latest Verified Adaptive Runs
 
 ```text
 Scenario B iteration 1 | sections [5, 8]    | mode=cold_start | score=50.0
@@ -342,15 +246,15 @@ Scenario B iteration 3 | sections [8]       | mode=adaptive   | score=0.0
 
 ---
 
-# 3. Repository
+# Repository
 
 ```bash
-https://github.com/bringerofdarkness/adaptive-document-prep-Cloudly
+git clone https://github.com/bringerofdarkness/adaptive-document-prep-Cloudly.git
 ```
 
 ---
 
-# 4. Prerequisites
+# Prerequisites
 
 ## Recommended Environment
 
@@ -361,23 +265,21 @@ Windows PowerShell or compatible terminal
 Groq API key for real LLM generation
 ```
 
----
-
 ## Required Services
 
 ```text
-PostgreSQL (Port 5433)
-Qdrant (Port 16433)
-Redis (Port 6380)
+PostgreSQL  -> Port 5433
+Qdrant      -> Port 16433
+Redis       -> Port 6380
 ```
 
 All services run through Docker Compose.
 
 ---
 
-# 5. Fresh Setup on a New PC
+# Fresh Setup on a New PC
 
-## 5.1 Clone the Repository
+## 1. Clone the Repository
 
 ```powershell
 git clone https://github.com/bringerofdarkness/adaptive-document-prep-Cloudly.git
@@ -387,18 +289,23 @@ cd adaptive-document-prep-Cloudly
 
 ---
 
-## 5.2 Create and Activate a Virtual Environment
+## 2. Create Virtual Environment
 
 ### Windows PowerShell
 
 ```powershell
-
 python -m venv .venv
-.\.venv\Scripts\Activate.ps1
 
-# If the global `python` command is not configured on your PC
+.\.venv\Scripts\Activate.ps1
+```
+
+If the global `python` command is not configured:
+
+```powershell
 Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass
+
 py -m venv .venv
+
 .\.venv\Scripts\Activate.ps1
 ```
 
@@ -412,7 +319,7 @@ source .venv/bin/activate
 
 ---
 
-## 5.3 Install Dependencies
+## 3. Install Dependencies
 
 ```powershell
 python -m pip install --upgrade pip
@@ -422,9 +329,9 @@ python -m pip install -r requirements.txt
 
 ---
 
-## 5.4 Create `.env`
+## 4. Create `.env`
 
-### Windows PowerShell
+### Windows
 
 ```powershell
 Copy-Item .env.example .env
@@ -443,25 +350,24 @@ LLM_PROVIDER=groq
 GROQ_API_KEY=your_groq_api_key_here
 ```
 
----
-
-## Optional Deterministic Local Testing
+Optional deterministic local testing:
 
 ```env
 LLM_PROVIDER=mock
 ```
 
-> Never commit `.env`.
+Never commit `.env`.
 
 ---
 
-# 6. Environment Variables
+# Environment Variables
 
 ```env
 APP_NAME="Adaptive Document Preparation System"
 APP_ENV=local
+
 API_HOST=0.0.0.0
-API_PORT=8000
+API_PORT=8090
 
 POSTGRES_HOST=localhost
 POSTGRES_PORT=5433
@@ -475,23 +381,18 @@ QDRANT_COLLECTION=slatefall_chunks
 
 EMBEDDING_MODEL=sentence-transformers/all-MiniLM-L6-v2
 
-LLM_PROVIDER=mock
-GEMINI_API_KEY=
+LLM_PROVIDER=groq
 GROQ_API_KEY=
-
 
 REDIS_HOST=localhost
 REDIS_PORT=6380
 REDIS_DB=0
+
 CELERY_BROKER_URL=redis://localhost:6380/0
 CELERY_RESULT_BACKEND=redis://localhost:6380/0
 
+QDRANT_SCORE_THRESHOLD=0.75
 
-QDRANT_SCORE_THRESHOLD=0.75   zx
-
-### MinIO Storage Environment Configuration
-
-```env
 MINIO_ENDPOINT=localhost:9000
 MINIO_ACCESS_KEY=minioadmin
 MINIO_SECRET_KEY=minioadminpassword
@@ -501,7 +402,7 @@ MINIO_BUCKET_NAME=raw-dossiers
 
 ---
 
-# 7. Start Docker Services
+# Start Docker Services
 
 ```powershell
 docker compose up -d
@@ -509,21 +410,21 @@ docker compose up -d
 
 ---
 
-## Verify Services
+# Verify Services
 
-### PostgreSQL
+## PostgreSQL
 
 ```powershell
 docker exec adaptive_doc_postgres pg_isready -U postgres -d adaptive_doc_prep
 ```
 
-### Qdrant
+## Qdrant
 
 ```powershell
 Invoke-RestMethod http://127.0.0.1:16433/healthz
 ```
 
-### Redis
+## Redis
 
 ```powershell
 python -c "import redis; r = redis.Redis(host='localhost', port=6380, db=0); print('Redis Live:', r.ping())"
@@ -531,7 +432,7 @@ python -c "import redis; r = redis.Redis(host='localhost', port=6380, db=0); pri
 
 ---
 
-# 8. Prepare the Knowledge Base (Idempotent Setup)
+# Prepare the Knowledge Base
 
 PDF location:
 
@@ -606,11 +507,9 @@ green           101
 
 ---
 
-# 9. Run Evaluation Scenarios
+# Run Evaluation Scenarios
 
----
-
-## 9.1 Run Scenario A
+## Scenario A
 
 ```powershell
 python -m cli.run_scenario_a --questions-per-section 5
@@ -625,7 +524,7 @@ outputs/scenario_a/kb_snapshot_scenario_a.json
 
 ---
 
-## 9.2 Run Scenario B
+## Scenario B
 
 ```powershell
 python -m cli.run_scenario_b --questions-per-section 5
@@ -646,7 +545,7 @@ outputs/scenario_b_iter3/kb_snapshot_iter3.json
 
 ---
 
-## 9.3 Run Full Evaluation
+## Full Evaluation
 
 ```powershell
 python -m cli.run_evaluation --questions-per-section 5
@@ -654,30 +553,7 @@ python -m cli.run_evaluation --questions-per-section 5
 
 ---
 
-# 10. Verify Output Counts
-
-```powershell
-(Get-Content outputs\scenario_a\questions_scenario_a.json | ConvertFrom-Json).questions.Count
-
-(Get-Content outputs\scenario_b_iter1\questions_iter1.json | ConvertFrom-Json).questions.Count
-
-(Get-Content outputs\scenario_b_iter2\questions_iter2.json | ConvertFrom-Json).questions.Count
-
-(Get-Content outputs\scenario_b_iter3\questions_iter3.json | ConvertFrom-Json).questions.Count
-```
-
-Expected:
-
-```text
-10
-10
-15
-5
-```
-
----
-
-# 11. Run Tests
+# Run Tests
 
 ```powershell
 python -m pytest tests
@@ -691,43 +567,55 @@ Expected:
 
 ---
 
-# 12. Run Async Workers & Backend Server
+# Run Workers, Backend & Frontend
 
-Open two terminals.
+Open three separate terminals with the virtual environment activated.
 
 ---
 
-## 12.1 Run Celery Worker
+## Run Celery Worker
 
 ```powershell
 $env:PYTHONPATH="."
 
-celery -A app.core.celery_app.celery_app worker --loglevel=info -P solo
+python -m celery -A app.core.celery_app.celery_app worker --loglevel=info -P threads
 ```
 
 ---
 
-## 12.2 Run FastAPI Server
+## Run FastAPI Server
 
 ```powershell
 $env:PYTHONPATH="."
 
-python -m uvicorn app.main:app --host 127.0.0.1 --port 18000
+python -m uvicorn app.main:app --host 127.0.0.1 --port 8090
 ```
 
 Swagger UI:
 
 ```text
-http://127.0.0.1:18000/docs
+http://127.0.0.1:8090/docs
 ```
 
 ---
 
-# 13. API Usage & Real-Time DB Verification
+## Run Streamlit Frontend
+
+```powershell
+streamlit run app_ui.py
+```
+
+Frontend URL:
+
+```text
+http://localhost:8501
+```
 
 ---
 
-## 13.1 Health Check
+# API Usage
+
+## Health Check
 
 ```http
 GET /health
@@ -735,7 +623,7 @@ GET /health
 
 ---
 
-## 13.2 List Latest Document Sections
+## List Latest Document Sections
 
 ```http
 GET /documents/latest/sections
@@ -743,7 +631,7 @@ GET /documents/latest/sections
 
 ---
 
-## 13.3 Start a Prep Session
+## Start a Prep Session
 
 ```powershell
 Invoke-RestMethod -Uri http://127.0.0.1:18000/prep/start `
@@ -755,10 +643,7 @@ Invoke-RestMethod -Uri http://127.0.0.1:18000/prep/start `
 }'
 ```
 
-
----
-
-## Response Example
+### Response Example
 
 ```json
 {
@@ -770,7 +655,7 @@ Invoke-RestMethod -Uri http://127.0.0.1:18000/prep/start `
 
 ---
 
-## 13.4 Track Worker Task Status
+## Track Worker Task Status
 
 ```powershell
 Invoke-RestMethod -Uri http://127.0.0.1:18000/prep/task/Your-Task-ID
@@ -778,16 +663,7 @@ Invoke-RestMethod -Uri http://127.0.0.1:18000/prep/task/Your-Task-ID
 
 ---
 
-## 13.5 PostgreSQL Session Verification
-
-```powershell
-docker exec -it adaptive_doc_postgres psql -U postgres -d adaptive_doc_prep `
--c "SELECT id, mode, score, total_questions, selected_section_numbers FROM prep_sessions ORDER BY created_at DESC LIMIT 1;"
-```
-
----
-
-## 13.6 Submit Batch Answers
+## Submit Batch Answers
 
 ```powershell
 Invoke-RestMethod -Uri http://127.0.0.1:18000/prep/submit `
@@ -804,33 +680,7 @@ Invoke-RestMethod -Uri http://127.0.0.1:18000/prep/submit `
 
 ---
 
-## 13.7 Verify Final Database State
-
-### Verify Session Updates
-
-```powershell
-docker exec -it adaptive_doc_postgres psql -U postgres -d adaptive_doc_prep `
--c "SELECT id, score, correct_count, wrong_count FROM prep_sessions ORDER BY created_at DESC LIMIT 1;"
-```
-
-### Audit Question Schema
-
-```powershell
-docker exec -it adaptive_doc_postgres psql -U postgres -d adaptive_doc_prep `
--c "SELECT section_number, topic, difficulty, question_text, correct_answer FROM generated_questions LIMIT 2;"
-```
-
----
-
-## 13.8 Retrieve KB Snapshot
-
-```http
-GET /kb/snapshot
-```
-
----
-
-# 14. PDF Section Mapping
+# PDF Section Mapping
 
 | Section | Title | Pages |
 |---|---|---|
@@ -847,61 +697,18 @@ GET /kb/snapshot
 
 ---
 
-# 15. Architecture Summary
+# Architecture Summary
 
 ```text
 PostgreSQL = Historical state, scoring, weak-topic tracking
 Qdrant     = Section-filtered semantic retrieval
 LangGraph  = Adaptive orchestration workflow
+Streamlit  = Interactive presentation layer
 ```
 
 ---
 
-## Ingestion Architecture
-
-```text
-SLATEFALL_DOSSIER.pdf
-        │
-        ▼
-PyMuPDF Page Extractor
-        │
-        ▼
-Section Splitter
-        │
-        ├──► PostgreSQL Storage
-        │
-        └──► SentenceTransformers
-                     │
-                     ▼
-               Qdrant Vector Store
-```
-
----
-
-## Prep-Time Architecture
-
-```text
-Target Selection
-        │
-        ▼
-History Lookup
-        │
-        ▼
-Qdrant Retrieval
-        │
-        ▼
-LLM MCQ Generation
-        │
-        ▼
-Pydantic Validation
-        │
-        ▼
-Scoring + Persistence
-```
-
----
-
-# 16. LangGraph Workflow
+# LangGraph Workflow
 
 ```text
 load_document_and_history
@@ -921,19 +728,7 @@ persist_session
 
 ---
 
-# 17. Knowledge Base Design
-
-Relational modeling enables:
-
-- Weak-topic aggregation
-- Historical session tracking
-- Adaptive analytics
-- Snapshot exports
-- Reviewer-auditable persistence
-
----
-
-# 18. Adaptation Strategy
+# Adaptation Strategy
 
 ## Cold Start
 
@@ -941,58 +736,31 @@ Relational modeling enables:
 No prior history exists for selected sections.
 ```
 
----
-
 ## Adaptive
 
 ```text
 Previous mistakes and weak topics influence future question generation.
 ```
 
-The backend explicitly owns adaptation metadata generation rather than delegating trust to LLM outputs.
+The backend explicitly owns adaptation metadata generation instead of delegating trust entirely to LLM responses.
 
 ---
 
-# 19. LLM and Model Choice
-
-## Primary Engine
-
-```text
-Groq Cloud Hosted API
-```
-
-Benefits:
-
-- Fast inference
-- Strong JSON adherence
-- Lightweight deployment requirements
-
----
-
-## Mock Framework
-
-Used for:
-
-- Offline testing
-- Unit testing
-- CI-safe execution
-
----
-
-# 20. MCQ Validation
+# MCQ Validation
 
 Validation guarantees:
 
 - Exactly 4 answer choices
 - Strict A/B/C/D schema
-- Section-boundary enforcement
 - Retry-on-invalid-generation behavior
+- Section-boundary enforcement
+- Structured response normalization
 
 ---
 
-# 21. Encoding Cleanup
+# Encoding Cleanup
 
-The project uses `ftfy` normalization to repair mojibake artifacts.
+The project uses `ftfy` normalization to repair mojibake artifacts introduced during PDF extraction.
 
 Example:
 
@@ -1008,79 +776,7 @@ Cuartel Valparaíso
 
 ---
 
-# 22. Project Speciality
-
-Main engineering contribution:
-
-```text
-failure in earlier sessions
-            ↓
-weak-topic persistence
-            ↓
-adaptive prompt steering
-            ↓
-targeted follow-up evaluation
-```
-
----
-
-# 23. Known Limitations
-
-## LLM Non-Determinism
-
-Minor variance may occur across environments.
-
-Mitigated using:
-
-```text
-Low temperature configuration
-Strict schema validation
-Retry enforcement
-```
-
----
-
-## Cold Starts
-
-Initial model loads may delay first-run execution slightly.
-
----
-
-# 24. Output Commit Strategy
-
-The `outputs/` directory stores reviewer-ready execution artifacts for rapid evaluation.
-
----
-
-# 25. Suggested Project Verification Flow
-
-```powershell
-# Start Services
-docker compose up -d
-
-# Reset & Rebuild State
-python -m cli.reset_db reset
-python -m cli.ingest_pdf
-python -m cli.index_qdrant
-
-# Run Tests
-python -m pytest tests
-
-# Execute Full Evaluation
-python -m cli.run_evaluation --questions-per-section 5
-
-# Start Worker
-$env:PYTHONPATH="."
-celery -A app.core.celery_app.celery_app worker --loglevel=info -P solo
-
-# Start API (Separate Terminal)
-$env:PYTHONPATH="."
-python -m uvicorn app.main:app --host 127.0.0.1 --port 18000
-```
-
----
-
-# 26. Project Structure
+# Project Structure
 
 ```text
 app/
@@ -1099,11 +795,12 @@ cli/               CLI execution scripts
 docs/              Architecture and strategy docs
 outputs/           Scenario outputs and KB snapshots
 tests/             Automated tests
+app_ui.py          Streamlit frontend interface
 ```
 
 ---
 
-# 27. Useful Commands
+# Useful Commands
 
 ## Service Boot
 
@@ -1111,79 +808,69 @@ tests/             Automated tests
 docker compose up -d
 ```
 
----
-
-## Database Purge
+## Reset Database
 
 ```powershell
 python -m cli.reset_db reset
 ```
 
----
-
-## Pipeline Processing
+## PDF Processing
 
 ```powershell
 python -m cli.ingest_pdf
 
 python -m cli.index_qdrant
+```
 
+## Full Evaluation
+
+```powershell
 python -m cli.run_evaluation --questions-per-section 5
 ```
 
----
-
-## Workers & API
+## Start Workers & API
 
 ```powershell
 $env:PYTHONPATH="."
 
-celery -A app.core.celery_app.celery_app worker --loglevel=info -P solo
+python -m celery -A app.core.celery_app.celery_app worker --loglevel=info -P threads
 
-$env:PYTHONPATH="."
+python -m uvicorn app.main:app --host 127.0.0.1 --port 8090
 
-python -m uvicorn app.main:app --host 127.0.0.1 --port 18000
+streamlit run app_ui.py
 ```
 
 ---
 
-# 28. Development Note
+# Development Note
 
 This project was independently implemented and validated by the project author.
 
 AI tools were used as supplementary assistants for:
 
-- Brainstorming
-- Debugging support
-- Documentation refinement
-- Reviewing implementation decisions
+- brainstorming
+- debugging support
+- documentation refinement
+- reviewing implementation decisions
 
-All final architecture, implementation, testing, validation, and maintenance decisions were reviewed and owned by the project author.
-
----
-
-## AI Tools Used
-
-- ChatGPT
-- Google Gemini
+All final architecture, implementation logic, testing, validation, and maintenance decisions were reviewed and owned by the project author.
 
 ---
 
-# 29. Final Project Pitch
+# Final Project Pitch
 
-This project demonstrates a production-style adaptive RAG backend that:
+This project demonstrates a production-style adaptive RAG backend capable of:
 
-- Ingests structured PDFs
-- Stores semantic embeddings in Qdrant
-- Maintains learning history in PostgreSQL
-- Generates MCQs using LLMs
-- Validates structured outputs
-- Scores answer submissions
-- Tracks weak topics
-- Adapts future question generation
-- Exports reviewer-ready Scenario outputs
+- ingesting structured PDFs
+- indexing semantic embeddings in Qdrant
+- maintaining historical learning state in PostgreSQL
+- generating MCQs using LLM pipelines
+- validating structured outputs
+- tracking weak-topic evolution
+- adapting future evaluation sessions
+- exporting reviewer-ready execution artifacts
 
-The system demonstrates deterministic adaptive preparation behavior across repeated study sessions while maintaining strict retrieval boundaries, persistence guarantees, and audit-ready evaluation outputs.
+The system demonstrates deterministic adaptive preparation behavior across repeated study sessions while maintaining strict retrieval boundaries, persistence guarantees, and auditable evaluation outputs.
 
 ---
 

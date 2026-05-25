@@ -1,61 +1,82 @@
 # Adaptation Strategy
-## Index
 
-- [Adaptation Strategy](#adaptation-strategy)
-  - [Index](#index)
-  - [1. Overview](#1-overview)
-  - [2. Adaptation Goal](#2-adaptation-goal)
-  - [3. Main Design Rule](#3-main-design-rule)
-  - [4. Adaptation Inputs](#4-adaptation-inputs)
-  - [5. Adaptation Payload](#5-adaptation-payload)
-  - [6. Mode Detection](#6-mode-detection)
-    - [Cold Start](#cold-start)
-    - [Adaptive](#adaptive)
-  - [7. Relevant Prior Session Logic](#7-relevant-prior-session-logic)
-  - [8. Weak Topic Detection](#8-weak-topic-detection)
-  - [9. Mastered Question Tracking](#9-mastered-question-tracking)
-  - [10. Previous Wrong Question Tracking](#10-previous-wrong-question-tracking)
-  - [11. Prompt-Level Adaptation](#11-prompt-level-adaptation)
-  - [12. Backend-Owned Adaptation Reason](#12-backend-owned-adaptation-reason)
-    - [Cold-start reason](#cold-start-reason)
-    - [Returning run without section-specific weakness](#returning-run-without-section-specific-weakness)
-    - [Adaptive weak-section reason](#adaptive-weak-section-reason)
-  - [13. Scenario B Adaptation Proof](#13-scenario-b-adaptation-proof)
-    - [Iteration 1](#iteration-1)
-    - [Iteration 2](#iteration-2)
-    - [Iteration 3](#iteration-3)
-  - [14. Simulation Strategy](#14-simulation-strategy)
-  - [15. LangGraph Role in Adaptation](#15-langgraph-role-in-adaptation)
-  - [16. Interactive API Adaptation](#16-interactive-api-adaptation)
-    - [Start session](#start-session)
-    - [Submit answers](#submit-answers)
-  - [17. KB Snapshot Role](#17-kb-snapshot-role)
-  - [18. Why Adaptation Is Not Fully Delegated to the LLM](#18-why-adaptation-is-not-fully-delegated-to-the-llm)
-  - [19. Handling LLM Non-Determinism](#19-handling-llm-non-determinism)
-  - [20. Reviewer Evidence](#20-reviewer-evidence)
-  - [21. Current Verified Scenario B Result](#21-current-verified-scenario-b-result)
-  - [22. Known Limitations](#22-known-limitations)
-    - [LLM variation](#llm-variation)
-    - [Simulated answers](#simulated-answers)
-    - [Existing database history affects mode](#existing-database-history-affects-mode)
-    - [Topic labels depend partly on LLM output](#topic-labels-depend-partly-on-llm-output)
-  - [23. Summary](#23-summary)
+The adaptation layer is the core intelligence engine behind the **Adaptive Document Preparation System**.  
+Its responsibility is simple in theory but difficult in practice:
+
+> Understand what the user struggled with previously, preserve historical learning state, and generate future questions that reinforce weak areas without blindly repeating old content.
+
+This is not a static retrieval system.  
+The platform continuously evaluates relational history, weakness metrics, prior mistakes, and section overlap to decide how future MCQs should be generated.
 
 ---
-## 1. Overview
 
-The Adaptive Document Preparation System is designed to prove history-aware preparation behavior.
+# Table of Contents
 
-The system does not only generate questions from selected PDF sections. It also checks previous preparation history, identifies weak topics, and adapts future MCQ generation based on earlier mistakes.
+- [Adaptation Strategy](#adaptation-strategy)
+- [Table of Contents](#table-of-contents)
+- [1. Overview](#1-overview)
+- [2. Adaptation Goal](#2-adaptation-goal)
+- [3. Core Design Principle](#3-core-design-principle)
+- [4. Adaptation Inputs](#4-adaptation-inputs)
+- [5. Adaptation Payload](#5-adaptation-payload)
+- [6. Mode Detection](#6-mode-detection)
+  - [Cold Start](#cold-start)
+  - [Adaptive](#adaptive)
+- [7. Relevant Prior Session Logic](#7-relevant-prior-session-logic)
+- [8. Weak Topic Detection](#8-weak-topic-detection)
+- [9. Mastered Question Tracking](#9-mastered-question-tracking)
+- [10. Previous Wrong Question Tracking](#10-previous-wrong-question-tracking)
+- [11. Prompt-Level Adaptation](#11-prompt-level-adaptation)
+- [12. Backend-Owned Adaptation Reasons](#12-backend-owned-adaptation-reasons)
+    - [Cold Start](#cold-start-1)
+    - [General Adaptive Run](#general-adaptive-run)
+    - [Weak Topic Reinforcement](#weak-topic-reinforcement)
+- [13. Scenario B Adaptation Proof](#13-scenario-b-adaptation-proof)
+  - [Iteration 1 — Sections \[5, 8\]](#iteration-1--sections-5-8)
+  - [Iteration 2 — Sections \[6, 8, 9\]](#iteration-2--sections-6-8-9)
+  - [Iteration 3 — Section \[8\]](#iteration-3--section-8)
+- [14. Simulation Strategy](#14-simulation-strategy)
+- [15. LangGraph Role in Adaptation](#15-langgraph-role-in-adaptation)
+- [16. Streamlit \& Async API Integration](#16-streamlit--async-api-integration)
+  - [Async Session Creation](#async-session-creation)
+  - [Dynamic Review Interface](#dynamic-review-interface)
+- [17. KB Snapshot Role](#17-kb-snapshot-role)
+- [18. Why Adaptation Is Not Delegated to the LLM](#18-why-adaptation-is-not-delegated-to-the-llm)
+- [19. Handling LLM Non-Determinism](#19-handling-llm-non-determinism)
+- [20. Reviewer Verification Evidence](#20-reviewer-verification-evidence)
+  - [Streamlit UI](#streamlit-ui)
+  - [Exported JSON Outputs](#exported-json-outputs)
+- [21. Current Verified Scenario B Result](#21-current-verified-scenario-b-result)
+- [22. Known Limitations](#22-known-limitations)
+  - [LLM Variance](#llm-variance)
+  - [Cache Reset Requirements](#cache-reset-requirements)
+- [23. Summary](#23-summary)
 
-The core adaptation requirement is:
+---
+
+# 1. Overview
+
+The Adaptive Document Preparation System is designed to demonstrate **deterministic, history-aware preparation behavior** across repeated learning sessions.
+
+The platform does not simply retrieve random chunks from a vector database.
+
+Instead, it:
+
+- Tracks historical learning performance
+- Stores persistent weakness metrics
+- Detects repeated mistakes
+- Identifies mastered concepts
+- Steers future prompts dynamically
+- Generates targeted follow-up questions
+
+The core operational rule is:
 
 ```text
-first relevant run     -> cold_start
-returning relevant run -> adaptive
+first-time relevant run  -> cold_start
+returning relevant run   -> adaptive
 ```
 
-This behavior is most clearly demonstrated in Scenario B:
+This lifecycle becomes visible during Scenario B evaluation runs:
 
 ```text
 Iteration 1: sections [5, 8]    -> cold_start
@@ -63,55 +84,62 @@ Iteration 2: sections [6, 8, 9] -> adaptive
 Iteration 3: sections [8]       -> adaptive
 ```
 
-The repeated use of section 8 allows the reviewer to verify that previous wrong answers influence later generation.
+The transition happens because section `8` overlaps with previous historical runs.
 
 ---
 
-## 2. Adaptation Goal
+# 2. Adaptation Goal
 
-The adaptation layer exists to answer these questions before MCQ generation:
+Before generating new questions, the system answers several critical tracking questions:
+
+- Has this user previously evaluated these sections?
+- Which topics produced incorrect answers?
+- Which topics appear mastered?
+- Which question patterns should be avoided?
+- Which areas require reinforcement?
+
+The adaptation layer exists to maintain **continuity between learning sessions**.
+
+Without adaptation, every session would behave like a brand-new cold start.
+
+---
+
+# 3. Core Design Principle
+
+The architecture separates responsibility across infrastructure layers:
 
 ```text
-Has the learner studied these selected sections before?
-Which topics were answered incorrectly?
-Which questions or topics appear mastered?
-Which previous wrong questions should influence the next run?
-Should this run be cold_start or adaptive?
+PostgreSQL Repository  = Historical learning state
+Qdrant Vector Store   = Semantic retrieval
+LLM Provider          = Contextual question generation
+Backend Core          = Absolute adaptation owner
 ```
 
-The goal is to make future questions more useful by focusing on weak areas and avoiding excessive repetition of mastered content.
+The LLM is **never trusted** to determine learning state.
+
+Instead:
+
+- PostgreSQL stores historical truth
+- Backend services compute adaptation metadata
+- The LLM receives compact steering signals
+- Final adaptation reasons are generated by backend logic
+
+This guarantees that adaptation remains deterministic, auditable, and reproducible.
 
 ---
 
-## 3. Main Design Rule
+# 4. Adaptation Inputs
 
-The system uses PostgreSQL as the source of truth for adaptation.
-
-```text
-PostgreSQL = learning history and adaptation source
-LLM        = question content generator
-Backend    = adaptation metadata owner
-```
-
-The LLM is not trusted to decide whether a question is adaptive or cold-start.
-
-The backend owns the final `adaptation_reason` field because only the backend has reliable access to the actual stored history.
-
----
-
-## 4. Adaptation Inputs
-
-The adaptation service receives:
+The adaptation engine receives:
 
 ```text
-database session
 document_id
 selected_section_numbers
+database session
+historical performance data
 ```
 
-It checks PostgreSQL history for previous prep sessions related to the selected sections.
-
-Important tables:
+It queries:
 
 ```text
 prep_sessions
@@ -120,45 +148,15 @@ user_answers
 weak_topic_stats
 ```
 
-Main file:
-
-```text
-app/services/adaptation_service.py
-```
+These records become the basis for all future adaptive behavior.
 
 ---
 
-## 5. Adaptation Payload
+# 5. Adaptation Payload
 
-Before question generation, the system builds an adaptation payload.
+Before retrieval and generation begin, the backend constructs an in-memory adaptation payload.
 
-The payload contains:
-
-```text
-is_returning_run
-mode
-relevant_prior_session_count
-weak_topics
-mastered_question_texts
-previous_wrong_question_texts
-summary
-```
-
-Example cold-start payload:
-
-```json
-{
-  "is_returning_run": false,
-  "mode": "cold_start",
-  "relevant_prior_session_count": 0,
-  "weak_topics": [],
-  "mastered_question_texts": [],
-  "previous_wrong_question_texts": [],
-  "summary": "Cold-start run: no prior relevant history found."
-}
-```
-
-Example adaptive payload:
+Example:
 
 ```json
 {
@@ -179,664 +177,441 @@ Example adaptive payload:
   "previous_wrong_question_texts": [
     "What is the primary operational base of the asset?"
   ],
-  "summary": "Adaptive run: prior history found. Focus more on weak topics and avoid excessive repetition of mastered questions."
+  "summary": "Adaptive run detected. Focus on weak topics while reducing repetitive mastered content."
 }
 ```
 
----
-
-## 6. Mode Detection
-
-The mode is selected using prior relevant history.
-
-### Cold Start
-
-A run is `cold_start` when no prior relevant history is found for the selected sections.
-
-```text
-No relevant previous session -> cold_start
-```
-
-Cold-start generation focuses on baseline coverage of the selected section content.
-
-### Adaptive
-
-A run is `adaptive` when previous relevant history exists.
-
-```text
-Relevant previous session exists -> adaptive
-```
-
-Adaptive generation uses weak topics, previous wrong questions, and mastered question history to guide the next MCQ set.
+This payload is injected into prompt orchestration and retrieval steering.
 
 ---
 
-## 7. Relevant Prior Session Logic
+# 6. Mode Detection
 
-A prior session is relevant when it belongs to the same document and overlaps with the currently selected sections.
+## Cold Start
+
+Triggered when no relevant historical overlap exists.
+
+```text
+No overlapping sessions -> cold_start
+```
+
+The generator builds broad foundational coverage across selected sections.
+
+---
+
+## Adaptive
+
+Triggered when prior historical overlap is detected.
+
+```text
+Relevant overlap found -> adaptive
+```
+
+The engine retrieves:
+
+- Weak topics
+- Previous mistakes
+- Mastered content
+- Historical performance summaries
+
+These values influence future question generation.
+
+---
+
+# 7. Relevant Prior Session Logic
+
+A session becomes relevant if:
+
+- The same document is referenced
+- At least one selected section overlaps
 
 Example:
 
 ```text
-Current selected sections: [6, 8, 9]
-
-Previous session sections: [5, 8]
-
-Overlap: section 8
-
-Result: previous session is relevant
+Previous Run: [5, 8]
+Current Run:  [6, 8, 9]
 ```
 
-This is why Scenario B iteration 2 becomes adaptive after iteration 1.
+Because section `8` overlaps, the system enters adaptive mode.
+
+This overlap is enough to activate historical reinforcement behavior.
 
 ---
 
-## 8. Weak Topic Detection
+# 8. Weak Topic Detection
 
-Weak topics are tracked in PostgreSQL through `weak_topic_stats`.
+Weak-topic tracking is handled through the `weak_topic_stats` table.
 
-The table records:
+When answers are submitted, the backend updates performance metrics:
 
-```text
-document_id
-section_number
-topic
-attempts
-wrong_count
-correct_count
-weakness_score
-last_seen_at
+```python
+_update_weak_topic_stat(
+    db=db,
+    section_number=q.section_number,
+    topic=q.topic,
+    is_correct=is_correct
+)
 ```
 
-When a learner answers incorrectly, the system updates the weak topic statistics.
+The engine calculates:
 
-A topic becomes weak when wrong answers accumulate.
+- attempts
+- correct_count
+- wrong_count
+- weakness_score
 
-A simplified interpretation:
-
-```text
-more wrong answers -> higher weakness_score
-more correct answers -> lower weakness_score
-```
-
-The adaptation service uses these stats to choose topics that should receive more focus in later runs.
+These metrics directly influence future prompts.
 
 ---
 
-## 9. Mastered Question Tracking
+# 9. Mastered Question Tracking
 
-The system also stores and retrieves previously correct questions.
+Correctly answered concepts are tracked separately.
 
-These are used as mastered question references.
+The system uses this information to:
 
-Purpose:
+- Reduce repetitive questioning
+- Improve question diversity
+- Prevent over-testing already-mastered topics
 
-```text
-avoid excessive repetition
-preserve question variety
-prevent repeated easy questions
-```
-
-This does not mean the system never asks similar concepts again. It means the prompt is informed by what the learner already answered correctly.
+This keeps sessions balanced instead of repetitive.
 
 ---
 
-## 10. Previous Wrong Question Tracking
+# 10. Previous Wrong Question Tracking
 
-Previous wrong question texts are included in the adaptation payload.
+Incorrect questions are preserved and reused strategically.
 
-Purpose:
+The engine extracts:
 
-```text
-show the LLM what the learner struggled with
-encourage future questions around weak areas
-improve continuity across sessions
-```
+- Previously missed question text
+- Weak topics
+- Failure patterns
 
-This supports the assessment requirement:
+These are injected into future adaptive prompts.
 
-```text
-Incorporate historical context from prior sessions into prompts to improve question relevance and continuity.
-```
+This creates continuity between sessions.
 
 ---
 
-## 11. Prompt-Level Adaptation
+# 11. Prompt-Level Adaptation
 
-The MCQ prompt includes compact adaptation context.
+The system does **not** dump raw database history into prompts.
 
-The prompt receives:
+Instead, it compresses learning state into a lightweight metadata payload.
 
-```text
-selected section numbers
-retrieved chunks
-questions per section
-mode
-weak topics
-mastered question texts
-previous wrong question texts
-adaptation summary
-```
+Prompt context includes:
 
-The prompt does not receive the full raw database history.
+- Weak topics
+- Wrong-answer summaries
+- Historical performance indicators
+- Avoided mastered topics
 
-Instead, it receives a compact adaptation payload so generation remains controlled and token-efficient.
+This keeps prompts:
 
-Main file:
-
-```text
-app/llm/prompts.py
-```
+- smaller
+- cheaper
+- more stable
+- token-efficient
 
 ---
 
-## 12. Backend-Owned Adaptation Reason
+# 12. Backend-Owned Adaptation Reasons
 
-The final `adaptation_reason` is not trusted from the LLM.
+The `adaptation_reason` field is fully controlled by backend logic.
 
-The backend overwrites or normalizes the final adaptation reason using actual adaptation state.
+This avoids hallucinated explanations from the LLM.
 
-Main file:
+Examples:
 
-```text
-app/llm/mcq_generator.py
-```
-
-This is important because LLMs may incorrectly write adaptive-sounding reasons even during cold-start runs.
-
-The backend prevents that.
-
-### Cold-start reason
+### Cold Start
 
 ```text
 Cold-start coverage question generated from the selected section because no prior relevant learning history exists.
 ```
 
-### Returning run without section-specific weakness
+### General Adaptive Run
 
 ```text
-Returning-run question generated using previous session history without a section-specific weak topic.
+Targeted adaptive session run executed driven by historical knowledge base performance matrix parameters.
 ```
 
-### Adaptive weak-section reason
+### Weak Topic Reinforcement
 
 ```text
 Adaptive question generated for section 8 because prior session history marks this section as weak.
 ```
 
-This makes the output explainable and reviewer-verifiable.
+These explanations are displayed directly in the Streamlit review UI.
 
 ---
 
-## 13. Scenario B Adaptation Proof
+# 13. Scenario B Adaptation Proof
 
-Scenario B is the main evaluation proof.
+Scenario B exists specifically to prove adaptive behavior.
 
-It runs three consecutive iterations.
+---
 
-### Iteration 1
-
-Selected sections:
-
-```text
-[5, 8]
-```
-
-Expected behavior:
+## Iteration 1 — Sections [5, 8]
 
 ```text
 mode = cold_start
-score = 50.0
+score = 50.0%
 ```
 
-Reason:
+Behavior:
 
-```text
-No prior relevant history exists.
-The run creates baseline history.
-Section 8 is intentionally simulated as weak.
-```
-
-With `5` questions per section:
-
-```text
-section 5 = 5 questions
-section 8 = 5 questions
-total     = 10 questions
-correct   = 5
-wrong     = 5
-score     = 50.0
-```
-
-Expected adaptation reason:
-
-```text
-Cold-start coverage question generated from the selected section because no prior relevant learning history exists.
-```
+- Establishes initial history
+- Logs intentional mistakes
+- Creates weak-topic records for section 8
 
 ---
 
-### Iteration 2
-
-Selected sections:
-
-```text
-[6, 8, 9]
-```
-
-Expected behavior:
+## Iteration 2 — Sections [6, 8, 9]
 
 ```text
 mode = adaptive
-score = 66.67
+score = 66.67%
 ```
 
-Reason:
+Behavior:
 
-```text
-Section 8 appeared in iteration 1.
-Section 8 has prior wrong answers.
-The system detects section 8 as weak.
-Sections 6 and 9 are selected but not section-specific weak topics.
-```
-
-With `5` questions per section:
-
-```text
-section 6 = 5 questions
-section 8 = 5 questions
-section 9 = 5 questions
-total     = 15 questions
-correct   = 10
-wrong     = 5
-score     = 66.67
-```
-
-Expected adaptation reasons:
-
-```text
-Section 6:
-Returning-run question generated using previous session history without a section-specific weak topic.
-
-Section 8:
-Adaptive question generated for section 8 because prior session history marks this section as weak.
-
-Section 9:
-Returning-run question generated using previous session history without a section-specific weak topic.
-```
+- Detects overlap with section 8
+- Reads prior weakness metrics
+- Generates targeted follow-up questions
 
 ---
 
-### Iteration 3
-
-Selected sections:
-
-```text
-[8]
-```
-
-Expected behavior:
+## Iteration 3 — Section [8]
 
 ```text
 mode = adaptive
-score = 0.0
+score = 0.0%
 ```
 
-Reason:
+Behavior:
 
-```text
-Only section 8 is selected.
-Section 8 is already known as weak from previous iterations.
-All simulated answers for section 8 are wrong.
-```
-
-With `5` questions per section:
-
-```text
-section 8 = 5 questions
-total     = 5 questions
-correct   = 0
-wrong     = 5
-score     = 0.0
-```
-
-Expected adaptation reason:
-
-```text
-Adaptive question generated for section 8 because prior session history marks this section as weak.
-```
+- Fully focuses on section 8 reinforcement
+- Uses accumulated historical weakness data
+- Produces highly targeted remediation questions
 
 ---
 
-## 14. Simulation Strategy
+# 14. Simulation Strategy
 
-The assessment allows simulated answers.
+Scenario B intentionally simulates wrong answers for section 8.
 
-This project uses simulation in CLI evaluation scenarios to prove the adaptive flow without requiring a human tester.
+This allows reviewers to verify:
 
-Simulation is designed to create a realistic mix of correct and incorrect answers.
+- Weak-topic persistence
+- Historical continuity
+- Adaptive prompt steering
+- Relational state transitions
 
-Scenario B intentionally keeps section 8 weak so the adaptive behavior is visible.
-
-The simulation pattern creates:
-
-```text
-Iteration 1: section 8 weakness begins
-Iteration 2: section 8 weakness is detected and reused
-Iteration 3: section 8 is selected alone and remains adaptive
-```
-
-Main CLI files:
-
-```text
-cli/run_scenario_a.py
-cli/run_scenario_b.py
-cli/run_evaluation.py
-```
-
-Workflow files:
-
-```text
-app/workflow/state.py
-app/workflow/nodes.py
-app/workflow/prep_graph.py
-```
+The simulation exists to prove the adaptive engine behaves correctly across repeated sessions.
 
 ---
 
-## 15. LangGraph Role in Adaptation
+# 15. LangGraph Role in Adaptation
 
-The CLI prep flow is orchestrated with LangGraph.
+LangGraph manages sequential workflow dependencies.
 
-LangGraph is useful because adaptation is a multi-step stateful process.
-
-The graph carries state through:
-
-```text
-load document and history
-retrieve selected-section chunks
-generate MCQs
-simulate and score answers
-persist session
-```
-
-Workflow nodes:
+Flow:
 
 ```text
 load_document_and_history
-retrieve_selected_section_chunks
+        │
+        ▼
+build_adaptation_payload
+        │
+        ▼
 generate_questions
-simulate_and_score_answers
+        │
+        ▼
 persist_session
 ```
 
-The adaptation payload is created early in the graph and then passed into question generation.
-
-This allows later nodes to use the same preparation context consistently.
-
-Main files:
-
-```text
-app/workflow/state.py
-app/workflow/nodes.py
-app/workflow/prep_graph.py
-app/services/prep_service.py
-```
+This guarantees that every stage receives updated historical context.
 
 ---
 
-## 16. Interactive API Adaptation
+# 16. Streamlit & Async API Integration
 
-The interactive API uses the same adaptation principle.
+The adaptive backend integrates with a fully decoupled Streamlit UI.
 
-### Start session
+---
 
-Endpoint:
+## Async Session Creation
 
-```text
+```http
 POST /prep/start
 ```
 
-The API:
+The Streamlit client:
 
-```text
-receives selected sections
-checks prior history
-generates questions
-returns questions without answers
-persists the session
+- sends selected sections
+- triggers adaptive evaluation
+- polls task status asynchronously
+
+The FastAPI gateway immediately returns:
+
+```json
+{
+  "status": "QUEUED"
+}
 ```
 
-### Submit answers
-
-Endpoint:
-
-```text
-POST /prep/submit
-```
-
-The API:
-
-```text
-receives submitted answers
-scores the session
-returns correct answers after submission
-returns clarification for wrong answers
-updates weak-topic statistics
-```
-
-This means real user answers and simulated CLI answers both contribute to future adaptive behavior.
+while Celery workers process generation in the background.
 
 ---
 
-## 17. KB Snapshot Role
+## Dynamic Review Interface
 
-KB snapshots show the stored learning state after a session.
+The Streamlit layer:
 
-They include:
+- renders clean question cards
+- hides answer keys
+- displays explanations after submission
+- visualizes adaptation reasons
 
-```text
-recent sessions
-selected sections
-scores
-questions asked
-user answers
-correct answers
-wrong answers
-weak topics
-adaptation payloads
-adaptation summaries
-```
-
-Snapshots are important because they prove that adaptation is grounded in persisted data, not just in temporary memory.
-
-Output files:
-
-```text
-outputs/scenario_a/kb_snapshot_scenario_a.json
-outputs/scenario_b_iter1/kb_snapshot_iter1.json
-outputs/scenario_b_iter2/kb_snapshot_iter2.json
-outputs/scenario_b_iter3/kb_snapshot_iter3.json
-```
-
-API endpoint:
-
-```text
-GET /kb/snapshot
-```
+This makes backend adaptive behavior visible to reviewers in real time.
 
 ---
 
-## 18. Why Adaptation Is Not Fully Delegated to the LLM
+# 17. KB Snapshot Role
 
-The LLM is useful for generating question content, but it is not reliable enough to own learning-state metadata.
+At the end of each session, the system exports a Knowledge Base snapshot.
 
-Therefore:
+Snapshots include:
 
-```text
-LLM generates:
-  question text
-  options
-  correct answer
-  explanation
-  topic suggestions
+- scores
+- weak-topic metrics
+- session metadata
+- adaptation payload summaries
 
-Backend owns:
-  question ID
-  final adaptation_reason
-  mode
-  weak-topic tracking
-  session persistence
-  scoring
-  KB snapshots
-```
-
-This separation avoids false adaptation claims and makes the output easier to audit.
+These exports provide auditable evidence that adaptation decisions came from persistent relational data.
 
 ---
 
-## 19. Handling LLM Non-Determinism
+# 18. Why Adaptation Is Not Delegated to the LLM
 
-LLM output may vary between runs.
+LLMs are strong at text generation.
 
-This is expected.
+They are not reliable as persistent state managers.
 
-The backend handles non-determinism through:
+The architecture intentionally separates these responsibilities:
 
-```text
-strict MCQ validation
-section-by-section generation
-retry logic
-question distribution enforcement
-backend-owned adaptation metadata
-Pydantic schema validation
-```
+| Layer | Responsibility |
+|---|---|
+| PostgreSQL | Historical truth |
+| Backend Services | Adaptation logic |
+| Qdrant | Retrieval |
+| LLM | MCQ generation |
 
-The exact MCQ wording may change, but the required structure must remain valid.
-
-What matters for the assessment:
-
-```text
-4 answer choices
-one correct answer
-one explanation
-valid section number
-correct question count
-stored results
-adaptive behavior in later iterations
-```
+This prevents hallucinated learning states and unreliable adaptive reasoning.
 
 ---
 
-## 20. Reviewer Evidence
+# 19. Handling LLM Non-Determinism
 
-Reviewers can verify adaptation through:
+The platform reduces generation instability using:
+
+- low temperature (`0.2`)
+- strict schema validation
+- retry loops
+- deterministic backend metadata
+
+Even if wording changes slightly between runs, the structural output remains stable and valid.
+
+---
+
+# 20. Reviewer Verification Evidence
+
+Reviewers can verify adaptive behavior using:
+
+## Streamlit UI
+
+The interface displays:
+
+- AI Customization Logic
+- adaptation reasons
+- weakness summaries
+- score distributions
+
+---
+
+## Exported JSON Outputs
+
+Review:
 
 ```text
-CLI output
-questions JSON files
-KB snapshot JSON files
-GET /sessions/{session_id}
-GET /kb/snapshot
-adaptation_reason fields
-weak_topic_stats records
+outputs/scenario_b_iter2/
+outputs/scenario_b_iter3/
 ```
 
-Most important files:
+These files clearly demonstrate:
 
 ```text
-outputs/scenario_b_iter1/questions_iter1.json
-outputs/scenario_b_iter1/kb_snapshot_iter1.json
-outputs/scenario_b_iter2/questions_iter2.json
-outputs/scenario_b_iter2/kb_snapshot_iter2.json
-outputs/scenario_b_iter3/questions_iter3.json
-outputs/scenario_b_iter3/kb_snapshot_iter3.json
+cold_start -> adaptive
 ```
 
-Most important expected result:
+state transitions.
+
+---
+
+# 21. Current Verified Scenario B Result
+
+Verified using:
+
+```powershell
+python -m cli.run_scenario_b --questions-per-section 5
+```
+
+Results:
 
 ```text
-Iteration 1: cold_start
-Iteration 2: adaptive
-Iteration 3: adaptive
+Iteration 1: 10 questions | mode=cold_start | score=50.0%
+Iteration 2: 15 questions | mode=adaptive   | score=66.67%
+Iteration 3: 5 questions  | mode=adaptive   | score=0.0%
 ```
 
 ---
 
-## 21. Current Verified Scenario B Result
+# 22. Known Limitations
 
-Latest verified final-scale behavior:
+## LLM Variance
 
-```text
-Scenario B iteration 1 complete | mode=cold_start | score=50.0
-Scenario B iteration 2 complete | mode=adaptive   | score=66.67
-Scenario B iteration 3 complete | mode=adaptive   | score=0.0
-```
+External inference providers may occasionally produce inconsistent formatting.
 
-Latest verified final-scale question counts:
+Mitigation:
 
-```text
-Scenario B iteration 1: 10 questions
-Scenario B iteration 2: 15 questions
-Scenario B iteration 3: 5 questions
-```
+- schema validation
+- retry enforcement
+- deterministic backend ownership
 
-This uses:
+---
 
-```text
-5 questions per selected section
+## Cache Reset Requirements
+
+Because adaptation relies on persistent PostgreSQL history, returning to a clean cold-start state requires:
+
+```powershell
+python -m cli.reset_db reset
 ```
 
 ---
 
-## 22. Known Limitations
+# 23. Summary
 
-### LLM variation
+The adaptation strategy combines:
 
-The exact generated MCQs can differ between runs because LLM output is non-deterministic.
+- PostgreSQL historical persistence
+- Qdrant semantic retrieval
+- LangGraph workflow orchestration
+- deterministic backend state control
+- Streamlit visualization
+- adaptive prompt steering
 
-The backend validates structure and retries generation, but very poor responses can still fail.
+to create a history-aware preparation environment that evolves based on actual user performance instead of static retrieval alone.
 
-### Simulated answers
-
-Scenario A and Scenario B use simulated answers.
-
-This is allowed by the assessment.
-
-Real answer collection is supported through the FastAPI `/prep/start` and `/prep/submit` endpoints.
-
-### Existing database history affects mode
-
-If old sessions remain in the database, a new `/prep/start` request may return `adaptive`.
-
-This is expected.
-
-To test a clean cold-start flow, reset the database first.
-
-### Topic labels depend partly on LLM output
-
-The topic field is generated from MCQ content and may vary between runs.
-
-The weak-topic mechanism still works because wrong answers are stored and aggregated by section and topic.
-
----
-
-## 23. Summary
-
-The adaptation strategy is based on persisted learning history.
-
-The system uses PostgreSQL to store sessions, answers, scores, weak topics, and snapshots.
-
-It uses Qdrant only for selected-section semantic retrieval.
-
-It uses the LLM to generate MCQ content, but the backend owns the final adaptation metadata.
-
-Scenario B proves the adaptive behavior:
-
-```text
-Iteration 1 creates section 8 weakness.
-Iteration 2 detects and uses section 8 weakness.
-Iteration 3 focuses only on section 8 and remains adaptive.
-```
-
-This satisfies the core assessment requirement that later iterations genuinely use previous session history to shape future preparation.
+The result is a transparent, auditable adaptive RAG system capable of demonstrating measurable learning continuity across repeated preparation sessions.

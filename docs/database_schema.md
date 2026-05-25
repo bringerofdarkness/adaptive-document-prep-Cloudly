@@ -2,95 +2,59 @@
 
 ## Index
 
-- [Database Schema](#database-schema)
-  - [Index](#index)
-  - [1. Overview](#1-overview)
-  - [2. Main Tables](#2-main-tables)
-  - [3. Relationship Summary](#3-relationship-summary)
-  - [4. Table: documents](#4-table-documents)
-    - [Purpose](#purpose)
-    - [Columns](#columns)
-    - [Related tables](#related-tables)
-  - [5. Table: sections](#5-table-sections)
-    - [Purpose](#purpose-1)
-    - [Columns](#columns-1)
-    - [Related tables](#related-tables-1)
-    - [Current section mapping](#current-section-mapping)
-  - [6. Table: chunks](#6-table-chunks)
-    - [Purpose](#purpose-2)
-    - [Columns](#columns-2)
-    - [Qdrant metadata mirror](#qdrant-metadata-mirror)
-    - [Retrieval rule](#retrieval-rule)
-  - [7. Table: prep\_sessions](#7-table-prep_sessions)
-    - [Purpose](#purpose-3)
-    - [Columns](#columns-3)
-    - [Related tables](#related-tables-2)
-    - [Example selected sections](#example-selected-sections)
-  - [8. Table: generated\_questions](#8-table-generated_questions)
-    - [Purpose](#purpose-4)
-    - [Columns](#columns-4)
-    - [Important design decision](#important-design-decision)
-    - [Adaptation reason](#adaptation-reason)
-  - [9. Table: user\_answers](#9-table-user_answers)
-    - [Purpose](#purpose-5)
-    - [Columns](#columns-5)
-    - [Query use](#query-use)
-  - [10. Table: weak\_topic\_stats](#10-table-weak_topic_stats)
-    - [Purpose](#purpose-6)
-    - [Columns](#columns-6)
-    - [Weakness score](#weakness-score)
-  - [11. Table: kb\_snapshots](#11-table-kb_snapshots)
-    - [Purpose](#purpose-7)
-    - [Columns](#columns-7)
-    - [Snapshot contents](#snapshot-contents)
-  - [12. Assessment Query Patterns](#12-assessment-query-patterns)
-    - [12.1 Given a set of section IDs, retrieve prior prep sessions involving those sections](#121-given-a-set-of-section-ids-retrieve-prior-prep-sessions-involving-those-sections)
-    - [12.2 Given a session, retrieve question-level right/wrong results](#122-given-a-session-retrieve-question-level-rightwrong-results)
-    - [12.3 Identify topics/questions answered incorrectly across multiple sessions](#123-identify-topicsquestions-answered-incorrectly-across-multiple-sessions)
-    - [12.4 Retrieve a snapshot of the KB state at the end of a session](#124-retrieve-a-snapshot-of-the-kb-state-at-the-end-of-a-session)
-  - [13. Scenario B Database Behavior](#13-scenario-b-database-behavior)
-    - [Iteration 1](#iteration-1)
-    - [Iteration 2](#iteration-2)
-    - [Iteration 3](#iteration-3)
-  - [14. Why PostgreSQL Instead of Only JSON Files](#14-why-postgresql-instead-of-only-json-files)
-  - [15. Why Qdrant Is Separate from PostgreSQL](#15-why-qdrant-is-separate-from-postgresql)
-  - [16. Files Related to Database](#16-files-related-to-database)
-  - [17. Summary](#17-summary)
----
-
-## 1. Overview
-
-PostgreSQL is the source of truth for the Adaptive Document Preparation System.
-
-The database stores:
-
-```text
-document metadata
-parsed PDF sections
-section chunks
-prep sessions
-generated MCQs
-submitted or simulated answers
-score results
-weak-topic statistics
-KB snapshots
-adaptation metadata
-```
-
-Qdrant is used only for semantic chunk retrieval. It stores embeddings and retrieval metadata, but it does not store the learning history.
-
-The main database design rule is:
-
-```text
-PostgreSQL = truth, history, scoring, adaptation, snapshots
-Qdrant     = semantic retrieval only
-```
+- [1. Overview](#1-overview)
+- [2. Storage Tiers & Main Tables](#2-storage-tiers--main-tables)
+- [3. Relationship Summary](#3-relationship-summary)
+- [4. Table: documents](#4-table-documents)
+- [5. Table: sections](#5-table-sections)
+- [6. Table: chunks](#6-table-chunks)
+- [7. Table: prep_sessions](#7-table-prep_sessions)
+- [8. Table: generated_questions](#8-table-generated_questions)
+- [9. Table: user_answers](#9-table-user_answers)
+- [10. Table: weak_topic_stats](#10-table-weak_topic_stats)
+- [11. Table: kb_snapshots](#11-table-kb_snapshots)
+- [12. Assessment Query Patterns](#12-assessment-query-patterns)
+- [13. Scenario B Database Behavior](#13-scenario-b-database-behavior)
+- [14. Why PostgreSQL Instead of JSON Files](#14-why-postgresql-instead-of-json-files)
+- [15. Enterprise Hybrid Storage Separation](#15-enterprise-hybrid-storage-separation)
+- [16. Files Related to Database](#16-files-related-to-database)
+- [17. Summary](#17-summary)
 
 ---
 
-## 2. Main Tables
+# 1. Overview
 
-The current SQLAlchemy models define these PostgreSQL tables:
+The **Adaptive Document Preparation System** uses a distributed hybrid storage architecture where each infrastructure layer has a clearly isolated responsibility.
+
+At the center of the system is **PostgreSQL**, which acts as the primary relational transactional database and the main source of truth for all adaptive learning states.
+
+The relational layer stores:
+
+- document metadata
+- parsed section boundaries
+- chunk references
+- adaptive prep sessions
+- generated MCQs
+- user submissions
+- weak-topic analytics
+- historical scoring data
+- auditable KB snapshots
+
+The system intentionally separates responsibilities across multiple infrastructure tiers:
+
+```text
+MinIO Storage  = Immutable raw PDF object vault
+PostgreSQL     = Relational history, scoring, analytics, adaptation tracking
+Qdrant Store   = Semantic vector embeddings and retrieval only
+```
+
+This separation keeps the platform scalable, transparent, and reviewer-friendly.
+
+---
+
+# 2. Storage Tiers & Main Tables
+
+The SQLAlchemy ORM layer currently maps the following tables:
 
 ```text
 documents
@@ -103,670 +67,513 @@ weak_topic_stats
 kb_snapshots
 ```
 
-All primary IDs are UUID strings.
+All primary keys use UUID-based string identifiers.
 
 ---
 
-## 3. Relationship Summary
+# 3. Relationship Summary
 
 ```text
+MinIO Object Storage (raw-dossiers)
+            │
+            ▼
+       documents
+            │
+            ▼
+        sections
+            │
+            ▼
+         chunks
+
 documents
-  └── sections
-        └── chunks
+    └── prep_sessions
+            └── generated_questions
+                    └── user_answers
 
-documents
-  └── prep_sessions
-        └── generated_questions
-              └── user_answers
-
-documents
-  └── weak_topic_stats
-
-prep_sessions
-  └── kb_snapshots
+documents ──► weak_topic_stats
+prep_sessions ──► kb_snapshots
 ```
 
-More specifically:
+All major relational dependencies use:
 
 ```text
-documents.id -> sections.document_id
-documents.id -> chunks.document_id
-sections.id  -> chunks.section_id
-
-documents.id      -> prep_sessions.document_id
-prep_sessions.id  -> generated_questions.session_id
-documents.id      -> generated_questions.document_id
-sections.id       -> generated_questions.section_id
-
-prep_sessions.id       -> user_answers.session_id
-generated_questions.id -> user_answers.question_id
-
-documents.id      -> weak_topic_stats.document_id
-prep_sessions.id  -> kb_snapshots.session_id
+ON DELETE CASCADE
 ```
 
-Most relationships use cascade deletion so that deleting a document or session also removes dependent child records.
+This guarantees automatic cleanup of dependent rows whenever root records are removed.
 
 ---
 
-## 4. Table: documents
+# 4. Table: documents
 
-Stores metadata about ingested PDF documents.
+## Purpose
 
-### Purpose
+Tracks top-level document metadata and links relational records with the immutable PDF stored inside MinIO object storage.
 
-This table identifies the source PDF and tracks top-level document metadata.
+---
 
-### Columns
+## Columns
 
 | Column | Type | Required | Purpose |
-|---|---|---:|---|
-| `id` | `String(36)` | Yes | Primary key UUID |
-| `filename` | `String(255)` | Yes | Original PDF filename |
-| `title` | `String(255)` | No | Parsed or assigned document title |
-| `source_path` | `Text` | Yes | Local/source path of the PDF |
-| `total_pages` | `Integer` | Yes | Number of PDF pages |
-| `created_at` | `DateTime` | Yes | Record creation timestamp |
-
-### Related tables
-
-```text
-documents -> sections
-documents -> chunks
-documents -> prep_sessions
-documents -> generated_questions
-documents -> weak_topic_stats
-```
+|---|---|---|---|
+| id | String(36) | Yes | Primary UUID key |
+| filename | String(255) | Yes | Original uploaded filename |
+| title | String(255) | No | Human-readable document title |
+| source_path | Text | Yes | MinIO object key path |
+| total_pages | Integer | Yes | Total PDF page count |
+| created_at | DateTime | Yes | Record creation timestamp |
 
 ---
 
-## 5. Table: sections
+# 5. Table: sections
 
-Stores parsed PDF sections.
+## Purpose
 
-### Purpose
+Represents logical document sections used during retrieval and adaptive generation.
 
-This table maps the structured PDF into section-level study units. Users select sections by `section_number`.
+The retrieval engine directly filters by `section_number`.
 
-### Columns
+---
+
+## Columns
 
 | Column | Type | Required | Purpose |
-|---|---|---:|---|
-| `id` | `String(36)` | Yes | Primary key UUID |
-| `document_id` | `ForeignKey(documents.id)` | Yes | Parent document |
-| `section_number` | `Integer` | Yes | Human-facing section number |
-| `title` | `String(255)` | Yes | Section title |
-| `start_page` | `Integer` | Yes | First page of section |
-| `end_page` | `Integer` | Yes | Last page of section |
-| `text` | `Text` | Yes | Full section text |
-| `created_at` | `DateTime` | Yes | Record creation timestamp |
-
-### Related tables
-
-```text
-sections -> chunks
-sections -> generated_questions
-```
-
-### Current section mapping
-
-| Section | Title | Pages |
-|---:|---|---:|
-| 1 | Identity, Background, and Public Status | 1-4 |
-| 2 | Powers, Abilities, and Documented Limits | 4-11 |
-| 3 | Origin and Key Historical Events | 11-15 |
-| 4 | Equipment, Gear, and Specialized Technology | 15-22 |
-| 5 | Operational Tactics and Combat Doctrine | 22-25 |
-| 6 | Allies, Networks, and Known Affiliations | 25-30 |
-| 7 | Adversaries and Documented Threats | 30-36 |
-| 8 | Known Bases, Safehouses, and Operational Territory | 36-39 |
-| 9 | Case Files: Documented Engagements and Incidents | 39-43 |
-| 10 | Glossary, Codenames, and Reference Tables | 43-50 |
+|---|---|---|---|
+| id | String(36) | Yes | Primary UUID key |
+| document_id | ForeignKey(documents.id) | Yes | Parent document reference |
+| section_number | Integer | Yes | Human-facing section identifier |
+| title | String(255) | Yes | Parsed section title |
+| start_page | Integer | Yes | Section starting page |
+| end_page | Integer | Yes | Section ending page |
+| text | Text | Yes | Full extracted section text |
+| created_at | DateTime | Yes | Record timestamp |
 
 ---
 
-## 6. Table: chunks
+# 6. Table: chunks
 
-Stores smaller text chunks created from parsed sections.
+## Purpose
 
-### Purpose
+Stores relational tracking metadata corresponding to Qdrant vector payloads.
 
-Chunks are the bridge between PostgreSQL and Qdrant.
+Each chunk acts as a bridge between:
 
-PostgreSQL stores the full chunk text and metadata. Qdrant stores the vector embedding for the same chunk.
+- PostgreSQL metadata
+- Qdrant embeddings
+- retrieval audit trails
 
-### Columns
+---
+
+## Columns
 
 | Column | Type | Required | Purpose |
-|---|---|---:|---|
-| `id` | `String(36)` | Yes | Primary key UUID |
-| `document_id` | `ForeignKey(documents.id)` | Yes | Parent document |
-| `section_id` | `ForeignKey(sections.id)` | Yes | Parent section |
-| `section_number` | `Integer` | Yes | Section number for retrieval filtering |
-| `chunk_index` | `Integer` | Yes | Chunk order within section |
-| `page_number` | `Integer` | No | Source page number if available |
-| `text` | `Text` | Yes | Full chunk text |
-| `text_preview` | `Text` | Yes | Short preview for retrieval metadata |
-| `qdrant_point_id` | `String(64)` | No | Matching Qdrant point ID |
-| `created_at` | `DateTime` | Yes | Record creation timestamp |
-
-### Qdrant metadata mirror
-
-Each chunk indexed in Qdrant stores metadata such as:
-
-```text
-document_id
-section_id
-section_number
-chunk_id
-chunk_index
-page_number
-text_preview
-```
-
-### Retrieval rule
-
-For selected sections such as:
-
-```text
-[5, 8]
-```
-
-Qdrant retrieval is filtered by `section_number`, and the backend reads the trusted chunk text from PostgreSQL.
+|---|---|---|---|
+| id | String(36) | Yes | UUID matching Qdrant payload |
+| document_id | ForeignKey(documents.id) | Yes | Parent document |
+| section_id | ForeignKey(sections.id) | Yes | Parent section |
+| section_number | Integer | Yes | Deterministic retrieval filter |
+| chunk_index | Integer | Yes | Chunk ordering index |
+| page_number | Integer | No | Source PDF page |
+| text | Text | Yes | Full chunk text |
+| text_preview | Text | Yes | Sanitized preview snippet |
+| qdrant_point_id | String(64) | No | Qdrant vector identifier |
+| created_at | DateTime | Yes | Timestamp |
 
 ---
 
-## 7. Table: prep_sessions
+# 7. Table: prep_sessions
 
-Stores each preparation run.
+## Purpose
 
-### Purpose
+Tracks adaptive study sessions launched from the Streamlit presentation layer.
 
-This table records the session-level result for a prep attempt.
+This table stores global performance and adaptation state.
 
-A prep session may be:
+---
 
-```text
-cold_start
-adaptive
-```
-
-### Columns
+## Columns
 
 | Column | Type | Required | Purpose |
-|---|---|---:|---|
-| `id` | `String(36)` | Yes | Primary key UUID |
-| `document_id` | `ForeignKey(documents.id)` | Yes | Document used for prep |
-| `mode` | `String(50)` | Yes | `cold_start` or `adaptive` |
-| `selected_section_numbers` | `JSON` | Yes | List of selected section numbers |
-| `score` | `Float` | Yes | Final session score |
-| `total_questions` | `Integer` | Yes | Number of questions in session |
-| `correct_count` | `Integer` | Yes | Number of correct answers |
-| `wrong_count` | `Integer` | Yes | Number of wrong answers |
-| `adaptation_summary` | `Text` | No | Human-readable adaptation summary |
-| `adaptation_payload` | `JSON` | No | Full adaptation context used for generation |
-| `created_at` | `DateTime` | Yes | Record creation timestamp |
-
-### Related tables
-
-```text
-prep_sessions -> generated_questions
-prep_sessions -> user_answers
-prep_sessions -> kb_snapshots
-```
-
-### Example selected sections
-
-Scenario B uses:
-
-```text
-Iteration 1: [5, 8]
-Iteration 2: [6, 8, 9]
-Iteration 3: [8]
-```
+|---|---|---|---|
+| id | String(36) | Yes | Session UUID |
+| document_id | ForeignKey(documents.id) | Yes | Parent document |
+| mode | String(50) | Yes | `cold_start` or `adaptive` |
+| selected_section_numbers | JSON | Yes | Selected sections array |
+| score | Float | Yes | Final percentage score |
+| total_questions | Integer | Yes | Generated MCQ count |
+| correct_count | Integer | Yes | Correct answers |
+| wrong_count | Integer | Yes | Incorrect answers |
+| adaptation_summary | Text | No | Human-readable adaptive summary |
+| adaptation_payload | JSON | No | Internal adaptive metadata |
+| created_at | DateTime | Yes | Session timestamp |
 
 ---
 
-## 8. Table: generated_questions
+# 8. Table: generated_questions
 
-Stores generated MCQs.
+## Purpose
 
-### Purpose
+Stores validated MCQs generated by the backend orchestration pipeline.
 
-This table stores every generated question, its options, correct answer, explanation, section reference, source chunks, and adaptation reason.
+Correct answers remain hidden from the frontend until submission is complete.
 
-### Columns
+---
+
+## Columns
 
 | Column | Type | Required | Purpose |
-|---|---|---:|---|
-| `id` | `String(36)` | Yes | Primary key UUID generated by backend |
-| `session_id` | `ForeignKey(prep_sessions.id)` | Yes | Parent prep session |
-| `document_id` | `ForeignKey(documents.id)` | Yes | Source document |
-| `section_id` | `ForeignKey(sections.id)` | Yes | Source section |
-| `section_number` | `Integer` | Yes | Source section number |
-| `topic` | `String(255)` | Yes | Question topic |
-| `difficulty` | `String(50)` | Yes | Difficulty label |
-| `question_text` | `Text` | Yes | MCQ question text |
-| `options` | `JSON` | Yes | MCQ options A/B/C/D |
-| `correct_answer` | `String(1)` | Yes | Correct answer key |
-| `explanation` | `Text` | Yes | Explanation or clarification basis |
-| `adaptation_reason` | `Text` | Yes | Backend-owned adaptation reason |
-| `source_chunk_ids` | `JSON` | No | Source chunk UUIDs used for grounding |
-| `created_at` | `DateTime` | Yes | Record creation timestamp |
-
-### Important design decision
-
-The backend generates `question_id` values.
-
-The LLM is not trusted to generate database primary keys. This prevents duplicate IDs and avoids making model output responsible for database identity.
-
-### Adaptation reason
-
-The final `adaptation_reason` is owned by the backend, not the LLM.
-
-Examples:
-
-```text
-Cold-start coverage question generated from the selected section because no prior relevant learning history exists.
-
-Returning-run question generated using previous session history without a section-specific weak topic.
-
-Adaptive question generated for section 8 because prior session history marks this section as weak.
-```
+|---|---|---|---|
+| id | String(36) | Yes | Backend-generated UUID |
+| session_id | ForeignKey(prep_sessions.id) | Yes | Active session |
+| document_id | ForeignKey(documents.id) | Yes | Parent document |
+| section_id | ForeignKey(sections.id) | Yes | Source section |
+| section_number | Integer | Yes | Section reference |
+| topic | String(255) | Yes | Fine-grained topic label |
+| difficulty | String(50) | Yes | Difficulty category |
+| question_text | Text | Yes | Generated MCQ |
+| options | JSON | Yes | A/B/C/D options |
+| correct_answer | String(1) | Yes | Correct answer token |
+| explanation | Text | Yes | Explanation text |
+| adaptation_reason | Text | Yes | Backend-generated adaptive reason |
+| source_chunk_ids | JSON | No | Retrieval chunk traceability |
+| created_at | DateTime | Yes | Timestamp |
 
 ---
 
-## 9. Table: user_answers
+## Design Guardrails
 
-Stores submitted or simulated answers.
+### Backend-Owned UUIDs
 
-### Purpose
+The LLM never generates database IDs.
 
-This table stores question-level answer results for each prep session.
+All identifiers are created strictly by backend services to avoid collisions or malformed relational states.
 
-Answers may come from:
+---
+
+### Deterministic Adaptation Reasons
+
+`adaptation_reason` is generated by backend logic rather than trusting LLM responses.
+
+Example:
 
 ```text
-simulated CLI scenario runs
-real interactive API submissions
+Adaptive question generated for section 8 because previous sessions marked this topic as weak.
 ```
 
-### Columns
+This keeps adaptation reasoning fully auditable.
+
+---
+
+# 9. Table: user_answers
+
+## Purpose
+
+Stores user submissions captured dynamically from the Streamlit frontend interface.
+
+---
+
+## Columns
 
 | Column | Type | Required | Purpose |
-|---|---|---:|---|
-| `id` | `String(36)` | Yes | Primary key UUID |
-| `session_id` | `ForeignKey(prep_sessions.id)` | Yes | Parent prep session |
-| `question_id` | `ForeignKey(generated_questions.id)` | Yes | Answered question |
-| `selected_answer` | `String(1)` | Yes | User or simulated answer |
-| `correct_answer` | `String(1)` | Yes | Correct answer key |
-| `is_correct` | `Boolean` | Yes | Whether selected answer is correct |
-| `clarification` | `Text` | No | Clarification for wrong answers |
-| `created_at` | `DateTime` | Yes | Record creation timestamp |
-
-### Query use
-
-This table supports:
-
-```text
-retrieve question-level right/wrong results
-show correct answers after submission
-build weak-topic statistics
-generate session history
-build KB snapshots
-```
+|---|---|---|---|
+| id | String(36) | Yes | Primary UUID |
+| session_id | ForeignKey(prep_sessions.id) | Yes | Parent session |
+| question_id | ForeignKey(generated_questions.id) | Yes | Related question |
+| selected_answer | String(1) | Yes | Submitted option |
+| correct_answer | String(1) | Yes | Correct answer key |
+| is_correct | Boolean | Yes | Binary evaluation result |
+| clarification | Text | No | Explanation for incorrect answers |
+| created_at | DateTime | Yes | Timestamp |
 
 ---
 
-## 10. Table: weak_topic_stats
+## Bulk Submission Optimization
 
-Stores topic-level learning performance over time.
+The frontend sends answers as a unified dictionary payload:
 
-### Purpose
+```json
+{
+  "QUESTION_ID_1": "A",
+  "QUESTION_ID_2": "C"
+}
+```
 
-This table allows the system to identify weak topics and adapt future question generation.
+The backend assembles rows in memory and executes:
 
-### Columns
+```python
+db.add_all(answer_rows)
+```
+
+This reduces database I/O overhead significantly.
+
+---
+
+# 10. Table: weak_topic_stats
+
+## Purpose
+
+Tracks cumulative weakness analytics across repeated sessions.
+
+This table powers the adaptive intelligence layer.
+
+---
+
+## Columns
 
 | Column | Type | Required | Purpose |
-|---|---|---:|---|
-| `id` | `String(36)` | Yes | Primary key UUID |
-| `document_id` | `ForeignKey(documents.id)` | Yes | Source document |
-| `section_number` | `Integer` | Yes | Section number |
-| `topic` | `String(255)` | Yes | Topic label |
-| `attempts` | `Integer` | Yes | Total attempts for topic |
-| `wrong_count` | `Integer` | Yes | Number of wrong answers |
-| `correct_count` | `Integer` | Yes | Number of correct answers |
-| `weakness_score` | `Float` | Yes | Computed weakness score |
-| `last_seen_at` | `DateTime` | Yes | Last update timestamp |
-
-### Weakness score
-
-The weakness score represents how weak a topic is based on answer history.
-
-A simple interpretation:
-
-```text
-higher wrong_count and lower correct_count -> stronger weakness
-```
-
-Scenario B uses this to keep section 8 weak across iterations.
+|---|---|---|---|
+| id | String(36) | Yes | Primary UUID |
+| document_id | ForeignKey(documents.id) | Yes | Parent document |
+| section_number | Integer | Yes | Section reference |
+| topic | String(255) | Yes | Topic label |
+| attempts | Integer | Yes | Total attempts |
+| wrong_count | Integer | Yes | Incorrect attempts |
+| correct_count | Integer | Yes | Correct attempts |
+| weakness_score | Float | Yes | Calculated weakness metric |
+| last_seen_at | DateTime | Yes | Last updated timestamp |
 
 ---
 
-## 11. Table: kb_snapshots
+# 11. Table: kb_snapshots
 
-Stores human-readable KB snapshots.
+## Purpose
 
-### Purpose
+Maintains auditable snapshots of the knowledge base state after each session.
 
-This table persists reviewer-readable snapshots of recent learning history.
+These snapshots are useful for:
 
-A KB snapshot helps reviewers verify that:
+- reviewer verification
+- adaptive state tracking
+- export auditing
+- debugging adaptive behavior
 
-```text
-history is being stored
-questions and answers are persisted
-weak topics are tracked
-adaptation is grounded in previous sessions
-```
+---
 
-### Columns
+## Columns
 
 | Column | Type | Required | Purpose |
-|---|---|---:|---|
-| `id` | `String(36)` | Yes | Primary key UUID |
-| `session_id` | `ForeignKey(prep_sessions.id)` | Yes | Session associated with snapshot |
-| `snapshot_json` | `JSON` | Yes | Human-readable snapshot payload |
-| `created_at` | `DateTime` | Yes | Snapshot creation timestamp |
-
-### Snapshot contents
-
-Snapshots include:
-
-```text
-snapshot_created_at
-current_session_id
-recent_session_count
-recent_sessions
-session scores
-selected sections
-questions asked
-user answers
-correct answers
-wrong answers
-clarifications
-adaptation payloads
-weak topics
-```
-
-The snapshot design supports the assessment requirement:
-
-```text
-Retrieve a snapshot of the KB state at the end of any given session.
-```
+|---|---|---|---|
+| id | String(36) | Yes | Primary UUID |
+| session_id | ForeignKey(prep_sessions.id) | Yes | Related session |
+| snapshot_json | JSON | Yes | Serialized KB telemetry |
+| created_at | DateTime | Yes | Timestamp |
 
 ---
 
-## 12. Assessment Query Patterns
+# 12. Assessment Query Patterns
 
-The assessment requires the KB to support specific query patterns.
+## 12.1 Prior Session Filtering
 
-### 12.1 Given a set of section IDs, retrieve prior prep sessions involving those sections
-
-Supported by:
+### Supported Fields
 
 ```text
 prep_sessions.selected_section_numbers
-prep_sessions.document_id
 ```
 
-Used by:
+### Used By
 
 ```text
 app/services/adaptation_service.py
 ```
 
-Purpose:
+The adaptation layer uses historical matches to determine:
 
 ```text
-detect cold_start vs adaptive
-find relevant prior sessions
-build adaptation payload
+cold_start
+or
+adaptive
 ```
 
 ---
 
-### 12.2 Given a session, retrieve question-level right/wrong results
+## 12.2 Session-Level Performance Analytics
 
-Supported by:
+### Supported Fields
 
 ```text
-prep_sessions
+user_answers
 generated_questions
-user_answers
 ```
 
-Used by:
+### Used By
 
-```text
-GET /sessions/{session_id}
-```
-
-Purpose:
-
-```text
-show question text
-show selected answer
-show correct answer
-show is_correct
-show explanation or clarification
-```
+- `GET /sessions/{session_id}`
+- Streamlit review screen
+- adaptive scoring dashboards
 
 ---
 
-### 12.3 Identify topics/questions answered incorrectly across multiple sessions
+## 12.3 Weak Topic Aggregation
 
-Supported by:
+### Supported Fields
 
 ```text
-user_answers
-generated_questions.topic
-generated_questions.section_number
 weak_topic_stats
 ```
 
-Used by:
+### Index Support
 
 ```text
-app/db/repositories/session_repo.py
-app/services/adaptation_service.py
+idx_weak_topic_perf_sorting
 ```
 
-Purpose:
-
-```text
-compute weak topics
-guide adaptive generation
-prioritize repeated mistakes
-```
+This drives adaptive prompt steering for future sessions.
 
 ---
 
-### 12.4 Retrieve a snapshot of the KB state at the end of a session
+## 12.4 Knowledge Base Snapshot Retrieval
 
-Supported by:
+### Supported Fields
 
 ```text
-kb_snapshots
+kb_snapshots.snapshot_json
 ```
 
-Used by:
+### Used By
 
 ```text
-app/services/snapshot_service.py
 GET /kb/snapshot
-scenario output exports
 ```
 
-Purpose:
-
-```text
-provide reviewer-visible evidence of stored history and adaptive grounding
-```
+and Streamlit adaptive telemetry panels.
 
 ---
 
-## 13. Scenario B Database Behavior
+# 13. Scenario B Database Behavior
 
-Scenario B proves that the schema supports adaptive history.
-
-### Iteration 1
+The schema supports adaptive state transitions across repeated evaluation cycles.
 
 ```text
-selected sections = [5, 8]
+Iteration 1 (Sections 5, 8)
+        │
+        ▼
 mode = cold_start
-score = 50.0
-section 8 answers are simulated wrong
-weak_topic_stats begins tracking section 8 weaknesses
-```
-
-### Iteration 2
-
-```text
-selected sections = [6, 8, 9]
+        │
+        ▼
+Mistakes logged into weak_topic_stats
+        │
+        ▼
+Iteration 2 (Sections 6, 8, 9)
+        │
+        ▼
 mode = adaptive
-score = 66.67
-section 8 is recognized as weak from iteration 1
-section 6 and 9 are returning-run context but not weak-specific
+        │
+        ▼
+Historical section 8 weaknesses injected
+        │
+        ▼
+Iteration 3 (Section 8 only)
+        │
+        ▼
+Highly targeted reinforcement generation
 ```
 
-### Iteration 3
-
-```text
-selected sections = [8]
-mode = adaptive
-score = 0.0
-only weak section 8 is selected
-all section 8 questions are adaptive weak-section questions
-```
-
-The database stores all generated questions, answers, scores, weak topics, and snapshots for each iteration.
+This is the core adaptive behavior of the system.
 
 ---
 
-## 14. Why PostgreSQL Instead of Only JSON Files
+# 14. Why PostgreSQL Instead of JSON Files
 
-PostgreSQL is used because the system needs queryable structured history.
+Plain JSON files work well for static logging.
 
-The project must support:
+But adaptive preparation systems require:
 
-```text
-session lookup by selected sections
-question-level result retrieval
-weak-topic aggregation
-snapshot generation
-future adaptive prompting
-```
+- relational joins
+- indexed lookups
+- historical aggregation
+- real-time analytics
+- scoring calculations
+- session filtering
+- adaptive state transitions
 
-Plain JSON files would be enough for static outputs, but they would be weaker for history-aware adaptive behavior.
-
----
-
-## 15. Why Qdrant Is Separate from PostgreSQL
-
-PostgreSQL is excellent for structured history and relational queries.
-
-Qdrant is better for vector similarity search.
-
-The separation keeps responsibilities clean:
-
-```text
-PostgreSQL:
-  truth
-  history
-  sessions
-  answers
-  scores
-  weak topics
-  snapshots
-
-Qdrant:
-  vector embeddings
-  semantic retrieval
-  selected-section filtering
-```
-
-This hybrid design makes the system both queryable and retrieval-capable.
+PostgreSQL enables all of this efficiently while remaining transparent and auditable.
 
 ---
 
-## 16. Files Related to Database
+# 15. Enterprise Hybrid Storage Separation
 
-Database models:
+The system intentionally separates infrastructure responsibilities across dedicated services.
+
+---
+
+## MinIO Object Storage
+
+Responsible for:
+
+- immutable raw PDFs
+- object storage isolation
+- distributed file access
+
+---
+
+## PostgreSQL Relational Layer
+
+Responsible for:
+
+- transactional state
+- adaptive history
+- scoring analytics
+- session persistence
+- KB snapshots
+
+---
+
+## Qdrant Vector Engine
+
+Responsible for:
+
+- semantic embeddings
+- similarity matching
+- vector retrieval
+- section-filtered searches
+
+---
+
+# 16. Files Related to Database
+
+## ORM Models
 
 ```text
 app/db/models.py
-```
-
-Database session/engine:
-
-```text
 app/db/session.py
 ```
 
-Repositories:
+---
+
+## Repository Layer
 
 ```text
-app/db/repositories/document_repo.py
 app/db/repositories/session_repo.py
-app/db/repositories/question_repo.py
-app/db/repositories/snapshot_repo.py
+app/db/repositories/document_repo.py
 ```
 
-Reset command:
+---
+
+## Service Layer
+
+```text
+app/services/interactive_prep_service.py
+```
+
+---
+
+## Database Utility Scripts
 
 ```text
 cli/reset_db.py
 ```
 
-Ingestion command:
-
-```text
-cli/ingest_pdf.py
-```
-
-Scenario persistence flow:
-
-```text
-app/services/prep_service.py
-app/workflow/nodes.py
-app/workflow/prep_graph.py
-```
-
-Interactive API persistence flow:
-
-```text
-app/services/interactive_prep_service.py
-app/api/routes_prep.py
-```
-
 ---
 
-## 17. Summary
+# 17. Summary
 
-The database design satisfies the assessment’s Knowledge Base requirements.
+The database architecture was designed to remain:
 
-It supports:
+- transparent
+- scalable
+- reviewer-friendly
+- adaptive
+- audit-safe
+- production-oriented
 
-```text
-section-based prior session retrieval
-session-level and question-level history
-correct/wrong answer storage
-weak-topic detection
-adaptive generation context
-reviewer-readable KB snapshots
-Scenario A and Scenario B output generation
-```
-
-The schema is intentionally simple, auditable, and suitable for a production-style backend assessment project.
+By combining PostgreSQL, MinIO, and Qdrant into isolated infrastructure tiers, the system maintains reliable adaptive learning behavior while preserving strict retrieval integrity and complete historical traceability across all study sessions.

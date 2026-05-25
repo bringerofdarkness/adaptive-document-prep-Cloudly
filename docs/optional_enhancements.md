@@ -1,57 +1,54 @@
 # Optional Enhancements & Production Performance Metrics
 
-This document outlines the engineering optimizations, resiliency improvements, and production-grade scalability enhancements implemented within the **Adaptive Document Preparation System**.
+This document covers the engineering optimizations, resiliency upgrades, infrastructure improvements, and presentation-layer enhancements implemented in the **Adaptive Document Preparation System**.
 
-The original backend prototype focused primarily on proving adaptive retrieval and MCQ orchestration behavior. Over time, the system evolved into a far more stable and observable architecture capable of handling asynchronous workloads, reducing infrastructure bottlenecks, protecting against upstream instability, and preserving deterministic evaluation boundaries under repeated execution cycles.
+The project originally started as a focused adaptive RAG backend for PDF-driven MCQ generation. Over time, it evolved into a much more stable, observable, and production-style multi-service architecture with asynchronous execution, isolated object storage, adaptive workflows, optimized retrieval, and an interactive frontend visualization layer.
+
+The goal was not only to generate questions from documents — but to build a system that behaves like a real adaptive preparation platform under repeated learning sessions.
 
 ---
 
 # Architecture Flow Mapping
 
 ```text
-                  [ Incoming API Request ]
-                             │
-                             ▼
-               ┌───────────────────────────┐
-               │    FastAPI Rate Limiter   │
-               └─────────────┬─────────────┘
-                             │
-                             ▼
-               ┌───────────────────────────┐
-               │     HTTP Payload Parse    │
-               │  (Instantly Returns 202)  │
-               └─────────────┬─────────────┘
-                             │ (Broker Push)
-                             ▼
-               ┌───────────────────────────┐
-               │    Redis Message Broker   │
-               │       (Port 6380)         │
-               └─────────────┬─────────────┘
-                             │ (Worker Pick)
-                             ▼
-               ┌───────────────────────────┐
-               │   Celery Background Pool  │
-               │  - Fixed-Window Batching  │
-               │  - Offline Embedding Cache│
-               └─────────────┬─────────────┘
-                             │
-                             ▼
-               ┌───────────────────────────┐
-               │     LangGraph Workflow    │
-               │  Retrieval + Adaptation   │
-               └─────────────┬─────────────┘
-                             │
-                             ▼
-               ┌───────────────────────────┐
-               │      LLM Generation       │
-               │   Groq / Mock Fallback    │
-               └─────────────┬─────────────┘
-                             │
-                             ▼
-               ┌───────────────────────────┐
-               │ PostgreSQL Persistence    │
-               │ Sessions + Weak Topics    │
-               └───────────────────────────┘
+ [ User Interaction via Streamlit Web UI ]
+                                          │
+                                          ▼
+                             [ FastAPI REST API Gateway ]
+                             (Instantly Returns 202 Task)
+                                          │
+                 ┌────────────────────────┴────────────────────────┐
+                 ▼ (Async Broker Push)                             ▼ (Storage Audit)
+      [ Redis Message Broker ]                        [ MinIO S3 Object Repository ]
+            (Port 6380)                                  (Raw PDF Document Vault)
+                 │                                                 │
+                 ▼ (Worker Thread Pick)                            ▼ (Source Fetch)
+      [ Celery Asynchronous Workers ] ─────────────────────────────┘
+       - Fixed-Window Multi-Section Batching
+       - Offline Transformers Local Cache
+                 │
+                 ▼
+      [ LangGraph Stateful Workflows ]
+       (Retrieval + Adaptation Payloads)
+                 │
+                 ▼
+        [ Qdrant Vector Engine ]
+       (Strict Section Partition Filter)
+                 │
+                 ▼
+      [ Upstream LLM Inference Tier ]
+        (Groq Llama-3 / Mock Fallback)
+                 │
+                 ▼
+      [ Pydantic Validation & ftfy Cleanup ]
+                 │
+                 ▼
+      [ PostgreSQL Persistence Core ]
+       (Bulk db.add_all Relational Flushes)
+                 │
+                 ▼
+      [ Streamlit Performance Rendering ]
+       (Human-Readable Snapshots & Explanations)
 ```
 
 ---
@@ -60,45 +57,57 @@ The original backend prototype focused primarily on proving adaptive retrieval a
 
 ## Initial Bottleneck
 
-The earliest implementation executed vector retrieval, chunk orchestration, and LLM generation directly inside the HTTP request cycle.
+The first implementation handled vector retrieval, chunk orchestration, and MCQ generation directly inside the FastAPI request-response lifecycle.
 
-That design worked for small evaluation runs, but the API response time increased linearly as more sections were selected. Large MCQ generation jobs could freeze the FastAPI thread pool and eventually trigger timeout risks under repeated execution.
+That worked for smaller evaluation runs, but once larger section combinations were requested, API response times increased heavily. Long-running generation tasks blocked the web thread, causing timeout risks and making the UI feel frozen during processing.
 
 ---
 
 ## Engineering Upgrade
 
-The execution flow was redesigned around a fully asynchronous processing architecture using:
+The architecture was redesigned around a fully asynchronous execution model using:
 
-- **Celery** for distributed task execution
-- **Redis** as the message broker and result backend
-- Background workers isolated from the API lifecycle
+- Celery background workers
+- Redis task broker
+- FastAPI task dispatching
+- Streamlit polling-based UI updates
 
-The API layer now validates the payload and immediately returns a lightweight:
+The API layer now performs only:
 
-```http
-202 QUEUED
+1. Payload validation
+2. Session initialization
+3. Task dispatching
+
+After validation, the API instantly returns:
+
+```json
+{
+  "status": "QUEUED",
+  "task_id": "..."
+}
 ```
 
-alongside a unique task identifier for client-side polling.
+The heavy orchestration work is then executed independently by Celery workers.
 
 ---
 
-## Performance Impact
+## Result
 
 ### Before
 
 ```text
-Heavy generation blocked the request thread directly
+Heavy generation blocked API request threads directly.
 ```
 
 ### After
 
 ```text
-API Time-To-First-Byte (TTFB) reduced to < 15ms
+TTFB reduced to <15ms
+Background execution fully isolated from UI lifecycle
+Responsive frontend during generation
 ```
 
-The backend now handles long-running generation safely outside the request lifecycle without interrupting user-facing responsiveness.
+The frontend remains interactive while long-running adaptive generation continues asynchronously.
 
 ---
 
@@ -106,58 +115,59 @@ The backend now handles long-running generation safely outside the request lifec
 
 ## Initial Bottleneck
 
-The original orchestration loop generated MCQs sequentially for every section independently.
+The original implementation generated MCQs sequentially for every section individually.
 
-A 10-section preparation session triggered:
+Example:
 
 ```text
-10 independent LLM network round-trips
+10 sections selected
+→ 10 separate LLM requests
+→ high latency
+→ excessive token usage
+→ frequent HTTP 429 rate limits
 ```
 
-This caused:
-
-- Excessive latency
-- Upstream token exhaustion
-- Frequent HTTP 429 rate-limit failures
-- Poor horizontal scalability
+This produced poor scalability and unstable generation cycles.
 
 ---
 
 ## Engineering Upgrade
 
-A **Fixed-Window Micro-Batching Strategy** was introduced.
+A fixed-window micro-batching strategy was introduced.
 
-Instead of generating one section at a time:
+Instead of generating one section per request:
 
 ```text
-2 sections are grouped into a single generation batch
+2 sections → grouped into 1 generation batch
 ```
 
 Additional safeguards include:
 
-- Controlled token pacing
-- 2-second safety cooldown windows
-- Structured retry intervals
-- Batch-aware orchestration routing
+- 2-second token pacing windows
+- Controlled retry intervals
+- Batched frontend submissions
+- Reduced network round-trips
 
 ---
 
-## Measured Optimization
+## Performance Improvement
 
 | Metric | Previous | Optimized |
 |---|---|---|
-| Full 50-question runtime | 420+ seconds | ~28 seconds |
-| API stability | Unstable under load | Stable |
+| 50-question runtime | 420+ sec | ~28 sec |
+| API stability | Unstable | Stable |
 | Token failures | Frequent | Eliminated |
-| LLM throughput | Sequential | Batched |
+| UI responsiveness | Blocking | Instant |
 
-### Net Result
+---
+
+## Net Impact
 
 ```text
-~93% total runtime reduction
+~93% reduction in total execution time
 ```
 
-while maintaining schema-safe generation consistency.
+while maintaining schema-safe structured generation.
 
 ---
 
@@ -165,60 +175,58 @@ while maintaining schema-safe generation consistency.
 
 ## Initial Risk
 
-The system originally depended entirely on upstream LLM availability.
+The earliest version depended entirely on upstream LLM availability.
 
-Any of the following could terminate active sessions:
+Failures such as:
 
-- API instability
 - malformed JSON
-- token limit errors
-- network jitter
-- vendor-side response mutation
+- HTTP 429
+- upstream outages
+- response corruption
+- timeout spikes
 
-A single failure could corrupt the active worker lifecycle.
+could terminate active sessions entirely.
 
 ---
 
 ## Engineering Upgrade
 
-Core generation layers were wrapped inside strict resiliency guards:
+Core generation modules were wrapped inside strict validation boundaries.
 
 ```python
 try:
     ...
-except JSONDecodeError:
-    ...
-except ValidationError:
+except (JSONDecodeError, ValidationError, ValueError):
     ...
 ```
 
-If the upstream provider fails:
+If an upstream provider fails:
 
-- generation instantly reroutes
-- the fallback mock engine activates
-- structurally valid MCQs continue flowing through the pipeline
+```text
+Groq Failure
+    ↓
+Automatic fallback activation
+    ↓
+Local mock generator execution
+    ↓
+Session preserved safely
+```
 
 ---
 
-## Reliability Impact
-
-### Current Behavior
+## Reliability Result
 
 ```text
-External API failure
+External API Failure
         ↓
-Automatic fallback routing
+Fallback Routing
         ↓
-Session survives safely
+Worker Continuity Preserved
         ↓
-Pipeline integrity preserved
+Session Commits Successfully
 ```
 
-This guarantees:
-
-- uninterrupted worker execution
-- valid schema-safe outputs
-- stable adaptive evaluation continuity
+The adaptive workflow continues safely without crashing active sessions.
 
 ---
 
@@ -226,23 +234,19 @@ This guarantees:
 
 ## Initial Bottleneck
 
-Profiling revealed that embedding initialization repeatedly attempted remote Hugging Face verification checks during worker startup.
+Profiling revealed that embedding initialization repeatedly triggered Hugging Face verification checks during worker startup.
 
-Even when models already existed locally, the framework still initiated network handshakes.
-
-Cold starts occasionally consumed:
+Even with locally cached models, startup delays occasionally exceeded:
 
 ```text
 140+ seconds
 ```
 
-before actual generation even began.
-
 ---
 
 ## Engineering Upgrade
 
-The embedding layer was isolated completely offline:
+Embedding execution was isolated completely offline.
 
 ```python
 import os
@@ -252,138 +256,140 @@ os.environ["HF_HUB_OFFLINE"] = "1"
 
 Additional improvements:
 
-- single shared embedding instance
+- shared embedding instance reuse
+- local disk cache loading
+- no remote verification calls
 - persistent model reuse
-- disk-cached transformer loading
-- worker-level initialization reuse
-
----
-
-## Measured Improvement
-
-| Operation | Before | After |
-|---|---|---|
-| Embedding startup | 140+ sec | milliseconds |
-| Network dependency | Required | Removed |
-| Worker boot consistency | Variable | Stable |
-
----
-
-# 5. Relational Database Performance Optimization
-
-## History Lookup Latency Reduction
-
-### Initial Problem
-
-Adaptive evaluation requires continuous historical lookups across:
-
-- sessions
-- generated questions
-- weak-topic analytics
-- answer histories
-
-Without indexing, query performance degraded linearly as records accumulated.
-
----
-
-## Engineering Upgrade
-
-Specialized B-Tree composite indices were introduced:
-
-```text
-idx_weak_topic_perf_sorting
-idx_gen_questions_doc_section
-```
-
-Optimized query paths include:
-
-```text
-weak_topic_stats(document_id, section_number, weakness_score, wrong_count)
-
-generated_questions(document_id, section_number)
-```
-
----
-
-## Performance Impact
-
-### Before
-
-```text
-Sequential table scans (O(N))
-```
-
-### After
-
-```text
-Indexed logarithmic lookups (O(logN))
-```
-
-Estimated latency reduction:
-
-```text
-85%+ improvement
-```
-
-during adaptive scoring cycles.
-
----
-
-## Zero-Repetition Data Integrity
-
-### Problem
-
-Avoiding repeated MCQs required expensive historical joins under strict latency budgets.
-
----
-
-## Engineering Upgrade
-
-A covered index strategy was introduced:
-
-```text
-idx_user_answers_eval
-```
-
-mapped across:
-
-```text
-user_answers(question_id, is_correct)
-```
 
 ---
 
 ## Result
 
-The system can now instantly identify:
+### Before
 
-- mastered content
-- repeated questions
-- prior mistakes
+```text
+140+ second startup delays
+```
 
-without adding additional orchestration latency.
+### After
+
+```text
+Embedding initialization reduced to milliseconds
+```
 
 ---
 
-# 6. Strict Vector Boundary Isolation (Idempotent Filtering)
+# 5. Relational Database Performance Optimization
 
-## Initial Problem
+## Historical Lookup Optimization
 
-Naive vector retrieval allowed semantically similar chunks from unrelated sections to leak into the active context window.
+Adaptive generation requires constant access to:
 
-Example:
+- previous sessions
+- weak-topic history
+- generated questions
+- scoring metadata
+- answer analytics
 
-```text
-Section 4 chunks appearing inside Section 2 retrievals
-```
-
-This violated strict retrieval isolation guarantees.
+Without indexing, lookup performance degraded as records accumulated.
 
 ---
 
 ## Engineering Upgrade
 
-Qdrant payload filtering was enforced directly during vector retrieval:
+Composite B-Tree indexes were introduced:
+
+```text
+idx_weak_topic_perf_sorting
+idx_gen_questions_doc_section
+idx_user_answers_eval
+```
+
+Optimized fields include:
+
+```text
+weak_topic_stats(document_id, section_number, weakness_score, wrong_count)
+
+generated_questions(document_id, section_number)
+
+user_answers(question_id, is_correct)
+```
+
+---
+
+## Performance Result
+
+### Before
+
+```text
+Sequential scans → O(N)
+```
+
+### After
+
+```text
+Indexed lookups → O(logN)
+```
+
+Historical lookups now execute within milliseconds.
+
+---
+
+# 6. Bulk Submission & Reduced Database I/O
+
+## Initial Problem
+
+Saving answers one-by-one created unnecessary transaction overhead.
+
+---
+
+## Engineering Upgrade
+
+Frontend responses are accumulated into a single payload:
+
+```json
+{
+  "answers": {
+    "QUESTION_1": "A",
+    "QUESTION_2": "C"
+  }
+}
+```
+
+The backend uses:
+
+```python
+db.add_all(answer_rows)
+```
+
+to flush all records in a single database transaction.
+
+---
+
+## Result
+
+```text
+Reduced transaction overhead
+Fewer database commits
+Cleaner submission lifecycle
+Improved API responsiveness
+```
+
+---
+
+# 7. Strict Vector Boundary Isolation
+
+## Initial Problem
+
+Naive vector retrieval occasionally leaked semantically similar chunks from unrelated sections.
+
+That violated strict section-isolation guarantees.
+
+---
+
+## Engineering Upgrade
+
+Qdrant payload filtering was enforced directly at retrieval time.
 
 ```python
 from qdrant_client.http import models
@@ -402,21 +408,19 @@ qdrant_filter = models.Filter(
 
 ## Integrity Result
 
-### Current Guarantee
-
 ```text
 0% cross-section contamination
 ```
 
-The vector engine now performs semantic similarity scoring strictly inside the user-selected boundaries.
+The retrieval layer now searches only inside explicitly selected section boundaries.
 
 ---
 
-# 7. Dynamic Text Normalization & Mojibake Repair Pipeline
+# 8. Dynamic Text Normalization & Mojibake Repair
 
 ## Initial Problem
 
-Raw PDF extraction frequently introduced encoding corruption:
+PDF extraction introduced corrupted Unicode text such as:
 
 ```text
 Cuartel ValparaÃ­so
@@ -428,100 +432,188 @@ instead of:
 Cuartel Valparaíso
 ```
 
-Corrupted tokens distorted embeddings and damaged semantic search precision.
+These artifacts damaged embedding precision and semantic retrieval quality.
 
 ---
 
 ## Engineering Upgrade
 
-A dedicated normalization middleware layer was added using:
+A dedicated normalization middleware was added using:
 
 ```text
 ftfy
 ```
 
-The ingestion pipeline now automatically performs:
+All extracted text is sanitized before:
 
-- Unicode normalization
-- mojibake repair
-- ASCII cleanup
-- malformed token correction
-
-before chunk embedding occurs.
+- embedding generation
+- vector indexing
+- UI rendering
+- persistence
 
 ---
 
-## Data Quality Impact
+## Result
 
-### Benefits
-
-- stable vector similarity scoring
-- cleaner retrieval precision
-- consistent semantic matching
-- improved downstream LLM context quality
-
----
-
-# 8. Observability & Evaluation Transparency
-
-One major engineering priority was making the system reviewer-auditable.
-
-The backend exports:
-
-- Scenario A outputs
-- Scenario B outputs
-- KB snapshots
-- adaptive scoring metadata
-- weak-topic persistence traces
-
-This makes it possible to validate adaptive behavior externally without rebuilding the entire environment.
+```text
+Stable Unicode rendering
+Cleaner embeddings
+Improved semantic matching accuracy
+```
 
 ---
 
-## 8. S3-Compatible Cloud Object Storage Gateway (MinIO Integration)
-- **Baseline Condition:** Raw documents and incoming assessment sources were stored directly on the local server file system, limiting horizontal scaling, decoupling potential, and distributed cloud worker synchronization.
-- **Advanced Engineering Solution:** Integrated a local cloud-native MinIO instance running as an isolated storage tier bound to local network sockets. Re-configured Pydantic settings via `extra="ignore"` structures to map S3 keys safely.
-- **Empirical Impact:** Standardizes document ingestion under a true Medallion Architecture (Bronze landing zone). Prepares the framework for high-throughput multi-worker reads via stateless cloud workers.
+# 9. S3-Compatible Object Storage Integration (MinIO)
 
-# 9. Production Scalability Considerations
+## Initial Problem
+
+Storing PDFs directly on local disk paths created:
+
+- portability issues
+- scaling limitations
+- inconsistent worker environments
+- dependency on local filesystem state
+
+---
+
+## Engineering Upgrade
+
+MinIO was integrated as an isolated object storage layer.
+
+```text
+Port: 9000
+Bucket: raw-dossiers
+```
+
+Uploaded PDFs are streamed directly into object storage instead of relying on local filesystem persistence.
+
+---
+
+## Infrastructure Benefit
+
+```text
+Raw file vault separation
+Stateless worker compatibility
+Cloud-native storage behavior
+Portable deployment structure
+```
+
+This creates a much cleaner separation between:
+
+- structured database state
+- vector embeddings
+- raw binary source documents
+
+---
+
+# 10. Interactive UI Presentation Layer
+
+## Initial Problem
+
+Reviewing adaptive logic only through terminal logs and JSON outputs made evaluation difficult.
+
+The backend worked correctly, but the adaptive behavior was hard to visualize.
+
+---
+
+## Engineering Upgrade
+
+A dedicated Streamlit frontend was built on top of the API layer.
+
+The UI acts as a decoupled presentation client communicating entirely through REST endpoints.
+
+---
+
+## Frontend Improvements
+
+### Structured User Input Formatting
+
+User answers are normalized into:
+
+```text
+A / B / C / D
+```
+
+This prevents validation mismatches and frontend inconsistencies.
+
+---
+
+### Adaptive Transparency
+
+The frontend now displays:
+
+- weak-topic adaptation reasons
+- session scores
+- KB snapshot metrics
+- adaptive mode indicators
+- question review summaries
+
+directly on-screen.
+
+---
+
+## Result
+
+The system became significantly easier to:
+
+- demonstrate
+- debug
+- review
+- evaluate
+- present during interviews or technical reviews
+
+---
+
+# 11. Scalability Considerations
 
 The architecture was intentionally designed with horizontal scalability in mind.
 
-Core scalable components already support:
-
-| Layer | Scaling Strategy |
-|---|---|
-| FastAPI | Horizontal API replicas |
-| Redis | Shared broker layer |
-| Celery | Distributed worker pools |
-| PostgreSQL | Indexed relational storage |
-| Qdrant | Dedicated vector retrieval node |
-| LangGraph | Stateless orchestration execution |
+| Layer | Component | Scaling Strategy |
+|---|---|---|
+| Presentation Layer | Streamlit | Stateless replicas |
+| API Gateway | FastAPI | Horizontal container scaling |
+| Broker Layer | Redis | Cluster sharding |
+| Worker Layer | Celery | Dynamic worker allocation |
+| Relational Database | PostgreSQL | Read replicas & pooling |
+| Vector Engine | Qdrant | Distributed collections |
+| Object Storage | MinIO | S3-compatible scaling |
 
 ---
 
-# 10. Engineering Outcome
+# 12. Engineering Outcome
 
-The final system evolved far beyond a simple RAG prototype.
+The final platform evolved far beyond a simple RAG demo.
 
-It now demonstrates:
+The system now demonstrates:
 
-- adaptive evaluation logic
-- resilient async execution
-- deterministic retrieval isolation
-- historical performance tracking
-- scalable orchestration behavior
-- production-aware infrastructure decisions
-- reviewer-auditable evaluation exports
+- adaptive retrieval behavior
+- asynchronous orchestration
+- isolated vector boundaries
+- scalable background execution
+- resilient LLM fallback handling
+- object storage separation
+- optimized persistence strategies
+- reviewer-friendly frontend visualization
+- production-style infrastructure layering
 
-while maintaining strict schema integrity and stable execution behavior across repeated adaptive preparation sessions.
+while maintaining deterministic adaptive preparation behavior across repeated study sessions.
 
 ---
 
 # Final Note
 
-The enhancements documented here were implemented incrementally during iterative profiling, debugging, and validation cycles.
+The most important engineering outcome was not simply generating MCQs from PDFs.
 
-Most optimizations emerged from observing real execution bottlenecks during Scenario A/B evaluation runs rather than being added artificially for documentation purposes.
+The real achievement was building a system capable of:
 
-The result is a significantly more stable, observable, and production-oriented adaptive RAG backend capable of handling repeated evaluation workloads with deterministic retrieval guarantees and resilient orchestration behavior.
+```text
+tracking historical weaknesses
+            ↓
+persisting learning behavior
+            ↓
+injecting adaptive context
+            ↓
+steering future evaluation dynamically
+```
+
+inside a decoupled, observable, and production-style architecture.
