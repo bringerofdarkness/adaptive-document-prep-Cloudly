@@ -479,14 +479,14 @@ LLM_PROVIDER=mock
 GEMINI_API_KEY=
 GROQ_API_KEY=
 
-# Redis & Celery Message Broker Configurations
+
 REDIS_HOST=localhost
 REDIS_PORT=6380
 REDIS_DB=0
 CELERY_BROKER_URL=redis://localhost:6380/0
 CELERY_RESULT_BACKEND=redis://localhost:6380/0
 
-# Algorithmic Retrieval Engineering Boundaries
+
 QDRANT_SCORE_THRESHOLD=0.75   zx
 ```
 
