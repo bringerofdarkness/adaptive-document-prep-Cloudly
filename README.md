@@ -258,7 +258,7 @@ Optional enhancements and scalability ideas
   - [LLM Non-Determinism](#llm-non-determinism)
   - [Cold Starts](#cold-starts)
 - [24. Output Commit Strategy](#24-output-commit-strategy)
-- [25. Suggested Recruiter Verification Flow](#25-suggested-recruiter-verification-flow)
+- [25. Suggested Project Verification Flow](#25-suggested-project-verification-flow)
 - [26. Project Structure](#26-project-structure)
 - [27. Useful Commands](#27-useful-commands)
   - [Service Boot](#service-boot)
@@ -392,10 +392,13 @@ cd adaptive-document-prep-Cloudly
 ### Windows PowerShell
 
 ```powershell
+
+python -m venv .venv
+.\.venv\Scripts\Activate.ps1
+
+# If the global `python` command is not configured on your PC
 Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass
-
 py -m venv .venv
-
 .\.venv\Scripts\Activate.ps1
 ```
 
@@ -761,7 +764,7 @@ Invoke-RestMethod -Uri http://127.0.0.1:18000/prep/start `
 ## 13.4 Track Worker Task Status
 
 ```powershell
-Invoke-RestMethod -Uri http://127.0.0.1:18000/prep/task/6e007c87-d6db-44c4-96ba-6191764abca1
+Invoke-RestMethod -Uri http://127.0.0.1:18000/prep/task/Your-Task-ID
 ```
 
 ---
@@ -1040,7 +1043,7 @@ The `outputs/` directory stores reviewer-ready execution artifacts for rapid eva
 
 ---
 
-# 25. Suggested Recruiter Verification Flow
+# 25. Suggested Project Verification Flow
 
 ```powershell
 # Start Services
