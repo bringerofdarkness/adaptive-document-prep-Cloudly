@@ -49,10 +49,20 @@ The primary goal is not just retrieval-augmented generation — it is demonstrat
 
 | File | Purpose |
 |---|---|
-| `docs/architecture.md` | Hybrid RAG architecture and retrieval flow |
-| `docs/database_schema.md` | PostgreSQL schema and KB relationships |
-| `docs/adaptation_strategy.md` | Adaptive logic and weak-topic tracking |
-| `docs/optional_enhancements.md` | Optional enhancements and scalability ideas |
+| [`docs/architecture.md`](docs/architecture.md) | Hybrid RAG architecture and retrieval flow |
+| [`docs/database_schema.md`](docs/database_schema.md) | PostgreSQL schema and KB relationships |
+| [`docs/adaptation_strategy.md`](docs/adaptation_strategy.md) | Adaptive logic and weak-topic tracking |
+| [`docs/optional_enhancements.md`](docs/optional_enhancements.md) | Optional enhancements and scalability ideas |
+
+---
+
+## Recommended Reading Order
+
+```text
+1. docs/architecture.md
+2. docs/database_schema.md
+3. docs/adaptation_strategy.md
+```
 
 ---
 
@@ -117,6 +127,7 @@ The primary goal is not just retrieval-augmented generation — it is demonstrat
   - [Overview](#overview)
 - [Documentation](#documentation)
   - [Recommended Reading Order](#recommended-reading-order)
+  - [Recommended Reading Order](#recommended-reading-order-1)
 - [Architecture Overview](#architecture-overview)
 - [Table of Contents](#table-of-contents)
 - [1. Project Highlights](#1-project-highlights)
