@@ -30,7 +30,19 @@
 ---
 ---
 
-# 📺 Live System Demonstration
+# 📺 Live System Demonstration & Cloud Sandbox
+
+<p align="center">
+  <a href="https://huggingface.co/spaces/bringerofdarkness/adaptive-document-prep" target="_blank">
+    <img src="https://img.shields.io/badge/%F0%9F%A4%97%20Hugging%20Face-Spaces%20Live%20Demo-blue?style=for-the-badge&logo=huggingface" alt="Hugging Face Spaces">
+  </a>
+</p>
+
+> [!TIP]  
+> **🧠 Standalone Live Simulation:** Want to try the interface instantly? Click the Hugging Face badge above to explore the frontend application flow. 
+> *Note: Due to resource constraints on the Hugging Face free CPU layer, the live space runs in an **In-Memory Simulation Mode** (micking backend responses). It does not spin up the heavy distributed background worker stack (PostgreSQL, Qdrant cluster, Redis, and Celery). To experience the **full potential and end-to-end multi-container architecture**, follow the [Local Deployment Guide](#-quick-start--local-deployment) below.*
+
+---
 
 > [!NOTE]  
 > **Beyond the Specification:** Although the primary assessment guidelines emphasized building a solid history-adaptive CLI architecture first, I engineered an interactive, real-time **Streamlit Frontend Interface** to visually demonstrate the underlying adaptive intelligence and evaluation loops in action.
