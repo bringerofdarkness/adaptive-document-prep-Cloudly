@@ -40,7 +40,7 @@
 
 > [!TIP]  
 > **🧠 Standalone Live Simulation:** Want to try the interface instantly? Click the Hugging Face badge above to explore the frontend application flow. 
-> *Note: Due to resource constraints on the Hugging Face free CPU layer, the live space runs in an **In-Memory Simulation Mode** (micking backend responses). It does not spin up the heavy distributed background worker stack (PostgreSQL, Qdrant cluster, Redis, and Celery). To experience the **full potential and end-to-end multi-container architecture**, follow the [Local Deployment Guide](#-quick-start--local-deployment) below.*
+> *Note: Due to resource constraints on the Hugging Face free CPU layer, the live space runs in an **In-Memory Simulation Mode** (micking backend responses). It does not spin up the heavy distributed background worker stack (PostgreSQL, Qdrant cluster, Redis, and Celery). To experience the **full potential and end-to-end multi-container architecture**, follow the [Fresh Setup on a New PC](#fresh-setup-on-a-new-pc) below.*
 
 ---
 
@@ -274,7 +274,7 @@ Scenario B iteration 3 | sections [8]       | mode=adaptive   | score=0.0
 # Repository
 
 ```bash
-git clone https://github.com/bringerofdarkness/adaptive-document-prep-Cloudly.git
+git clone https://github.com/bringerofdarkness/adaptive-document-prep-Cloudly
 ```
 
 ---
