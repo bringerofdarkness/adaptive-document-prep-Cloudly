@@ -1,5 +1,5 @@
 {
-  "session_id": "0983e44f-a125-4778-9294-d38b658152d2",
+  "session_id": "8c30afac-8175-4025-a9b0-ee269aa55e6d",
   "mode": "cold_start",
   "selected_sections": [
     5,
@@ -27,8 +27,8 @@
   },
   "questions": [
     {
-      "question_id": "3dbac2bd-fb38-4bcd-ba74-b9be801e176c",
-      "section_id": "4ac2a618-adca-4d81-af68-92d4a84e06d3",
+      "question_id": "992e3951-2039-464b-8a99-6d5b8c81fc2f",
+      "section_id": "f0e59715-7b8b-41ce-aba0-32a67018e895",
       "section_number": 5,
       "topic": "Section 5 concept 1",
       "difficulty": "medium",
@@ -43,15 +43,15 @@
       "explanation": "Option A is correct because it is directly grounded in the retrieved chunk from the selected section.",
       "adaptation_reason": "Cold-start coverage question generated from the selected section because no prior relevant learning history exists.",
       "source_chunk_ids": [
-        "04c40b3f-7d51-4b62-8bfe-20af288470a7"
+        "01735812-31f4-4ce4-8bef-383799c418b0"
       ],
       "simulated_user_answer": "A",
       "is_correct": true,
       "clarification": null
     },
     {
-      "question_id": "0dfbf76a-c67f-4379-9ee2-75c3443ab36d",
-      "section_id": "4ac2a618-adca-4d81-af68-92d4a84e06d3",
+      "question_id": "9e9a4dd6-9ab3-4ed4-a549-2ae7d85074f3",
+      "section_id": "f0e59715-7b8b-41ce-aba0-32a67018e895",
       "section_number": 5,
       "topic": "Section 5 concept 7",
       "difficulty": "medium",
@@ -66,15 +66,15 @@
       "explanation": "Option A is correct because it is directly grounded in the retrieved chunk from the selected section.",
       "adaptation_reason": "Cold-start coverage question generated from the selected section because no prior relevant learning history exists.",
       "source_chunk_ids": [
-        "d0bddff7-8fb4-4694-8d46-f0f62d500d0b"
+        "a2f788b0-7503-4a55-ae6f-6fe0402d35b1"
       ],
       "simulated_user_answer": "A",
       "is_correct": true,
       "clarification": null
     },
     {
-      "question_id": "9cb1605a-7fbf-42a9-9936-b4d8a2180ad3",
-      "section_id": "4ac2a618-adca-4d81-af68-92d4a84e06d3",
+      "question_id": "327b5bde-9991-4626-a4b2-ff663fc14b37",
+      "section_id": "f0e59715-7b8b-41ce-aba0-32a67018e895",
       "section_number": 5,
       "topic": "Section 5 concept 4",
       "difficulty": "medium",
@@ -89,15 +89,15 @@
       "explanation": "Option A is correct because it is directly grounded in the retrieved chunk from the selected section.",
       "adaptation_reason": "Cold-start coverage question generated from the selected section because no prior relevant learning history exists.",
       "source_chunk_ids": [
-        "55df33e2-9b04-490a-b098-90f0adcfd956"
+        "1dfba877-fb0d-479e-8c46-15a1e29a92b0"
       ],
       "simulated_user_answer": "A",
       "is_correct": true,
       "clarification": null
     },
     {
-      "question_id": "b64883ee-0f17-48a6-aed3-9640c16dcb93",
-      "section_id": "4ac2a618-adca-4d81-af68-92d4a84e06d3",
+      "question_id": "65ca3317-dda0-46a1-9d18-0ef19bd0f7ae",
+      "section_id": "f0e59715-7b8b-41ce-aba0-32a67018e895",
       "section_number": 5,
       "topic": "Section 5 concept 6",
       "difficulty": "medium",
@@ -112,15 +112,15 @@
       "explanation": "Option A is correct because it is directly grounded in the retrieved chunk from the selected section.",
       "adaptation_reason": "Cold-start coverage question generated from the selected section because no prior relevant learning history exists.",
       "source_chunk_ids": [
-        "7634fbfa-7d7b-4deb-93a9-8c5bc47fb487"
+        "f8dce97b-e457-4355-b4af-28042cbcc972"
       ],
       "simulated_user_answer": "A",
       "is_correct": true,
       "clarification": null
     },
     {
-      "question_id": "c4e6aa88-6f21-4eb7-9917-045392a7a17c",
-      "section_id": "4ac2a618-adca-4d81-af68-92d4a84e06d3",
+      "question_id": "7c5fe94a-f37d-45de-a156-27b1210af833",
+      "section_id": "f0e59715-7b8b-41ce-aba0-32a67018e895",
       "section_number": 5,
       "topic": "Section 5 concept 2",
       "difficulty": "medium",
@@ -135,15 +135,15 @@
       "explanation": "Option A is correct because it is directly grounded in the retrieved chunk from the selected section.",
       "adaptation_reason": "Cold-start coverage question generated from the selected section because no prior relevant learning history exists.",
       "source_chunk_ids": [
-        "fbdd6550-902f-4922-be45-6a11e2f79d18"
+        "ce3fc51a-b819-4c7a-8839-9cab1ef655f4"
       ],
       "simulated_user_answer": "A",
       "is_correct": true,
       "clarification": null
     },
     {
-      "question_id": "7aa47bc3-1ff5-4e1b-b25b-3dfd17592386",
-      "section_id": "9d5e342c-b654-4257-ba13-d30f822d9422",
+      "question_id": "296431af-d895-440a-bf8a-48a0f94754a6",
+      "section_id": "4758d794-ad31-4d5f-80bd-ba0e52cec80f",
       "section_number": 8,
       "topic": "Section 8 concept 1",
       "difficulty": "medium",
@@ -158,15 +158,15 @@
       "explanation": "Option A is correct because it is directly grounded in the retrieved chunk from the selected section.",
       "adaptation_reason": "Cold-start coverage question generated from the selected section because no prior relevant learning history exists.",
       "source_chunk_ids": [
-        "6d68ed53-037a-4281-84fa-57145baca38e"
+        "0dc462b5-46aa-486e-9992-bfde3d2f18eb"
       ],
       "simulated_user_answer": "B",
       "is_correct": false,
       "clarification": "Option A is correct because it is directly grounded in the retrieved chunk from the selected section."
     },
     {
-      "question_id": "4700e13a-2a4f-45a6-99bd-8581f8fc008e",
-      "section_id": "9d5e342c-b654-4257-ba13-d30f822d9422",
+      "question_id": "8ee4253b-abc2-4da6-83aa-7905b6bda2ee",
+      "section_id": "4758d794-ad31-4d5f-80bd-ba0e52cec80f",
       "section_number": 8,
       "topic": "Section 8 concept 3",
       "difficulty": "medium",
@@ -181,15 +181,15 @@
       "explanation": "Option A is correct because it is directly grounded in the retrieved chunk from the selected section.",
       "adaptation_reason": "Cold-start coverage question generated from the selected section because no prior relevant learning history exists.",
       "source_chunk_ids": [
-        "91ede720-8f85-445d-a74e-5bc2c5253dd1"
+        "1bde212f-e1a6-45c4-9e16-73cfcffc8ca2"
       ],
       "simulated_user_answer": "B",
       "is_correct": false,
       "clarification": "Option A is correct because it is directly grounded in the retrieved chunk from the selected section."
     },
     {
-      "question_id": "12b6dc7a-5141-488e-b161-ec1a74ffe807",
-      "section_id": "9d5e342c-b654-4257-ba13-d30f822d9422",
+      "question_id": "424e5384-f338-422a-afd8-153ed91f020b",
+      "section_id": "4758d794-ad31-4d5f-80bd-ba0e52cec80f",
       "section_number": 8,
       "topic": "Section 8 concept 4",
       "difficulty": "medium",
@@ -204,15 +204,15 @@
       "explanation": "Option A is correct because it is directly grounded in the retrieved chunk from the selected section.",
       "adaptation_reason": "Cold-start coverage question generated from the selected section because no prior relevant learning history exists.",
       "source_chunk_ids": [
-        "667775f3-34d5-423b-a644-a3421ab481d4"
+        "a52b3e43-c6a0-47cc-9493-4b3ebc5762f8"
       ],
       "simulated_user_answer": "B",
       "is_correct": false,
       "clarification": "Option A is correct because it is directly grounded in the retrieved chunk from the selected section."
     },
     {
-      "question_id": "f25484cd-61bd-4f68-8f15-413b24bdce97",
-      "section_id": "9d5e342c-b654-4257-ba13-d30f822d9422",
+      "question_id": "817e1e10-071a-464f-aefd-d58ed704e0c6",
+      "section_id": "4758d794-ad31-4d5f-80bd-ba0e52cec80f",
       "section_number": 8,
       "topic": "Section 8 concept 6",
       "difficulty": "medium",
@@ -227,15 +227,15 @@
       "explanation": "Option A is correct because it is directly grounded in the retrieved chunk from the selected section.",
       "adaptation_reason": "Cold-start coverage question generated from the selected section because no prior relevant learning history exists.",
       "source_chunk_ids": [
-        "41553014-6633-4a10-98c1-1ae3cc602760"
+        "8fc64592-bf67-4fd2-8fc3-61805ce89a06"
       ],
       "simulated_user_answer": "B",
       "is_correct": false,
       "clarification": "Option A is correct because it is directly grounded in the retrieved chunk from the selected section."
     },
     {
-      "question_id": "981ec339-cf8f-4a37-82e3-495398e9c87f",
-      "section_id": "9d5e342c-b654-4257-ba13-d30f822d9422",
+      "question_id": "2100857b-833c-4442-b030-c214afe0f6be",
+      "section_id": "4758d794-ad31-4d5f-80bd-ba0e52cec80f",
       "section_number": 8,
       "topic": "Section 8 concept 5",
       "difficulty": "medium",
@@ -250,7 +250,7 @@
       "explanation": "Option A is correct because it is directly grounded in the retrieved chunk from the selected section.",
       "adaptation_reason": "Cold-start coverage question generated from the selected section because no prior relevant learning history exists.",
       "source_chunk_ids": [
-        "88947449-73f5-4a4a-999a-216bbadaa4d7"
+        "2682b27c-f895-46b5-9dfb-1189054bd271"
       ],
       "simulated_user_answer": "B",
       "is_correct": false,

@@ -1,5 +1,5 @@
 {
-  "session_id": "deb3807f-e539-4f28-a97f-9c9d11eeed69",
+  "session_id": "f2606987-aab0-4b2b-b4d9-17c9dc90f08e",
   "mode": "adaptive",
   "selected_sections": [
     8
@@ -78,8 +78,8 @@
   },
   "questions": [
     {
-      "question_id": "b9b3447b-edd0-4081-9566-39d191d72385",
-      "section_id": "9d5e342c-b654-4257-ba13-d30f822d9422",
+      "question_id": "67e5af9e-f5c8-4b6c-a381-b06a601a279c",
+      "section_id": "4758d794-ad31-4d5f-80bd-ba0e52cec80f",
       "section_number": 8,
       "topic": "Primary Base",
       "difficulty": "medium",
@@ -91,44 +91,44 @@
         "D": "Valpara\u00edso"
       },
       "correct_answer": "A",
-      "explanation": "The primary operational base is Cuartel Valpara\u00edso.",
-      "adaptation_reason": "Adaptive question generated for section 8 because prior session history marks this section as weak.",
+      "explanation": "The asset's primary operational base is Cuartel Valpara\u00edso.",
+      "adaptation_reason": "This question targets prior weak topics and mistakes from previous sessions.",
       "source_chunk_ids": [
-        "6d68ed53-037a-4281-84fa-57145baca38e"
+        "0dc462b5-46aa-486e-9992-bfde3d2f18eb"
       ],
       "simulated_user_answer": "B",
       "is_correct": false,
-      "clarification": "The primary operational base is Cuartel Valpara\u00edso."
+      "clarification": "The asset's primary operational base is Cuartel Valpara\u00edso."
     },
     {
-      "question_id": "068f472f-cc7e-4ee2-80ca-1c259321c619",
-      "section_id": "9d5e342c-b654-4257-ba13-d30f822d9422",
+      "question_id": "4f8e5cc3-777a-48f5-be4f-589ac4a77733",
+      "section_id": "4758d794-ad31-4d5f-80bd-ba0e52cec80f",
       "section_number": 8,
       "topic": "Safehouse Provisioning",
-      "difficulty": "hard",
-      "question": "Who audits the safehouse provisioning semi-annually?",
+      "difficulty": "easy",
+      "question": "Who audits the asset's safehouse provisioning?",
       "options": {
         "A": "Cpl. Vendrame",
         "B": "The asset's former trainer",
-        "C": "Bolivian Servicio de Operaciones Especiales (SOE)",
-        "D": "Peruvian Direcci\u00f3n de Asuntos Metahumanos (DAM)"
+        "C": "Peruvian Direcci\u00f3n de Asuntos Metahumanos (DAM)",
+        "D": "Bolivian Servicio de Operaciones Especiales (SOE)"
       },
       "correct_answer": "A",
-      "explanation": "Cpl. Vendrame audits the safehouse provisioning semi-annually.",
-      "adaptation_reason": "Adaptive question generated for section 8 because prior session history marks this section as weak.",
+      "explanation": "Cpl. Vendrame audits the asset's safehouse provisioning semi-annually.",
+      "adaptation_reason": "This question targets prior weak topics and mistakes from previous sessions.",
       "source_chunk_ids": [
-        "91ede720-8f85-445d-a74e-5bc2c5253dd1"
+        "1bde212f-e1a6-45c4-9e16-73cfcffc8ca2"
       ],
       "simulated_user_answer": "B",
       "is_correct": false,
-      "clarification": "Cpl. Vendrame audits the safehouse provisioning semi-annually."
+      "clarification": "Cpl. Vendrame audits the asset's safehouse provisioning semi-annually."
     },
     {
-      "question_id": "6d125328-a565-4a61-9bff-21e4311b997d",
-      "section_id": "9d5e342c-b654-4257-ba13-d30f822d9422",
+      "question_id": "0d85b66e-094b-4109-a77b-748e576e748c",
+      "section_id": "4758d794-ad31-4d5f-80bd-ba0e52cec80f",
       "section_number": 8,
       "topic": "Operational Territory",
-      "difficulty": "medium",
+      "difficulty": "hard",
       "question": "What is the approximate size of the asset's authorized operational territory?",
       "options": {
         "A": "6.8 million km\u00b2",
@@ -137,60 +137,58 @@
         "D": "3 million km\u00b2"
       },
       "correct_answer": "A",
-      "explanation": "The authorized operational territory spans approximately 6.8 million km\u00b2.",
-      "adaptation_reason": "Adaptive question generated for section 8 because prior session history marks this section as weak.",
+      "explanation": "The asset's authorized operational territory spans approximately 6.8 million km\u00b2.",
+      "adaptation_reason": "This question targets prior weak topics and mistakes from previous sessions.",
       "source_chunk_ids": [
-        "667775f3-34d5-423b-a644-a3421ab481d4"
+        "a52b3e43-c6a0-47cc-9493-4b3ebc5762f8"
       ],
       "simulated_user_answer": "B",
       "is_correct": false,
-      "clarification": "The authorized operational territory spans approximately 6.8 million km\u00b2."
+      "clarification": "The asset's authorized operational territory spans approximately 6.8 million km\u00b2."
     },
     {
-      "question_id": "0c2d9d72-5bd9-42fa-b553-411437569b2d",
-      "section_id": "9d5e342c-b654-4257-ba13-d30f822d9422",
+      "question_id": "ecab5bd3-7777-42cb-be6f-d0ca52447a5e",
+      "section_id": "4758d794-ad31-4d5f-80bd-ba0e52cec80f",
       "section_number": 8,
       "topic": "Bilateral Cooperation",
-      "difficulty": "hard",
-      "question": "What is the name of the bilateral cooperation framework between the asset and the Bolivian Servicio de Operaciones Especiales (SOE)?",
+      "difficulty": "medium",
+      "question": "What is the name of the bilateral cooperation framework between the asset and Bolivian Servicio de Operaciones Especiales (SOE)?",
       "options": {
         "A": "La Paz Annex 2023",
-        "B": "Cuzco Framework",
+        "B": "Cuzco Protocol",
         "C": "Valpara\u00edso Agreement",
         "D": "PAMC-SOE Partnership"
       },
       "correct_answer": "A",
-      "explanation": "The bilateral cooperation framework is La Paz Annex 2023.",
-      "adaptation_reason": "Adaptive question generated for section 8 because prior session history marks this section as weak.",
+      "explanation": "The asset and Bolivian Servicio de Operaciones Especiales (SOE) have a bilateral cooperation framework called La Paz Annex 2023.",
+      "adaptation_reason": "This question targets prior weak topics and mistakes from previous sessions.",
       "source_chunk_ids": [
-        "41553014-6633-4a10-98c1-1ae3cc602760"
+        "8fc64592-bf67-4fd2-8fc3-61805ce89a06"
       ],
       "simulated_user_answer": "B",
       "is_correct": false,
-      "clarification": "The bilateral cooperation framework is La Paz Annex 2023."
+      "clarification": "The asset and Bolivian Servicio de Operaciones Especiales (SOE) have a bilateral cooperation framework called La Paz Annex 2023."
     },
     {
-      "question_id": "4370af64-fe80-4d52-a5ef-00390d327045",
-      "section_id": "9d5e342c-b654-4257-ba13-d30f822d9422",
+      "question_id": "e5f4b182-3808-4613-bd94-3647acd3195c",
+      "section_id": "4758d794-ad31-4d5f-80bd-ba0e52cec80f",
       "section_number": 8,
-      "topic": "Offshore Islands",
+      "topic": "Micro-Cache Network",
       "difficulty": "easy",
-      "question": "Which island is restricted in the asset's operational territory?",
+      "question": "How many micro-caches does the asset maintain?",
       "options": {
-        "A": "Easter Island",
-        "B": "Chilo\u00e9 Island",
-        "C": "Isla de Pascua",
-        "D": "Robinson Crusoe Island"
+        "A": "10",
+        "B": "19",
+        "C": "20",
+        "D": "25"
       },
       "correct_answer": "A",
-      "explanation": "Easter Island is restricted in the asset's operational territory.",
-      "adaptation_reason": "Adaptive question generated for section 8 because prior session history marks this section as weak.",
-      "source_chunk_ids": [
-        "6d68ed53-037a-4281-84fa-57145baca38e"
-      ],
+      "explanation": "The answer is grounded in the retrieved source context.",
+      "adaptation_reason": "Generated from the selected section and current preparation history.",
+      "source_chunk_ids": [],
       "simulated_user_answer": "B",
       "is_correct": false,
-      "clarification": "Easter Island is restricted in the asset's operational territory."
+      "clarification": "The answer is grounded in the retrieved source context."
     }
   ]
 }

@@ -1,11 +1,11 @@
 {
-  "snapshot_created_at": "2026-05-23T18:08:13.939728",
-  "current_session_id": "4cd903b5-cdf1-4a5f-a96a-cf442c4dddfc",
+  "snapshot_created_at": "2026-05-26T02:41:37.351479",
+  "current_session_id": "f8989dc8-32fe-498d-b5f9-9a3beb3bda5d",
   "recent_session_count": 2,
   "recent_sessions": [
     {
-      "session_id": "4cd903b5-cdf1-4a5f-a96a-cf442c4dddfc",
-      "timestamp": "2026-05-23T18:08:13.816278",
+      "session_id": "f8989dc8-32fe-498d-b5f9-9a3beb3bda5d",
+      "timestamp": "2026-05-26T02:41:37.227034",
       "mode": "adaptive",
       "selected_sections": [
         6,
@@ -81,7 +81,7 @@
       },
       "questions_asked": [
         {
-          "question_id": "1fd6b008-0bc8-4ca3-abd9-51cc7046858e",
+          "question_id": "c6e6296c-3874-4f26-bd3b-b5c4ae869a3f",
           "section_number": 6,
           "topic": "Section 6 concept 9",
           "difficulty": "medium",
@@ -96,13 +96,13 @@
           "correct_answer": "A",
           "is_correct": true,
           "clarification": null,
-          "adaptation_reason": "Returning-run question generated using previous session history without a section-specific weak topic.",
+          "adaptation_reason": "Targeted adaptive session run executed driven by historical knowledge base performance matrix parameters.",
           "source_chunk_ids": [
-            "425075c0-39d6-4628-bf31-f8e1ad735ec6"
+            "849ead24-1799-4e45-9d32-cded7782c8a2"
           ]
         },
         {
-          "question_id": "3154d195-71b3-4f69-a8a6-81958bd5450d",
+          "question_id": "a27328a1-9388-456a-bc35-919f410b1ca2",
           "section_number": 6,
           "topic": "Section 6 concept 6",
           "difficulty": "medium",
@@ -117,13 +117,13 @@
           "correct_answer": "A",
           "is_correct": true,
           "clarification": null,
-          "adaptation_reason": "Returning-run question generated using previous session history without a section-specific weak topic.",
+          "adaptation_reason": "Targeted adaptive session run executed driven by historical knowledge base performance matrix parameters.",
           "source_chunk_ids": [
-            "4cb13098-6944-4d6f-97a2-391d2bfc9083"
+            "2355972e-0642-4fba-9b8f-c4bfaff1d888"
           ]
         },
         {
-          "question_id": "bd491e46-3b75-4ccd-8e30-2d076350f4d9",
+          "question_id": "5a864c82-c857-47de-b9df-987ff6d38b38",
           "section_number": 6,
           "topic": "Section 6 concept 8",
           "difficulty": "medium",
@@ -138,13 +138,13 @@
           "correct_answer": "A",
           "is_correct": true,
           "clarification": null,
-          "adaptation_reason": "Returning-run question generated using previous session history without a section-specific weak topic.",
+          "adaptation_reason": "Targeted adaptive session run executed driven by historical knowledge base performance matrix parameters.",
           "source_chunk_ids": [
-            "52d1ce1f-cace-42f4-a91a-91b3aaa56520"
+            "6a776443-d12a-4c92-beed-8fa3d6459be2"
           ]
         },
         {
-          "question_id": "95c621dc-0248-4956-ac01-062e71d7c8cf",
+          "question_id": "d3ff6154-1fcf-4ffd-83a1-6ed7bff8a0e4",
           "section_number": 6,
           "topic": "Section 6 concept 1",
           "difficulty": "medium",
@@ -159,13 +159,13 @@
           "correct_answer": "A",
           "is_correct": true,
           "clarification": null,
-          "adaptation_reason": "Returning-run question generated using previous session history without a section-specific weak topic.",
+          "adaptation_reason": "Targeted adaptive session run executed driven by historical knowledge base performance matrix parameters.",
           "source_chunk_ids": [
-            "f7c0a8a6-cfcf-4bb7-92de-666c7a542be9"
+            "39732073-353f-4cc6-bb96-b8683463a557"
           ]
         },
         {
-          "question_id": "399ad254-1f88-423e-9915-42675c157374",
+          "question_id": "f9287d95-5651-4c30-987d-79edc9b713e6",
           "section_number": 6,
           "topic": "Section 6 concept 4",
           "difficulty": "medium",
@@ -180,13 +180,13 @@
           "correct_answer": "A",
           "is_correct": true,
           "clarification": null,
-          "adaptation_reason": "Returning-run question generated using previous session history without a section-specific weak topic.",
+          "adaptation_reason": "Targeted adaptive session run executed driven by historical knowledge base performance matrix parameters.",
           "source_chunk_ids": [
-            "7b2a0c42-972c-4a38-a6bd-f8e141a13943"
+            "b1123f2c-5b06-4eea-b827-72a73233e407"
           ]
         },
         {
-          "question_id": "752c33ac-3bf4-4c8e-b319-c81ad7edda53",
+          "question_id": "246f8ee0-8ff3-46d2-8c2f-9ccefe52b282",
           "section_number": 8,
           "topic": "Section 8 concept 1",
           "difficulty": "medium",
@@ -203,11 +203,11 @@
           "clarification": "Option A is correct because it is directly grounded in the retrieved chunk from the selected section.",
           "adaptation_reason": "Adaptive question generated for section 8 because prior session history marks this section as weak.",
           "source_chunk_ids": [
-            "6d68ed53-037a-4281-84fa-57145baca38e"
+            "0dc462b5-46aa-486e-9992-bfde3d2f18eb"
           ]
         },
         {
-          "question_id": "f55ade2d-53c9-4f4b-9d2f-92feb1520be8",
+          "question_id": "a5789ca7-fc1d-4ce0-9c3a-269655385297",
           "section_number": 8,
           "topic": "Section 8 concept 3",
           "difficulty": "medium",
@@ -224,11 +224,11 @@
           "clarification": "Option A is correct because it is directly grounded in the retrieved chunk from the selected section.",
           "adaptation_reason": "Adaptive question generated for section 8 because prior session history marks this section as weak.",
           "source_chunk_ids": [
-            "91ede720-8f85-445d-a74e-5bc2c5253dd1"
+            "1bde212f-e1a6-45c4-9e16-73cfcffc8ca2"
           ]
         },
         {
-          "question_id": "2894f6d9-0937-4626-bb5b-c00a477e6ab3",
+          "question_id": "c1893d6c-2044-480c-8f34-cd49c9b64935",
           "section_number": 8,
           "topic": "Section 8 concept 4",
           "difficulty": "medium",
@@ -245,11 +245,11 @@
           "clarification": "Option A is correct because it is directly grounded in the retrieved chunk from the selected section.",
           "adaptation_reason": "Adaptive question generated for section 8 because prior session history marks this section as weak.",
           "source_chunk_ids": [
-            "667775f3-34d5-423b-a644-a3421ab481d4"
+            "a52b3e43-c6a0-47cc-9493-4b3ebc5762f8"
           ]
         },
         {
-          "question_id": "96629223-7075-45cc-abd4-d8424c45fb28",
+          "question_id": "6ad82718-d451-492c-b2a4-9cf396c13e40",
           "section_number": 8,
           "topic": "Section 8 concept 6",
           "difficulty": "medium",
@@ -266,11 +266,11 @@
           "clarification": "Option A is correct because it is directly grounded in the retrieved chunk from the selected section.",
           "adaptation_reason": "Adaptive question generated for section 8 because prior session history marks this section as weak.",
           "source_chunk_ids": [
-            "41553014-6633-4a10-98c1-1ae3cc602760"
+            "8fc64592-bf67-4fd2-8fc3-61805ce89a06"
           ]
         },
         {
-          "question_id": "0bd486f3-cd54-4036-aa5a-955caf5ad01d",
+          "question_id": "0f90eab4-60c5-48ce-84d3-a605ca8fa13d",
           "section_number": 8,
           "topic": "Section 8 concept 5",
           "difficulty": "medium",
@@ -287,113 +287,111 @@
           "clarification": "Option A is correct because it is directly grounded in the retrieved chunk from the selected section.",
           "adaptation_reason": "Adaptive question generated for section 8 because prior session history marks this section as weak.",
           "source_chunk_ids": [
-            "88947449-73f5-4a4a-999a-216bbadaa4d7"
+            "2682b27c-f895-46b5-9dfb-1189054bd271"
           ]
         },
         {
-          "question_id": "1ab0d180-0cac-4852-a114-65ff7c6836e9",
+          "question_id": "48c55268-4968-4b14-bb6e-8696060d875f",
           "section_number": 9,
           "topic": "Case File Format",
           "difficulty": "medium",
-          "question": "What is the uniform PAMC format for recording cases?",
+          "question": "What is the format of all cases recorded under the PAMC format?",
           "options": {
-            "A": "Case number (year-sequence) SLATEFALL_DOSSIER.md",
-            "B": "Date (start\u2013end) Location (city, province, country)",
-            "C": "Classification (open / classified / declassified) Outcome (Successful / Partial / Inconclusive /...)",
-            "D": "Case number (year-sequence) Date (start\u2013end)"
+            "A": "Case number (year-sequence)",
+            "B": "Date (start\u2013end)",
+            "C": "Location (city, province, country)",
+            "D": "Classification (open / classified / declassified)"
           },
           "user_answer": "A",
           "correct_answer": "A",
           "is_correct": true,
           "clarification": null,
-          "adaptation_reason": "Returning-run question generated using previous session history without a section-specific weak topic.",
+          "adaptation_reason": "This question targets prior weak topics and mistakes from previous sessions.",
           "source_chunk_ids": [
-            "04f6454f-2a1d-48b6-91db-7176b23b14f1"
+            "59a0e19e-9ac4-46a5-8709-537a51ff461f"
           ]
         },
         {
-          "question_id": "ad1793a2-98e2-4b48-a70e-08e1c00dbc6c",
-          "section_number": 9,
-          "topic": "Case 2024-0202: Quebrantadero Showdown",
-          "difficulty": "medium",
-          "question": "What was the outcome of Case 2024-0202: Quebrantadero Showdown?",
-          "options": {
-            "A": "Successful",
-            "B": "Inconclusive",
-            "C": "Partial",
-            "D": "Open"
-          },
-          "user_answer": "A",
-          "correct_answer": "A",
-          "is_correct": true,
-          "clarification": null,
-          "adaptation_reason": "Returning-run question generated using previous session history without a section-specific weak topic.",
-          "source_chunk_ids": [
-            "dc164085-3c2a-4c78-a936-98dbccef5b19"
-          ]
-        },
-        {
-          "question_id": "846f070a-1e01-4cf5-b060-5399a5af6ede",
-          "section_number": 9,
-          "topic": "Case 2023-0067: El Sereno Pursuit",
-          "difficulty": "medium",
-          "question": "What was the classification of Case 2023-0067: El Sereno Pursuit?",
-          "options": {
-            "A": "Open",
-            "B": "Declassified",
-            "C": "Classified",
-            "D": "Unclassified"
-          },
-          "user_answer": "A",
-          "correct_answer": "A",
-          "is_correct": true,
-          "clarification": null,
-          "adaptation_reason": "Returning-run question generated using previous session history without a section-specific weak topic.",
-          "source_chunk_ids": [
-            "85c110f4-c3be-4fde-a304-0c8aaf39626f"
-          ]
-        },
-        {
-          "question_id": "15df6aee-b208-448e-81b4-fa69ab958ac2",
-          "section_number": 9,
-          "topic": "Case 2020-0048: Containment",
-          "difficulty": "medium",
-          "question": "What was the outcome of Case 2020-0048: Containment?",
-          "options": {
-            "A": "Inconclusive",
-            "B": "Successful",
-            "C": "Partial",
-            "D": "Open"
-          },
-          "user_answer": "B",
-          "correct_answer": "B",
-          "is_correct": true,
-          "clarification": null,
-          "adaptation_reason": "Returning-run question generated using previous session history without a section-specific weak topic.",
-          "source_chunk_ids": [
-            "e0fccb8b-4c01-4874-80bd-ba48dfddd35d"
-          ]
-        },
-        {
-          "question_id": "5a02d0d7-4132-4c37-93b9-977b95f96ff2",
+          "question_id": "0d7a0348-c2fd-4b30-a7fc-75090c3bcf8d",
           "section_number": 9,
           "topic": "Case File Format",
           "difficulty": "medium",
-          "question": "What information is included in the Location field of the uniform PAMC format?",
+          "question": "What is the purpose of the PAMC format for case files?",
           "options": {
-            "A": "City, province, and country",
-            "B": "City and province",
-            "C": "Province and country",
-            "D": "City and country"
+            "A": "To record all cases under a uniform format",
+            "B": "To classify cases as open, classified, or declassified",
+            "C": "To track the location of cases",
+            "D": "To determine the outcome of cases"
           },
           "user_answer": "A",
           "correct_answer": "A",
           "is_correct": true,
           "clarification": null,
-          "adaptation_reason": "Returning-run question generated using previous session history without a section-specific weak topic.",
+          "adaptation_reason": "This question targets prior weak topics and mistakes from previous sessions.",
           "source_chunk_ids": [
-            "04f6454f-2a1d-48b6-91db-7176b23b14f1"
+            "59a0e19e-9ac4-46a5-8709-537a51ff461f"
           ]
+        },
+        {
+          "question_id": "da5a872e-0cb3-4caa-bcb5-24cf2f530a66",
+          "section_number": 9,
+          "topic": "Case File Format",
+          "difficulty": "medium",
+          "question": "What information is included in the PAMC format for case files?",
+          "options": {
+            "A": "Case number, date, location, and classification",
+            "B": "Case number, date, location, and outcome",
+            "C": "Case number, date, classification, and outcome",
+            "D": "Case number, location, classification, and outcome"
+          },
+          "user_answer": "A",
+          "correct_answer": "A",
+          "is_correct": true,
+          "clarification": null,
+          "adaptation_reason": "This question targets prior weak topics and mistakes from previous sessions.",
+          "source_chunk_ids": [
+            "59a0e19e-9ac4-46a5-8709-537a51ff461f"
+          ]
+        },
+        {
+          "question_id": "a2cdb5d3-4490-486f-a94e-c25e71450374",
+          "section_number": 9,
+          "topic": "Case File Format",
+          "difficulty": "medium",
+          "question": "What is the format of the case number in the PAMC format?",
+          "options": {
+            "A": "Year-sequence",
+            "B": "Date (start\u2013end)",
+            "C": "Location (city, province, country)",
+            "D": "Classification (open / classified / declassified)"
+          },
+          "user_answer": "A",
+          "correct_answer": "A",
+          "is_correct": true,
+          "clarification": null,
+          "adaptation_reason": "This question targets prior weak topics and mistakes from previous sessions.",
+          "source_chunk_ids": [
+            "59a0e19e-9ac4-46a5-8709-537a51ff461f"
+          ]
+        },
+        {
+          "question_id": "01da635f-2c68-4cba-a4fa-8d288c4e25a6",
+          "section_number": 9,
+          "topic": "Case File Format",
+          "difficulty": "medium",
+          "question": "What is the purpose of the date field in the PAMC format?",
+          "options": {
+            "A": "To record the start date of the case",
+            "B": "To record the end date of the case",
+            "C": "To record the date of the incident",
+            "D": "To record the date of the report"
+          },
+          "user_answer": "A",
+          "correct_answer": "A",
+          "is_correct": true,
+          "clarification": null,
+          "adaptation_reason": "Generated from the selected section and current preparation history.",
+          "source_chunk_ids": []
         }
       ],
       "weak_topics": [
@@ -440,33 +438,9 @@
         {
           "section_number": 9,
           "topic": "Case File Format",
-          "attempts": 2,
+          "attempts": 5,
           "wrong_count": 0,
-          "correct_count": 2,
-          "weakness_score": 0.0
-        },
-        {
-          "section_number": 9,
-          "topic": "Case 2020-0048: Containment",
-          "attempts": 1,
-          "wrong_count": 0,
-          "correct_count": 1,
-          "weakness_score": 0.0
-        },
-        {
-          "section_number": 9,
-          "topic": "Case 2023-0067: El Sereno Pursuit",
-          "attempts": 1,
-          "wrong_count": 0,
-          "correct_count": 1,
-          "weakness_score": 0.0
-        },
-        {
-          "section_number": 9,
-          "topic": "Case 2024-0202: Quebrantadero Showdown",
-          "attempts": 1,
-          "wrong_count": 0,
-          "correct_count": 1,
+          "correct_count": 5,
           "weakness_score": 0.0
         },
         {
@@ -476,12 +450,36 @@
           "wrong_count": 0,
           "correct_count": 1,
           "weakness_score": 0.0
+        },
+        {
+          "section_number": 6,
+          "topic": "Section 6 concept 1",
+          "attempts": 1,
+          "wrong_count": 0,
+          "correct_count": 1,
+          "weakness_score": 0.0
+        },
+        {
+          "section_number": 6,
+          "topic": "Section 6 concept 8",
+          "attempts": 1,
+          "wrong_count": 0,
+          "correct_count": 1,
+          "weakness_score": 0.0
+        },
+        {
+          "section_number": 6,
+          "topic": "Section 6 concept 6",
+          "attempts": 1,
+          "wrong_count": 0,
+          "correct_count": 1,
+          "weakness_score": 0.0
         }
       ]
     },
     {
-      "session_id": "0983e44f-a125-4778-9294-d38b658152d2",
-      "timestamp": "2026-05-23T18:06:28.085556",
+      "session_id": "8c30afac-8175-4025-a9b0-ee269aa55e6d",
+      "timestamp": "2026-05-26T02:40:02.150633",
       "mode": "cold_start",
       "selected_sections": [
         5,
@@ -509,7 +507,7 @@
       },
       "questions_asked": [
         {
-          "question_id": "3dbac2bd-fb38-4bcd-ba74-b9be801e176c",
+          "question_id": "992e3951-2039-464b-8a99-6d5b8c81fc2f",
           "section_number": 5,
           "topic": "Section 5 concept 1",
           "difficulty": "medium",
@@ -526,11 +524,11 @@
           "clarification": null,
           "adaptation_reason": "Cold-start coverage question generated from the selected section because no prior relevant learning history exists.",
           "source_chunk_ids": [
-            "04c40b3f-7d51-4b62-8bfe-20af288470a7"
+            "01735812-31f4-4ce4-8bef-383799c418b0"
           ]
         },
         {
-          "question_id": "0dfbf76a-c67f-4379-9ee2-75c3443ab36d",
+          "question_id": "9e9a4dd6-9ab3-4ed4-a549-2ae7d85074f3",
           "section_number": 5,
           "topic": "Section 5 concept 7",
           "difficulty": "medium",
@@ -547,11 +545,11 @@
           "clarification": null,
           "adaptation_reason": "Cold-start coverage question generated from the selected section because no prior relevant learning history exists.",
           "source_chunk_ids": [
-            "d0bddff7-8fb4-4694-8d46-f0f62d500d0b"
+            "a2f788b0-7503-4a55-ae6f-6fe0402d35b1"
           ]
         },
         {
-          "question_id": "9cb1605a-7fbf-42a9-9936-b4d8a2180ad3",
+          "question_id": "327b5bde-9991-4626-a4b2-ff663fc14b37",
           "section_number": 5,
           "topic": "Section 5 concept 4",
           "difficulty": "medium",
@@ -568,11 +566,11 @@
           "clarification": null,
           "adaptation_reason": "Cold-start coverage question generated from the selected section because no prior relevant learning history exists.",
           "source_chunk_ids": [
-            "55df33e2-9b04-490a-b098-90f0adcfd956"
+            "1dfba877-fb0d-479e-8c46-15a1e29a92b0"
           ]
         },
         {
-          "question_id": "b64883ee-0f17-48a6-aed3-9640c16dcb93",
+          "question_id": "65ca3317-dda0-46a1-9d18-0ef19bd0f7ae",
           "section_number": 5,
           "topic": "Section 5 concept 6",
           "difficulty": "medium",
@@ -589,11 +587,11 @@
           "clarification": null,
           "adaptation_reason": "Cold-start coverage question generated from the selected section because no prior relevant learning history exists.",
           "source_chunk_ids": [
-            "7634fbfa-7d7b-4deb-93a9-8c5bc47fb487"
+            "f8dce97b-e457-4355-b4af-28042cbcc972"
           ]
         },
         {
-          "question_id": "c4e6aa88-6f21-4eb7-9917-045392a7a17c",
+          "question_id": "7c5fe94a-f37d-45de-a156-27b1210af833",
           "section_number": 5,
           "topic": "Section 5 concept 2",
           "difficulty": "medium",
@@ -610,11 +608,11 @@
           "clarification": null,
           "adaptation_reason": "Cold-start coverage question generated from the selected section because no prior relevant learning history exists.",
           "source_chunk_ids": [
-            "fbdd6550-902f-4922-be45-6a11e2f79d18"
+            "ce3fc51a-b819-4c7a-8839-9cab1ef655f4"
           ]
         },
         {
-          "question_id": "7aa47bc3-1ff5-4e1b-b25b-3dfd17592386",
+          "question_id": "296431af-d895-440a-bf8a-48a0f94754a6",
           "section_number": 8,
           "topic": "Section 8 concept 1",
           "difficulty": "medium",
@@ -631,11 +629,11 @@
           "clarification": "Option A is correct because it is directly grounded in the retrieved chunk from the selected section.",
           "adaptation_reason": "Cold-start coverage question generated from the selected section because no prior relevant learning history exists.",
           "source_chunk_ids": [
-            "6d68ed53-037a-4281-84fa-57145baca38e"
+            "0dc462b5-46aa-486e-9992-bfde3d2f18eb"
           ]
         },
         {
-          "question_id": "4700e13a-2a4f-45a6-99bd-8581f8fc008e",
+          "question_id": "8ee4253b-abc2-4da6-83aa-7905b6bda2ee",
           "section_number": 8,
           "topic": "Section 8 concept 3",
           "difficulty": "medium",
@@ -652,11 +650,11 @@
           "clarification": "Option A is correct because it is directly grounded in the retrieved chunk from the selected section.",
           "adaptation_reason": "Cold-start coverage question generated from the selected section because no prior relevant learning history exists.",
           "source_chunk_ids": [
-            "91ede720-8f85-445d-a74e-5bc2c5253dd1"
+            "1bde212f-e1a6-45c4-9e16-73cfcffc8ca2"
           ]
         },
         {
-          "question_id": "12b6dc7a-5141-488e-b161-ec1a74ffe807",
+          "question_id": "424e5384-f338-422a-afd8-153ed91f020b",
           "section_number": 8,
           "topic": "Section 8 concept 4",
           "difficulty": "medium",
@@ -673,11 +671,11 @@
           "clarification": "Option A is correct because it is directly grounded in the retrieved chunk from the selected section.",
           "adaptation_reason": "Cold-start coverage question generated from the selected section because no prior relevant learning history exists.",
           "source_chunk_ids": [
-            "667775f3-34d5-423b-a644-a3421ab481d4"
+            "a52b3e43-c6a0-47cc-9493-4b3ebc5762f8"
           ]
         },
         {
-          "question_id": "f25484cd-61bd-4f68-8f15-413b24bdce97",
+          "question_id": "817e1e10-071a-464f-aefd-d58ed704e0c6",
           "section_number": 8,
           "topic": "Section 8 concept 6",
           "difficulty": "medium",
@@ -694,11 +692,11 @@
           "clarification": "Option A is correct because it is directly grounded in the retrieved chunk from the selected section.",
           "adaptation_reason": "Cold-start coverage question generated from the selected section because no prior relevant learning history exists.",
           "source_chunk_ids": [
-            "41553014-6633-4a10-98c1-1ae3cc602760"
+            "8fc64592-bf67-4fd2-8fc3-61805ce89a06"
           ]
         },
         {
-          "question_id": "981ec339-cf8f-4a37-82e3-495398e9c87f",
+          "question_id": "2100857b-833c-4442-b030-c214afe0f6be",
           "section_number": 8,
           "topic": "Section 8 concept 5",
           "difficulty": "medium",
@@ -715,7 +713,7 @@
           "clarification": "Option A is correct because it is directly grounded in the retrieved chunk from the selected section.",
           "adaptation_reason": "Cold-start coverage question generated from the selected section because no prior relevant learning history exists.",
           "source_chunk_ids": [
-            "88947449-73f5-4a4a-999a-216bbadaa4d7"
+            "2682b27c-f895-46b5-9dfb-1189054bd271"
           ]
         }
       ],

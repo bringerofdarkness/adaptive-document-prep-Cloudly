@@ -7,7 +7,7 @@ BACKEND_URL = "http://localhost:8090"
 st.set_page_config(
     page_title="Adaptive Study Assistant",
     page_icon="🧠",
-    layout="centered"
+    layout="wide"
 )
 
 st.title("🧠 Adaptive Study Assistant")
