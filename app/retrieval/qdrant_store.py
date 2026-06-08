@@ -45,7 +45,7 @@ def upsert_chunk_vectors(points: list[PointStruct]) -> None:
 
 
 
-# NEW: Optimized Threshold-Tuned Vector Search Query
+# optimized threshold-tuned vector search query
 
 def search_similar_chunks(query_vector: list[float], limit: int = 4) -> list[ScoredPoint]:
     """
@@ -61,7 +61,7 @@ def search_similar_chunks(query_vector: list[float], limit: int = 4) -> list[Sco
         collection_name=settings.qdrant_collection,
         query_vector=query_vector,
         limit=limit,
-        score_threshold=settings.qdrant_score_threshold  # <-- Dynamic threshold wall
+        score_threshold=settings.qdrant_score_threshold 
     )
     
     return results

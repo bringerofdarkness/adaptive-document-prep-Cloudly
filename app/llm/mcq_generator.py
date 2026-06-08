@@ -130,7 +130,7 @@ def generate_mcqs(
                 questions_per_section=questions_per_section,
                 adaptation_payload=adaptation_payload or {},
             )
-            compiled_questions.extend(q.model_dump() for q in segment_set.questions)
+            compiled_questions.extend(q.model_dump() for q in segment_set.questions)   #pydantic qustions to dictonary -final list
             
             if i + segment_size < len(selected_section_numbers):
                 time.sleep(2.0)

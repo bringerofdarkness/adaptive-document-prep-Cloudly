@@ -26,14 +26,14 @@ def ingest(
     object_name = local_path.name
     bucket_name = settings.minio_bucket_name
 
-    # --- Phase 1: Upload Raw Document to MinIO (Bronze Layer) ---
+    #phase1: upload raw doc to MinIO (Bronze Layer) 
     try:
         typer.echo(f"Verifying Object Storage Asset: '{object_name}' in bucket '{bucket_name}'...")
         try:
             minio_client.stat_object(bucket_name, object_name)
             typer.echo("Document already exists in MinIO. Skipping upload phase.")
         except Exception:
-            # Object does not exist, upload it securely
+         
             typer.echo("Uploading raw document to cloud storage tier...")
             minio_client.fput_object(bucket_name, object_name, str(local_path))
             typer.echo("Successfully committed object to Bronze Layer.")
@@ -41,7 +41,7 @@ def ingest(
         typer.echo(f"Storage Layer Failure: {str(e)}", err=True)
         raise typer.Exit(code=1)
 
-    # --- Phase 2: Stream Raw Bytes into Data Extraction Pipeline ---
+    #phase2: stream raw bytes into data extraction pipeline 
     try:
         typer.echo("Streaming object bytes from MinIO into volatile memory buffer...")
         response = minio_client.get_object(bucket_name, object_name)
@@ -79,7 +79,7 @@ def ingest(
             sections_payload=sections_payload,
         )
 
-        typer.echo("\n🚀 Ingestion pipeline execution completed successfully!")
+        typer.echo("\n Ingestion pipeline execution completed successfully!")
         typer.echo(f"Assigned Document Database ID: {document.id}")
         typer.echo(f"Extracted Pages count: {len(pages)}")
         typer.echo(f"Parsed Section Records: {len(sections)}")

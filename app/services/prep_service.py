@@ -69,16 +69,3 @@ def run_prep_session(
     return final_state["result"]
 
 
-    return {
-        "session_id": session.id,
-        "document_id": document.id,
-        "selected_sections": selected_section_numbers,
-        "mode": session.mode,
-        "score": session.score,
-        "total_questions": session.total_questions,
-        "correct_count": session.correct_count,
-        "wrong_count": session.wrong_count,
-        "adaptation_summary": session.adaptation_summary,
-        "weak_topics_used": adaptation_payload["weak_topics"],
-        "relevant_prior_session_count": adaptation_payload["relevant_prior_session_count"],
-    }

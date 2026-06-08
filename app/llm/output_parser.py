@@ -26,47 +26,6 @@ def clean_text_value(value: Any, default: str = "") -> str:
     return fix_text(text).strip()
 
 
-def _repair_mojibake(text: str) -> str:
-
-    """
-    Fix common encoding corruption in LLM/user-facing text.
-
-    Example:
-    "Cuartel ValparaÃ­so" becomes "Cuartel Valparaíso".
-
-    This is not a word-specific replacement. It reverses a general UTF-8
-    decoding mistake and returns the original text if repair is not possible.
-    """
-
-    repaired_text = text
-
-    for _ in range(3):
-        if not _looks_like_mojibake(repaired_text):
-            break
-
-        repaired_once = repaired_text
-
-        for source_encoding in ("latin1", "cp1252"):
-            try:
-                candidate = repaired_text.encode(source_encoding).decode("utf-8")
-            except (UnicodeEncodeError, UnicodeDecodeError):
-                continue
-
-            if candidate and candidate != repaired_text:
-                repaired_once = candidate
-                break
-
-        if repaired_once == repaired_text:
-            break
-
-        repaired_text = repaired_once
-
-    return repaired_text
-
-
-def _looks_like_mojibake(text: str) -> bool:
-    return any(marker in text for marker in ("Ã", "Â", "â€", "â€™", "â€œ", "â€"))
-
 
 def _normalize_options(raw_options: Any) -> dict[str, str] | None:
     if isinstance(raw_options, dict):

@@ -27,8 +27,7 @@ def start_prep(request: PrepStartRequest) -> dict:
     instantly shedding read-blocking latency away from the primary thread.
     """
     try:
-        # send_task routes the execution payload to Redis using the explicit task name string.
-        # This completely breaks the circular startup lock and prevents local import failures.
+       
         task = celery_app.send_task(
             "app.workers.tasks.async_start_prep_session",
             kwargs={

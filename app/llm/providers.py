@@ -122,8 +122,7 @@ def _call_mock_fallback(prompt: str) -> str:
     """
     logger.info("[CIRCUIT BREAKER] Triggering dynamic local mock fallback generator.")
     
-    # We will hook this precisely to your project's local mock function/class 
-    # once we verify its path in your next file review step.
+
     from app.llm.mcq_generator import get_mock_provider_response
     return get_mock_provider_response(prompt)
 

@@ -1,51 +1,48 @@
 from functools import lru_cache
 from pydantic_settings import BaseSettings, SettingsConfigDict
 
-
 class Settings(BaseSettings):
-    app_name: str = "Adaptive Document Preparation System"
-    app_env: str = "local"
-    api_host: str = "0.0.0.0"
-    api_port: int = 8000
+    app_name: str
+    app_env: str
+    api_host: str
+    api_port: int
 
-    postgres_host: str = "localhost"
-    postgres_port: int = 5432
-    postgres_db: str = "adaptive_doc_prep"
-    postgres_user: str = "postgres"
-    postgres_password: str = "postgres"
+    postgres_host: str
+    postgres_port: int
+    postgres_db: str
+    postgres_user: str
+    postgres_password: str
 
-    qdrant_host: str = "localhost"
-    qdrant_port: int = 6333
-    qdrant_collection: str = "slatefall_chunks"
+    qdrant_host: str
+    qdrant_port: int
+    qdrant_collection: str
 
-    embedding_model: str = "sentence-transformers/all-MiniLM-L6-v2"
+    embedding_model: str
 
-    llm_provider: str = "mock"
-    gemini_api_key: str | None = None
-    groq_api_key: str | None = None
+    llm_provider: str
+    gemini_api_key: str | None
+    groq_api_key: str | None
 
-    # 🔗 Redis and Celery Configuration
-    redis_url: str = "redis://localhost:6380/0"
-    redis_host: str = "localhost"
-    redis_port: int = 6380
-    redis_db: int = 0
-    celery_broker_url: str = "redis://localhost:6380/0"
-    celery_result_backend: str = "redis://localhost:6380/0"
-    
-    qdrant_score_threshold: float = 0.75
+    redis_url: str | None = None
+    redis_host: str
+    redis_port: int
+    redis_db: int
+    celery_broker_url: str
+    celery_result_backend: str
 
-    # 📦 MinIO Object Storage Configuration
-    minio_endpoint: str = "localhost:9000"
-    minio_access_key: str = "minioadmin"
-    minio_secret_key: str = "minioadminpassword"
-    minio_secure: bool = False
-    minio_bucket_name: str = "raw-dossiers"
+    qdrant_score_threshold: float
+
+    minio_endpoint: str
+    minio_access_key: str
+    minio_secret_key: str
+    minio_secure: bool
+    minio_bucket_name: str
 
     model_config = SettingsConfigDict(
         env_file=".env",
         env_file_encoding="utf-8",
         case_sensitive=False,
-        extra="ignore", 
+        extra="ignore",
     )
 
     @property

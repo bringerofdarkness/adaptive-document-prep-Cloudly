@@ -5,7 +5,7 @@ from app.retrieval.retriever import retrieve_chunks_for_sections
 from app.services.adaptation_service import build_adaptation_payload
 from app.services.scoring_service import score_mcq_answers
 from app.workflow.state import PrepWorkflowState
-from app.core.config import get_settings
+from app.core.config import get_settings #Load config values(llm provider, bucket name, etc)
 
 def load_document_and_history(state: PrepWorkflowState) -> PrepWorkflowState:
     db = state["db"]
@@ -58,8 +58,7 @@ def generate_questions(state: PrepWorkflowState) -> PrepWorkflowState:
         adaptation_payload=state["adaptation_payload"],
     )
 
-    # Determine if a circuit breakout fallback occurred during execution
-    # If the configured provider wasn't mock, but the generated questions match mock characteristics, track it.
+    # Determine if a circuit breakout fallback occurred during execution.
     actual_provider = initial_provider
     if initial_provider != "mock" and len(mcq_set.questions) > 0:
         first_q = mcq_set.questions[0]

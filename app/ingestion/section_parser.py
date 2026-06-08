@@ -2,8 +2,15 @@ import re
 
 
 SECTION_PATTERN = re.compile(
-    r"Section\s+(\d+)\.\s+(.+?)(?=\n|\r)",
-    re.IGNORECASE,
+    r"""
+    ^Section\s+      #  look for the word 'Section'
+    (\d+)            # section Number
+    \.               # dot after number
+    \s+              # space between number n title
+    (.+?)            # section title
+    (?=\n|\r)        #  line ends
+    """,
+    re.VERBOSE | re.IGNORECASE | re.MULTILINE
 )
 
 PAGE_MARKER_PATTERN = re.compile(r"\[\[PAGE:(\d+)\]\]")

@@ -20,7 +20,7 @@ def retrieve_chunks_for_sections(
 
     settings = get_settings()
     client = get_qdrant_client()
-    query_vector = embed_texts([query])[0]
+    query_vector = embed_texts([query])[0]  
 
     per_section_limit = max(1, limit // len(selected_section_numbers))
     points = []
@@ -36,14 +36,14 @@ def retrieve_chunks_for_sections(
         )
 
         response = client.query_points(
-            collection_name=settings.qdrant_collection,
+            collection_name=settings.qdrant_collection,     #Settings=config
             query=query_vector,
             query_filter=qdrant_filter,
             limit=per_section_limit,
             with_payload=True,
         )
 
-        points.extend(response.points)
+        points.extend(response.points)  #added results to point list
 
     points = sorted(points, key=lambda point: point.score or 0.0, reverse=True)[:limit]
     chunk_ids = list(dict.fromkeys(str(point.payload["chunk_id"]) for point in points))
@@ -62,7 +62,7 @@ def retrieve_chunks_for_sections(
         if chunk is None:
             continue
 
-        retrieved.append(
+        retrieved.append(      #adding chunk info to final list
             {
                 "chunk_id": chunk.id,
                 "section_id": chunk.section_id,

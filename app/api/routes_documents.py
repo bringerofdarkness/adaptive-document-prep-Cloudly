@@ -68,37 +68,4 @@ def get_document_sections(
 
     return _build_document_sections_response(db=db, document=document)
 
-    sections = (
-        db.query(Section)
-        .filter(Section.document_id == document_id)
-        .order_by(Section.section_number.asc())
-        .all()
-    )
-
-    section_responses = []
-
-    for section in sections:
-        chunk_count = (
-            db.query(Chunk)
-            .filter(Chunk.section_id == section.id)
-            .count()
-        )
-
-        section_responses.append(
-            SectionResponse(
-                section_id=section.id,
-                section_number=section.section_number,
-                title=section.title,
-                start_page=section.start_page,
-                end_page=section.end_page,
-                chunk_count=chunk_count,
-            )
-        )
-
-    return DocumentSectionsResponse(
-        document_id=document.id,
-        filename=document.filename,
-        title=document.title,
-        total_pages=document.total_pages,
-        sections=section_responses,
-    )
+    

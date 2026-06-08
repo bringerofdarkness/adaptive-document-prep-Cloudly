@@ -4,10 +4,9 @@ def chunk_text(
     overlap: int = 180,
 ) -> list[str]:
     """
-    Simple deterministic character chunker.
+    Simple text chunker.
 
-    Good enough for the take-home because section filtering is more important
-    than fancy chunking at this stage.
+    Section filtering is the main focus here.
     """
     cleaned = " ".join(text.split())
 
